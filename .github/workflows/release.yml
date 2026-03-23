@@ -41,7 +41,7 @@ jobs:
 
       # Generate docs and build the Astro site
       - name: Build docs
-        run: npx astro build --root ./docs
+        run: pnpm -C docs build
         env:
           RELEASE_VERSION: ${{ github.event.release.tag_name }}
 
