@@ -3,6 +3,9 @@ import { reactOutputTarget } from '@stencil/react-output-target';
 import { vueOutputTarget } from '@stencil/vue-output-target';
 import { angularOutputTarget } from '@stencil/angular-output-target';
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const { storybookOutputTarget } = require('./scripts/storybook-output-target');
+
 export const config: Config = {
   namespace: 'tessera-ui',
   globalStyle: 'src/theme/tokens.css',
@@ -61,6 +64,9 @@ export const config: Config = {
       directivesProxyFile: 'packages/angular/src/directives/proxies.ts',
       directivesArrayFile: 'packages/angular/src/directives/index.ts',
     }),
+
+    // --- Auto-generated Storybook stories ---
+    storybookOutputTarget(),
   ],
 
   testing: {
