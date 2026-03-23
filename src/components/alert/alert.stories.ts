@@ -17,7 +17,7 @@ export default {
 const Template = (args: Record<string, unknown>) => {
   const attrs: string[] = [];
   if (args.closable) attrs.push('closable');
-  if (args.variant != null) attrs.push(`variant="${args.variant}"`);
+  if (args.variant !== undefined && args.variant !== null) attrs.push(`variant="${args.variant}"`);
   return `<ts-alert ${attrs.join(' ')}>${args.slotContent || ''}
     <span slot="action">${args['slot_action'] || ''}</span>
     <span slot="icon">${args['slot_icon'] || ''}</span>

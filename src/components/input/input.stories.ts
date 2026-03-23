@@ -32,21 +32,21 @@ export default {
 
 const Template = (args: Record<string, unknown>) => {
   const attrs: string[] = [];
-  if (args.autocomplete != null) attrs.push(`autocomplete="${args.autocomplete}"`);
+  if (args.autocomplete !== undefined && args.autocomplete !== null) attrs.push(`autocomplete="${args.autocomplete}"`);
   if (args.disabled) attrs.push('disabled');
-  if (args.error != null) attrs.push(`error="${args.error}"`);
-  if (args.helpText != null) attrs.push(`help-text="${args.helpText}"`);
-  if (args.label != null) attrs.push(`label="${args.label}"`);
-  if (args.maxlength != null) attrs.push(`maxlength="${args.maxlength}"`);
-  if (args.minlength != null) attrs.push(`minlength="${args.minlength}"`);
-  if (args.name != null) attrs.push(`name="${args.name}"`);
-  if (args.pattern != null) attrs.push(`pattern="${args.pattern}"`);
-  if (args.placeholder != null) attrs.push(`placeholder="${args.placeholder}"`);
+  if (args.error !== undefined && args.error !== null) attrs.push(`error="${args.error}"`);
+  if (args.helpText !== undefined && args.helpText !== null) attrs.push(`help-text="${args.helpText}"`);
+  if (args.label !== undefined && args.label !== null) attrs.push(`label="${args.label}"`);
+  if (args.maxlength !== undefined && args.maxlength !== null) attrs.push(`maxlength="${args.maxlength}"`);
+  if (args.minlength !== undefined && args.minlength !== null) attrs.push(`minlength="${args.minlength}"`);
+  if (args.name !== undefined && args.name !== null) attrs.push(`name="${args.name}"`);
+  if (args.pattern !== undefined && args.pattern !== null) attrs.push(`pattern="${args.pattern}"`);
+  if (args.placeholder !== undefined && args.placeholder !== null) attrs.push(`placeholder="${args.placeholder}"`);
   if (args.readonly) attrs.push('readonly');
   if (args.required) attrs.push('required');
-  if (args.size != null) attrs.push(`size="${args.size}"`);
-  if (args.type != null) attrs.push(`type="${args.type}"`);
-  if (args.value != null) attrs.push(`value="${args.value}"`);
+  if (args.size !== undefined && args.size !== null) attrs.push(`size="${args.size}"`);
+  if (args.type !== undefined && args.type !== null) attrs.push(`type="${args.type}"`);
+  if (args.value !== undefined && args.value !== null) attrs.push(`value="${args.value}"`);
   return `<ts-input ${attrs.join(' ')}>
     <span slot="help-text">${args['slot_help-text'] || ''}</span>
     <span slot="prefix">${args['slot_prefix'] || ''}</span>

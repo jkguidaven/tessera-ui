@@ -92,7 +92,7 @@ function generateStory(component) {
     if (prop.type === 'boolean') {
       lines.push(`  if (args.${prop.name}) attrs.push('${prop.attr || prop.name}');`);
     } else {
-      lines.push(`  if (args.${prop.name} != null) attrs.push(\`${prop.attr || prop.name}="\${args.${prop.name}}"\`);`);
+      lines.push(`  if (args.${prop.name} !== undefined && args.${prop.name} !== null) attrs.push(\`${prop.attr || prop.name}="\${args.${prop.name}}"\`);`);
     }
   }
 

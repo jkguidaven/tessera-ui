@@ -1,4 +1,5 @@
-import { Component, Prop, Event, EventEmitter, State, h, Host, Method } from '@stencil/core';
+import { Component, Prop, Event, State, h, Host, Method } from '@stencil/core';
+import type { EventEmitter } from '@stencil/core';
 import type { TsVariant } from '../../types';
 
 /**

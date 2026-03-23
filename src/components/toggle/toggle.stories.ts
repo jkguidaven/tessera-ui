@@ -21,9 +21,9 @@ const Template = (args: Record<string, unknown>) => {
   const attrs: string[] = [];
   if (args.checked) attrs.push('checked');
   if (args.disabled) attrs.push('disabled');
-  if (args.name != null) attrs.push(`name="${args.name}"`);
-  if (args.size != null) attrs.push(`size="${args.size}"`);
-  if (args.value != null) attrs.push(`value="${args.value}"`);
+  if (args.name !== undefined && args.name !== null) attrs.push(`name="${args.name}"`);
+  if (args.size !== undefined && args.size !== null) attrs.push(`size="${args.size}"`);
+  if (args.value !== undefined && args.value !== null) attrs.push(`value="${args.value}"`);
   return `<ts-toggle ${attrs.join(' ')}>${args.slotContent || ''}
   </ts-toggle>`;
 };

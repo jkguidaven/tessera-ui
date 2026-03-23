@@ -15,7 +15,15 @@ describe('ts-modal e2e', () => {
 
     const tsClose = await page.spyOnEvent('tsClose');
 
+    // Wait for requestAnimationFrame to focus the dialog
+    await page.waitForChanges();
+    await page.waitForTimeout(100);
+
+    // Focus the modal's dialog and press Escape
+    const dialog = await page.find('ts-modal >>> [role="dialog"]');
+    await dialog.focus();
     await page.keyboard.press('Escape');
+    await page.waitForChanges();
 
     expect(tsClose).toHaveReceivedEvent();
   });

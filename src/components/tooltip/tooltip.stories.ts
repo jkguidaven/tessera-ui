@@ -19,11 +19,11 @@ export default {
 
 const Template = (args: Record<string, unknown>) => {
   const attrs: string[] = [];
-  if (args.content != null) attrs.push(`content="${args.content}"`);
+  if (args.content !== undefined && args.content !== null) attrs.push(`content="${args.content}"`);
   if (args.disabled) attrs.push('disabled');
-  if (args.hideDelay != null) attrs.push(`hide-delay="${args.hideDelay}"`);
-  if (args.placement != null) attrs.push(`placement="${args.placement}"`);
-  if (args.showDelay != null) attrs.push(`show-delay="${args.showDelay}"`);
+  if (args.hideDelay !== undefined && args.hideDelay !== null) attrs.push(`hide-delay="${args.hideDelay}"`);
+  if (args.placement !== undefined && args.placement !== null) attrs.push(`placement="${args.placement}"`);
+  if (args.showDelay !== undefined && args.showDelay !== null) attrs.push(`show-delay="${args.showDelay}"`);
   return `<ts-tooltip ${attrs.join(' ')}>${args.slotContent || ''}
   </ts-tooltip>`;
 };

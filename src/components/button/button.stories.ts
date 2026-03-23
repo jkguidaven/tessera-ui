@@ -39,15 +39,15 @@ export default {
 
 const Template = (args: Record<string, unknown>) => {
   const attrs: string[] = [];
-  if (args.appearance != null) attrs.push(`appearance="${args.appearance}"`);
+  if (args.appearance !== undefined && args.appearance !== null) attrs.push(`appearance="${args.appearance}"`);
   if (args.block) attrs.push('block');
   if (args.disabled) attrs.push('disabled');
-  if (args.href != null) attrs.push(`href="${args.href}"`);
+  if (args.href !== undefined && args.href !== null) attrs.push(`href="${args.href}"`);
   if (args.loading) attrs.push('loading');
-  if (args.size != null) attrs.push(`size="${args.size}"`);
-  if (args.target != null) attrs.push(`target="${args.target}"`);
-  if (args.type != null) attrs.push(`type="${args.type}"`);
-  if (args.variant != null) attrs.push(`variant="${args.variant}"`);
+  if (args.size !== undefined && args.size !== null) attrs.push(`size="${args.size}"`);
+  if (args.target !== undefined && args.target !== null) attrs.push(`target="${args.target}"`);
+  if (args.type !== undefined && args.type !== null) attrs.push(`type="${args.type}"`);
+  if (args.variant !== undefined && args.variant !== null) attrs.push(`variant="${args.variant}"`);
   return `<ts-button ${attrs.join(' ')}>${args.slotContent || ''}
     <span slot="prefix">${args['slot_prefix'] || ''}</span>
     <span slot="suffix">${args['slot_suffix'] || ''}</span>

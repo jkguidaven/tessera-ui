@@ -1,4 +1,5 @@
-import { Component, Prop, Event, EventEmitter, h, Host, Element, Method } from '@stencil/core';
+import { Component, Prop, Event, h, Host, Element, Method } from '@stencil/core';
+import type { EventEmitter } from '@stencil/core';
 import type { TsSize, TsToggleEventDetail } from '../../types';
 import { generateId } from '../../utils/aria';
 

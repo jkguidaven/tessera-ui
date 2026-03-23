@@ -26,8 +26,8 @@ const Template = (args: Record<string, unknown>) => {
   if (args.dot) attrs.push('dot');
   if (args.outline) attrs.push('outline');
   if (args.pill) attrs.push('pill');
-  if (args.size != null) attrs.push(`size="${args.size}"`);
-  if (args.variant != null) attrs.push(`variant="${args.variant}"`);
+  if (args.size !== undefined && args.size !== null) attrs.push(`size="${args.size}"`);
+  if (args.variant !== undefined && args.variant !== null) attrs.push(`variant="${args.variant}"`);
   return `<ts-badge ${attrs.join(' ')}>${args.slotContent || ''}
   </ts-badge>`;
 };

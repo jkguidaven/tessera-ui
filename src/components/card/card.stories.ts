@@ -23,9 +23,9 @@ export default {
 const Template = (args: Record<string, unknown>) => {
   const attrs: string[] = [];
   if (args.bordered) attrs.push('bordered');
-  if (args.elevation != null) attrs.push(`elevation="${args.elevation}"`);
+  if (args.elevation !== undefined && args.elevation !== null) attrs.push(`elevation="${args.elevation}"`);
   if (args.interactive) attrs.push('interactive');
-  if (args.padding != null) attrs.push(`padding="${args.padding}"`);
+  if (args.padding !== undefined && args.padding !== null) attrs.push(`padding="${args.padding}"`);
   return `<ts-card ${attrs.join(' ')}>${args.slotContent || ''}
     <span slot="footer">${args['slot_footer'] || ''}</span>
     <span slot="header">${args['slot_header'] || ''}</span>

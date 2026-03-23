@@ -3,13 +3,13 @@ import {
   Prop,
   State,
   Event,
-  EventEmitter,
   h,
   Host,
   Element,
   Method,
   Watch,
 } from '@stencil/core';
+import type { EventEmitter } from '@stencil/core';
 import type { TsSize } from '../../types';
 import { generateId, trapFocus } from '../../utils/aria';
 

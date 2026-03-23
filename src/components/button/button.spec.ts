@@ -10,8 +10,8 @@ describe('ts-button', () => {
 
     const button = page.root?.shadowRoot?.querySelector('button');
     expect(button).not.toBeNull();
-    expect(button?.type).toBe('button');
-    expect(button?.disabled).toBe(false);
+    expect(button?.getAttribute('type')).toBe('button');
+    expect(button?.hasAttribute('disabled')).toBe(false);
   });
 
   it('reflects variant prop to host attribute', async () => {
@@ -40,7 +40,7 @@ describe('ts-button', () => {
     });
 
     const button = page.root?.shadowRoot?.querySelector('button');
-    expect(button?.disabled).toBe(true);
+    expect(button?.hasAttribute('disabled')).toBe(true);
     expect(button?.getAttribute('aria-disabled')).toBe('true');
   });
 

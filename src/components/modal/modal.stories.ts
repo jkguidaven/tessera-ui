@@ -22,10 +22,10 @@ const Template = (args: Record<string, unknown>) => {
   const attrs: string[] = [];
   if (args.closeOnEscape) attrs.push('close-on-escape');
   if (args.closeOnOverlay) attrs.push('close-on-overlay');
-  if (args.label != null) attrs.push(`label="${args.label}"`);
+  if (args.label !== undefined && args.label !== null) attrs.push(`label="${args.label}"`);
   if (args.open) attrs.push('open');
   if (args.showClose) attrs.push('show-close');
-  if (args.size != null) attrs.push(`size="${args.size}"`);
+  if (args.size !== undefined && args.size !== null) attrs.push(`size="${args.size}"`);
   return `<ts-modal ${attrs.join(' ')}>${args.slotContent || ''}
     <span slot="footer">${args['slot_footer'] || ''}</span>
     <span slot="header">${args['slot_header'] || ''}</span>
