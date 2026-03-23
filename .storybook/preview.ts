@@ -1,5 +1,8 @@
 import { defineCustomElements } from '../loader';
 
+// Load global design tokens and theme styles
+import '../dist/tessera-ui/tessera-ui.css';
+
 // Register Tessera UI web components
 defineCustomElements();
 
