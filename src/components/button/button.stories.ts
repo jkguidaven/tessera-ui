@@ -29,7 +29,7 @@ export default {
   },
 };
 
-const Template = (args) => {
+const Template = (args: Record<string, unknown>) => {
   return `<ts-button
     variant="${args.variant || 'primary'}"
     appearance="${args.appearance || 'solid'}"
@@ -40,8 +40,9 @@ const Template = (args) => {
   >${args.label || 'Button'}</ts-button>`;
 };
 
-export const Default = Template.bind({});
-Default.args = { label: 'Click me' };
+export const Default = Object.assign(Template.bind({}) as typeof Template & { args: Record<string, unknown> }, {
+  args: { label: 'Click me' } as Record<string, unknown>,
+});
 
 export const Variants = () => `
   <div style="display: flex; gap: 8px; flex-wrap: wrap; align-items: center;">

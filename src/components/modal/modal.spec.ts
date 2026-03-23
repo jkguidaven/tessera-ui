@@ -44,8 +44,7 @@ describe('ts-modal', () => {
     // Stencil reflects boolean props — check that close button is missing
     const closeBtn = page.root?.shadowRoot?.querySelector('.modal__close');
     // show-close="false" needs to be parsed as boolean by Stencil
-    // This depends on the framework setup; we verify the structure exists
-    expect(page.root).not.toBeNull();
+    expect(closeBtn).toBeNull();
   });
 
   it('emits tsClose when close button is clicked', async () => {

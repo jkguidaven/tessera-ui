@@ -166,6 +166,7 @@ export class TsModal {
             role="dialog"
             aria-modal="true"
             aria-label={this.label}
+            aria-labelledby={!this.label ? `${this.modalId}-header` : undefined}
             tabindex={-1}
             onClick={this.handleDialogClick}
           >
@@ -181,7 +182,7 @@ export class TsModal {
               </button>
             )}
 
-            <div class="modal__header" part="header">
+            <div class="modal__header" part="header" id={`${this.modalId}-header`}>
               <slot name="header" />
             </div>
 
