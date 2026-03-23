@@ -26,6 +26,8 @@
     "generate:angular": "stencil build --docs-json dist/components.json && node scripts/generate-angular.js",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
+    "docs": "stencil build && pnpm -C docs dev",
+    "docs:build": "stencil build && pnpm -C docs build",
     "lint": "eslint src --ext .ts,.tsx",
     "lint.fix": "eslint src --ext .ts,.tsx --fix",
     "tokens:build": "node scripts/build-tokens.js"
