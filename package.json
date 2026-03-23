@@ -56,7 +56,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/your-org/tessera-ui"
+    "url": "https://github.com/jkguidaven/tessera-ui"
   },
   "keywords": [
     "web-components",

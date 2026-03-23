@@ -1,0 +1,104 @@
+---
+title: Design Tokens
+description: CSS custom properties used across all Tessera UI components
+---
+
+All Tessera UI components use design tokens (CSS custom properties) for styling. Tokens use the `--ts-` prefix and cross the Shadow DOM boundary, making theming straightforward.
+
+**Never use raw values in component CSS — always reference tokens.**
+
+## Colors
+
+### Primary
+
+| Token | Value | Preview |
+|---|---|---|
+| `--ts-color-primary-50` | `#eef2ff` | |
+| `--ts-color-primary-100` | `#dbe4ff` | |
+| `--ts-color-primary-200` | `#bac8ff` | |
+| `--ts-color-primary-300` | `#91a7ff` | |
+| `--ts-color-primary-400` | `#748ffc` | |
+| `--ts-color-primary-500` | `#5c7cfa` | |
+| `--ts-color-primary-600` | `#4c6ef5` | |
+| `--ts-color-primary-700` | `#4263eb` | |
+| `--ts-color-primary-800` | `#3b5bdb` | |
+| `--ts-color-primary-900` | `#364fc7` | |
+
+### Semantic
+
+| Token | Value | Usage |
+|---|---|---|
+| `--ts-color-success-500` | `#40c057` | Success states |
+| `--ts-color-success-600` | `#2f9e44` | Success emphasis |
+| `--ts-color-warning-500` | `#fab005` | Warning states |
+| `--ts-color-warning-600` | `#f08c00` | Warning emphasis |
+| `--ts-color-danger-500` | `#fa5252` | Error/danger states |
+| `--ts-color-danger-600` | `#e03131` | Error emphasis |
+| `--ts-color-info-500` | `#339af0` | Informational states |
+| `--ts-color-info-600` | `#1c7ed6` | Info emphasis |
+
+## Typography
+
+| Token | Value |
+|---|---|
+| `--ts-font-family-base` | `'Inter', -apple-system, ...sans-serif` |
+| `--ts-font-family-mono` | `'JetBrains Mono', 'Fira Code', ...monospace` |
+| `--ts-font-size-xs` | `0.75rem` (12px) |
+| `--ts-font-size-sm` | `0.875rem` (14px) |
+| `--ts-font-size-md` | `1rem` (16px) |
+| `--ts-font-size-lg` | `1.125rem` (18px) |
+| `--ts-font-size-xl` | `1.25rem` (20px) |
+
+## Spacing
+
+Based on a 4px unit scale:
+
+| Token | Value |
+|---|---|
+| `--ts-spacing-1` | `0.25rem` (4px) |
+| `--ts-spacing-2` | `0.5rem` (8px) |
+| `--ts-spacing-3` | `0.75rem` (12px) |
+| `--ts-spacing-4` | `1rem` (16px) |
+| `--ts-spacing-6` | `1.5rem` (24px) |
+| `--ts-spacing-8` | `2rem` (32px) |
+| `--ts-spacing-12` | `3rem` (48px) |
+| `--ts-spacing-16` | `4rem` (64px) |
+
+## Border Radius
+
+| Token | Value |
+|---|---|
+| `--ts-radius-none` | `0` |
+| `--ts-radius-sm` | `0.25rem` |
+| `--ts-radius-md` | `0.5rem` |
+| `--ts-radius-lg` | `0.75rem` |
+| `--ts-radius-xl` | `1rem` |
+| `--ts-radius-full` | `9999px` |
+
+## Shadows
+
+| Token | Description |
+|---|---|
+| `--ts-shadow-xs` | Subtle shadow |
+| `--ts-shadow-sm` | Small shadow |
+| `--ts-shadow-md` | Medium elevation |
+| `--ts-shadow-lg` | Large elevation |
+| `--ts-shadow-xl` | Highest elevation |
+
+## Transitions
+
+| Token | Value |
+|---|---|
+| `--ts-transition-fast` | `150ms ease` |
+| `--ts-transition-normal` | `250ms ease` |
+| `--ts-transition-slow` | `350ms ease` |
+
+## Dark Mode
+
+Dark mode is activated by adding `data-theme="dark"` to any ancestor. Token overrides are defined in `src/theme/tokens.css` and automatically adjust neutral colors and shadows for dark backgrounds.
+
+```html
+<html data-theme="dark">
+  <!-- All components automatically use dark tokens -->
+</html>
+```

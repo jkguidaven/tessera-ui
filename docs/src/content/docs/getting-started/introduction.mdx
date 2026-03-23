@@ -1,0 +1,39 @@
+---
+title: Introduction
+description: What is Tessera UI and why use it
+---
+
+# Tessera UI
+
+**Tessera UI** is a framework-agnostic web component library built with [Stencil.js](https://stenciljs.com/) and TypeScript. Components are authored once and compiled to standards-compliant Web Components with automatic wrapper generation for React, Vue, and Angular.
+
+## Why Tessera UI?
+
+- **Write once, use everywhere** — components work in React, Vue, Angular, or vanilla HTML
+- **True encapsulation** — Shadow DOM prevents style leaks in both directions
+- **Design tokens** — CSS custom properties cross the Shadow DOM boundary, making theming trivial
+- **Accessible by default** — WCAG 2.1 AA compliant with keyboard navigation and ARIA patterns
+- **Tree-shakeable** — only bundle the components you use
+- **Type-safe** — strict TypeScript with fully typed props, events, and methods
+
+## Available Components
+
+| Component | Tag | Description |
+|---|---|---|
+| Button | `<ts-button>` | Versatile button with variants, sizes, and appearances |
+| Input | `<ts-input>` | Text input with validation, labels, and help text |
+| Card | `<ts-card>` | Container with header, body, footer, and media slots |
+| Modal | `<ts-modal>` | Dialog overlay with focus trapping and keyboard support |
+| Badge | `<ts-badge>` | Small status indicator with variants |
+| Toggle | `<ts-toggle>` | Switch control for boolean values |
+| Alert | `<ts-alert>` | Contextual feedback messages |
+| Tooltip | `<ts-tooltip>` | Informational popup on hover/focus |
+
+## Packages
+
+| Package | Description |
+|---|---|
+| `@tessera-ui/core` | Web Components (framework-agnostic) |
+| `@tessera-ui/react` | First-class React wrappers |
+| `@tessera-ui/vue` | First-class Vue wrappers |
+| `@tessera-ui/angular` | First-class Angular wrappers |

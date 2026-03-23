@@ -1,0 +1,61 @@
+name: Release & Deploy Docs
+
+on:
+  release:
+    types: [published]
+
+concurrency:
+  group: deploy-pages
+  cancel-in-progress: false
+
+permissions:
+  pages: write
+  id-token: write
+
+jobs:
+  deploy:
+    name: Build & Deploy
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      # Build the component library (generates dist/components.json)
+      - run: pnpm build
+
+      # Build Storybook
+      - run: pnpm build-storybook
+
+      # Generate docs and build the Astro site
+      - name: Build docs
+        run: npx astro build --root ./docs
+        env:
+          RELEASE_VERSION: ${{ github.event.release.tag_name }}
+
+      # Combine: docs site at root, storybook at /storybook/
+      - name: Combine outputs
+        run: |
+          mkdir -p docs/dist/storybook
+          cp -r storybook-static/* docs/dist/storybook/
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: docs/dist/
+
+      - id: deploy
+        uses: actions/deploy-pages@v4

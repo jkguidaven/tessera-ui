@@ -28,6 +28,11 @@ Thumbs.db
 # Storybook
 storybook-static/
 
+# Docs (auto-generated component pages + build output)
+docs/src/content/docs/components/
+docs/dist/
+docs/.astro/
+
 # Test coverage
 coverage/
 

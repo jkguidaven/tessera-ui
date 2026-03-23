@@ -2,6 +2,8 @@
 
 A framework-agnostic web component library built with **Stencil.js** and **TypeScript**. Write components once, use them everywhere — React, Vue, Angular, or vanilla HTML.
 
+**[Documentation](https://jkguidaven.github.io/tessera-ui/)** | **[Storybook](https://jkguidaven.github.io/tessera-ui/storybook/)** | **[npm](https://www.npmjs.com/package/@tessera-ui/core)**
+
 ## Features
 
 - **Framework agnostic** — Web Components that work in any framework or none
@@ -113,13 +115,22 @@ Tessera UI uses CSS custom properties for theming. Override tokens on `:root` or
 
 Enable dark mode by adding `data-theme="dark"` to any ancestor element.
 
+## Documentation
+
+Full documentation is deployed to GitHub Pages on every release:
+
+- **Docs site** — `https://jkguidaven.github.io/tessera-ui/` — component API reference, design tokens, getting started guides
+- **Storybook** — `https://jkguidaven.github.io/tessera-ui/storybook/` — interactive component playground
+
+Both sites are auto-generated from the codebase and always reflect the latest release version.
+
 ## Development
 
 ```bash
 # Install dependencies
 pnpm install
 
-# Start dev server with hot reload
+# Start dev server with hot reload (Stencil watch + Storybook)
 pnpm start
 
 # Run unit tests
@@ -131,9 +142,18 @@ pnpm test.e2e
 # Build for production
 pnpm build
 
-# Start Storybook
-pnpm storybook
+# Build docs site locally
+pnpm build && pnpm -C docs build
 ```
+
+## Releasing
+
+Create a [GitHub Release](https://docs.github.com/en/repositories/releasing-projects-on-github/managing-releases-in-a-repository) with a tag (e.g., `v0.2.0`). This triggers the release workflow which:
+
+1. Builds the component library
+2. Builds Storybook
+3. Generates and builds the documentation site with the release version
+4. Deploys docs + Storybook to GitHub Pages
 
 ## Architecture
 

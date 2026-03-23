@@ -62,3 +62,12 @@ Do NOT commit if any of these fail. Fix the issue first.
 | `pnpm test.e2e` | E2E tests |
 | `pnpm storybook` | Storybook only (needs prior `pnpm build`) |
 | `pnpm lint` | ESLint |
+| `pnpm -C docs build` | Build docs site (needs prior `pnpm build`) |
+
+### Docs site
+
+- Lives in `docs/` (Astro Starlight)
+- Component API pages are auto-generated from `dist/components.json` by `docs/scripts/generate-component-docs.mjs`
+- Hand-written pages (getting-started, tokens) are in `docs/src/content/docs/`
+- Deployed to GitHub Pages on release (not on every push)
+- Storybook is served at `/storybook/` subpath alongside the docs

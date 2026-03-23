@@ -1,0 +1,15 @@
+{
+  "name": "@tessera-ui/docs",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "generate": "node scripts/generate-component-docs.mjs",
+    "dev": "node scripts/generate-component-docs.mjs && astro dev",
+    "build": "node scripts/generate-component-docs.mjs && astro build",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "@astrojs/starlight": "^0.34.0",
+    "astro": "^5.7.0"
+  }
+}

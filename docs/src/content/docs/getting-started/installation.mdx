@@ -1,0 +1,92 @@
+---
+title: Installation
+description: How to install Tessera UI in your project
+---
+
+## Package Manager
+
+```bash
+# npm
+npm install @tessera-ui/core
+
+# pnpm
+pnpm add @tessera-ui/core
+
+# yarn
+yarn add @tessera-ui/core
+```
+
+## Framework Wrappers
+
+For first-class framework integration, install the appropriate wrapper package:
+
+```bash
+# React
+pnpm add @tessera-ui/react
+
+# Vue
+pnpm add @tessera-ui/vue
+
+# Angular
+pnpm add @tessera-ui/angular
+```
+
+## CDN
+
+For quick prototyping, use the CDN:
+
+```html
+<script type="module" src="https://unpkg.com/@tessera-ui/core/dist/tessera-ui/tessera-ui.esm.js"></script>
+```
+
+## Setup
+
+### Vanilla HTML / Web Components
+
+```html
+<script type="module">
+  import { defineCustomElements } from '@tessera-ui/core/loader';
+  defineCustomElements();
+</script>
+
+<ts-button variant="primary">Click me</ts-button>
+```
+
+### React
+
+```jsx
+import { TsButton } from '@tessera-ui/react';
+
+function App() {
+  return <TsButton variant="primary">Click me</TsButton>;
+}
+```
+
+### Vue
+
+```vue
+<script setup>
+import { TsButton } from '@tessera-ui/vue';
+</script>
+
+<template>
+  <TsButton variant="primary">Click me</TsButton>
+</template>
+```
+
+### Angular
+
+```typescript
+// app.module.ts
+import { TsButtonModule } from '@tessera-ui/angular';
+
+@NgModule({
+  imports: [TsButtonModule],
+})
+export class AppModule {}
+```
+
+```html
+<!-- component.html -->
+<ts-button variant="primary">Click me</ts-button>
+```

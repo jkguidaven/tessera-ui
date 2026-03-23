@@ -1,0 +1,95 @@
+---
+title: Usage
+description: How to use Tessera UI components
+---
+
+## Basic Usage
+
+All Tessera UI components use the `ts-` prefix to avoid naming collisions:
+
+```html
+<ts-button variant="primary" size="md">Click me</ts-button>
+<ts-input label="Email" type="email" placeholder="you@example.com"></ts-input>
+<ts-badge variant="success">Active</ts-badge>
+```
+
+## Theming
+
+Tessera UI uses CSS custom properties (design tokens) for all styling. Override tokens to customize the theme:
+
+```css
+:root {
+  --ts-color-primary-600: #7c3aed; /* Change primary to purple */
+  --ts-radius-md: 12px;            /* Rounder corners */
+  --ts-font-family-base: 'Nunito', sans-serif;
+}
+```
+
+All tokens use the `--ts-` prefix. See the [Design Tokens](/tessera-ui/tokens/overview/) page for the full reference.
+
+## Dark Mode
+
+Activate dark mode by adding `data-theme="dark"` to any ancestor element:
+
+```html
+<body data-theme="dark">
+  <ts-button variant="primary">Dark mode button</ts-button>
+</body>
+```
+
+Or toggle it dynamically:
+
+```javascript
+document.documentElement.setAttribute('data-theme', 'dark');
+```
+
+## Slots
+
+Components use slots for flexible content composition:
+
+```html
+<ts-button>
+  <span slot="prefix">🔍</span>
+  Search
+  <span slot="suffix">→</span>
+</ts-button>
+
+<ts-card>
+  <h3 slot="header">Card Title</h3>
+  <p>Card body content goes here.</p>
+  <div slot="footer">
+    <ts-button size="sm">Action</ts-button>
+  </div>
+</ts-card>
+```
+
+## Events
+
+Components emit custom events with the `ts` prefix:
+
+```javascript
+const button = document.querySelector('ts-button');
+button.addEventListener('tsClick', (event) => {
+  console.log('Button clicked!');
+});
+
+const input = document.querySelector('ts-input');
+input.addEventListener('tsChange', (event) => {
+  console.log('Value:', event.detail.value);
+});
+```
+
+## CSS Parts
+
+Style internal elements using `::part()`:
+
+```css
+ts-button::part(base) {
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+ts-input::part(input) {
+  font-size: 1.25rem;
+}
+```
