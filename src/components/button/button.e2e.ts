@@ -42,7 +42,9 @@ describe('ts-button e2e', () => {
     const tsClick = await page.spyOnEvent('tsClick');
 
     await page.keyboard.press('Tab');
+    await page.waitForChanges();
     await page.keyboard.press('Space');
+    await page.waitForChanges();
 
     expect(tsClick).toHaveReceivedEvent();
   });
