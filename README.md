@@ -117,12 +117,8 @@ Enable dark mode by adding `data-theme="dark"` to any ancestor element.
 
 ## Documentation
 
-Full documentation is deployed to GitHub Pages on every release:
-
-- **Docs site** — `https://jkguidaven.github.io/tessera-ui/` — component API reference, design tokens, getting started guides
-- **Storybook** — `https://jkguidaven.github.io/tessera-ui/storybook/` — interactive component playground
-
-Both sites are auto-generated from the codebase and always reflect the latest release version.
+- **Docs site** — `https://jkguidaven.github.io/tessera-ui/` — component API reference, design tokens, getting started guides. Deployed on **release**.
+- **Storybook** — `https://jkguidaven.github.io/tessera-ui/storybook/` — interactive component playground. Deployed on every **push to main**.
 
 ## Development
 
