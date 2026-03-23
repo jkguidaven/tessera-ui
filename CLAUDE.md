@@ -69,6 +69,4 @@ Do NOT commit if any of these fail. Fix the issue first.
 - Lives in `docs/` (Astro Starlight)
 - Component API pages are auto-generated from `dist/components.json` by `docs/scripts/generate-component-docs.mjs`
 - Hand-written pages (getting-started, tokens) are in `docs/src/content/docs/`
-- Docs site deployed to GitHub Pages on **release** only
-- Storybook deployed to `/storybook/` on every **push to main** (latest dev preview)
-- On release, both docs + Storybook are deployed together
+- Docs site + Storybook deployed to GitHub Pages on **release** only
