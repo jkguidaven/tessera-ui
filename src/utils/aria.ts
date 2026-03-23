@@ -1,0 +1,101 @@
+/**
+ * Tessera UI — Accessibility Utilities
+ *
+ * Helpers for consistent ARIA patterns across components.
+ */
+
+/** Generate a unique ID for ARIA relationships */
+let idCounter = 0;
+export function generateId(prefix = 'q'): string {
+  idCounter += 1;
+  return `${prefix}-${idCounter}`;
+}
+
+/** Reset ID counter (for testing) */
+export function resetIdCounter(): void {
+  idCounter = 0;
+}
+
+/**
+ * Announce a message to screen readers via a live region.
+ * Creates a temporary `aria-live` element, inserts the message,
+ * and removes it after the AT has time to read it.
+ */
+export function announce(message: string, priority: 'polite' | 'assertive' = 'polite'): void {
+  const el = document.createElement('div');
+  el.setAttribute('aria-live', priority);
+  el.setAttribute('role', 'status');
+  el.setAttribute('aria-atomic', 'true');
+  Object.assign(el.style, {
+    position: 'absolute',
+    width: '1px',
+    height: '1px',
+    padding: '0',
+    margin: '-1px',
+    overflow: 'hidden',
+    clip: 'rect(0, 0, 0, 0)',
+    whiteSpace: 'nowrap',
+    border: '0',
+  });
+
+  document.body.appendChild(el);
+
+  // Delay to ensure the live region is registered before content is added
+  requestAnimationFrame(() => {
+    el.textContent = message;
+    setTimeout(() => el.remove(), 1000);
+  });
+}
+
+/**
+ * Check if the user prefers reduced motion.
+ */
+export function prefersReducedMotion(): boolean {
+  return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+}
+
+/**
+ * Trap focus within a container element.
+ * Returns a cleanup function to remove the trap.
+ */
+export function trapFocus(container: HTMLElement): () => void {
+  const focusableSelectors = [
+    'a[href]',
+    'button:not([disabled])',
+    'input:not([disabled])',
+    'select:not([disabled])',
+    'textarea:not([disabled])',
+    '[tabindex]:not([tabindex="-1"])',
+  ].join(', ');
+
+  function handleKeydown(event: KeyboardEvent): void {
+    if (event.key !== 'Tab') return;
+
+    const focusableElements = Array.from(
+      container.querySelectorAll<HTMLElement>(focusableSelectors)
+    );
+
+    if (focusableElements.length === 0) {
+      event.preventDefault();
+      return;
+    }
+
+    const firstFocusable = focusableElements[0];
+    const lastFocusable = focusableElements[focusableElements.length - 1];
+
+    if (event.shiftKey) {
+      if (document.activeElement === firstFocusable) {
+        event.preventDefault();
+        lastFocusable.focus();
+      }
+    } else {
+      if (document.activeElement === lastFocusable) {
+        event.preventDefault();
+        firstFocusable.focus();
+      }
+    }
+  }
+
+  container.addEventListener('keydown', handleKeydown);
+  return () => container.removeEventListener('keydown', handleKeydown);
+}

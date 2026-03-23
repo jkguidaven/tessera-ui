@@ -1,0 +1,27 @@
+# Windsurf Rules — Quantum UI
+
+# All project conventions and agent instructions live in `.ai-instructions.md`.
+# Read that file FIRST before making any changes to this codebase.
+
+You are working on **Quantum UI**, a framework-agnostic web component library built with Stencil.js and TypeScript.
+
+## Critical Rules
+
+1. Read `.ai-instructions.md` for complete project context, conventions, and architecture.
+2. Use `pnpm` exclusively — never `npm` or `yarn`.
+3. All components live under `src/components/<name>/` with five mandatory files: `.tsx`, `.css`, `.spec.ts`, `.e2e.ts`, `.stories.ts`.
+4. All component tags use the `ts-` prefix (e.g., `<ts-button>`).
+5. All CSS values must reference design tokens (`--ts-*`) from `src/theme/tokens.css`. Never use raw hex, px, or rem values.
+6. TypeScript strict mode is enabled. No `any` types. Use `import type` for type-only imports.
+7. All interactive components must be keyboard navigable and WCAG 2.1 AA accessible.
+8. Shadow DOM is used for style encapsulation. Use CSS custom properties for consumer-facing theming.
+9. Custom events must set `{ bubbles: true, composed: true }` to cross Shadow DOM boundaries.
+10. The reference implementation is `src/components/button/` — follow that pattern for new components.
+
+## When generating code
+
+- Follow existing patterns in the codebase — check similar components before writing new ones.
+- Always include JSDoc comments on `@Prop()` and `@Event()` decorators.
+- Always include `@part` and `@slot` annotations in the component class JSDoc.
+- Test disabled, loading, and error states — not just the happy path.
+- Run `pnpm test` after changes.

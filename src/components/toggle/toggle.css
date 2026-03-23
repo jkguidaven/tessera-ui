@@ -1,0 +1,76 @@
+/* ==========================================================================
+   ts-toggle — Shadow DOM Scoped Styles
+   ========================================================================== */
+
+:host {
+  display: inline-block;
+  font-family: var(--ts-font-family-base);
+}
+
+.toggle__base {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ts-spacing-2);
+  cursor: pointer;
+  outline: none;
+}
+
+.toggle__base:focus-visible .toggle__track {
+  box-shadow: var(--ts-focus-ring);
+}
+
+:host(.ts-toggle--disabled) .toggle__base {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ---- Track ---- */
+.toggle__track {
+  position: relative;
+  background-color: var(--ts-color-neutral-300);
+  border-radius: var(--ts-radius-full);
+  transition:
+    background-color var(--ts-transition-fast),
+    box-shadow var(--ts-transition-fast);
+  flex-shrink: 0;
+}
+
+:host(.ts-toggle--checked) .toggle__track {
+  background-color: var(--ts-color-primary-500);
+}
+
+/* ---- Thumb ---- */
+.toggle__thumb {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: var(--ts-color-neutral-0);
+  border-radius: var(--ts-radius-full);
+  box-shadow: var(--ts-shadow-sm);
+  transition: left var(--ts-transition-fast);
+}
+
+/* ---- Sizes ---- */
+:host([size="sm"]) .toggle__track { width: 32px; height: 18px; }
+:host([size="sm"]) .toggle__thumb { width: 14px; height: 14px; left: 2px; }
+:host(.ts-toggle--checked[size="sm"]) .toggle__thumb { left: 16px; }
+
+:host([size="md"]) .toggle__track { width: 40px; height: 22px; }
+:host([size="md"]) .toggle__thumb { width: 18px; height: 18px; left: 2px; }
+:host(.ts-toggle--checked[size="md"]) .toggle__thumb { left: 20px; }
+
+:host([size="lg"]) .toggle__track { width: 50px; height: 28px; }
+:host([size="lg"]) .toggle__thumb { width: 24px; height: 24px; left: 2px; }
+:host(.ts-toggle--checked[size="lg"]) .toggle__thumb { left: 24px; }
+
+/* ---- Label ---- */
+.toggle__label {
+  font-size: var(--ts-font-size-sm);
+  color: var(--ts-color-neutral-700);
+  cursor: inherit;
+  user-select: none;
+}
+
+:host([size="lg"]) .toggle__label {
+  font-size: var(--ts-font-size-md);
+}

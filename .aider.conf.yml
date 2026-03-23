@@ -1,0 +1,27 @@
+# Aider Configuration — Tessera UI
+# Aider reads this file for project-level configuration.
+
+# Point aider to read the shared instructions file for full context.
+read:
+  - .ai-instructions.md
+
+# Lint command to run after edits
+lint-cmd: "pnpm lint"
+
+# Test command to verify changes
+test-cmd: "pnpm test"
+
+# Auto-commit is off — let the developer review first
+auto-commits: false
+
+# Convention summary for Aider's context
+conventions: |
+  - This is a Stencil.js web component library (TypeScript, Shadow DOM).
+  - All components use the `ts-` prefix (e.g., <ts-button>).
+  - CSS must only use design tokens (--ts-* custom properties).
+  - TypeScript strict mode. No `any` types.
+  - Each component needs 5 files: .tsx, .css, .spec.ts, .e2e.ts, .stories.ts
+  - Custom events: { bubbles: true, composed: true } to cross Shadow DOM.
+  - Reference implementation: src/components/button/
+  - Package manager: pnpm only.
+  - Read .ai-instructions.md for full project context.

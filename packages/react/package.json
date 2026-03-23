@@ -1,0 +1,23 @@
+{
+  "name": "@tessera-ui/react",
+  "version": "0.1.0",
+  "description": "React wrappers for Tessera UI web components",
+  "main": "dist/index.cjs.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": ["dist/"],
+  "scripts": {
+    "build": "tsc -p tsconfig.json"
+  },
+  "peerDependencies": {
+    "react": ">=17.0.0",
+    "react-dom": ">=17.0.0",
+    "@tessera-ui/core": ">=0.1.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.6.0",
+    "react": "^18.3.0",
+    "@types/react": "^18.3.0"
+  },
+  "license": "MIT"
+}

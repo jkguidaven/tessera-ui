@@ -1,0 +1,140 @@
+/* ==========================================================================
+   ts-input — Shadow DOM Scoped Styles
+   ========================================================================== */
+
+:host {
+  display: block;
+  font-family: var(--ts-font-family-base);
+}
+
+/* ---- Label ---- */
+.input__label {
+  display: block;
+  margin-bottom: var(--ts-spacing-1);
+  font-size: var(--ts-font-size-sm);
+  font-weight: var(--ts-font-weight-medium);
+  color: var(--ts-color-neutral-700);
+  line-height: var(--ts-line-height-normal);
+}
+
+.input__required {
+  color: var(--ts-color-danger-500);
+}
+
+/* ---- Wrapper ---- */
+.input__wrapper {
+  display: flex;
+  align-items: center;
+  gap: var(--ts-spacing-2);
+  border: 2px solid var(--ts-color-neutral-300);
+  border-radius: var(--ts-radius-md);
+  background-color: var(--ts-color-neutral-0);
+  transition:
+    border-color var(--ts-transition-fast),
+    box-shadow var(--ts-transition-fast);
+  overflow: hidden;
+}
+
+.input__wrapper--focused {
+  border-color: var(--ts-color-primary-500);
+  box-shadow: var(--ts-focus-ring);
+}
+
+.input__wrapper--error {
+  border-color: var(--ts-color-danger-500);
+}
+
+.input__wrapper--error.input__wrapper--focused {
+  box-shadow: 0 0 0 3px rgba(250, 82, 82, 0.3);
+}
+
+.input__wrapper--disabled {
+  background-color: var(--ts-color-neutral-100);
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* ---- Native Input ---- */
+.input__native {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-family: inherit;
+  color: var(--ts-color-neutral-900);
+  width: 100%;
+  min-width: 0;
+}
+
+.input__native::placeholder {
+  color: var(--ts-color-neutral-500);
+}
+
+.input__native:disabled {
+  cursor: not-allowed;
+}
+
+/* ---- Sizes ---- */
+:host([size="sm"]) .input__wrapper {
+  border-radius: var(--ts-radius-sm);
+}
+:host([size="sm"]) .input__native {
+  padding: var(--ts-spacing-1) var(--ts-spacing-2);
+  font-size: var(--ts-font-size-sm);
+}
+
+:host([size="md"]) .input__native {
+  padding: var(--ts-spacing-2) var(--ts-spacing-3);
+  font-size: var(--ts-font-size-md);
+}
+
+:host([size="lg"]) .input__native {
+  padding: var(--ts-spacing-3) var(--ts-spacing-4);
+  font-size: var(--ts-font-size-lg);
+}
+
+:host([size="xl"]) .input__wrapper {
+  border-radius: var(--ts-radius-lg);
+}
+:host([size="xl"]) .input__native {
+  padding: var(--ts-spacing-4) var(--ts-spacing-5);
+  font-size: var(--ts-font-size-xl);
+}
+
+/* ---- Prefix / Suffix ---- */
+.input__prefix,
+.input__suffix {
+  display: inline-flex;
+  align-items: center;
+  color: var(--ts-color-neutral-500);
+}
+
+.input__prefix {
+  padding-left: var(--ts-spacing-3);
+}
+
+.input__suffix {
+  padding-right: var(--ts-spacing-3);
+}
+
+.input__prefix:empty,
+.input__suffix:empty {
+  display: none;
+}
+
+/* ---- Help & Error Text ---- */
+.input__help,
+.input__error {
+  margin-top: var(--ts-spacing-1);
+  font-size: var(--ts-font-size-xs);
+  line-height: var(--ts-line-height-normal);
+}
+
+.input__help {
+  color: var(--ts-color-neutral-500);
+}
+
+.input__error {
+  color: var(--ts-color-danger-600);
+  font-weight: var(--ts-font-weight-medium);
+}

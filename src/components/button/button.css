@@ -1,0 +1,249 @@
+/* ==========================================================================
+   ts-button — Shadow DOM Scoped Styles
+   All values reference design tokens (--ts-*).
+   ========================================================================== */
+
+:host {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+:host([block]) {
+  display: block;
+  width: 100%;
+}
+
+/* ---- Base native element ---- */
+.button__native {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--ts-spacing-2);
+  width: 100%;
+  border: 2px solid transparent;
+  border-radius: var(--ts-radius-md);
+  font-family: var(--ts-font-family-base);
+  font-weight: var(--ts-font-weight-semi);
+  line-height: var(--ts-line-height-tight);
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    background-color var(--ts-transition-fast),
+    border-color var(--ts-transition-fast),
+    color var(--ts-transition-fast),
+    box-shadow var(--ts-transition-fast),
+    opacity var(--ts-transition-fast),
+    transform var(--ts-transition-fast);
+  position: relative;
+  white-space: nowrap;
+  user-select: none;
+  -webkit-appearance: none;
+  appearance: none;
+  outline: none;
+}
+
+/* ---- Focus visible ---- */
+.button__native:focus-visible {
+  box-shadow: var(--ts-focus-ring);
+}
+
+/* ---- Active press ---- */
+.button__native:active:not([disabled]):not([aria-disabled="true"]) {
+  transform: scale(0.97);
+}
+
+/* ---- Sizes ---- */
+:host([size="xs"]) .button__native {
+  padding: var(--ts-spacing-1) var(--ts-spacing-2);
+  font-size: var(--ts-font-size-xs);
+  border-radius: var(--ts-radius-sm);
+}
+
+:host([size="sm"]) .button__native {
+  padding: var(--ts-spacing-1) var(--ts-spacing-3);
+  font-size: var(--ts-font-size-sm);
+}
+
+:host([size="md"]) .button__native {
+  padding: var(--ts-spacing-2) var(--ts-spacing-4);
+  font-size: var(--ts-font-size-md);
+}
+
+:host([size="lg"]) .button__native {
+  padding: var(--ts-spacing-3) var(--ts-spacing-6);
+  font-size: var(--ts-font-size-lg);
+}
+
+:host([size="xl"]) .button__native {
+  padding: var(--ts-spacing-4) var(--ts-spacing-8);
+  font-size: var(--ts-font-size-xl);
+  border-radius: var(--ts-radius-lg);
+}
+
+/* ---- Solid Appearance ---- */
+:host([appearance="solid"][variant="primary"]) .button__native {
+  background-color: var(--ts-color-primary-600);
+  color: var(--ts-color-neutral-0);
+}
+:host([appearance="solid"][variant="primary"]) .button__native:hover:not([disabled]) {
+  background-color: var(--ts-color-primary-700);
+}
+
+:host([appearance="solid"][variant="success"]) .button__native {
+  background-color: var(--ts-color-success-600);
+  color: var(--ts-color-neutral-0);
+}
+:host([appearance="solid"][variant="success"]) .button__native:hover:not([disabled]) {
+  background-color: var(--ts-color-success-500);
+}
+
+:host([appearance="solid"][variant="danger"]) .button__native {
+  background-color: var(--ts-color-danger-600);
+  color: var(--ts-color-neutral-0);
+}
+:host([appearance="solid"][variant="danger"]) .button__native:hover:not([disabled]) {
+  background-color: var(--ts-color-danger-500);
+}
+
+:host([appearance="solid"][variant="warning"]) .button__native {
+  background-color: var(--ts-color-warning-600);
+  color: var(--ts-color-neutral-900);
+}
+:host([appearance="solid"][variant="warning"]) .button__native:hover:not([disabled]) {
+  background-color: var(--ts-color-warning-500);
+}
+
+:host([appearance="solid"][variant="neutral"]) .button__native {
+  background-color: var(--ts-color-neutral-800);
+  color: var(--ts-color-neutral-0);
+}
+:host([appearance="solid"][variant="neutral"]) .button__native:hover:not([disabled]) {
+  background-color: var(--ts-color-neutral-700);
+}
+
+:host([appearance="solid"][variant="secondary"]) .button__native {
+  background-color: var(--ts-color-neutral-200);
+  color: var(--ts-color-neutral-800);
+}
+:host([appearance="solid"][variant="secondary"]) .button__native:hover:not([disabled]) {
+  background-color: var(--ts-color-neutral-300);
+}
+
+/* ---- Outline Appearance ---- */
+:host([appearance="outline"]) .button__native {
+  background-color: transparent;
+}
+:host([appearance="outline"][variant="primary"]) .button__native {
+  border-color: var(--ts-color-primary-500);
+  color: var(--ts-color-primary-600);
+}
+:host([appearance="outline"][variant="primary"]) .button__native:hover:not([disabled]) {
+  background-color: var(--ts-color-primary-50);
+}
+
+:host([appearance="outline"][variant="danger"]) .button__native {
+  border-color: var(--ts-color-danger-500);
+  color: var(--ts-color-danger-600);
+}
+:host([appearance="outline"][variant="danger"]) .button__native:hover:not([disabled]) {
+  background-color: rgba(250, 82, 82, 0.06);
+}
+
+:host([appearance="outline"][variant="neutral"]) .button__native {
+  border-color: var(--ts-color-neutral-400);
+  color: var(--ts-color-neutral-700);
+}
+:host([appearance="outline"][variant="neutral"]) .button__native:hover:not([disabled]) {
+  background-color: var(--ts-color-neutral-50);
+}
+
+/* ---- Ghost Appearance ---- */
+:host([appearance="ghost"]) .button__native {
+  background-color: transparent;
+  border-color: transparent;
+}
+:host([appearance="ghost"][variant="primary"]) .button__native {
+  color: var(--ts-color-primary-600);
+}
+:host([appearance="ghost"][variant="primary"]) .button__native:hover:not([disabled]) {
+  background-color: var(--ts-color-primary-50);
+}
+
+:host([appearance="ghost"][variant="neutral"]) .button__native {
+  color: var(--ts-color-neutral-700);
+}
+:host([appearance="ghost"][variant="neutral"]) .button__native:hover:not([disabled]) {
+  background-color: var(--ts-color-neutral-100);
+}
+
+/* ---- Link Appearance ---- */
+:host([appearance="link"]) .button__native {
+  background: none;
+  border: none;
+  padding: 0;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+:host([appearance="link"][variant="primary"]) .button__native {
+  color: var(--ts-color-primary-600);
+}
+:host([appearance="link"]) .button__native:hover:not([disabled]) {
+  text-decoration-thickness: 2px;
+}
+
+/* ---- Disabled State ---- */
+:host([disabled]) .button__native,
+.button__native[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* ---- Loading State ---- */
+:host([loading]) .button__label,
+:host([loading]) .button__prefix,
+:host([loading]) .button__suffix {
+  visibility: hidden;
+}
+
+:host([loading]) .button__native {
+  cursor: wait;
+  position: relative;
+}
+
+/* ---- Spinner ---- */
+.button__spinner {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.button__spinner svg {
+  width: 1.2em;
+  height: 1.2em;
+  animation: ts-spin 0.8s linear infinite;
+}
+
+@keyframes ts-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ---- Slot wrappers ---- */
+.button__prefix,
+.button__suffix {
+  display: inline-flex;
+  align-items: center;
+}
+
+.button__prefix:empty,
+.button__suffix:empty {
+  display: none;
+}
+
+.button__label {
+  display: inline-flex;
+  align-items: center;
+}

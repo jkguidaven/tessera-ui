@@ -1,0 +1,98 @@
+/* ==========================================================================
+   ts-card — Shadow DOM Scoped Styles
+   ========================================================================== */
+
+:host {
+  display: block;
+  font-family: var(--ts-font-family-base);
+}
+
+.card__base {
+  border-radius: var(--ts-radius-lg);
+  background-color: var(--ts-color-neutral-0);
+  overflow: hidden;
+  transition:
+    box-shadow var(--ts-transition-normal),
+    transform var(--ts-transition-normal);
+}
+
+/* ---- Elevation ---- */
+:host([elevation="none"]) .card__base { box-shadow: none; }
+:host([elevation="sm"]) .card__base   { box-shadow: var(--ts-shadow-sm); }
+:host([elevation="md"]) .card__base   { box-shadow: var(--ts-shadow-md); }
+:host([elevation="lg"]) .card__base   { box-shadow: var(--ts-shadow-lg); }
+:host([elevation="xl"]) .card__base   { box-shadow: var(--ts-shadow-xl); }
+
+/* ---- Bordered ---- */
+:host([bordered]) .card__base {
+  border: 1px solid var(--ts-color-neutral-200);
+}
+
+/* ---- Interactive ---- */
+:host([interactive]) {
+  cursor: pointer;
+}
+
+:host([interactive]) .card__base:hover {
+  box-shadow: var(--ts-shadow-lg);
+  transform: translateY(-2px);
+}
+
+:host([interactive]) .card__base:active {
+  transform: translateY(0);
+}
+
+:host([interactive]:focus-visible) .card__base {
+  box-shadow: var(--ts-focus-ring);
+}
+
+/* ---- Sections ---- */
+.card__media {
+  overflow: hidden;
+}
+
+.card__media:empty {
+  display: none;
+}
+
+.card__media ::slotted(img) {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.card__header {
+  border-bottom: 1px solid var(--ts-color-neutral-100);
+}
+
+.card__header:empty {
+  display: none;
+  border-bottom: none;
+}
+
+.card__footer {
+  border-top: 1px solid var(--ts-color-neutral-100);
+}
+
+.card__footer:empty {
+  display: none;
+  border-top: none;
+}
+
+/* ---- Padding ---- */
+:host([padding="none"]) .card__header,
+:host([padding="none"]) .card__body,
+:host([padding="none"]) .card__footer { padding: 0; }
+
+:host([padding="sm"]) .card__header,
+:host([padding="sm"]) .card__body,
+:host([padding="sm"]) .card__footer { padding: var(--ts-spacing-3); }
+
+:host([padding="md"]) .card__header,
+:host([padding="md"]) .card__body,
+:host([padding="md"]) .card__footer { padding: var(--ts-spacing-4); }
+
+:host([padding="lg"]) .card__header,
+:host([padding="lg"]) .card__body,
+:host([padding="lg"]) .card__footer { padding: var(--ts-spacing-6); }

@@ -1,0 +1,115 @@
+/* ==========================================================================
+   ts-tooltip — Shadow DOM Scoped Styles
+   ========================================================================== */
+
+:host {
+  display: inline-block;
+  position: relative;
+  font-family: var(--ts-font-family-base);
+}
+
+.tooltip__trigger {
+  display: inline-block;
+}
+
+/* ---- Popup ---- */
+.tooltip__popup {
+  position: absolute;
+  z-index: var(--ts-z-tooltip);
+  padding: var(--ts-spacing-1) var(--ts-spacing-2);
+  background-color: var(--ts-color-neutral-800);
+  color: var(--ts-color-neutral-0);
+  font-size: var(--ts-font-size-xs);
+  font-weight: var(--ts-font-weight-medium);
+  line-height: var(--ts-line-height-normal);
+  border-radius: var(--ts-radius-sm);
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transform: scale(0.95);
+  transition:
+    opacity var(--ts-transition-fast),
+    transform var(--ts-transition-fast);
+}
+
+.tooltip__popup--visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* ---- Placements ---- */
+.tooltip__popup--top {
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform-origin: bottom center;
+}
+.tooltip__popup--top,
+.tooltip__popup--top-start,
+.tooltip__popup--top-end {
+  bottom: calc(100% + 8px);
+}
+.tooltip__popup--top { left: 50%; margin-left: -50%; }
+.tooltip__popup--top-start { left: 0; }
+.tooltip__popup--top-end { right: 0; }
+
+.tooltip__popup--bottom,
+.tooltip__popup--bottom-start,
+.tooltip__popup--bottom-end {
+  top: calc(100% + 8px);
+}
+.tooltip__popup--bottom { left: 50%; margin-left: -50%; }
+.tooltip__popup--bottom-start { left: 0; }
+.tooltip__popup--bottom-end { right: 0; }
+
+.tooltip__popup--left,
+.tooltip__popup--left-start,
+.tooltip__popup--left-end {
+  right: calc(100% + 8px);
+}
+.tooltip__popup--left { top: 50%; transform: translateY(-50%) scale(0.95); }
+.tooltip__popup--left.tooltip__popup--visible { transform: translateY(-50%) scale(1); }
+
+.tooltip__popup--right,
+.tooltip__popup--right-start,
+.tooltip__popup--right-end {
+  left: calc(100% + 8px);
+}
+.tooltip__popup--right { top: 50%; transform: translateY(-50%) scale(0.95); }
+.tooltip__popup--right.tooltip__popup--visible { transform: translateY(-50%) scale(1); }
+
+/* ---- Arrow ---- */
+.tooltip__arrow {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: var(--ts-color-neutral-800);
+  transform: rotate(45deg);
+}
+
+.tooltip__popup--top .tooltip__arrow,
+.tooltip__popup--top-start .tooltip__arrow,
+.tooltip__popup--top-end .tooltip__arrow {
+  bottom: -4px;
+  left: 50%;
+  margin-left: -4px;
+}
+
+.tooltip__popup--bottom .tooltip__arrow,
+.tooltip__popup--bottom-start .tooltip__arrow,
+.tooltip__popup--bottom-end .tooltip__arrow {
+  top: -4px;
+  left: 50%;
+  margin-left: -4px;
+}
+
+.tooltip__popup--left .tooltip__arrow {
+  right: -4px;
+  top: 50%;
+  margin-top: -4px;
+}
+
+.tooltip__popup--right .tooltip__arrow {
+  left: -4px;
+  top: 50%;
+  margin-top: -4px;
+}

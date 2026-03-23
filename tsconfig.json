@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
+    "allowUnreachableCode": false,
+    "declaration": true,
+    "experimentalDecorators": true,
+    "forceConsistentCasingInFileNames": true,
+    "jsx": "react",
+    "jsxFactory": "h",
+    "lib": ["DOM", "ES2022"],
+    "module": "ESNext",
+    "moduleResolution": "node",
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "strict": true,
+    "target": "ES2022",
+    "skipLibCheck": true
+  },
+  "include": ["src"],
+  "exclude": ["node_modules", "dist", "packages"]
+}

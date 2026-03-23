@@ -1,0 +1,120 @@
+/* ==========================================================================
+   ts-modal — Shadow DOM Scoped Styles
+   ========================================================================== */
+
+:host {
+  font-family: var(--ts-font-family-base);
+}
+
+/* ---- Overlay ---- */
+.modal__overlay {
+  position: fixed;
+  inset: 0;
+  z-index: var(--ts-z-modal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--ts-spacing-4);
+  background-color: rgba(0, 0, 0, 0.45);
+  animation: ts-fade-in 200ms ease-out;
+}
+
+/* ---- Dialog ---- */
+.modal__dialog {
+  position: relative;
+  background-color: var(--ts-color-neutral-0);
+  border-radius: var(--ts-radius-xl);
+  box-shadow: var(--ts-shadow-xl);
+  max-height: calc(100vh - var(--ts-spacing-16));
+  overflow-y: auto;
+  animation: ts-scale-in 250ms cubic-bezier(0.16, 1, 0.3, 1);
+  outline: none;
+}
+
+/* ---- Sizes ---- */
+.modal__dialog--xs  { width: 100%; max-width: 320px; }
+.modal__dialog--sm  { width: 100%; max-width: 440px; }
+.modal__dialog--md  { width: 100%; max-width: 560px; }
+.modal__dialog--lg  { width: 100%; max-width: 720px; }
+.modal__dialog--xl  { width: 100%; max-width: 960px; }
+
+/* ---- Close Button ---- */
+.modal__close {
+  position: absolute;
+  top: var(--ts-spacing-3);
+  right: var(--ts-spacing-3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border: none;
+  border-radius: var(--ts-radius-md);
+  background: transparent;
+  color: var(--ts-color-neutral-500);
+  font-size: var(--ts-font-size-md);
+  cursor: pointer;
+  transition:
+    background-color var(--ts-transition-fast),
+    color var(--ts-transition-fast);
+  z-index: 1;
+  padding: 0;
+  line-height: 1;
+}
+
+.modal__close:hover {
+  background-color: var(--ts-color-neutral-100);
+  color: var(--ts-color-neutral-700);
+}
+
+.modal__close:focus-visible {
+  box-shadow: var(--ts-focus-ring);
+}
+
+/* ---- Sections ---- */
+.modal__header {
+  padding: var(--ts-spacing-5) var(--ts-spacing-6) var(--ts-spacing-3);
+  font-size: var(--ts-font-size-lg);
+  font-weight: var(--ts-font-weight-semi);
+  color: var(--ts-color-neutral-900);
+}
+
+.modal__header:empty {
+  display: none;
+}
+
+.modal__body {
+  padding: var(--ts-spacing-3) var(--ts-spacing-6);
+  font-size: var(--ts-font-size-md);
+  color: var(--ts-color-neutral-700);
+  line-height: var(--ts-line-height-normal);
+}
+
+.modal__footer {
+  padding: var(--ts-spacing-3) var(--ts-spacing-6) var(--ts-spacing-5);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--ts-spacing-2);
+}
+
+.modal__footer:empty {
+  display: none;
+}
+
+/* ---- Animations ---- */
+@keyframes ts-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes ts-scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}

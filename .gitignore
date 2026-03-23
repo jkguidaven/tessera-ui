@@ -1,0 +1,36 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+www/
+loader/
+
+# Generated framework wrappers
+packages/react/src/components/
+packages/vue/src/components.ts
+packages/angular/src/directives/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Storybook
+storybook-static/
+
+# Test coverage
+coverage/
+
+# Environment
+.env
+.env.local
+
+# Logs
+*.log
+npm-debug.log*

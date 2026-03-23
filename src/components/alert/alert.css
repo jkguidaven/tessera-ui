@@ -1,0 +1,105 @@
+/* ==========================================================================
+   ts-alert — Shadow DOM Scoped Styles
+   ========================================================================== */
+
+:host {
+  display: block;
+  font-family: var(--ts-font-family-base);
+}
+
+.alert__base {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--ts-spacing-3);
+  padding: var(--ts-spacing-3) var(--ts-spacing-4);
+  border-radius: var(--ts-radius-md);
+  border: 1px solid transparent;
+  font-size: var(--ts-font-size-sm);
+  line-height: var(--ts-line-height-normal);
+}
+
+/* ---- Variants ---- */
+:host([variant="info"]) .alert__base {
+  background-color: rgba(51, 154, 240, 0.08);
+  border-color: rgba(51, 154, 240, 0.25);
+  color: var(--ts-color-info-600);
+}
+
+:host([variant="success"]) .alert__base {
+  background-color: rgba(64, 192, 87, 0.08);
+  border-color: rgba(64, 192, 87, 0.25);
+  color: var(--ts-color-success-600);
+}
+
+:host([variant="warning"]) .alert__base {
+  background-color: rgba(250, 176, 5, 0.08);
+  border-color: rgba(250, 176, 5, 0.25);
+  color: var(--ts-color-warning-600);
+}
+
+:host([variant="danger"]) .alert__base {
+  background-color: rgba(250, 82, 82, 0.08);
+  border-color: rgba(250, 82, 82, 0.25);
+  color: var(--ts-color-danger-600);
+}
+
+:host([variant="neutral"]) .alert__base {
+  background-color: var(--ts-color-neutral-50);
+  border-color: var(--ts-color-neutral-200);
+  color: var(--ts-color-neutral-700);
+}
+
+/* ---- Icon ---- */
+.alert__icon {
+  display: flex;
+  align-items: center;
+  font-size: 1.15em;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+/* ---- Message ---- */
+.alert__message {
+  flex: 1;
+  min-width: 0;
+}
+
+/* ---- Action ---- */
+.alert__action {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.alert__action:empty {
+  display: none;
+}
+
+/* ---- Close Button ---- */
+.alert__close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 1.5rem;
+  height: 1.5rem;
+  border: none;
+  border-radius: var(--ts-radius-sm);
+  background: transparent;
+  color: currentColor;
+  opacity: 0.6;
+  cursor: pointer;
+  font-size: 0.8em;
+  transition: opacity var(--ts-transition-fast);
+  padding: 0;
+  line-height: 1;
+}
+
+.alert__close:hover {
+  opacity: 1;
+}
+
+.alert__close:focus-visible {
+  box-shadow: var(--ts-focus-ring);
+  opacity: 1;
+}

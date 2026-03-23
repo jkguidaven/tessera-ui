@@ -1,0 +1,128 @@
+/* ==========================================================================
+   Tessera UI — Design Tokens
+   All tokens use the --ts- prefix and are the ONLY values allowed in
+   component stylesheets. Never use raw hex/px/rem in component CSS.
+   ========================================================================== */
+
+:root {
+  /* ----- Color: Primary ----- */
+  --ts-color-primary-50:  #eef2ff;
+  --ts-color-primary-100: #dbe4ff;
+  --ts-color-primary-200: #bac8ff;
+  --ts-color-primary-300: #91a7ff;
+  --ts-color-primary-400: #748ffc;
+  --ts-color-primary-500: #5c7cfa;
+  --ts-color-primary-600: #4c6ef5;
+  --ts-color-primary-700: #4263eb;
+  --ts-color-primary-800: #3b5bdb;
+  --ts-color-primary-900: #364fc7;
+
+  /* ----- Color: Neutral ----- */
+  --ts-color-neutral-0:   #ffffff;
+  --ts-color-neutral-50:  #f8f9fa;
+  --ts-color-neutral-100: #f1f3f5;
+  --ts-color-neutral-200: #e9ecef;
+  --ts-color-neutral-300: #dee2e6;
+  --ts-color-neutral-400: #ced4da;
+  --ts-color-neutral-500: #adb5bd;
+  --ts-color-neutral-600: #868e96;
+  --ts-color-neutral-700: #495057;
+  --ts-color-neutral-800: #343a40;
+  --ts-color-neutral-900: #212529;
+
+  /* ----- Color: Semantic ----- */
+  --ts-color-success-500: #40c057;
+  --ts-color-success-600: #2f9e44;
+  --ts-color-warning-500: #fab005;
+  --ts-color-warning-600: #f08c00;
+  --ts-color-danger-500:  #fa5252;
+  --ts-color-danger-600:  #e03131;
+  --ts-color-info-500:    #339af0;
+  --ts-color-info-600:    #1c7ed6;
+
+  /* ----- Typography ----- */
+  --ts-font-family-base:    'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --ts-font-family-mono:    'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+  --ts-font-weight-regular: 400;
+  --ts-font-weight-medium:  500;
+  --ts-font-weight-semi:    600;
+  --ts-font-weight-bold:    700;
+
+  --ts-font-size-xs:  0.75rem;   /* 12px */
+  --ts-font-size-sm:  0.875rem;  /* 14px */
+  --ts-font-size-md:  1rem;      /* 16px */
+  --ts-font-size-lg:  1.125rem;  /* 18px */
+  --ts-font-size-xl:  1.25rem;   /* 20px */
+  --ts-font-size-2xl: 1.5rem;    /* 24px */
+  --ts-font-size-3xl: 1.875rem;  /* 30px */
+
+  --ts-line-height-tight:  1.25;
+  --ts-line-height-normal: 1.5;
+  --ts-line-height-loose:  1.75;
+
+  /* ----- Spacing (4px base unit) ----- */
+  --ts-spacing-0:   0;
+  --ts-spacing-1:   0.25rem;  /* 4px  */
+  --ts-spacing-2:   0.5rem;   /* 8px  */
+  --ts-spacing-3:   0.75rem;  /* 12px */
+  --ts-spacing-4:   1rem;     /* 16px */
+  --ts-spacing-5:   1.25rem;  /* 20px */
+  --ts-spacing-6:   1.5rem;   /* 24px */
+  --ts-spacing-8:   2rem;     /* 32px */
+  --ts-spacing-10:  2.5rem;   /* 40px */
+  --ts-spacing-12:  3rem;     /* 48px */
+  --ts-spacing-16:  4rem;     /* 64px */
+
+  /* ----- Border Radius ----- */
+  --ts-radius-none: 0;
+  --ts-radius-sm:   0.25rem;  /* 4px  */
+  --ts-radius-md:   0.5rem;   /* 8px  */
+  --ts-radius-lg:   0.75rem;  /* 12px */
+  --ts-radius-xl:   1rem;     /* 16px */
+  --ts-radius-full: 9999px;
+
+  /* ----- Shadows / Elevation ----- */
+  --ts-shadow-xs:  0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --ts-shadow-sm:  0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
+  --ts-shadow-md:  0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+  --ts-shadow-lg:  0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+  --ts-shadow-xl:  0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+
+  /* ----- Transitions ----- */
+  --ts-transition-fast:   150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --ts-transition-normal: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  --ts-transition-slow:   350ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* ----- Z-Index Scale ----- */
+  --ts-z-dropdown: 1000;
+  --ts-z-sticky:   1020;
+  --ts-z-fixed:    1030;
+  --ts-z-overlay:  1040;
+  --ts-z-modal:    1050;
+  --ts-z-popover:  1060;
+  --ts-z-tooltip:  1070;
+
+  /* ----- Focus Ring ----- */
+  --ts-focus-ring: 0 0 0 3px rgba(92, 124, 250, 0.4);
+}
+
+/* ----- Dark Theme Override ----- */
+[data-theme="dark"] {
+  --ts-color-neutral-0:   #1a1b1e;
+  --ts-color-neutral-50:  #25262b;
+  --ts-color-neutral-100: #2c2e33;
+  --ts-color-neutral-200: #373a40;
+  --ts-color-neutral-300: #495057;
+  --ts-color-neutral-400: #868e96;
+  --ts-color-neutral-500: #adb5bd;
+  --ts-color-neutral-600: #ced4da;
+  --ts-color-neutral-700: #dee2e6;
+  --ts-color-neutral-800: #e9ecef;
+  --ts-color-neutral-900: #f1f3f5;
+
+  --ts-shadow-xs:  0 1px 2px 0 rgba(0, 0, 0, 0.3);
+  --ts-shadow-sm:  0 1px 3px 0 rgba(0, 0, 0, 0.4), 0 1px 2px -1px rgba(0, 0, 0, 0.3);
+  --ts-shadow-md:  0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -2px rgba(0, 0, 0, 0.3);
+  --ts-shadow-lg:  0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -4px rgba(0, 0, 0, 0.3);
+  --ts-shadow-xl:  0 20px 25px -5px rgba(0, 0, 0, 0.4), 0 8px 10px -6px rgba(0, 0, 0, 0.3);
+}
