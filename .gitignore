@@ -6,6 +6,9 @@ dist/
 www/
 loader/
 
+# Generated component docs
+src/components/*/readme.md
+
 # Generated framework wrappers
 packages/react/src/components/
 packages/vue/src/components.ts

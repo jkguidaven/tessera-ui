@@ -34,11 +34,6 @@ export const config: Config = {
       serviceWorker: null,
     },
 
-    // --- Auto-generated API docs ---
-    {
-      type: 'docs-readme',
-      footer: '*Built with [Tessera UI](https://github.com/your-org/tessera-ui)*',
-    },
 
     // --- Custom Elements Manifest (JSON) ---
     {
