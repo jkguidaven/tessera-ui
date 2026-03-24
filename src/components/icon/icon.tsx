@@ -70,7 +70,7 @@ export class TsIcon {
   }
 
   componentWillLoad(): void {
-    return this.loadIcon() as any;
+    return this.loadIcon() as unknown as void;
   }
 
   /**
@@ -100,7 +100,7 @@ export class TsIcon {
       if (!lucideCache) {
         try {
           const mod = await import('lucide');
-          lucideCache = mod.icons as Record<string, LucideNode>;
+          lucideCache = (mod as { icons: Record<string, LucideNode> }).icons;
         } catch {
           this.svgContent = undefined;
           return;
