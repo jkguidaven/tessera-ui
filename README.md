@@ -115,6 +115,40 @@ Tessera UI uses CSS custom properties for theming. Override tokens on `:root` or
 
 Enable dark mode by adding `data-theme="dark"` to any ancestor element.
 
+## Theming
+
+Tessera UI uses a **three-tier token architecture** for maximum flexibility:
+
+| Tier | Prefix | Purpose |
+|---|---|---|
+| Reference | `--ts-ref-*` | Raw palette values (never use directly) |
+| Semantic | `--ts-*` | Role-based tokens (what components consume) |
+| Component | `--ts-{component}-*` | Per-component overrides (customization API) |
+
+Override component tokens to customize individual components without touching the design system:
+
+```css
+/* Customize all buttons */
+ts-button {
+  --ts-button-radius: 9999px;
+}
+
+/* Customize all cards */
+ts-card {
+  --ts-card-bg: #f0f0f0;
+  --ts-card-radius: 0;
+}
+```
+
+Or override semantic tokens to change the entire system:
+
+```css
+:root {
+  --ts-color-interactive-primary: #e63946;
+  --ts-color-interactive-primary-hover: #c1121f;
+}
+```
+
 ## Documentation
 
 - **Docs site** — `https://jkguidaven.github.io/tessera-ui/` — component API reference, design tokens, getting started guides. Deployed on **release**.

@@ -1,9 +1,20 @@
 /* ==========================================================================
    ts-modal — Shadow DOM Scoped Styles
+
+   Component tokens (Tier 3):
+     --ts-modal-bg          Dialog background
+     --ts-modal-overlay-bg  Overlay background
+     --ts-modal-radius      Dialog border radius
+     --ts-modal-shadow      Dialog box-shadow
    ========================================================================== */
 
 :host {
   font-family: var(--ts-font-family-base);
+
+  --ts-modal-bg: var(--ts-color-bg-surface);
+  --ts-modal-overlay-bg: var(--ts-color-bg-overlay);
+  --ts-modal-radius: var(--ts-radius-xl);
+  --ts-modal-shadow: var(--ts-shadow-xl);
 }
 
 /* ---- Overlay ---- */
@@ -15,16 +26,16 @@
   align-items: center;
   justify-content: center;
   padding: var(--ts-spacing-4);
-  background-color: rgba(0, 0, 0, 0.45);
+  background-color: var(--ts-modal-overlay-bg);
   animation: ts-fade-in 200ms ease-out;
 }
 
 /* ---- Dialog ---- */
 .modal__dialog {
   position: relative;
-  background-color: var(--ts-color-neutral-0);
-  border-radius: var(--ts-radius-xl);
-  box-shadow: var(--ts-shadow-xl);
+  background-color: var(--ts-modal-bg);
+  border-radius: var(--ts-modal-radius);
+  box-shadow: var(--ts-modal-shadow);
   max-height: calc(100vh - var(--ts-spacing-16));
   overflow-y: auto;
   animation: ts-scale-in 250ms cubic-bezier(0.16, 1, 0.3, 1);
@@ -51,7 +62,7 @@
   border: none;
   border-radius: var(--ts-radius-md);
   background: transparent;
-  color: var(--ts-color-neutral-500);
+  color: var(--ts-color-text-tertiary);
   font-size: var(--ts-font-size-md);
   cursor: pointer;
   transition:
@@ -63,8 +74,8 @@
 }
 
 .modal__close:hover {
-  background-color: var(--ts-color-neutral-100);
-  color: var(--ts-color-neutral-700);
+  background-color: var(--ts-color-bg-hover);
+  color: var(--ts-color-text-secondary);
 }
 
 .modal__close:focus-visible {
@@ -76,7 +87,7 @@
   padding: var(--ts-spacing-5) var(--ts-spacing-6) var(--ts-spacing-3);
   font-size: var(--ts-font-size-lg);
   font-weight: var(--ts-font-weight-semi);
-  color: var(--ts-color-neutral-900);
+  color: var(--ts-color-text-primary);
 }
 
 .modal__header:empty {
@@ -86,7 +97,7 @@
 .modal__body {
   padding: var(--ts-spacing-3) var(--ts-spacing-6);
   font-size: var(--ts-font-size-md);
-  color: var(--ts-color-neutral-700);
+  color: var(--ts-color-text-secondary);
   line-height: var(--ts-line-height-normal);
 }
 

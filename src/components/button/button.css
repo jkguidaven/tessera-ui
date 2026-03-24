@@ -1,11 +1,19 @@
 /* ==========================================================================
    ts-button — Shadow DOM Scoped Styles
-   All values reference design tokens (--ts-*).
+
+   Component tokens (Tier 3):
+     --ts-button-radius         Border radius
+     --ts-button-font-weight    Label font weight
+     --ts-button-focus-ring     Focus ring box-shadow
    ========================================================================== */
 
 :host {
   display: inline-block;
   vertical-align: middle;
+
+  --ts-button-radius: var(--ts-radius-md);
+  --ts-button-font-weight: var(--ts-font-weight-semi);
+  --ts-button-focus-ring: var(--ts-focus-ring);
 }
 
 :host([block]) {
@@ -21,9 +29,9 @@
   gap: var(--ts-spacing-2);
   width: 100%;
   border: 2px solid transparent;
-  border-radius: var(--ts-radius-md);
+  border-radius: var(--ts-button-radius);
   font-family: var(--ts-font-family-base);
-  font-weight: var(--ts-font-weight-semi);
+  font-weight: var(--ts-button-font-weight);
   line-height: var(--ts-line-height-tight);
   text-decoration: none;
   cursor: pointer;
@@ -44,7 +52,7 @@
 
 /* ---- Focus visible ---- */
 .button__native:focus-visible {
-  box-shadow: var(--ts-focus-ring);
+  box-shadow: var(--ts-button-focus-ring);
 }
 
 /* ---- Active press ---- */
@@ -82,11 +90,11 @@
 
 /* ---- Solid Appearance ---- */
 :host([appearance="solid"][variant="primary"]) .button__native {
-  background-color: var(--ts-color-primary-600);
-  color: var(--ts-color-neutral-0);
+  background-color: var(--ts-color-interactive-primary);
+  color: var(--ts-color-text-on-primary);
 }
 :host([appearance="solid"][variant="primary"]) .button__native:hover:not([disabled]) {
-  background-color: var(--ts-color-primary-700);
+  background-color: var(--ts-color-interactive-primary-hover);
 }
 
 :host([appearance="solid"][variant="success"]) .button__native {
@@ -98,11 +106,11 @@
 }
 
 :host([appearance="solid"][variant="danger"]) .button__native {
-  background-color: var(--ts-color-danger-600);
+  background-color: var(--ts-color-interactive-danger);
   color: var(--ts-color-neutral-0);
 }
 :host([appearance="solid"][variant="danger"]) .button__native:hover:not([disabled]) {
-  background-color: var(--ts-color-danger-500);
+  background-color: var(--ts-color-interactive-danger-hover);
 }
 
 :host([appearance="solid"][variant="warning"]) .button__native {
@@ -135,26 +143,26 @@
 }
 :host([appearance="outline"][variant="primary"]) .button__native {
   border-color: var(--ts-color-primary-500);
-  color: var(--ts-color-primary-600);
+  color: var(--ts-color-interactive-primary);
 }
 :host([appearance="outline"][variant="primary"]) .button__native:hover:not([disabled]) {
-  background-color: var(--ts-color-primary-50);
+  background-color: var(--ts-color-interactive-primary-subtle);
 }
 
 :host([appearance="outline"][variant="danger"]) .button__native {
   border-color: var(--ts-color-danger-500);
-  color: var(--ts-color-danger-600);
+  color: var(--ts-color-interactive-danger);
 }
 :host([appearance="outline"][variant="danger"]) .button__native:hover:not([disabled]) {
-  background-color: rgba(250, 82, 82, 0.06);
+  background-color: var(--ts-color-interactive-danger-subtle);
 }
 
 :host([appearance="outline"][variant="neutral"]) .button__native {
-  border-color: var(--ts-color-neutral-400);
-  color: var(--ts-color-neutral-700);
+  border-color: var(--ts-color-border-strong);
+  color: var(--ts-color-text-secondary);
 }
 :host([appearance="outline"][variant="neutral"]) .button__native:hover:not([disabled]) {
-  background-color: var(--ts-color-neutral-50);
+  background-color: var(--ts-color-bg-subtle);
 }
 
 /* ---- Ghost Appearance ---- */
@@ -163,14 +171,14 @@
   border-color: transparent;
 }
 :host([appearance="ghost"][variant="primary"]) .button__native {
-  color: var(--ts-color-primary-600);
+  color: var(--ts-color-interactive-primary);
 }
 :host([appearance="ghost"][variant="primary"]) .button__native:hover:not([disabled]) {
-  background-color: var(--ts-color-primary-50);
+  background-color: var(--ts-color-interactive-primary-subtle);
 }
 
 :host([appearance="ghost"][variant="neutral"]) .button__native {
-  color: var(--ts-color-neutral-700);
+  color: var(--ts-color-text-secondary);
 }
 :host([appearance="ghost"][variant="neutral"]) .button__native:hover:not([disabled]) {
   background-color: var(--ts-color-neutral-100);
@@ -185,7 +193,7 @@
   text-underline-offset: 2px;
 }
 :host([appearance="link"][variant="primary"]) .button__native {
-  color: var(--ts-color-primary-600);
+  color: var(--ts-color-interactive-primary);
 }
 :host([appearance="link"]) .button__native:hover:not([disabled]) {
   text-decoration-thickness: 2px;

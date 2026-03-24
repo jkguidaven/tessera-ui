@@ -1,0 +1,85 @@
+---
+title: Elevation
+description: The shadow and depth system in Tessera UI — layering model, z-index scale, and dark mode.
+---
+
+Elevation communicates the spatial relationship between elements. Tessera UI uses **box-shadows** to create depth and a **z-index scale** to manage stacking order.
+
+## Shadow Scale
+
+Five elevation levels provide a clear visual hierarchy from flat to floating:
+
+| Token | Level | Usage |
+|---|---|---|
+| `--ts-shadow-xs` | Level 1 | Subtle depth — pressed states, inset elements |
+| `--ts-shadow-sm` | Level 2 | Slight lift — cards at rest, toggle thumbs |
+| `--ts-shadow-md` | Level 3 | Moderate lift — hovered cards, elevated panels |
+| `--ts-shadow-lg` | Level 4 | Strong lift — hovered interactive cards, dropdowns |
+| `--ts-shadow-xl` | Level 5 | Maximum lift — modals, full-screen overlays |
+
+### Shadow Values
+
+**Light mode:**
+
+```css
+--ts-shadow-xs:  0 1px 2px 0 rgba(0, 0, 0, 0.05);
+--ts-shadow-sm:  0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
+--ts-shadow-md:  0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+--ts-shadow-lg:  0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+--ts-shadow-xl:  0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+```
+
+**Dark mode** — Shadow opacity increases to remain visible against dark backgrounds:
+
+```css
+--ts-shadow-xs:  0 1px 2px 0 rgba(0, 0, 0, 0.3);
+--ts-shadow-sm:  0 1px 3px 0 rgba(0, 0, 0, 0.4), 0 1px 2px -1px rgba(0, 0, 0, 0.3);
+--ts-shadow-md:  0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -2px rgba(0, 0, 0, 0.3);
+--ts-shadow-lg:  0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -4px rgba(0, 0, 0, 0.3);
+--ts-shadow-xl:  0 20px 25px -5px rgba(0, 0, 0, 0.4), 0 8px 10px -6px rgba(0, 0, 0, 0.3);
+```
+
+## Layering Model
+
+Elements at rest occupy different conceptual layers:
+
+| Layer | Elevation | Components |
+|---|---|---|
+| **Surface** | None | Page background, inline content |
+| **Raised** | `sm` – `md` | Cards, panels, form containers |
+| **Floating** | `lg` | Dropdown menus, popovers |
+| **Overlay** | `xl` + overlay bg | Modals, drawers, dialogs |
+
+When a component transitions between states (e.g., a card on hover), it moves up one elevation level:
+
+```
+Card at rest:   --ts-shadow-sm
+Card on hover:  --ts-shadow-lg
+```
+
+## Z-Index Scale
+
+Z-index values are managed through tokens to prevent stacking conflicts:
+
+| Token | Value | Usage |
+|---|---|---|
+| `--ts-z-dropdown` | `1000` | Dropdown menus, select popups |
+| `--ts-z-sticky` | `1020` | Sticky headers, navigation bars |
+| `--ts-z-fixed` | `1030` | Fixed position elements |
+| `--ts-z-overlay` | `1040` | Background overlays |
+| `--ts-z-modal` | `1050` | Modal dialogs |
+| `--ts-z-popover` | `1060` | Popovers, context menus |
+| `--ts-z-tooltip` | `1070` | Tooltips (always on top) |
+
+**Rules:**
+- Always use z-index tokens — never hardcode values
+- Tooltips must always appear above all other UI
+- Modals include an overlay (`--ts-z-overlay`) behind the dialog (`--ts-z-modal`)
+- Stacking context is reset inside Shadow DOM — z-index only competes within the same stacking context
+
+## Guidelines
+
+1. **Use elevation sparingly.** Not every container needs a shadow. Flat layouts with borders are often cleaner for dense UIs.
+2. **One elevation increase per interaction.** Hover effects should move up one level, not jump from none to `xl`.
+3. **Pair elevation with borders in dark mode.** Shadows are less visible on dark backgrounds — consider adding a subtle border (`--ts-color-border-subtle`) for clarity.
+4. **Reserve `xl` for modals and critical overlays.** Overuse of high elevation diminishes its impact.

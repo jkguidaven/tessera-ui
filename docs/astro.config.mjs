@@ -30,6 +30,20 @@ export default defineConfig({
           autogenerate: { directory: 'getting-started' },
         },
         {
+          label: 'Design Language',
+          items: [
+            { label: 'Design Principles', slug: 'design-language/principles' },
+            { label: 'Color', slug: 'design-language/color' },
+            { label: 'Typography', slug: 'design-language/typography' },
+            { label: 'Layout', slug: 'design-language/layout' },
+            { label: 'Elevation', slug: 'design-language/elevation' },
+            { label: 'Shapes', slug: 'design-language/shapes' },
+            { label: 'Material', slug: 'design-language/material' },
+            { label: 'Motion', slug: 'design-language/motion' },
+            { label: 'Iconography', slug: 'design-language/iconography' },
+          ],
+        },
+        {
           label: 'Design Tokens',
           autogenerate: { directory: 'tokens' },
         },

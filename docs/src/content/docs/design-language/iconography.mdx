@@ -1,0 +1,122 @@
+---
+title: Iconography
+description: Icon guidelines, sizing, integration, and recommended libraries for Tessera UI.
+---
+
+Tessera UI **does not ship its own icon set**. Instead, it provides guidelines and integration patterns that work with any icon library. This keeps the bundle lean and gives teams the freedom to choose icons that match their brand.
+
+## Recommended Icon Libraries
+
+These libraries are well-maintained, accessible, and work seamlessly with Web Components:
+
+| Library | Style | License | Best For |
+|---|---|---|---|
+| **Lucide** | Outlined, geometric | ISC | General-purpose UI |
+| **Phosphor** | Six weight variants | MIT | Flexible, multi-weight designs |
+| **Heroicons** | Outlined + solid | MIT | Tailwind-adjacent projects |
+| **Material Symbols** | Outlined + filled + rounded | Apache 2.0 | Material Design ecosystems |
+| **Tabler Icons** | Outlined, consistent stroke | MIT | Clean, minimal UI |
+
+## Sizing
+
+Icons should align with the type scale for visual consistency:
+
+| Context | Icon Size | Matching Font Token |
+|---|---|---|
+| Badge, caption | 12px | `--ts-font-size-xs` |
+| Button (sm), label | 14px | `--ts-font-size-sm` |
+| Button (md), body text | 16px | `--ts-font-size-md` |
+| Button (lg), subheading | 18px | `--ts-font-size-lg` |
+| Section header | 20px | `--ts-font-size-xl` |
+| Hero, display | 24px+ | `--ts-font-size-2xl`+ |
+
+**Rule of thumb:** Icon size should match the `font-size` of adjacent text. If an icon sits next to 14px text, the icon should be 14px.
+
+## Stroke Width
+
+For outlined icon libraries, maintain consistent stroke width across all icons:
+
+- **Recommended:** `1.5px` – `2px` stroke width
+- **Avoid mixing** stroke widths within the same interface — this creates visual noise
+- Choose a weight and apply it consistently (most libraries support this via props or CSS)
+
+## Vertical Alignment
+
+Icons should vertically center with their adjacent text. Tessera UI components handle this automatically via `inline-flex` and `align-items: center`:
+
+```html
+<!-- Button with icon — alignment handled by component -->
+<ts-button>
+  <svg slot="prefix" width="16" height="16"><!-- icon --></svg>
+  Save
+</ts-button>
+```
+
+For standalone icons next to text, use flexbox:
+
+```css
+.icon-text {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ts-spacing-2);  /* 8px gap between icon and text */
+}
+```
+
+## Slot Integration
+
+Tessera UI components provide `prefix` and `suffix` slots for icon placement:
+
+### Button
+
+```html
+<ts-button>
+  <svg slot="prefix" width="16" height="16"><!-- leading icon --></svg>
+  Label
+  <svg slot="suffix" width="16" height="16"><!-- trailing icon --></svg>
+</ts-button>
+```
+
+### Input
+
+```html
+<ts-input label="Search">
+  <svg slot="prefix" width="16" height="16"><!-- search icon --></svg>
+  <svg slot="suffix" width="16" height="16"><!-- clear icon --></svg>
+</ts-input>
+```
+
+### Alert
+
+```html
+<ts-alert variant="info">
+  <svg slot="icon" width="16" height="16"><!-- info icon --></svg>
+  Your changes have been saved.
+</ts-alert>
+```
+
+## Accessibility
+
+- **Decorative icons** (next to text that already conveys meaning): add `aria-hidden="true"` to the SVG
+- **Meaningful icons** (no adjacent text): add `role="img"` and `aria-label="description"` to the SVG
+- **Icon-only buttons**: always provide an `aria-label` on the button
+
+```html
+<!-- Decorative icon — text conveys meaning -->
+<ts-button>
+  <svg slot="prefix" aria-hidden="true"><!-- icon --></svg>
+  Delete
+</ts-button>
+
+<!-- Meaningful icon — no text, icon IS the label -->
+<ts-button aria-label="Close">
+  <svg slot="prefix" role="img" aria-label="Close"><!-- X icon --></svg>
+</ts-button>
+```
+
+## Guidelines
+
+1. **One icon library per project.** Mixing libraries creates visual inconsistency in stroke width, style, and proportions.
+2. **Use semantic icons.** A trash can means "delete," a pencil means "edit." Don't repurpose icons for unrelated actions.
+3. **Don't use icons as the sole indicator of state.** Always pair icons with text or ARIA labels for accessibility.
+4. **Size icons to match text.** An oversized icon next to small text looks unbalanced. Use the sizing table above.
+5. **Prefer SVG over icon fonts.** SVG icons are sharper, more accessible, and tree-shakeable.

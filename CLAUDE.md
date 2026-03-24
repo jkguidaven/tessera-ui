@@ -10,6 +10,7 @@ Read and follow all instructions in `.ai-instructions.md` — it is the single s
 - Use `pnpm` not `npm` or `yarn` for all package operations.
 - Requires **Node 20+** — run `nvm use` before any commands (`.nvmrc` is configured).
 - The reference component is `src/components/button/` — always match that pattern.
+- Design tokens use a **three-tier architecture** (reference → semantic → component). See `.ai-instructions.md` for full token guidelines.
 
 ## Keeping docs in sync
 

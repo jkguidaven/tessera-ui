@@ -1,57 +1,97 @@
 ---
 title: Design Tokens
-description: CSS custom properties used across all Tessera UI components
+description: The three-tier token architecture powering Tessera UI's theming system.
 ---
 
-All Tessera UI components use design tokens (CSS custom properties) for styling. Tokens use the `--ts-` prefix and cross the Shadow DOM boundary, making theming straightforward.
+Tessera UI uses a **three-tier token architecture** implemented as CSS custom properties. All tokens use the `--ts-` prefix and cross Shadow DOM boundaries via CSS inheritance, making theming work automatically in all components.
 
 **Never use raw values in component CSS — always reference tokens.**
 
-## Colors
+## Architecture
 
-### Primary
+| Tier | Prefix | Purpose | Example |
+|---|---|---|---|
+| **1. Reference** | `--ts-ref-*` | Raw palette values | `--ts-ref-primary-600: #4c6ef5` |
+| **2. Semantic** | `--ts-*` | Role-based aliases | `--ts-color-interactive-primary: var(--ts-ref-primary-600)` |
+| **3. Component** | `--ts-{component}-*` | Per-component overrides | `--ts-button-radius: var(--ts-radius-md)` |
 
-| Token | Value | Preview |
-|---|---|---|
-| `--ts-color-primary-50` | `#eef2ff` | |
-| `--ts-color-primary-100` | `#dbe4ff` | |
-| `--ts-color-primary-200` | `#bac8ff` | |
-| `--ts-color-primary-300` | `#91a7ff` | |
-| `--ts-color-primary-400` | `#748ffc` | |
-| `--ts-color-primary-500` | `#5c7cfa` | |
-| `--ts-color-primary-600` | `#4c6ef5` | |
-| `--ts-color-primary-700` | `#4263eb` | |
-| `--ts-color-primary-800` | `#3b5bdb` | |
-| `--ts-color-primary-900` | `#364fc7` | |
+### How the tiers connect
 
-### Semantic
+```
+Tier 1 (Reference)          Tier 2 (Semantic)                 Tier 3 (Component)
+--ts-ref-primary-600   ←──  --ts-color-interactive-primary  ←──  --ts-button-bg
+#4c6ef5                     var(--ts-ref-primary-600)             var(--ts-color-interactive-primary)
+```
 
-| Token | Value | Usage |
-|---|---|---|
-| `--ts-color-success-500` | `#40c057` | Success states |
-| `--ts-color-success-600` | `#2f9e44` | Success emphasis |
-| `--ts-color-warning-500` | `#fab005` | Warning states |
-| `--ts-color-warning-600` | `#f08c00` | Warning emphasis |
-| `--ts-color-danger-500` | `#fa5252` | Error/danger states |
-| `--ts-color-danger-600` | `#e03131` | Error emphasis |
-| `--ts-color-info-500` | `#339af0` | Informational states |
-| `--ts-color-info-600` | `#1c7ed6` | Info emphasis |
+- **Reference tokens** hold raw hex/rem values. They never change between themes.
+- **Semantic tokens** map reference tokens to roles (text, background, border, interactive). Dark mode remaps these.
+- **Component tokens** are defined on each component's `:host` and default to semantic tokens. Consumers override these for customization.
 
-## Typography
+## Customization Examples
 
-| Token | Value |
+### Override a single component
+
+```css
+ts-button {
+  --ts-button-radius: 9999px;     /* Pill buttons */
+  --ts-button-font-weight: 700;   /* Bolder text */
+}
+```
+
+### Override the entire system
+
+```css
+:root {
+  --ts-color-interactive-primary: #e63946;
+  --ts-color-interactive-primary-hover: #c1121f;
+}
+```
+
+## Component Token Reference
+
+Each component exposes a curated set of tokens:
+
+| Component | Tokens |
 |---|---|
-| `--ts-font-family-base` | `'Inter', -apple-system, ...sans-serif` |
-| `--ts-font-family-mono` | `'JetBrains Mono', 'Fira Code', ...monospace` |
-| `--ts-font-size-xs` | `0.75rem` (12px) |
-| `--ts-font-size-sm` | `0.875rem` (14px) |
-| `--ts-font-size-md` | `1rem` (16px) |
-| `--ts-font-size-lg` | `1.125rem` (18px) |
-| `--ts-font-size-xl` | `1.25rem` (20px) |
+| `ts-button` | `--ts-button-radius`, `--ts-button-font-weight`, `--ts-button-focus-ring` |
+| `ts-input` | `--ts-input-bg`, `--ts-input-color`, `--ts-input-border-color`, `--ts-input-radius`, `--ts-input-focus-ring` |
+| `ts-card` | `--ts-card-bg`, `--ts-card-radius`, `--ts-card-border-color` |
+| `ts-modal` | `--ts-modal-bg`, `--ts-modal-overlay-bg`, `--ts-modal-radius`, `--ts-modal-shadow` |
+| `ts-alert` | `--ts-alert-radius`, `--ts-alert-font-size` |
+| `ts-toggle` | `--ts-toggle-track-bg`, `--ts-toggle-track-bg-checked`, `--ts-toggle-thumb-bg`, `--ts-toggle-focus-ring` |
+| `ts-badge` | `--ts-badge-radius`, `--ts-badge-font-weight` |
+| `ts-tooltip` | `--ts-tooltip-bg`, `--ts-tooltip-color`, `--ts-tooltip-radius` |
 
-## Spacing
+## Semantic Token Categories
 
-Based on a 4px unit scale:
+For detailed documentation on each category, see the [Design Language](/tessera-ui/design-language/principles/) section:
+
+- **[Color](/tessera-ui/design-language/color/)** — Text roles, backgrounds, borders, interactive states, feedback colors
+- **[Typography](/tessera-ui/design-language/typography/)** — Font families, size scale, weights, line heights
+- **[Layout](/tessera-ui/design-language/layout/)** — Spacing scale (4px base unit)
+- **[Elevation](/tessera-ui/design-language/elevation/)** — Shadow scale, z-index levels
+- **[Shapes](/tessera-ui/design-language/shapes/)** — Border radius scale
+- **[Motion](/tessera-ui/design-language/motion/)** — Transition durations, easing curves
+
+## Quick Reference
+
+### Colors — Semantic Roles
+
+| Token | Usage |
+|---|---|
+| `--ts-color-text-primary` | Primary body text |
+| `--ts-color-text-secondary` | Supporting text |
+| `--ts-color-text-tertiary` | Placeholder, hints |
+| `--ts-color-bg-surface` | Page/component background |
+| `--ts-color-bg-elevated` | Cards, modals |
+| `--ts-color-bg-overlay` | Modal overlay |
+| `--ts-color-border-default` | Standard borders |
+| `--ts-color-border-subtle` | Dividers |
+| `--ts-color-interactive-primary` | Primary interactive color |
+| `--ts-color-interactive-danger` | Danger interactive color |
+| `--ts-color-focus-ring` | Focus ring color |
+
+### Spacing
 
 | Token | Value |
 |---|---|
@@ -64,41 +104,43 @@ Based on a 4px unit scale:
 | `--ts-spacing-12` | `3rem` (48px) |
 | `--ts-spacing-16` | `4rem` (64px) |
 
-## Border Radius
+### Radius
 
 | Token | Value |
 |---|---|
 | `--ts-radius-none` | `0` |
-| `--ts-radius-sm` | `0.25rem` |
-| `--ts-radius-md` | `0.5rem` |
-| `--ts-radius-lg` | `0.75rem` |
-| `--ts-radius-xl` | `1rem` |
+| `--ts-radius-sm` | `0.25rem` (4px) |
+| `--ts-radius-md` | `0.5rem` (8px) |
+| `--ts-radius-lg` | `0.75rem` (12px) |
+| `--ts-radius-xl` | `1rem` (16px) |
 | `--ts-radius-full` | `9999px` |
 
-## Shadows
+### Shadows
 
-| Token | Description |
+| Token | Usage |
 |---|---|
-| `--ts-shadow-xs` | Subtle shadow |
-| `--ts-shadow-sm` | Small shadow |
-| `--ts-shadow-md` | Medium elevation |
-| `--ts-shadow-lg` | Large elevation |
-| `--ts-shadow-xl` | Highest elevation |
+| `--ts-shadow-xs` | Subtle — inset elements |
+| `--ts-shadow-sm` | Cards at rest, toggle thumbs |
+| `--ts-shadow-md` | Hovered cards, elevated panels |
+| `--ts-shadow-lg` | Dropdowns, hovered interactive cards |
+| `--ts-shadow-xl` | Modals, full-screen overlays |
 
-## Transitions
+### Transitions
 
 | Token | Value |
 |---|---|
-| `--ts-transition-fast` | `150ms ease` |
-| `--ts-transition-normal` | `250ms ease` |
-| `--ts-transition-slow` | `350ms ease` |
+| `--ts-transition-fast` | `150ms` — micro-interactions |
+| `--ts-transition-normal` | `250ms` — state transitions |
+| `--ts-transition-slow` | `350ms` — layout shifts |
 
 ## Dark Mode
 
-Dark mode is activated by adding `data-theme="dark"` to any ancestor. Token overrides are defined in `src/theme/tokens.css` and automatically adjust neutral colors and shadows for dark backgrounds.
+Activate dark mode by adding `data-theme="dark"` to any ancestor:
 
 ```html
 <html data-theme="dark">
-  <!-- All components automatically use dark tokens -->
+  <!-- All components automatically adapt -->
 </html>
 ```
+
+Reference tokens (Tier 1) never change. Dark mode works by remapping semantic tokens (Tier 2) to different values. Component tokens (Tier 3) inherit the changes automatically through the `var()` chain.

@@ -1,44 +1,150 @@
 /* ==========================================================================
-   Tessera UI — Design Tokens
-   All tokens use the --ts- prefix and are the ONLY values allowed in
-   component stylesheets. Never use raw hex/px/rem in component CSS.
+   Tessera UI — Design Tokens (Three-Tier Architecture)
+
+   Tier 1 — Reference tokens (--ts-ref-*): Raw palette values. NEVER use
+            directly in component CSS.
+   Tier 2 — Semantic tokens (--ts-*): Role-based tokens that alias reference
+            tokens. Components consume these.
+   Tier 3 — Component tokens (--ts-{component}-*): Defined in each
+            component's CSS on :host. Consumers override these.
+
+   Dark mode remaps semantic tokens via [data-theme="dark"].
+   Reference tokens are immutable — they never change between themes.
    ========================================================================== */
 
 :root {
-  /* ----- Color: Primary ----- */
-  --ts-color-primary-50:  #eef2ff;
-  --ts-color-primary-100: #dbe4ff;
-  --ts-color-primary-200: #bac8ff;
-  --ts-color-primary-300: #91a7ff;
-  --ts-color-primary-400: #748ffc;
-  --ts-color-primary-500: #5c7cfa;
-  --ts-color-primary-600: #4c6ef5;
-  --ts-color-primary-700: #4263eb;
-  --ts-color-primary-800: #3b5bdb;
-  --ts-color-primary-900: #364fc7;
+  /* =====================================================================
+     TIER 1 — REFERENCE TOKENS
+     Raw values. Never used directly by components.
+     ===================================================================== */
 
-  /* ----- Color: Neutral ----- */
-  --ts-color-neutral-0:   #ffffff;
-  --ts-color-neutral-50:  #f8f9fa;
-  --ts-color-neutral-100: #f1f3f5;
-  --ts-color-neutral-200: #e9ecef;
-  --ts-color-neutral-300: #dee2e6;
-  --ts-color-neutral-400: #ced4da;
-  --ts-color-neutral-500: #adb5bd;
-  --ts-color-neutral-600: #868e96;
-  --ts-color-neutral-700: #495057;
-  --ts-color-neutral-800: #343a40;
-  --ts-color-neutral-900: #212529;
+  /* ----- Reference: Primary Palette ----- */
+  --ts-ref-primary-50:  #eef2ff;
+  --ts-ref-primary-100: #dbe4ff;
+  --ts-ref-primary-200: #bac8ff;
+  --ts-ref-primary-300: #91a7ff;
+  --ts-ref-primary-400: #748ffc;
+  --ts-ref-primary-500: #5c7cfa;
+  --ts-ref-primary-600: #4c6ef5;
+  --ts-ref-primary-700: #4263eb;
+  --ts-ref-primary-800: #3b5bdb;
+  --ts-ref-primary-900: #364fc7;
 
-  /* ----- Color: Semantic ----- */
-  --ts-color-success-500: #40c057;
-  --ts-color-success-600: #2f9e44;
-  --ts-color-warning-500: #fab005;
-  --ts-color-warning-600: #f08c00;
-  --ts-color-danger-500:  #fa5252;
-  --ts-color-danger-600:  #e03131;
-  --ts-color-info-500:    #339af0;
-  --ts-color-info-600:    #1c7ed6;
+  /* ----- Reference: Neutral Palette ----- */
+  --ts-ref-neutral-0:   #ffffff;
+  --ts-ref-neutral-50:  #f8f9fa;
+  --ts-ref-neutral-100: #f1f3f5;
+  --ts-ref-neutral-200: #e9ecef;
+  --ts-ref-neutral-300: #dee2e6;
+  --ts-ref-neutral-400: #ced4da;
+  --ts-ref-neutral-500: #adb5bd;
+  --ts-ref-neutral-600: #868e96;
+  --ts-ref-neutral-700: #495057;
+  --ts-ref-neutral-800: #343a40;
+  --ts-ref-neutral-900: #212529;
+
+  /* ----- Reference: Success Palette ----- */
+  --ts-ref-success-500: #40c057;
+  --ts-ref-success-600: #2f9e44;
+
+  /* ----- Reference: Warning Palette ----- */
+  --ts-ref-warning-500: #fab005;
+  --ts-ref-warning-600: #f08c00;
+
+  /* ----- Reference: Danger Palette ----- */
+  --ts-ref-danger-500:  #fa5252;
+  --ts-ref-danger-600:  #e03131;
+
+  /* ----- Reference: Info Palette ----- */
+  --ts-ref-info-500:    #339af0;
+  --ts-ref-info-600:    #1c7ed6;
+
+  /* ----- Reference: Black & White ----- */
+  --ts-ref-black: #000000;
+  --ts-ref-white: #ffffff;
+
+  /* =====================================================================
+     TIER 2 — SEMANTIC TOKENS
+     Role-based aliases to reference tokens. These are what components use.
+     ===================================================================== */
+
+  /* ----- Color: Primary (legacy aliases — backwards compatible) ----- */
+  --ts-color-primary-50:  var(--ts-ref-primary-50);
+  --ts-color-primary-100: var(--ts-ref-primary-100);
+  --ts-color-primary-200: var(--ts-ref-primary-200);
+  --ts-color-primary-300: var(--ts-ref-primary-300);
+  --ts-color-primary-400: var(--ts-ref-primary-400);
+  --ts-color-primary-500: var(--ts-ref-primary-500);
+  --ts-color-primary-600: var(--ts-ref-primary-600);
+  --ts-color-primary-700: var(--ts-ref-primary-700);
+  --ts-color-primary-800: var(--ts-ref-primary-800);
+  --ts-color-primary-900: var(--ts-ref-primary-900);
+
+  /* ----- Color: Neutral (legacy aliases — backwards compatible) ----- */
+  --ts-color-neutral-0:   var(--ts-ref-neutral-0);
+  --ts-color-neutral-50:  var(--ts-ref-neutral-50);
+  --ts-color-neutral-100: var(--ts-ref-neutral-100);
+  --ts-color-neutral-200: var(--ts-ref-neutral-200);
+  --ts-color-neutral-300: var(--ts-ref-neutral-300);
+  --ts-color-neutral-400: var(--ts-ref-neutral-400);
+  --ts-color-neutral-500: var(--ts-ref-neutral-500);
+  --ts-color-neutral-600: var(--ts-ref-neutral-600);
+  --ts-color-neutral-700: var(--ts-ref-neutral-700);
+  --ts-color-neutral-800: var(--ts-ref-neutral-800);
+  --ts-color-neutral-900: var(--ts-ref-neutral-900);
+
+  /* ----- Color: Semantic (legacy aliases — backwards compatible) ----- */
+  --ts-color-success-500: var(--ts-ref-success-500);
+  --ts-color-success-600: var(--ts-ref-success-600);
+  --ts-color-warning-500: var(--ts-ref-warning-500);
+  --ts-color-warning-600: var(--ts-ref-warning-600);
+  --ts-color-danger-500:  var(--ts-ref-danger-500);
+  --ts-color-danger-600:  var(--ts-ref-danger-600);
+  --ts-color-info-500:    var(--ts-ref-info-500);
+  --ts-color-info-600:    var(--ts-ref-info-600);
+
+  /* ----- Color: Text Roles ----- */
+  --ts-color-text-primary:    var(--ts-ref-neutral-900);
+  --ts-color-text-secondary:  var(--ts-ref-neutral-700);
+  --ts-color-text-tertiary:   var(--ts-ref-neutral-500);
+  --ts-color-text-disabled:   var(--ts-ref-neutral-400);
+  --ts-color-text-inverse:    var(--ts-ref-neutral-0);
+  --ts-color-text-on-primary: var(--ts-ref-white);
+
+  /* ----- Color: Background Roles ----- */
+  --ts-color-bg-surface:  var(--ts-ref-neutral-0);
+  --ts-color-bg-elevated: var(--ts-ref-neutral-0);
+  --ts-color-bg-subtle:   var(--ts-ref-neutral-50);
+  --ts-color-bg-overlay:  rgba(0, 0, 0, 0.45);
+  --ts-color-bg-disabled: var(--ts-ref-neutral-100);
+  --ts-color-bg-hover:    var(--ts-ref-neutral-50);
+
+  /* ----- Color: Border Roles ----- */
+  --ts-color-border-default: var(--ts-ref-neutral-300);
+  --ts-color-border-subtle:  var(--ts-ref-neutral-200);
+  --ts-color-border-strong:  var(--ts-ref-neutral-400);
+
+  /* ----- Color: Interactive ----- */
+  --ts-color-interactive-primary:        var(--ts-ref-primary-600);
+  --ts-color-interactive-primary-hover:  var(--ts-ref-primary-700);
+  --ts-color-interactive-primary-subtle: var(--ts-ref-primary-50);
+  --ts-color-interactive-danger:         var(--ts-ref-danger-600);
+  --ts-color-interactive-danger-hover:   var(--ts-ref-danger-500);
+  --ts-color-interactive-danger-subtle:  rgba(250, 82, 82, 0.06);
+
+  /* ----- Color: Feedback Backgrounds ----- */
+  --ts-color-info-bg:       rgba(51, 154, 240, 0.08);
+  --ts-color-info-border:   rgba(51, 154, 240, 0.25);
+  --ts-color-success-bg:    rgba(64, 192, 87, 0.08);
+  --ts-color-success-border: rgba(64, 192, 87, 0.25);
+  --ts-color-warning-bg:    rgba(250, 176, 5, 0.08);
+  --ts-color-warning-border: rgba(250, 176, 5, 0.25);
+  --ts-color-danger-bg:     rgba(250, 82, 82, 0.08);
+  --ts-color-danger-border: rgba(250, 82, 82, 0.25);
+
+  /* ----- Color: Focus ----- */
+  --ts-color-focus-ring:        rgba(92, 124, 250, 0.4);
+  --ts-color-focus-ring-danger: rgba(250, 82, 82, 0.3);
 
   /* ----- Typography ----- */
   --ts-font-family-base:    'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -103,11 +209,16 @@
   --ts-z-tooltip:  1070;
 
   /* ----- Focus Ring ----- */
-  --ts-focus-ring: 0 0 0 3px rgba(92, 124, 250, 0.4);
+  --ts-focus-ring: 0 0 0 3px var(--ts-color-focus-ring);
 }
 
-/* ----- Dark Theme Override ----- */
+/* =======================================================================
+   DARK THEME
+   Remaps semantic tokens to different values. Reference tokens are
+   immutable — they never change between themes.
+   ======================================================================= */
 [data-theme="dark"] {
+  /* ----- Neutral scale (legacy aliases) ----- */
   --ts-color-neutral-0:   #1a1b1e;
   --ts-color-neutral-50:  #25262b;
   --ts-color-neutral-100: #2c2e33;
@@ -120,6 +231,42 @@
   --ts-color-neutral-800: #e9ecef;
   --ts-color-neutral-900: #f1f3f5;
 
+  /* ----- Text roles ----- */
+  --ts-color-text-primary:    #f1f3f5;
+  --ts-color-text-secondary:  #dee2e6;
+  --ts-color-text-tertiary:   #adb5bd;
+  --ts-color-text-disabled:   #868e96;
+  --ts-color-text-inverse:    #1a1b1e;
+  --ts-color-text-on-primary: #ffffff;
+
+  /* ----- Background roles ----- */
+  --ts-color-bg-surface:  #1a1b1e;
+  --ts-color-bg-elevated: #25262b;
+  --ts-color-bg-subtle:   #25262b;
+  --ts-color-bg-overlay:  rgba(0, 0, 0, 0.65);
+  --ts-color-bg-disabled: #2c2e33;
+  --ts-color-bg-hover:    #25262b;
+
+  /* ----- Border roles ----- */
+  --ts-color-border-default: #495057;
+  --ts-color-border-subtle:  #373a40;
+  --ts-color-border-strong:  #868e96;
+
+  /* ----- Interactive ----- */
+  --ts-color-interactive-primary-subtle: rgba(92, 124, 250, 0.12);
+  --ts-color-interactive-danger-subtle:  rgba(250, 82, 82, 0.12);
+
+  /* ----- Feedback backgrounds (stronger in dark) ----- */
+  --ts-color-info-bg:       rgba(51, 154, 240, 0.12);
+  --ts-color-info-border:   rgba(51, 154, 240, 0.30);
+  --ts-color-success-bg:    rgba(64, 192, 87, 0.12);
+  --ts-color-success-border: rgba(64, 192, 87, 0.30);
+  --ts-color-warning-bg:    rgba(250, 176, 5, 0.12);
+  --ts-color-warning-border: rgba(250, 176, 5, 0.30);
+  --ts-color-danger-bg:     rgba(250, 82, 82, 0.12);
+  --ts-color-danger-border: rgba(250, 82, 82, 0.30);
+
+  /* ----- Shadows ----- */
   --ts-shadow-xs:  0 1px 2px 0 rgba(0, 0, 0, 0.3);
   --ts-shadow-sm:  0 1px 3px 0 rgba(0, 0, 0, 0.4), 0 1px 2px -1px rgba(0, 0, 0, 0.3);
   --ts-shadow-md:  0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -2px rgba(0, 0, 0, 0.3);

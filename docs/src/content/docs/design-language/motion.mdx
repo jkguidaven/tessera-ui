@@ -1,0 +1,140 @@
+---
+title: Motion
+description: Animation principles, duration tokens, easing curves, and transition patterns in Tessera UI.
+---
+
+Motion brings interfaces to life — but only when used with purpose. Tessera UI's motion system is minimal and functional, providing feedback for interactions without introducing distraction or delay.
+
+## Principles
+
+1. **Motion communicates, it doesn't decorate.** Every animation should help the user understand what happened — an element appeared, moved, or changed state.
+2. **Fast by default.** Most interactions use `150ms` or less. Users should never wait for an animation to finish.
+3. **Consistent easing.** A single easing curve creates a unified feel across all transitions.
+4. **Respect user preferences.** Animations should be reduced or removed when `prefers-reduced-motion` is active.
+
+## Duration Tokens
+
+| Token | Value | Usage |
+|---|---|---|
+| `--ts-transition-fast` | `150ms` | Micro-interactions: button hover, toggle switch, focus ring, color changes |
+| `--ts-transition-normal` | `250ms` | State transitions: card hover elevation, component enter/exit |
+| `--ts-transition-slow` | `350ms` | Layout shifts: accordion expand, panel slide, page transitions |
+
+### When to use each
+
+- **`fast` (150ms)** — Use for anything that responds to direct user input: hover effects, active states, focus indicators, toggle slides. The user should feel an instant response.
+- **`normal` (250ms)** — Use for visual transitions that involve spatial change: a card lifting on hover, a modal scaling in, a tooltip appearing. Slightly longer to let the eye track the motion.
+- **`slow` (350ms)** — Use sparingly for larger layout changes: accordion sections expanding, panels sliding in from the edge. Reserved for motions that affect page layout.
+
+## Easing Curve
+
+All transitions use the same easing function:
+
+```css
+cubic-bezier(0.4, 0, 0.2, 1)
+```
+
+This is a standard **ease-out** curve — elements decelerate as they reach their final position, creating a natural, physical feel. It's the same curve used by Material Design (standard easing).
+
+**Why a single curve?** Multiple easing curves create subtle visual inconsistency. A single curve applied universally produces a cohesive motion language without additional complexity.
+
+## Animation Patterns
+
+### Button press
+
+```css
+/* Active state */
+transform: scale(0.97);
+transition: transform var(--ts-transition-fast);
+```
+
+A subtle scale-down on press provides tactile feedback. The 3% reduction is enough to feel without being distracting.
+
+### Modal entrance
+
+```css
+/* Overlay */
+@keyframes ts-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+/* Duration: 200ms, ease-out */
+
+/* Dialog */
+@keyframes ts-scale-in {
+  from { opacity: 0; transform: scale(0.95) translateY(8px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+/* Duration: 250ms, cubic-bezier(0.16, 1, 0.3, 1) */
+```
+
+Modals use a two-part entrance: the overlay fades in first, then the dialog scales up from slightly below center. The dialog uses a more pronounced ease-out (spring-like) for a polished feel.
+
+### Tooltip appearance
+
+```css
+opacity: 0 → 1;
+transform: scale(0.95) → scale(1);
+transition: opacity, transform var(--ts-transition-fast);
+```
+
+Tooltips fade and scale up from 95% — a quick, minimal entrance that doesn't draw focus.
+
+### Toggle switch
+
+```css
+transition: left var(--ts-transition-fast);
+/* Track background also transitions */
+transition: background-color var(--ts-transition-fast);
+```
+
+The thumb slides horizontally while the track color transitions simultaneously.
+
+### Card hover elevation
+
+```css
+transition: box-shadow var(--ts-transition-normal), transform var(--ts-transition-normal);
+/* On hover: shadow increases, card lifts 2px */
+```
+
+Interactive cards use `normal` duration because the shadow spread change is spatially larger than a color change.
+
+## Transition Properties
+
+Always list specific properties in transitions — never use `transition: all`:
+
+```css
+/* Good */
+transition:
+  background-color var(--ts-transition-fast),
+  border-color var(--ts-transition-fast),
+  color var(--ts-transition-fast);
+
+/* Bad — triggers layout recalculation for every property */
+transition: all var(--ts-transition-fast);
+```
+
+## Reduced Motion
+
+Users who set `prefers-reduced-motion: reduce` in their OS or browser preferences should see minimal or no animation. Components should respect this:
+
+```css
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+```
+
+This is recommended at the application level. Essential state changes (like toggle position) should still be instant but skip the animation.
+
+## Guidelines
+
+1. **Never block interaction with animation.** Users should be able to click, type, or navigate without waiting for an animation to complete.
+2. **Don't animate layout properties** (`width`, `height`, `top`, `left`). Use `transform` and `opacity` for performant animations that don't trigger layout recalculation.
+3. **Match duration to distance.** Small movements (hover color) = `fast`. Medium movements (card lift) = `normal`. Large movements (panel slide) = `slow`.
+4. **Entrance animations only.** Components animate when appearing but disappear instantly (or with a very fast fade). Users don't want to wait for something to leave.

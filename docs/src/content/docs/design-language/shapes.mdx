@@ -1,0 +1,69 @@
+---
+title: Shapes
+description: The border radius system and shape language in Tessera UI.
+---
+
+Shape is a subtle but powerful tool for communicating interactivity, hierarchy, and grouping. Tessera UI uses a constrained border radius scale that maps to specific component contexts.
+
+## Radius Scale
+
+| Token | Value | Pixels | Shape Language |
+|---|---|---|---|
+| `--ts-radius-none` | `0` | 0px | Sharp edges — data-dense UI, tables |
+| `--ts-radius-sm` | `0.25rem` | 4px | Subtle rounding — badges, small elements, tooltips |
+| `--ts-radius-md` | `0.5rem` | 8px | Default rounding — buttons, inputs, alerts |
+| `--ts-radius-lg` | `0.75rem` | 12px | Spacious rounding — cards, panels |
+| `--ts-radius-xl` | `1rem` | 16px | Prominent rounding — modals, large containers |
+| `--ts-radius-full` | `9999px` | Pill / circle | Pill shapes — toggle tracks, pill badges |
+
+## Component Shape Defaults
+
+Each component uses a radius appropriate to its size and purpose:
+
+| Component | Default Radius | Token |
+|---|---|---|
+| **Button** (base) | `md` (8px) | `--ts-button-radius` |
+| **Button** (xs) | `sm` (4px) | Size override |
+| **Button** (xl) | `lg` (12px) | Size override |
+| **Input** (base) | `md` (8px) | `--ts-input-radius` |
+| **Input** (sm) | `sm` (4px) | Size override |
+| **Input** (xl) | `lg` (12px) | Size override |
+| **Card** | `lg` (12px) | `--ts-card-radius` |
+| **Modal** | `xl` (16px) | `--ts-modal-radius` |
+| **Alert** | `md` (8px) | `--ts-alert-radius` |
+| **Badge** | `sm` (4px) | `--ts-badge-radius` |
+| **Badge** (pill) | `full` | Pill override |
+| **Tooltip** | `sm` (4px) | `--ts-tooltip-radius` |
+| **Toggle** track | `full` | Pill shape |
+
+## Size-Responsive Radius
+
+Some components adjust their border radius based on size to maintain visual proportion:
+
+- **Small elements** (`xs`, `sm`) use `radius-sm` — tight rounding keeps them compact
+- **Default elements** (`md`) use `radius-md` — balanced rounding for standard UI
+- **Large elements** (`lg`, `xl`) use `radius-lg` — more generous rounding scales with the element
+
+This prevents small elements from looking overly round and large elements from looking overly sharp.
+
+## Shape Consistency Rules
+
+1. **Nested elements match or decrease radius.** A button inside a card should not have a larger radius than the card.
+2. **Interactive elements use `md` by default.** Buttons, inputs, and selects share the same base radius for consistency.
+3. **Container elements use `lg` or `xl`.** Cards, modals, and panels use larger radii to visually group their contents.
+4. **Pill shapes are reserved for status indicators.** Toggle tracks, pill badges, and progress indicators use `radius-full`.
+
+## Customizing Shape
+
+Override component tokens to change the shape language for your application:
+
+```css
+/* Sharp, modern aesthetic */
+ts-button { --ts-button-radius: var(--ts-radius-sm); }
+ts-card   { --ts-card-radius: var(--ts-radius-sm); }
+ts-modal  { --ts-modal-radius: var(--ts-radius-md); }
+
+/* Fully rounded / pill aesthetic */
+ts-button { --ts-button-radius: var(--ts-radius-full); }
+ts-input  { --ts-input-radius: var(--ts-radius-full); }
+```

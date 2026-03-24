@@ -1,0 +1,84 @@
+---
+title: Typography
+description: The Tessera UI type system — font families, scale, weights, line heights, and hierarchy.
+---
+
+Typography establishes visual hierarchy and readability. Tessera UI uses a constrained type system with two font families and a fixed size scale.
+
+## Font Families
+
+| Token | Value | Usage |
+|---|---|---|
+| `--ts-font-family-base` | `Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif` | All body text, labels, buttons |
+| `--ts-font-family-mono` | `JetBrains Mono, Fira Code, Consolas, monospace` | Code blocks, technical content |
+
+**Inter** is the primary typeface — it's designed for screen readability with open letterforms, clear distinction between similar characters, and tabular number support.
+
+## Type Scale
+
+The type scale uses `rem` units based on a 16px root size. Each step provides a meaningful visual distinction.
+
+| Token | Size | Pixels | Usage |
+|---|---|---|---|
+| `--ts-font-size-xs` | `0.75rem` | 12px | Captions, badges, helper text |
+| `--ts-font-size-sm` | `0.875rem` | 14px | Labels, secondary content, input text (sm) |
+| `--ts-font-size-md` | `1rem` | 16px | Body text, buttons, input text (md) |
+| `--ts-font-size-lg` | `1.125rem` | 18px | Subheadings, modal headers |
+| `--ts-font-size-xl` | `1.25rem` | 20px | Section headers, prominent text |
+| `--ts-font-size-2xl` | `1.5rem` | 24px | Page headers |
+| `--ts-font-size-3xl` | `1.875rem` | 30px | Hero text, display headings |
+
+## Font Weights
+
+| Token | Value | Usage |
+|---|---|---|
+| `--ts-font-weight-regular` | `400` | Body text, descriptions |
+| `--ts-font-weight-medium` | `500` | Labels, input labels, emphasized text |
+| `--ts-font-weight-semi` | `600` | Buttons, headings, badge labels |
+| `--ts-font-weight-bold` | `700` | Strong emphasis, display text |
+
+## Line Heights
+
+| Token | Value | Usage |
+|---|---|---|
+| `--ts-line-height-tight` | `1.25` | Headings, buttons, compact layouts |
+| `--ts-line-height-normal` | `1.5` | Body text, default prose |
+| `--ts-line-height-loose` | `1.75` | Long-form reading, relaxed layouts |
+
+## Hierarchy in Components
+
+Components use the type scale consistently to establish hierarchy:
+
+### Button sizes map to font sizes
+| Button Size | Font Size | Weight |
+|---|---|---|
+| `xs` | `--ts-font-size-xs` | `semi` (600) |
+| `sm` | `--ts-font-size-sm` | `semi` (600) |
+| `md` | `--ts-font-size-md` | `semi` (600) |
+| `lg` | `--ts-font-size-lg` | `semi` (600) |
+| `xl` | `--ts-font-size-xl` | `semi` (600) |
+
+### Input typography by size
+| Input Size | Font Size | Label Size |
+|---|---|---|
+| `sm` | `--ts-font-size-sm` | `sm` / `medium` |
+| `md` | `--ts-font-size-md` | `sm` / `medium` |
+| `lg` | `--ts-font-size-lg` | `sm` / `medium` |
+| `xl` | `--ts-font-size-xl` | `sm` / `medium` |
+
+### Other components
+| Component | Font Size | Weight |
+|---|---|---|
+| Modal header | `lg` | `semi` |
+| Modal body | `md` | `regular` |
+| Alert message | `sm` | `regular` |
+| Tooltip | `xs` | `medium` |
+| Badge | `xs` | `semi` |
+| Toggle label | `sm` | `regular` |
+
+## Best Practices
+
+- **Use the type scale, not arbitrary sizes.** The seven-step scale covers all needs from captions to display text.
+- **Pair size with weight for hierarchy.** Avoid using weight alone to differentiate text — use size steps.
+- **Prefer `medium` (500) over `bold` (700) for emphasis.** Bold should be reserved for strong semantic emphasis.
+- **Use `tight` line height for single-line text** (buttons, labels). Use `normal` for multi-line content.

@@ -1,10 +1,21 @@
 /* ==========================================================================
    ts-toggle — Shadow DOM Scoped Styles
+
+   Component tokens (Tier 3):
+     --ts-toggle-track-bg          Unchecked track background
+     --ts-toggle-track-bg-checked  Checked track background
+     --ts-toggle-thumb-bg          Thumb background
+     --ts-toggle-focus-ring        Focus ring box-shadow
    ========================================================================== */
 
 :host {
   display: inline-block;
   font-family: var(--ts-font-family-base);
+
+  --ts-toggle-track-bg: var(--ts-color-border-default);
+  --ts-toggle-track-bg-checked: var(--ts-color-primary-500);
+  --ts-toggle-thumb-bg: var(--ts-color-bg-surface);
+  --ts-toggle-focus-ring: var(--ts-focus-ring);
 }
 
 .toggle__base {
@@ -16,7 +27,7 @@
 }
 
 .toggle__base:focus-visible .toggle__track {
-  box-shadow: var(--ts-focus-ring);
+  box-shadow: var(--ts-toggle-focus-ring);
 }
 
 :host(.ts-toggle--disabled) .toggle__base {
@@ -27,7 +38,7 @@
 /* ---- Track ---- */
 .toggle__track {
   position: relative;
-  background-color: var(--ts-color-neutral-300);
+  background-color: var(--ts-toggle-track-bg);
   border-radius: var(--ts-radius-full);
   transition:
     background-color var(--ts-transition-fast),
@@ -36,7 +47,7 @@
 }
 
 :host(.ts-toggle--checked) .toggle__track {
-  background-color: var(--ts-color-primary-500);
+  background-color: var(--ts-toggle-track-bg-checked);
 }
 
 /* ---- Thumb ---- */
@@ -44,7 +55,7 @@
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background-color: var(--ts-color-neutral-0);
+  background-color: var(--ts-toggle-thumb-bg);
   border-radius: var(--ts-radius-full);
   box-shadow: var(--ts-shadow-sm);
   transition: left var(--ts-transition-fast);
@@ -66,7 +77,7 @@
 /* ---- Label ---- */
 .toggle__label {
   font-size: var(--ts-font-size-sm);
-  color: var(--ts-color-neutral-700);
+  color: var(--ts-color-text-secondary);
   cursor: inherit;
   user-select: none;
 }

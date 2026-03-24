@@ -1,10 +1,23 @@
 /* ==========================================================================
    ts-input — Shadow DOM Scoped Styles
+
+   Component tokens (Tier 3):
+     --ts-input-bg               Input background
+     --ts-input-color            Input text color
+     --ts-input-border-color     Default border color
+     --ts-input-radius           Border radius
+     --ts-input-focus-ring       Focus ring box-shadow
    ========================================================================== */
 
 :host {
   display: block;
   font-family: var(--ts-font-family-base);
+
+  --ts-input-bg: var(--ts-color-bg-surface);
+  --ts-input-color: var(--ts-color-text-primary);
+  --ts-input-border-color: var(--ts-color-border-default);
+  --ts-input-radius: var(--ts-radius-md);
+  --ts-input-focus-ring: var(--ts-focus-ring);
 }
 
 /* ---- Label ---- */
@@ -13,7 +26,7 @@
   margin-bottom: var(--ts-spacing-1);
   font-size: var(--ts-font-size-sm);
   font-weight: var(--ts-font-weight-medium);
-  color: var(--ts-color-neutral-700);
+  color: var(--ts-color-text-secondary);
   line-height: var(--ts-line-height-normal);
 }
 
@@ -26,9 +39,9 @@
   display: flex;
   align-items: center;
   gap: var(--ts-spacing-2);
-  border: 2px solid var(--ts-color-neutral-300);
-  border-radius: var(--ts-radius-md);
-  background-color: var(--ts-color-neutral-0);
+  border: 2px solid var(--ts-input-border-color);
+  border-radius: var(--ts-input-radius);
+  background-color: var(--ts-input-bg);
   transition:
     border-color var(--ts-transition-fast),
     box-shadow var(--ts-transition-fast);
@@ -37,7 +50,7 @@
 
 .input__wrapper--focused {
   border-color: var(--ts-color-primary-500);
-  box-shadow: var(--ts-focus-ring);
+  box-shadow: var(--ts-input-focus-ring);
 }
 
 .input__wrapper--error {
@@ -45,11 +58,11 @@
 }
 
 .input__wrapper--error.input__wrapper--focused {
-  box-shadow: 0 0 0 3px rgba(250, 82, 82, 0.3);
+  box-shadow: 0 0 0 3px var(--ts-color-focus-ring-danger);
 }
 
 .input__wrapper--disabled {
-  background-color: var(--ts-color-neutral-100);
+  background-color: var(--ts-color-bg-disabled);
   opacity: 0.6;
   cursor: not-allowed;
 }
@@ -61,13 +74,13 @@
   outline: none;
   background: transparent;
   font-family: inherit;
-  color: var(--ts-color-neutral-900);
+  color: var(--ts-input-color);
   width: 100%;
   min-width: 0;
 }
 
 .input__native::placeholder {
-  color: var(--ts-color-neutral-500);
+  color: var(--ts-color-text-tertiary);
 }
 
 .input__native:disabled {
@@ -106,7 +119,7 @@
 .input__suffix {
   display: inline-flex;
   align-items: center;
-  color: var(--ts-color-neutral-500);
+  color: var(--ts-color-text-tertiary);
 }
 
 .input__prefix {
@@ -131,7 +144,7 @@
 }
 
 .input__help {
-  color: var(--ts-color-neutral-500);
+  color: var(--ts-color-text-tertiary);
 }
 
 .input__error {

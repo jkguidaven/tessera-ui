@@ -1,0 +1,50 @@
+---
+title: Design Principles
+description: The core philosophy guiding every design and engineering decision in Tessera UI.
+---
+
+Tessera UI is built on four foundational principles. Every component, token, and pattern in the system traces back to one or more of these values.
+
+## Clarity
+
+Interfaces should communicate instantly. Users should never have to guess what an element does, what state it's in, or what will happen when they interact with it.
+
+**In practice:**
+- Visual hierarchy is established through type scale, weight, and spacing — not decoration
+- States (hover, focus, disabled, error) are always visually distinct
+- Interactive elements look interactive; static elements do not
+- Labels, placeholders, and help text guide users without ambiguity
+
+## Consistency
+
+Identical patterns should produce identical results. When users learn one part of the interface, that knowledge should transfer to every other part.
+
+**In practice:**
+- All components share the same token system for color, spacing, typography, and motion
+- Similar actions use the same interaction patterns (e.g., all dismissible elements use the same close button pattern)
+- Component APIs follow predictable naming: `variant`, `size`, `disabled`, `appearance`
+- Spacing, radius, and elevation follow a constrained scale — no ad-hoc values
+
+## Accessibility
+
+Accessibility is a baseline requirement, not a feature. Every component must work for all users regardless of ability, device, or context.
+
+**In practice:**
+- All interactive components are fully keyboard navigable
+- ARIA attributes are applied wherever native HTML semantics are insufficient
+- Color contrast meets WCAG 2.1 AA minimum: **4.5:1** for normal text, **3:1** for large text and UI elements
+- Focus indicators are always visible and meet contrast requirements
+- Components degrade gracefully without JavaScript (no blank white boxes)
+- Motion respects `prefers-reduced-motion` preferences
+
+## Adaptability
+
+The design system should work everywhere — across frameworks, themes, devices, and team preferences — without friction.
+
+**In practice:**
+- Components are Web Components (framework-agnostic by design)
+- Theming is handled entirely through CSS custom properties — no build step required
+- The three-tier token architecture (reference → semantic → component) allows customization at every level
+- Shadow DOM provides style encapsulation — consumer styles cannot accidentally break components
+- Dark mode is a first-class citizen, not an afterthought
+- Components respond to container context rather than viewport (where possible)

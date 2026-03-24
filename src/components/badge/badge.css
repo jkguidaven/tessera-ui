@@ -1,21 +1,28 @@
 /* ==========================================================================
    ts-badge — Shadow DOM Scoped Styles
+
+   Component tokens (Tier 3):
+     --ts-badge-radius       Border radius
+     --ts-badge-font-weight  Label font weight
    ========================================================================== */
 
 :host {
   display: inline-flex;
   vertical-align: middle;
   font-family: var(--ts-font-family-base);
+
+  --ts-badge-radius: var(--ts-radius-sm);
+  --ts-badge-font-weight: var(--ts-font-weight-semi);
 }
 
 .badge__base {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-weight: var(--ts-font-weight-semi);
+  font-weight: var(--ts-badge-font-weight);
   line-height: 1;
   white-space: nowrap;
-  border-radius: var(--ts-radius-sm);
+  border-radius: var(--ts-badge-radius);
   border: 2px solid transparent;
 }
 
@@ -48,12 +55,12 @@
 :host([variant="warning"]:not([outline])) .badge__base   { background: var(--ts-color-warning-500); color: var(--ts-color-neutral-900); }
 :host([variant="danger"]:not([outline])) .badge__base    { background: var(--ts-color-danger-500); color: var(--ts-color-neutral-0); }
 :host([variant="info"]:not([outline])) .badge__base      { background: var(--ts-color-info-500); color: var(--ts-color-neutral-0); }
-:host([variant="neutral"]:not([outline])) .badge__base   { background: var(--ts-color-neutral-200); color: var(--ts-color-neutral-700); }
-:host([variant="secondary"]:not([outline])) .badge__base { background: var(--ts-color-neutral-100); color: var(--ts-color-neutral-600); }
+:host([variant="neutral"]:not([outline])) .badge__base   { background: var(--ts-color-neutral-200); color: var(--ts-color-text-secondary); }
+:host([variant="secondary"]:not([outline])) .badge__base { background: var(--ts-color-neutral-100); color: var(--ts-color-text-tertiary); }
 
 /* ---- Outline Variants ---- */
 :host([outline][variant="primary"]) .badge__base   { border-color: var(--ts-color-primary-500); color: var(--ts-color-primary-600); background: transparent; }
 :host([outline][variant="success"]) .badge__base   { border-color: var(--ts-color-success-500); color: var(--ts-color-success-600); background: transparent; }
 :host([outline][variant="danger"]) .badge__base    { border-color: var(--ts-color-danger-500); color: var(--ts-color-danger-600); background: transparent; }
 :host([outline][variant="warning"]) .badge__base   { border-color: var(--ts-color-warning-500); color: var(--ts-color-warning-600); background: transparent; }
-:host([outline][variant="neutral"]) .badge__base   { border-color: var(--ts-color-neutral-400); color: var(--ts-color-neutral-600); background: transparent; }
+:host([outline][variant="neutral"]) .badge__base   { border-color: var(--ts-color-border-strong); color: var(--ts-color-text-tertiary); background: transparent; }

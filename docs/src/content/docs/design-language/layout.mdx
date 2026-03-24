@@ -1,0 +1,89 @@
+---
+title: Layout
+description: Spacing system, grid guidance, and container patterns in Tessera UI.
+---
+
+Tessera UI uses a systematic spacing scale based on a **4px base unit**. This ensures visual rhythm, consistent alignment, and predictable component composition.
+
+## Spacing Scale
+
+All spacing — padding, margins, gaps — uses tokens from this scale. Never use arbitrary pixel values.
+
+| Token | Value | Pixels | Common Usage |
+|---|---|---|---|
+| `--ts-spacing-0` | `0` | 0 | Reset, no spacing |
+| `--ts-spacing-1` | `0.25rem` | 4px | Tight gaps (label-to-field, badge padding) |
+| `--ts-spacing-2` | `0.5rem` | 8px | Default inline gap, button padding (sm) |
+| `--ts-spacing-3` | `0.75rem` | 12px | Component internal padding (alert, modal sections) |
+| `--ts-spacing-4` | `1rem` | 16px | Standard padding (md), section gaps |
+| `--ts-spacing-5` | `1.25rem` | 20px | Modal header/footer padding |
+| `--ts-spacing-6` | `1.5rem` | 24px | Card padding (lg), modal body |
+| `--ts-spacing-8` | `2rem` | 32px | Large section spacing, button padding (xl) |
+| `--ts-spacing-10` | `2.5rem` | 40px | Section separators |
+| `--ts-spacing-12` | `3rem` | 48px | Page section spacing |
+| `--ts-spacing-16` | `4rem` | 64px | Large layout gaps, modal max-height offset |
+
+## The 4px Grid
+
+Every spacing value is a multiple of 4px. This ensures all elements align to a consistent 4px grid:
+
+- `4px` — minimum spacing between closely related elements
+- `8px` — default inline spacing (between icon and label, form field gap)
+- `16px` — standard padding for medium-density components
+- `24px` — comfortable padding for spacious components
+- `32px+` — layout-level spacing between sections
+
+## Spacing Patterns in Components
+
+### Component internal padding
+| Component | Padding | Token |
+|---|---|---|
+| Button (md) | `8px 16px` | `spacing-2 spacing-4` |
+| Input (md) | `8px 12px` | `spacing-2 spacing-3` |
+| Card (md) | `16px` | `spacing-4` |
+| Card (lg) | `24px` | `spacing-6` |
+| Alert | `12px 16px` | `spacing-3 spacing-4` |
+| Modal body | `12px 24px` | `spacing-3 spacing-6` |
+
+### Gaps between elements
+| Context | Gap | Token |
+|---|---|---|
+| Button icon ↔ label | `8px` | `spacing-2` |
+| Toggle track ↔ label | `8px` | `spacing-2` |
+| Alert icon ↔ message | `12px` | `spacing-3` |
+| Modal footer buttons | `8px` | `spacing-2` |
+| Label ↔ input field | `4px` | `spacing-1` |
+| Input ↔ help text | `4px` | `spacing-1` |
+
+## Container Patterns
+
+### Modal widths
+Modals provide five size options for different content needs:
+
+| Size | Max Width | Usage |
+|---|---|---|
+| `xs` | 320px | Confirmations, simple prompts |
+| `sm` | 440px | Forms, notifications |
+| `md` | 560px | Standard dialogs |
+| `lg` | 720px | Complex forms, data entry |
+| `xl` | 960px | Tables, rich content |
+
+## Responsive Considerations
+
+Tessera UI components are Web Components — they adapt to their container rather than the viewport. Components do not ship with built-in responsive breakpoints. Instead:
+
+- **Use `block` prop on buttons** to make them full-width on small screens
+- **Use CSS container queries** in your layout to adjust component sizing
+- **Modal widths use `max-width`** — they naturally shrink on narrow viewports
+- **Spacing tokens are `rem`-based** — they scale if the user changes their browser font size
+
+### Recommended application-level breakpoints
+
+These are suggestions for your application layout, not enforced by Tessera UI:
+
+| Name | Width | Typical usage |
+|---|---|---|
+| `sm` | `640px` | Mobile |
+| `md` | `768px` | Tablet |
+| `lg` | `1024px` | Desktop |
+| `xl` | `1280px` | Wide desktop |

@@ -1,0 +1,120 @@
+---
+title: Material
+description: Surface treatments, backgrounds, borders, and opacity patterns in Tessera UI.
+---
+
+Material defines how surfaces look and feel — their color, opacity, border treatment, and visual weight. Tessera UI uses a layered material system that adapts seamlessly between light and dark themes.
+
+## Surfaces
+
+Surfaces are the backgrounds on which content lives. Tessera UI defines three surface levels:
+
+| Token | Light | Dark | Usage |
+|---|---|---|---|
+| `--ts-color-bg-surface` | `#ffffff` | `#1a1b1e` | Default page and component background |
+| `--ts-color-bg-elevated` | `#ffffff` | `#25262b` | Cards, modals — visually lifted surfaces |
+| `--ts-color-bg-subtle` | `#f8f9fa` | `#25262b` | Tinted sections, alternate rows, hover backgrounds |
+
+In **light mode**, surfaces rely on shadows to create visual separation. In **dark mode**, surfaces use slightly different background values — elevated surfaces are lighter than the base surface.
+
+### Surface Hierarchy
+
+```
+Page background (surface)
+  └── Card (elevated + shadow)
+        └── Nested section (subtle)
+              └── Inline content (transparent)
+```
+
+Each nesting level should use a distinct surface to maintain readability.
+
+## Backgrounds
+
+### Solid Backgrounds
+
+Used for primary interactive elements and filled components:
+
+```css
+/* Primary button */
+background-color: var(--ts-color-interactive-primary);   /* #4c6ef5 */
+
+/* Neutral button */
+background-color: var(--ts-color-neutral-800);           /* #343a40 */
+```
+
+### Subtle Backgrounds
+
+Low-opacity tints used for feedback, hover states, and status indicators:
+
+| Token | Light | Dark | Usage |
+|---|---|---|---|
+| `--ts-color-interactive-primary-subtle` | `primary-50` | `rgba(92,124,250, 0.12)` | Primary hover/active backgrounds |
+| `--ts-color-interactive-danger-subtle` | `rgba(250,82,82, 0.06)` | `rgba(250,82,82, 0.12)` | Danger hover backgrounds |
+| `--ts-color-info-bg` | `rgba(51,154,240, 0.08)` | `rgba(51,154,240, 0.12)` | Info alert background |
+| `--ts-color-success-bg` | `rgba(64,192,87, 0.08)` | `rgba(64,192,87, 0.12)` | Success alert background |
+| `--ts-color-warning-bg` | `rgba(250,176,5, 0.08)` | `rgba(250,176,5, 0.12)` | Warning alert background |
+| `--ts-color-danger-bg` | `rgba(250,82,82, 0.08)` | `rgba(250,82,82, 0.12)` | Danger alert background |
+
+**The 0.08 / 0.12 opacity pattern:** Alert and status backgrounds use a very low opacity of the semantic color to create a tinted surface that remains readable in both light and dark modes. Dark mode uses slightly higher opacity (0.12) because the contrast range is narrower.
+
+### Overlay Background
+
+```css
+--ts-color-bg-overlay: rgba(0, 0, 0, 0.45);  /* Light */
+--ts-color-bg-overlay: rgba(0, 0, 0, 0.65);  /* Dark */
+```
+
+Used behind modals and drawers to dim underlying content. Dark mode uses a stronger overlay since the base surface is already dark.
+
+### Disabled Background
+
+```css
+--ts-color-bg-disabled: var(--ts-color-neutral-100);  /* Light */
+--ts-color-bg-disabled: #2c2e33;                      /* Dark */
+```
+
+Applied to disabled inputs and interactive elements to visually communicate non-interactivity.
+
+## Borders
+
+Borders create structure and separation without relying on shadows:
+
+| Token | Light | Dark | Usage |
+|---|---|---|---|
+| `--ts-color-border-default` | `neutral-300` | `#495057` | Standard input and card borders |
+| `--ts-color-border-subtle` | `neutral-200` | `#373a40` | Dividers, card section separators |
+| `--ts-color-border-strong` | `neutral-400` | `#868e96` | High contrast borders, outline buttons |
+
+### Border Patterns
+
+- **Input fields** use a `2px solid` border with `border-default` color, transitioning to `primary-500` on focus
+- **Cards** use a `1px solid` border with `border-subtle` when the `bordered` attribute is set
+- **Alerts** use a `1px solid` border with the semantic color's border token (e.g., `--ts-color-info-border`)
+- **Badges** use a `2px solid` border for outline variants
+
+## Focus Indicators
+
+Focus rings are critical for keyboard accessibility. Tessera UI uses a consistent ring pattern:
+
+```css
+--ts-focus-ring: 0 0 0 3px var(--ts-color-focus-ring);
+/* --ts-color-focus-ring: rgba(92, 124, 250, 0.4) */
+```
+
+A variant exists for error-state focus:
+
+```css
+--ts-color-focus-ring-danger: rgba(250, 82, 82, 0.3);
+```
+
+**Rules:**
+- Every interactive element must show a focus ring on `:focus-visible`
+- Focus rings use `box-shadow`, not `outline`, for consistent rendering with border-radius
+- The ring is always 3px wide with 40% opacity of the primary color
+
+## Guidelines
+
+1. **Prefer borders over shadows for flat layouts.** Bordered cards (`<ts-card bordered>`) are cleaner for data-dense interfaces.
+2. **Use subtle backgrounds for grouping.** Instead of adding more borders, use `--ts-color-bg-subtle` to create visual zones.
+3. **Keep opacity consistent.** Status backgrounds always use the 0.08/0.12 pattern — don't improvise opacity values.
+4. **Disabled opacity is 0.5-0.6.** Applied to the entire component, not just the background, to uniformly indicate non-interactivity.
