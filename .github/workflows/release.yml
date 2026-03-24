@@ -38,8 +38,8 @@ jobs:
       # Build framework wrapper packages
       - run: pnpm -r --filter='!@tessera-ui/docs' run build
 
-      # Publish packages whose version isn't yet on npm
-      - run: pnpm exec lerna publish from-package --yes --no-private
+      # Publish all public packages (pnpm resolves workspace:* to real versions)
+      - run: pnpm -r --filter='!@tessera-ui/docs' publish --access public --no-git-checks
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 

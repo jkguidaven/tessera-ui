@@ -12,7 +12,7 @@
   "peerDependencies": {
     "react": ">=17.0.0",
     "react-dom": ">=17.0.0",
-    "@tessera-ui/core": ">=0.3.0"
+    "@tessera-ui/core": "workspace:*"
   },
   "devDependencies": {
     "typescript": "^5.6.0",

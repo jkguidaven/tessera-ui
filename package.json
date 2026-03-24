@@ -32,7 +32,7 @@
     "lint.fix": "eslint src --ext .ts,.tsx --fix",
     "tokens:build": "node scripts/build-tokens.js",
     "version:bump": "lerna version --no-push --yes",
-    "publish:packages": "pnpm build && pnpm -r --filter='!@tessera-ui/docs' run build && lerna publish from-package --yes"
+    "publish:packages": "pnpm build && pnpm -r --filter='!@tessera-ui/docs' run build && pnpm -r --filter='!@tessera-ui/docs' publish --access public --no-git-checks"
   },
   "dependencies": {
     "lucide": "^0.511.0"
