@@ -51,11 +51,11 @@
 :host([dot][size="xl"]) .badge__base { width: 12px; height: 12px; }
 
 /* ---- Solid Variants ---- */
-:host([variant="primary"]:not([outline])) .badge__base   { background: var(--ts-color-primary-500); color: var(--ts-color-neutral-0); }
-:host([variant="success"]:not([outline])) .badge__base   { background: var(--ts-color-success-500); color: var(--ts-color-neutral-0); }
-:host([variant="warning"]:not([outline])) .badge__base   { background: var(--ts-color-warning-500); color: var(--ts-color-neutral-900); }
-:host([variant="danger"]:not([outline])) .badge__base    { background: var(--ts-color-danger-500); color: var(--ts-color-neutral-0); }
-:host([variant="info"]:not([outline])) .badge__base      { background: var(--ts-color-info-500); color: var(--ts-color-neutral-0); }
+:host([variant="primary"]:not([outline])) .badge__base   { background: var(--ts-color-primary-500); color: var(--ts-color-text-on-primary); }
+:host([variant="success"]:not([outline])) .badge__base   { background: var(--ts-color-success-500); color: var(--ts-color-text-on-success); }
+:host([variant="warning"]:not([outline])) .badge__base   { background: var(--ts-color-warning-500); color: var(--ts-color-text-on-warning); }
+:host([variant="danger"]:not([outline])) .badge__base    { background: var(--ts-color-danger-500); color: var(--ts-color-text-on-danger); }
+:host([variant="info"]:not([outline])) .badge__base      { background: var(--ts-color-info-500); color: var(--ts-color-text-on-info); }
 :host([variant="neutral"]:not([outline])) .badge__base   { background: var(--ts-color-neutral-200); color: var(--ts-color-text-secondary); }
 :host([variant="secondary"]:not([outline])) .badge__base { background: var(--ts-color-neutral-100); color: var(--ts-color-text-tertiary); }
 

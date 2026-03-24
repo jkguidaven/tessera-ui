@@ -12,8 +12,8 @@
   position: relative;
   font-family: var(--ts-font-family-base);
 
-  --ts-tooltip-bg: var(--ts-color-neutral-800);
-  --ts-tooltip-color: var(--ts-color-neutral-0);
+  --ts-tooltip-bg: var(--ts-ref-neutral-900);
+  --ts-tooltip-color: #ffffff;
   --ts-tooltip-radius: var(--ts-shape-badge);
 }
 

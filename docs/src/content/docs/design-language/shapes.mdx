@@ -10,11 +10,11 @@ Shape is a subtle but powerful tool for communicating interactivity, hierarchy, 
 | Token | Value | Pixels | Shape Language |
 |---|---|---|---|
 | `--ts-radius-none` | `0` | 0px | Sharp edges — data-dense UI, tables |
-| `--ts-radius-sm` | `0.25rem` | 4px | Subtle rounding — badges, small elements, tooltips |
-| `--ts-radius-md` | `0.5rem` | 8px | Default rounding — buttons, inputs, alerts |
-| `--ts-radius-lg` | `0.75rem` | 12px | Spacious rounding — cards, panels |
-| `--ts-radius-xl` | `1rem` | 16px | Prominent rounding — modals, large containers |
-| `--ts-radius-full` | `9999px` | Pill / circle | Pill shapes — toggle tracks, pill badges |
+| `--ts-radius-sm` | `0.375rem` | 6px | Subtle rounding — badges, small elements, tooltips |
+| `--ts-radius-md` | `0.75rem` | 12px | Default rounding — inputs, alerts |
+| `--ts-radius-lg` | `1rem` | 16px | Spacious rounding — cards, panels |
+| `--ts-radius-xl` | `1.75rem` | 28px | Prominent rounding — modals, large containers |
+| `--ts-radius-full` | `9999px` | Pill / circle | Pill shapes — buttons, toggle tracks, pill badges |
 
 ## Shape Families
 
@@ -22,18 +22,18 @@ Shape families are semantic shape roles that group components by their visual pu
 
 | Family Token | Default Value | Components |
 |---|---|---|
-| `--ts-shape-interactive` | `radius-md` (8px) | Buttons, inputs, selects, toggles |
-| `--ts-shape-container` | `radius-lg` (12px) | Cards, panels, form containers |
-| `--ts-shape-overlay` | `radius-xl` (16px) | Modals, drawers, dialogs |
-| `--ts-shape-badge` | `radius-sm` (4px) | Badges, tooltips, tags |
+| `--ts-shape-interactive` | `radius-full` (pill) | Buttons, toggles — pill-shaped by default |
+| `--ts-shape-container` | `radius-lg` (16px) | Cards, panels, form containers |
+| `--ts-shape-overlay` | `radius-xl` (28px) | Modals, drawers, dialogs |
+| `--ts-shape-badge` | `radius-sm` (6px) | Badges, tooltips, tags |
 | `--ts-shape-pill` | `radius-full` (9999px) | Toggle tracks, pill badges, progress bars |
 
 Override a shape family to globally change all components in that group:
 
 ```css
 :root {
-  /* Make all interactive elements fully rounded */
-  --ts-shape-interactive: var(--ts-radius-full);
+  /* Make all interactive elements rectangular instead of pill */
+  --ts-shape-interactive: var(--ts-radius-md);
 
   /* Make all containers sharp */
   --ts-shape-container: var(--ts-radius-sm);
@@ -46,18 +46,14 @@ Each component uses a radius appropriate to its size and purpose:
 
 | Component | Default Radius | Token |
 |---|---|---|
-| **Button** (base) | `md` (8px) | `--ts-button-radius` |
-| **Button** (xs) | `sm` (4px) | Size override |
-| **Button** (xl) | `lg` (12px) | Size override |
-| **Input** (base) | `md` (8px) | `--ts-input-radius` |
-| **Input** (sm) | `sm` (4px) | Size override |
-| **Input** (xl) | `lg` (12px) | Size override |
-| **Card** | `lg` (12px) | `--ts-card-radius` |
-| **Modal** | `xl` (16px) | `--ts-modal-radius` |
-| **Alert** | `md` (8px) | `--ts-alert-radius` |
-| **Badge** | `sm` (4px) | `--ts-badge-radius` |
+| **Button** (base) | `full` (pill) | `--ts-button-radius` |
+| **Input** (base) | `md` (12px) | `--ts-input-radius` |
+| **Card** | `lg` (16px) | `--ts-card-radius` |
+| **Modal** | `xl` (28px) | `--ts-modal-radius` |
+| **Alert** | `md` (12px) | `--ts-alert-radius` |
+| **Badge** | `sm` (6px) | `--ts-badge-radius` |
 | **Badge** (pill) | `full` | Pill override |
-| **Tooltip** | `sm` (4px) | `--ts-tooltip-radius` |
+| **Tooltip** | `sm` (6px) | `--ts-tooltip-radius` |
 | **Toggle** track | `full` | Pill shape |
 
 ## Size-Responsive Radius
@@ -72,10 +68,10 @@ This prevents small elements from looking overly round and large elements from l
 
 ## Shape Consistency Rules
 
-1. **Nested elements match or decrease radius.** A button inside a card should not have a larger radius than the card.
-2. **Interactive elements use `md` by default.** Buttons, inputs, and selects share the same base radius for consistency.
-3. **Container elements use `lg` or `xl`.** Cards, modals, and panels use larger radii to visually group their contents.
-4. **Pill shapes are reserved for status indicators.** Toggle tracks, pill badges, and progress indicators use `radius-full`.
+1. **Buttons are pill-shaped by default.** The M3-inspired design uses `radius-full` for all interactive elements like buttons and toggles.
+2. **Inputs use rectangular rounding.** Inputs and selects use `radius-md` (12px) for a clean, contained feel.
+3. **Container elements use generous rounding.** Cards use `radius-lg` (16px), modals use `radius-xl` (28px) for a soft, pillowy aesthetic.
+4. **Pill shapes for buttons and status indicators.** Buttons, toggle tracks, pill badges, and progress indicators use `radius-full`.
 
 ## Customizing Shape
 
@@ -87,7 +83,7 @@ ts-button { --ts-button-radius: var(--ts-radius-sm); }
 ts-card   { --ts-card-radius: var(--ts-radius-sm); }
 ts-modal  { --ts-modal-radius: var(--ts-radius-md); }
 
-/* Fully rounded / pill aesthetic */
-ts-button { --ts-button-radius: var(--ts-radius-full); }
-ts-input  { --ts-input-radius: var(--ts-radius-full); }
+/* Rectangular buttons (override pill default) */
+ts-button { --ts-button-radius: var(--ts-radius-md); }
+ts-input  { --ts-input-radius: var(--ts-radius-sm); }
 ```

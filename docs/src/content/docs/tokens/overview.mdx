@@ -11,16 +11,16 @@ Tessera UI uses a **three-tier token architecture** implemented as CSS custom pr
 
 | Tier | Prefix | Purpose | Example |
 |---|---|---|---|
-| **1. Reference** | `--ts-ref-*` | Raw palette values | `--ts-ref-primary-600: #e45c0e` |
+| **1. Reference** | `--ts-ref-*` | Raw palette values | `--ts-ref-primary-600: #1a73e8` |
 | **2. Semantic** | `--ts-*` | Role-based aliases | `--ts-color-interactive-primary: var(--ts-ref-primary-600)` |
-| **3. Component** | `--ts-{component}-*` | Per-component overrides | `--ts-button-radius: var(--ts-radius-md)` |
+| **3. Component** | `--ts-{component}-*` | Per-component overrides | `--ts-button-radius: var(--ts-shape-interactive)` |
 
 ### How the tiers connect
 
 ```
 Tier 1 (Reference)          Tier 2 (Semantic)                 Tier 3 (Component)
 --ts-ref-primary-600   ←──  --ts-color-interactive-primary  ←──  --ts-button-bg
-#e45c0e                     var(--ts-ref-primary-600)             var(--ts-color-interactive-primary)
+#1a73e8                     var(--ts-ref-primary-600)             var(--ts-color-interactive-primary)
 ```
 
 - **Reference tokens** hold raw hex/rem values. They never change between themes.
@@ -82,7 +82,7 @@ For detailed documentation on each category, see the [Design Language](/tessera-
 
 - **[Color](/tessera-ui/design-language/color/)** — Text roles, backgrounds, borders, interactive states, feedback colors
 - **[Typography](/tessera-ui/design-language/typography/)** — Font families, size scale, weights, line heights
-- **[Layout](/tessera-ui/design-language/layout/)** — Spacing scale (4px base unit)
+- **[Layout](/tessera-ui/design-language/layout/)** — Spacing scale (comfortable default)
 - **[Elevation](/tessera-ui/design-language/elevation/)** — Shadow scale, z-index levels
 - **[Shapes](/tessera-ui/design-language/shapes/)** — Border radius scale
 - **[Motion](/tessera-ui/design-language/motion/)** — Transition durations, easing curves
@@ -110,24 +110,26 @@ For detailed documentation on each category, see the [Design Language](/tessera-
 
 | Token | Value |
 |---|---|
-| `--ts-spacing-1` | `0.25rem` (4px) |
-| `--ts-spacing-2` | `0.5rem` (8px) |
-| `--ts-spacing-3` | `0.75rem` (12px) |
-| `--ts-spacing-4` | `1rem` (16px) |
-| `--ts-spacing-6` | `1.5rem` (24px) |
-| `--ts-spacing-8` | `2rem` (32px) |
-| `--ts-spacing-12` | `3rem` (48px) |
-| `--ts-spacing-16` | `4rem` (64px) |
+| `--ts-spacing-1` | `0.375rem` (6px) |
+| `--ts-spacing-2` | `0.625rem` (10px) |
+| `--ts-spacing-3` | `1rem` (16px) |
+| `--ts-spacing-4` | `1.25rem` (20px) |
+| `--ts-spacing-5` | `1.5rem` (24px) |
+| `--ts-spacing-6` | `2rem` (32px) |
+| `--ts-spacing-8` | `2.5rem` (40px) |
+| `--ts-spacing-10` | `3rem` (48px) |
+| `--ts-spacing-12` | `4rem` (64px) |
+| `--ts-spacing-16` | `5rem` (80px) |
 
 ### Radius
 
 | Token | Value |
 |---|---|
 | `--ts-radius-none` | `0` |
-| `--ts-radius-sm` | `0.25rem` (4px) |
-| `--ts-radius-md` | `0.5rem` (8px) |
-| `--ts-radius-lg` | `0.75rem` (12px) |
-| `--ts-radius-xl` | `1rem` (16px) |
+| `--ts-radius-sm` | `0.375rem` (6px) |
+| `--ts-radius-md` | `0.75rem` (12px) |
+| `--ts-radius-lg` | `1rem` (16px) |
+| `--ts-radius-xl` | `1.75rem` (28px) |
 | `--ts-radius-full` | `9999px` |
 
 ### Shadows
@@ -144,9 +146,9 @@ For detailed documentation on each category, see the [Design Language](/tessera-
 
 | Token | Value |
 |---|---|
-| `--ts-transition-fast` | `150ms` — micro-interactions |
-| `--ts-transition-normal` | `250ms` — state transitions |
-| `--ts-transition-slow` | `350ms` — layout shifts |
+| `--ts-transition-fast` | `160ms` — micro-interactions |
+| `--ts-transition-normal` | `240ms` — state transitions |
+| `--ts-transition-slow` | `360ms` — layout shifts |
 
 ## Density Modes
 

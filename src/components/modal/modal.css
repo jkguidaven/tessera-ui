@@ -11,7 +11,7 @@
 :host {
   font-family: var(--ts-font-family-base);
 
-  --ts-modal-bg: var(--ts-color-bg-surface);
+  --ts-modal-bg: var(--ts-color-bg-elevated);
   --ts-modal-overlay-bg: var(--ts-color-bg-overlay);
   --ts-modal-radius: var(--ts-shape-overlay);
   --ts-modal-shadow: var(--ts-shadow-xl);

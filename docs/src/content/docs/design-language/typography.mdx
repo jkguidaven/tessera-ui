@@ -9,10 +9,10 @@ Typography establishes visual hierarchy and readability. Tessera UI uses a const
 
 | Token | Value | Usage |
 |---|---|---|
-| `--ts-font-family-base` | `Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif` | All body text, labels, buttons |
-| `--ts-font-family-mono` | `JetBrains Mono, Fira Code, Consolas, monospace` | Code blocks, technical content |
+| `--ts-font-family-base` | `'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif` | All body text, labels, buttons |
+| `--ts-font-family-mono` | `'JetBrains Mono', 'Fira Code', 'Consolas', monospace` | Code blocks, technical content |
 
-**Inter** is the primary typeface — it's designed for screen readability with open letterforms, clear distinction between similar characters, and tabular number support.
+**Plus Jakarta Sans** is the primary typeface — it's a geometric sans-serif designed for screen readability with open letterforms and a modern, friendly aesthetic.
 
 ## Type Scale
 
@@ -20,16 +20,17 @@ The type scale uses `rem` units based on a 16px root size. Each step provides a 
 
 | Token | Size | Pixels | Usage |
 |---|---|---|---|
-| `--ts-font-size-xs` | `0.75rem` | 12px | Captions, badges, helper text |
-| `--ts-font-size-sm` | `0.875rem` | 14px | Labels, secondary content, input text (sm) |
-| `--ts-font-size-md` | `1rem` | 16px | Body text, buttons, input text (md) |
-| `--ts-font-size-lg` | `1.125rem` | 18px | Subheadings, modal headers |
-| `--ts-font-size-xl` | `1.25rem` | 20px | Section headers, prominent text |
-| `--ts-font-size-2xl` | `1.5rem` | 24px | Page headers |
-| `--ts-font-size-3xl` | `1.875rem` | 30px | Hero text, display headings |
-| `--ts-font-size-4xl` | `2.25rem` | 36px | Display small |
-| `--ts-font-size-5xl` | `3rem` | 48px | Display medium |
-| `--ts-font-size-6xl` | `3.75rem` | 60px | Display large, marketing hero |
+| `--ts-font-size-2xs` | `0.6875rem` | 11px | M3 label-small |
+| `--ts-font-size-xs` | `0.75rem` | 12px | M3 body-small, label-medium, captions |
+| `--ts-font-size-sm` | `0.875rem` | 14px | M3 body-medium, label-large, title-small |
+| `--ts-font-size-md` | `1rem` | 16px | M3 body-large, title-medium |
+| `--ts-font-size-lg` | `1.375rem` | 22px | M3 title-large |
+| `--ts-font-size-xl` | `1.5rem` | 24px | M3 headline-small |
+| `--ts-font-size-2xl` | `1.75rem` | 28px | M3 headline-medium |
+| `--ts-font-size-3xl` | `2rem` | 32px | M3 headline-large |
+| `--ts-font-size-4xl` | `2.8125rem` | 45px | M3 display-small |
+| `--ts-font-size-5xl` | `3.5625rem` | 57px | M3 display-medium |
+| `--ts-font-size-6xl` | `5.5rem` | 88px | M3 display-large, marketing hero |
 
 ## Font Weights
 
@@ -44,9 +45,9 @@ The type scale uses `rem` units based on a 16px root size. Each step provides a 
 
 | Token | Value | Usage |
 |---|---|---|
-| `--ts-line-height-tight` | `1.25` | Headings, buttons, compact layouts |
-| `--ts-line-height-normal` | `1.5` | Body text, default prose |
-| `--ts-line-height-loose` | `1.75` | Long-form reading, relaxed layouts |
+| `--ts-line-height-tight` | `1.25` | Headings, labels |
+| `--ts-line-height-normal` | `1.43` | Body text (M3: 20/14, 24/16) |
+| `--ts-line-height-loose` | `1.5` | Display text (M3: 64/57, 96/88) |
 
 ## Letter Spacing
 
@@ -54,12 +55,12 @@ Letter spacing tokens adjust tracking for different typographic contexts. Displa
 
 | Token | Value | Usage |
 |---|---|---|
-| `--ts-letter-spacing-tighter` | `-0.04em` | Display text (4xl–6xl) |
-| `--ts-letter-spacing-tight` | `-0.02em` | Headings (xl–3xl) |
-| `--ts-letter-spacing-normal` | `0em` | Body text, default |
-| `--ts-letter-spacing-wide` | `0.02em` | Labels (md), captions |
-| `--ts-letter-spacing-wider` | `0.05em` | Small labels, overlines |
-| `--ts-letter-spacing-widest` | `0.1em` | All-caps text, legal fine print |
+| `--ts-letter-spacing-tighter` | `-0.02em` | Display text |
+| `--ts-letter-spacing-tight` | `-0.01em` | Headings |
+| `--ts-letter-spacing-normal` | `0em` | Body text, default (M3: 0 for most sizes) |
+| `--ts-letter-spacing-wide` | `0.006em` | ~0.1px at 16px — M3 body-small/label |
+| `--ts-letter-spacing-wider` | `0.009em` | ~0.1px at 11px — small labels |
+| `--ts-letter-spacing-widest` | `0.05em` | All-caps text, legal fine print |
 
 ## Composite Type Roles
 
@@ -67,19 +68,22 @@ Type roles combine size, weight, line height, and letter spacing into a single s
 
 | Role | Size Token | Weight | Line Height | Letter Spacing | Usage |
 |---|---|---|---|---|---|
-| **display-lg** | `clamp(2.25rem, 5vw + 1rem, 3.75rem)` (36px-60px) | `bold` (700) | `1.1` | `tighter` (-0.04em) | Marketing hero, landing page headlines |
-| **display-md** | `clamp(2rem, 4vw + 1rem, 3rem)` (32px-48px) | `bold` (700) | `1.1` | `tighter` (-0.04em) | Section hero, feature highlights |
-| **display-sm** | `clamp(1.75rem, 3vw + 0.75rem, 2.25rem)` (28px-36px) | `bold` (700) | `1.15` | `tight` (-0.02em) | Page titles, onboarding headers |
-| **heading-lg** | `clamp(1.5rem, 2vw + 0.5rem, 1.875rem)` (24px-30px) | `semi` (600) | `1.25` | `tight` (-0.02em) | Page section headers |
-| **heading-md** | `clamp(1.25rem, 1.5vw + 0.5rem, 1.5rem)` (20px-24px) | `semi` (600) | `1.25` | `tight` (-0.02em) | Card headers, dialog titles |
-| **heading-sm** | `xl` (20px) | `semi` (600) | `1.25` | `normal` (0em) | Subsection headers |
-| **body-lg** | `lg` (18px) | `regular` (400) | `1.5` | `normal` (0em) | Introductory paragraphs, lead text |
-| **body-md** | `md` (16px) | `regular` (400) | `1.5` | `normal` (0em) | Default body text |
-| **body-sm** | `sm` (14px) | `regular` (400) | `1.5` | `normal` (0em) | Secondary body text, descriptions |
-| **label-lg** | `md` (16px) | `medium` (500) | `1.25` | `normal` (0em) | Form labels (lg), navigation items |
-| **label-md** | `sm` (14px) | `medium` (500) | `1.25` | `wide` (0.02em) | Form labels (md), button text |
-| **label-sm** | `xs` (12px) | `medium` (500) | `1.25` | `wider` (0.05em) | Badge labels, helper text, overlines |
-| **caption** | `xs` (12px) | `regular` (400) | `1.5` | `wide` (0.02em) | Timestamps, footnotes, fine print |
+| **display-lg** | `clamp(2.8125rem, 5vw + 1rem, 5.5rem)` (45px-88px) | `semi` (600) | `1.09` | `normal` (0em) | Marketing hero, landing page headlines |
+| **display-md** | `clamp(2rem, 4vw + 1rem, 3.5625rem)` (32px-57px) | `semi` (600) | `1.12` | `normal` (0em) | Section hero, feature highlights |
+| **display-sm** | `clamp(1.75rem, 3vw + 0.75rem, 2.8125rem)` (28px-45px) | `semi` (600) | `1.16` | `normal` (0em) | Page titles, onboarding headers |
+| **heading-lg** | `clamp(1.5rem, 2vw + 0.5rem, 2rem)` (24px-32px) | `semi` (600) | `1.25` | `normal` (0em) | Page section headers |
+| **heading-md** | `clamp(1.25rem, 1.5vw + 0.5rem, 1.75rem)` (20px-28px) | `semi` (600) | `1.29` | `normal` (0em) | Card headers, dialog titles |
+| **heading-sm** | `xl` (24px) | `semi` (600) | `1.33` | `normal` (0em) | Subsection headers |
+| **title-lg** | `lg` (22px) | `regular` (400) | `1.36` | `normal` (0em) | Card headers, dialog titles, nav items |
+| **title-md** | `md` (16px) | `medium` (500) | `1.5` | `normal` (0em) | List item titles, section labels |
+| **title-sm** | `sm` (14px) | `medium` (500) | `1.43` | `normal` (0em) | Compact titles, tab labels |
+| **body-lg** | `md` (16px) | `regular` (400) | `1.5` | `normal` (0em) | Introductory paragraphs, lead text |
+| **body-md** | `sm` (14px) | `regular` (400) | `1.43` | `normal` (0em) | Default body text |
+| **body-sm** | `xs` (12px) | `regular` (400) | `1.33` | `wide` (0.006em) | Secondary body text, descriptions |
+| **label-lg** | `sm` (14px) | `medium` (500) | `1.43` | `normal` (0em) | Form labels (lg), button text, navigation items |
+| **label-md** | `xs` (12px) | `medium` (500) | `1.33` | `wide` (0.006em) | Form labels (md), small button text |
+| **label-sm** | `2xs` (11px) | `medium` (500) | `1.45` | `wider` (0.009em) | Badge labels, helper text, overlines |
+| **caption** | `xs` (12px) | `regular` (400) | `1.33` | `wide` (0.006em) | Timestamps, footnotes, fine print |
 
 Each role is defined as a set of four CSS custom properties (e.g., `--ts-type-display-lg-size`, `--ts-type-display-lg-weight`, `--ts-type-display-lg-line`, `--ts-type-display-lg-spacing`), making them easy to apply and override.
 
@@ -89,11 +93,11 @@ Display and heading type role sizes use CSS `clamp()` by default, providing flui
 
 | Role | Min (mobile) | Max (desktop) |
 |---|---|---|
-| **display-lg** | 36px (2.25rem) | 60px (3.75rem) |
-| **display-md** | 32px (2rem) | 48px (3rem) |
-| **display-sm** | 28px (1.75rem) | 36px (2.25rem) |
-| **heading-lg** | 24px (1.5rem) | 30px (1.875rem) |
-| **heading-md** | 20px (1.25rem) | 24px (1.5rem) |
+| **display-lg** | 45px (2.8125rem) | 88px (5.5rem) |
+| **display-md** | 32px (2rem) | 57px (3.5625rem) |
+| **display-sm** | 28px (1.75rem) | 45px (2.8125rem) |
+| **heading-lg** | 24px (1.5rem) | 32px (2rem) |
+| **heading-md** | 20px (1.25rem) | 28px (1.75rem) |
 
 ```css
 /* The tokens are already fluid — just use them: */
@@ -106,7 +110,7 @@ To override with a fixed size, reassign the token:
 
 ```css
 :root {
-  --ts-type-display-lg-size: 3rem;  /* fixed 48px, no scaling */
+  --ts-type-display-lg-size: 5.5rem;  /* fixed 88px, no scaling */
 }
 ```
 
@@ -122,10 +126,10 @@ When supporting CJK (Chinese, Japanese, Korean) or Arabic scripts:
 - Append CJK-specific font families to `--ts-font-family-base`:
   ```css
   :root {
-    --ts-font-family-base: 'Inter', 'Noto Sans SC', 'Noto Sans JP', sans-serif;
+    --ts-font-family-base: 'Plus Jakarta Sans', 'Noto Sans SC', 'Noto Sans JP', sans-serif;
   }
   ```
-- CJK text typically needs `line-height: 1.7–1.8` instead of the default `1.5`
+- CJK text typically needs `line-height: 1.7–1.8` instead of the default `1.43`
 - Arabic and Hebrew scripts require RTL layout — see the [Internationalization](/tessera-ui/design-language/internationalization/) page
 - Avoid `letter-spacing` adjustments for CJK — the glyphs are already monospaced by design
 
@@ -162,7 +166,7 @@ Components use the type scale consistently to establish hierarchy:
 
 ## Best Practices
 
-- **Use the type scale, not arbitrary sizes.** The seven-step scale covers all needs from captions to display text.
+- **Use the type scale, not arbitrary sizes.** The eleven-step scale (2xs through 6xl) covers all needs from label-small to display-large.
 - **Pair size with weight for hierarchy.** Avoid using weight alone to differentiate text — use size steps.
 - **Prefer `medium` (500) over `bold` (700) for emphasis.** Bold should be reserved for strong semantic emphasis.
-- **Use `tight` line height for single-line text** (buttons, labels). Use `normal` for multi-line content.
+- **Use `tight` line height for single-line text** (headings, labels). Use `normal` for multi-line body content.

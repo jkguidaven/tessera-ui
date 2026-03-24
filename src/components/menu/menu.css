@@ -12,7 +12,7 @@
   position: relative;
   font-family: var(--ts-font-family-base);
 
-  --ts-menu-bg: var(--ts-color-bg-surface);
+  --ts-menu-bg: var(--ts-color-bg-elevated);
   --ts-menu-radius: var(--ts-shape-overlay);
   --ts-menu-shadow: var(--ts-shadow-lg);
 }

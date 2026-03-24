@@ -38,7 +38,7 @@
 
 /* ---- Active ---- */
 :host([active]) .switch-option__base {
-  background-color: var(--ts-switch-group-active-bg, var(--ts-color-neutral-0));
+  background-color: var(--ts-switch-group-active-bg, var(--ts-color-bg-elevated));
   color: var(--ts-color-text-primary);
   box-shadow: var(--ts-shadow-sm);
 }

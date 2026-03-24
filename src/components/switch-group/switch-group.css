@@ -12,7 +12,7 @@
   font-family: var(--ts-font-family-base);
 
   --ts-switch-group-bg: var(--ts-color-neutral-100);
-  --ts-switch-group-active-bg: var(--ts-color-neutral-0);
+  --ts-switch-group-active-bg: var(--ts-color-bg-elevated);
   --ts-switch-group-radius: var(--ts-shape-interactive);
 }
 

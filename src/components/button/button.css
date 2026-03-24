@@ -100,7 +100,7 @@
 
 :host([appearance="solid"][variant="success"]) .button__native {
   background-color: var(--ts-color-success-600);
-  color: var(--ts-color-neutral-0);
+  color: var(--ts-color-text-on-success);
 }
 :host([appearance="solid"][variant="success"]) .button__native:hover:not([disabled]) {
   background-color: var(--ts-color-success-500);
@@ -108,7 +108,7 @@
 
 :host([appearance="solid"][variant="danger"]) .button__native {
   background-color: var(--ts-color-interactive-danger);
-  color: var(--ts-color-neutral-0);
+  color: var(--ts-color-text-on-danger);
 }
 :host([appearance="solid"][variant="danger"]) .button__native:hover:not([disabled]) {
   background-color: var(--ts-color-interactive-danger-hover);
@@ -116,7 +116,7 @@
 
 :host([appearance="solid"][variant="warning"]) .button__native {
   background-color: var(--ts-color-warning-600);
-  color: var(--ts-color-neutral-900);
+  color: var(--ts-color-text-on-warning);
 }
 :host([appearance="solid"][variant="warning"]) .button__native:hover:not([disabled]) {
   background-color: var(--ts-color-warning-500);
@@ -124,7 +124,7 @@
 
 :host([appearance="solid"][variant="neutral"]) .button__native {
   background-color: var(--ts-color-neutral-800);
-  color: var(--ts-color-neutral-0);
+  color: var(--ts-color-text-on-primary);
 }
 :host([appearance="solid"][variant="neutral"]) .button__native:hover:not([disabled]) {
   background-color: var(--ts-color-neutral-700);
@@ -132,7 +132,7 @@
 
 :host([appearance="solid"][variant="secondary"]) .button__native {
   background-color: var(--ts-color-neutral-200);
-  color: var(--ts-color-neutral-800);
+  color: var(--ts-color-text-primary);
 }
 :host([appearance="solid"][variant="secondary"]) .button__native:hover:not([disabled]) {
   background-color: var(--ts-color-neutral-300);

@@ -10,7 +10,7 @@
 :host {
   font-family: var(--ts-font-family-base);
 
-  --ts-drawer-bg: var(--ts-color-bg-surface);
+  --ts-drawer-bg: var(--ts-color-bg-elevated);
   --ts-drawer-shadow: var(--ts-shadow-xl);
   --ts-drawer-overlay-bg: var(--ts-color-bg-overlay);
 }

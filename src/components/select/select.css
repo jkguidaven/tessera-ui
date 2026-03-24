@@ -114,7 +114,7 @@
   inset-inline-end: 0;
   top: calc(100% + var(--ts-spacing-1));
   z-index: 1000;
-  background-color: var(--ts-color-bg-surface);
+  background-color: var(--ts-color-bg-elevated);
   border: 1px solid var(--ts-color-border-default);
   border-radius: var(--ts-radius-md);
   box-shadow: var(--ts-shadow-lg);

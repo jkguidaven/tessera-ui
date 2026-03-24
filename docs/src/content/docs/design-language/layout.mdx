@@ -3,7 +3,7 @@ title: Layout
 description: Spacing system, grid guidance, and container patterns in Tessera UI.
 ---
 
-Tessera UI uses a systematic spacing scale based on a **4px base unit**. This ensures visual rhythm, consistent alignment, and predictable component composition.
+Tessera UI uses a systematic spacing scale with a **comfortable default** density. This ensures visual rhythm, consistent alignment, and predictable component composition.
 
 ## Spacing Scale
 
@@ -12,23 +12,23 @@ All spacing — padding, margins, gaps — uses tokens from this scale. Never us
 | Token | Value | Pixels | Common Usage |
 |---|---|---|---|
 | `--ts-spacing-0` | `0` | 0 | Reset, no spacing |
-| `--ts-spacing-1` | `0.25rem` | 4px | Tight gaps (label-to-field, badge padding) |
-| `--ts-spacing-2` | `0.5rem` | 8px | Default inline gap, button padding (sm) |
-| `--ts-spacing-3` | `0.75rem` | 12px | Component internal padding (alert, modal sections) |
-| `--ts-spacing-4` | `1rem` | 16px | Standard padding (md), section gaps |
-| `--ts-spacing-5` | `1.25rem` | 20px | Modal header/footer padding |
-| `--ts-spacing-6` | `1.5rem` | 24px | Card padding (lg), modal body |
-| `--ts-spacing-8` | `2rem` | 32px | Large section spacing, button padding (xl) |
-| `--ts-spacing-10` | `2.5rem` | 40px | Section separators |
-| `--ts-spacing-12` | `3rem` | 48px | Page section spacing |
-| `--ts-spacing-16` | `4rem` | 64px | Large layout gaps, modal max-height offset |
+| `--ts-spacing-1` | `0.375rem` | 6px | Tight gaps (label-to-field, badge padding) |
+| `--ts-spacing-2` | `0.625rem` | 10px | Default inline gap, button padding (sm) |
+| `--ts-spacing-3` | `1rem` | 16px | Component internal padding (alert, modal sections) |
+| `--ts-spacing-4` | `1.25rem` | 20px | Standard padding (md), section gaps |
+| `--ts-spacing-5` | `1.5rem` | 24px | Modal header/footer padding |
+| `--ts-spacing-6` | `2rem` | 32px | Card padding (lg), modal body |
+| `--ts-spacing-8` | `2.5rem` | 40px | Large section spacing, button padding (xl) |
+| `--ts-spacing-10` | `3rem` | 48px | Section separators |
+| `--ts-spacing-12` | `4rem` | 64px | Page section spacing |
+| `--ts-spacing-16` | `5rem` | 80px | Large layout gaps, modal max-height offset |
 
-## The 4px Grid
+## Spacing Rhythm
 
-Every spacing value is a multiple of 4px. This ensures all elements align to a consistent 4px grid:
+The spacing scale uses a comfortable progression (6/10/16/20/24/32px) that provides natural visual rhythm:
 
-- `4px` — minimum spacing between closely related elements
-- `8px` — default inline spacing (between icon and label, form field gap)
+- `6px` — minimum spacing between closely related elements
+- `10px` — default inline spacing (between icon and label, form field gap)
 - `16px` — standard padding for medium-density components
 - `24px` — comfortable padding for spacious components
 - `32px+` — layout-level spacing between sections
@@ -38,22 +38,22 @@ Every spacing value is a multiple of 4px. This ensures all elements align to a c
 ### Component internal padding
 | Component | Padding | Token |
 |---|---|---|
-| Button (md) | `8px 16px` | `spacing-2 spacing-4` |
-| Input (md) | `8px 12px` | `spacing-2 spacing-3` |
-| Card (md) | `16px` | `spacing-4` |
-| Card (lg) | `24px` | `spacing-6` |
-| Alert | `12px 16px` | `spacing-3 spacing-4` |
-| Modal body | `12px 24px` | `spacing-3 spacing-6` |
+| Button (md) | `10px 20px` | `spacing-2 spacing-4` |
+| Input (md) | `10px 16px` | `spacing-2 spacing-3` |
+| Card (md) | `20px` | `spacing-4` |
+| Card (lg) | `32px` | `spacing-6` |
+| Alert | `16px 20px` | `spacing-3 spacing-4` |
+| Modal body | `16px 32px` | `spacing-3 spacing-6` |
 
 ### Gaps between elements
 | Context | Gap | Token |
 |---|---|---|
-| Button icon ↔ label | `8px` | `spacing-2` |
-| Toggle track ↔ label | `8px` | `spacing-2` |
-| Alert icon ↔ message | `12px` | `spacing-3` |
-| Modal footer buttons | `8px` | `spacing-2` |
-| Label ↔ input field | `4px` | `spacing-1` |
-| Input ↔ help text | `4px` | `spacing-1` |
+| Button icon ↔ label | `10px` | `spacing-2` |
+| Toggle track ↔ label | `10px` | `spacing-2` |
+| Alert icon ↔ message | `16px` | `spacing-3` |
+| Modal footer buttons | `10px` | `spacing-2` |
+| Label ↔ input field | `6px` | `spacing-1` |
+| Input ↔ help text | `6px` | `spacing-1` |
 
 ## Grid Tokens
 
@@ -62,8 +62,8 @@ Tessera UI provides grid tokens for building consistent page layouts:
 | Token | Value | Usage |
 |---|---|---|
 | `--ts-grid-columns` | `12` | Number of columns in the grid |
-| `--ts-grid-gutter` | `var(--ts-spacing-6)` (24px) | Gap between columns |
-| `--ts-grid-margin` | `var(--ts-spacing-4)` (16px) | Outer margin of the grid container |
+| `--ts-grid-gutter` | `var(--ts-spacing-6)` (32px) | Gap between columns |
+| `--ts-grid-margin` | `var(--ts-spacing-4)` (20px) | Outer margin of the grid container |
 
 These tokens are designed for use with CSS Grid:
 
@@ -76,7 +76,7 @@ These tokens are designed for use with CSS Grid:
 }
 ```
 
-Grid values adapt automatically in density modes — compact density reduces the gutter to `spacing-4`, and spacious density increases it to `spacing-8`.
+Grid values adapt automatically in density modes — compact density reduces the gutter to `spacing-4` (16px), and spacious density increases it to `spacing-8` (40px).
 
 ## Breakpoint Tokens
 
@@ -104,12 +104,12 @@ Tessera UI supports three density modes that remap spacing and font-size tokens 
 
 | Token | Compact | Comfortable (default) | Spacious |
 |---|---|---|---|
-| `--ts-spacing-1` | 2px | 4px | 6px |
-| `--ts-spacing-2` | 6px | 8px | 10px |
-| `--ts-spacing-3` | 8px | 12px | 16px |
-| `--ts-spacing-4` | 12px | 16px | 20px |
-| `--ts-spacing-5` | 16px | 20px | 24px |
-| `--ts-spacing-6` | 20px | 24px | 32px |
+| `--ts-spacing-1` | 4px | 6px | 8px |
+| `--ts-spacing-2` | 8px | 10px | 12px |
+| `--ts-spacing-3` | 12px | 16px | 20px |
+| `--ts-spacing-4` | 16px | 20px | 24px |
+| `--ts-spacing-5` | 20px | 24px | 32px |
+| `--ts-spacing-6` | 24px | 32px | 40px |
 | `--ts-font-size-xs` | 11px | 12px | 12px |
 | `--ts-font-size-sm` | 12px | 14px | 16px |
 | `--ts-font-size-md` | 14px | 16px | 18px |

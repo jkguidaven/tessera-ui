@@ -14,7 +14,7 @@
 
   --ts-toggle-track-bg: var(--ts-color-neutral-200);
   --ts-toggle-track-bg-checked: var(--ts-color-primary-600);
-  --ts-toggle-thumb-bg: var(--ts-color-bg-surface);
+  --ts-toggle-thumb-bg: var(--ts-color-bg-elevated);
   --ts-toggle-focus-ring: var(--ts-focus-ring);
 }
 

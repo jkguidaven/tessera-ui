@@ -15,15 +15,61 @@ const preview = {
         date: /Date$/,
       },
     },
-    backgrounds: {
-      default: 'light',
-      values: [
-        { name: 'light', value: '#ffffff' },
-        { name: 'gray', value: '#f8f9fa' },
-        { name: 'dark', value: '#1a1b1e' },
-      ],
+  },
+  globalTypes: {
+    theme: {
+      name: 'Theme',
+      description: 'Tessera UI theme',
+      defaultValue: 'light',
+      toolbar: {
+        icon: 'mirror',
+        items: [
+          { value: 'light', title: 'Light', icon: 'sun' },
+          { value: 'dark', title: 'Dark', icon: 'moon' },
+          { value: 'high-contrast', title: 'High Contrast', icon: 'accessibility' },
+        ],
+        dynamicTitle: true,
+      },
+    },
+    density: {
+      name: 'Density',
+      description: 'Tessera UI density',
+      defaultValue: 'comfortable',
+      toolbar: {
+        icon: 'component',
+        items: [
+          { value: 'compact', title: 'Compact' },
+          { value: 'comfortable', title: 'Comfortable' },
+          { value: 'spacious', title: 'Spacious' },
+        ],
+        dynamicTitle: true,
+      },
     },
   },
+  decorators: [
+    (storyFn: any, context: any) => {
+      const theme = context.globals.theme || 'light';
+      const density = context.globals.density || 'comfortable';
+
+      // Apply theme and density to the document root so tokens cascade
+      document.documentElement.setAttribute('data-theme', theme === 'light' ? '' : theme);
+      if (density === 'comfortable') {
+        document.documentElement.removeAttribute('data-density');
+      } else {
+        document.documentElement.setAttribute('data-density', density);
+      }
+
+      // Set Storybook background to match theme
+      const bgColors: Record<string, string> = {
+        'light': '#fafbff',
+        'dark': '#111318',
+        'high-contrast': '#ffffff',
+      };
+      document.body.style.backgroundColor = bgColors[theme] || '#fafbff';
+
+      return storyFn();
+    },
+  ],
 };
 
 export default preview;

@@ -8,7 +8,7 @@ Motion brings interfaces to life — but only when used with purpose. Tessera UI
 ## Principles
 
 1. **Motion communicates, it doesn't decorate.** Every animation should help the user understand what happened — an element appeared, moved, or changed state.
-2. **Fast by default.** Most interactions use `150ms` or less. Users should never wait for an animation to finish.
+2. **Fast by default.** Most interactions use `160ms` or less. Users should never wait for an animation to finish.
 3. **Consistent easing.** A single easing curve creates a unified feel across all transitions.
 4. **Respect user preferences.** Animations should be reduced or removed when `prefers-reduced-motion` is active.
 
@@ -16,10 +16,10 @@ Motion brings interfaces to life — but only when used with purpose. Tessera UI
 
 | Token | Value | Usage |
 |---|---|---|
-| `--ts-transition-fast` | `150ms` | Micro-interactions: button hover, toggle switch, focus ring, color changes |
-| `--ts-transition-normal` | `250ms` | State transitions: card hover elevation, component enter/exit |
-| `--ts-transition-slow` | `350ms` | Layout shifts: accordion expand, panel slide, page transitions |
-| `--ts-transition-micro` | `75ms` | Instant-feeling micro-feedback: checkbox tick, ripple start |
+| `--ts-transition-fast` | `160ms` | Micro-interactions: button hover, toggle switch, focus ring, color changes |
+| `--ts-transition-normal` | `240ms` | State transitions: card hover elevation, component enter/exit |
+| `--ts-transition-slow` | `360ms` | Layout shifts: accordion expand, panel slide, page transitions |
+| `--ts-transition-micro` | `80ms` | Instant-feeling micro-feedback: checkbox tick, ripple start |
 | `--ts-transition-x-slow` | `500ms` | Large-scale transitions: page-level entrances, complex orchestrations |
 
 ### Loading Animation Durations
@@ -31,9 +31,9 @@ Motion brings interfaces to life — but only when used with purpose. Tessera UI
 
 ### When to use each
 
-- **`fast` (150ms)** — Use for anything that responds to direct user input: hover effects, active states, focus indicators, toggle slides. The user should feel an instant response.
-- **`normal` (250ms)** — Use for visual transitions that involve spatial change: a card lifting on hover, a modal scaling in, a tooltip appearing. Slightly longer to let the eye track the motion.
-- **`slow` (350ms)** — Use sparingly for larger layout changes: accordion sections expanding, panels sliding in from the edge. Reserved for motions that affect page layout.
+- **`fast` (160ms)** — Use for anything that responds to direct user input: hover effects, active states, focus indicators, toggle slides. The user should feel an instant response.
+- **`normal` (240ms)** — Use for visual transitions that involve spatial change: a card lifting on hover, a modal scaling in, a tooltip appearing. Slightly longer to let the eye track the motion.
+- **`slow` (360ms)** — Use sparingly for larger layout changes: accordion sections expanding, panels sliding in from the edge. Reserved for motions that affect page layout.
 
 ## Easing Curves
 
@@ -80,7 +80,7 @@ A subtle scale-down on press provides tactile feedback. The 3% reduction is enou
   from { opacity: 0; transform: scale(0.95) translateY(8px); }
   to   { opacity: 1; transform: scale(1) translateY(0); }
 }
-/* Duration: 250ms, cubic-bezier(0.16, 1, 0.3, 1) */
+/* Duration: 240ms, cubic-bezier(0.16, 1, 0.3, 1) */
 ```
 
 Modals use a two-part entrance: the overlay fades in first, then the dialog scales up from slightly below center. The dialog uses a more pronounced ease-out (spring-like) for a polished feel.

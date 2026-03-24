@@ -57,7 +57,7 @@
   block-size: 2rem;
   border-radius: var(--ts-radius-full);
   border: 2px solid var(--ts-color-border-default);
-  background-color: var(--ts-color-bg-surface);
+  background-color: var(--ts-color-bg-elevated);
   color: var(--ts-color-text-tertiary);
   font-size: var(--ts-font-size-sm);
   font-weight: var(--ts-font-weight-semi);
@@ -77,13 +77,13 @@
 .step__indicator--completed {
   border-color: var(--ts-stepper-completed-color, var(--ts-color-success-600));
   background-color: var(--ts-stepper-completed-color, var(--ts-color-success-600));
-  color: var(--ts-color-neutral-0, #fff);
+  color: #ffffff;
 }
 
 .step__indicator--error {
   border-color: var(--ts-color-danger-500);
   background-color: var(--ts-color-danger-500);
-  color: var(--ts-color-neutral-0, #fff);
+  color: #ffffff;
 }
 
 .step__icon {

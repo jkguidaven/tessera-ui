@@ -13,7 +13,7 @@
   position: relative;
   font-family: var(--ts-font-family-base);
 
-  --ts-popover-bg: var(--ts-color-bg-surface, #fff);
+  --ts-popover-bg: var(--ts-color-bg-elevated);
   --ts-popover-radius: var(--ts-radius-lg);
   --ts-popover-shadow: var(--ts-shadow-lg);
   --ts-popover-max-width: 320px;

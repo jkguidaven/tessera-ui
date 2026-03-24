@@ -99,9 +99,9 @@ Chinese, Japanese, and Korean scripts have unique typographic requirements:
 - **Letter spacing:** Do not apply letter-spacing tokens to CJK text — the characters are already monospaced.
 - **Font families:** Append CJK-specific fonts to the font stack:
   ```css
-  :lang(zh) { --ts-font-family-base: 'Inter', 'Noto Sans SC', sans-serif; }
-  :lang(ja) { --ts-font-family-base: 'Inter', 'Noto Sans JP', sans-serif; }
-  :lang(ko) { --ts-font-family-base: 'Inter', 'Noto Sans KR', sans-serif; }
+  :lang(zh) { --ts-font-family-base: 'Plus Jakarta Sans', 'Noto Sans SC', sans-serif; }
+  :lang(ja) { --ts-font-family-base: 'Plus Jakarta Sans', 'Noto Sans JP', sans-serif; }
+  :lang(ko) { --ts-font-family-base: 'Plus Jakarta Sans', 'Noto Sans KR', sans-serif; }
   ```
 - **Word break:** CJK text does not use spaces between words. Use `word-break: break-all` or `overflow-wrap: anywhere` for CJK content in constrained containers.
 
