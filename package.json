@@ -32,6 +32,9 @@
     "lint.fix": "eslint src --ext .ts,.tsx --fix",
     "tokens:build": "node scripts/build-tokens.js"
   },
+  "dependencies": {
+    "lucide": "^0.511.0"
+  },
   "devDependencies": {
     "@stencil/angular-output-target": "^1.3.0",
     "@stencil/core": "^4.43.3",

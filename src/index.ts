@@ -21,5 +21,8 @@ export { generateId, announce, prefersReducedMotion, trapFocus } from './utils/a
 export { debounce, clamp, hasSlotContent } from './utils/dom';
 export { emitEvent } from './utils/events';
 
+// Icon Registry
+export { registerIcons, registerIcon, getIcon, getRegisteredIconNames } from './components/icon/icon-registry';
+
 // Components
 export { TsIcon } from './components/icon/icon';

@@ -314,27 +314,27 @@
   --ts-letter-spacing-widest:  0.1em;
 
   /* ----- Composite Type Roles ----- */
-  --ts-type-display-lg-size:    var(--ts-font-size-6xl);
+  --ts-type-display-lg-size:    clamp(2.25rem, 5vw + 1rem, 3.75rem);    /* 36px → 60px */
   --ts-type-display-lg-weight:  var(--ts-font-weight-bold);
   --ts-type-display-lg-line:    1.1;
   --ts-type-display-lg-spacing: var(--ts-letter-spacing-tighter);
 
-  --ts-type-display-md-size:    var(--ts-font-size-5xl);
+  --ts-type-display-md-size:    clamp(2rem, 4vw + 1rem, 3rem);           /* 32px → 48px */
   --ts-type-display-md-weight:  var(--ts-font-weight-bold);
   --ts-type-display-md-line:    1.1;
   --ts-type-display-md-spacing: var(--ts-letter-spacing-tighter);
 
-  --ts-type-display-sm-size:    var(--ts-font-size-4xl);
+  --ts-type-display-sm-size:    clamp(1.75rem, 3vw + 0.75rem, 2.25rem);  /* 28px → 36px */
   --ts-type-display-sm-weight:  var(--ts-font-weight-bold);
   --ts-type-display-sm-line:    1.15;
   --ts-type-display-sm-spacing: var(--ts-letter-spacing-tight);
 
-  --ts-type-heading-lg-size:    var(--ts-font-size-3xl);
+  --ts-type-heading-lg-size:    clamp(1.5rem, 2vw + 0.5rem, 1.875rem);   /* 24px → 30px */
   --ts-type-heading-lg-weight:  var(--ts-font-weight-semi);
   --ts-type-heading-lg-line:    var(--ts-line-height-tight);
   --ts-type-heading-lg-spacing: var(--ts-letter-spacing-tight);
 
-  --ts-type-heading-md-size:    var(--ts-font-size-2xl);
+  --ts-type-heading-md-size:    clamp(1.25rem, 1.5vw + 0.5rem, 1.5rem);  /* 20px → 24px */
   --ts-type-heading-md-weight:  var(--ts-font-weight-semi);
   --ts-type-heading-md-line:    var(--ts-line-height-tight);
   --ts-type-heading-md-spacing: var(--ts-letter-spacing-tight);

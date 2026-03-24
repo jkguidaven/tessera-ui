@@ -35,6 +35,18 @@
   fill: currentColor;
 }
 
+/* ---- Registry SVG ---- */
+span {
+  display: contents;
+}
+
+span > svg {
+  width: 100%;
+  height: 100%;
+  fill: none;
+  stroke: currentColor;
+}
+
 /* ---- External image ---- */
 img {
   width: 100%;

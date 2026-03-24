@@ -6,7 +6,7 @@ export default {
   argTypes: {
     color: { control: 'text', description: 'CSS color value applied to the icon.' },
     label: { control: 'text', description: 'Accessible label. When set, applies role="img" and aria-label. When absent, sets aria-hidden="true".' },
-    name: { control: 'text', description: 'Icon name for future icon registry lookup.' },
+    name: { control: 'text', description: 'Icon name — resolves from custom registry first, then built-in Lucide icons. Accepts kebab-case or PascalCase.' },
     size: {
       control: 'select',
       options: ['lg', 'md', 'sm', 'xl', 'xs'],

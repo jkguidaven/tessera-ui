@@ -67,11 +67,11 @@ Type roles combine size, weight, line height, and letter spacing into a single s
 
 | Role | Size Token | Weight | Line Height | Letter Spacing | Usage |
 |---|---|---|---|---|---|
-| **display-lg** | `6xl` (60px) | `bold` (700) | `1.1` | `tighter` (-0.04em) | Marketing hero, landing page headlines |
-| **display-md** | `5xl` (48px) | `bold` (700) | `1.1` | `tighter` (-0.04em) | Section hero, feature highlights |
-| **display-sm** | `4xl` (36px) | `bold` (700) | `1.15` | `tight` (-0.02em) | Page titles, onboarding headers |
-| **heading-lg** | `3xl` (30px) | `semi` (600) | `1.25` | `tight` (-0.02em) | Page section headers |
-| **heading-md** | `2xl` (24px) | `semi` (600) | `1.25` | `tight` (-0.02em) | Card headers, dialog titles |
+| **display-lg** | `clamp(2.25rem, 5vw + 1rem, 3.75rem)` (36px-60px) | `bold` (700) | `1.1` | `tighter` (-0.04em) | Marketing hero, landing page headlines |
+| **display-md** | `clamp(2rem, 4vw + 1rem, 3rem)` (32px-48px) | `bold` (700) | `1.1` | `tighter` (-0.04em) | Section hero, feature highlights |
+| **display-sm** | `clamp(1.75rem, 3vw + 0.75rem, 2.25rem)` (28px-36px) | `bold` (700) | `1.15` | `tight` (-0.02em) | Page titles, onboarding headers |
+| **heading-lg** | `clamp(1.5rem, 2vw + 0.5rem, 1.875rem)` (24px-30px) | `semi` (600) | `1.25` | `tight` (-0.02em) | Page section headers |
+| **heading-md** | `clamp(1.25rem, 1.5vw + 0.5rem, 1.5rem)` (20px-24px) | `semi` (600) | `1.25` | `tight` (-0.02em) | Card headers, dialog titles |
 | **heading-sm** | `xl` (20px) | `semi` (600) | `1.25` | `normal` (0em) | Subsection headers |
 | **body-lg** | `lg` (18px) | `regular` (400) | `1.5` | `normal` (0em) | Introductory paragraphs, lead text |
 | **body-md** | `md` (16px) | `regular` (400) | `1.5` | `normal` (0em) | Default body text |
@@ -85,23 +85,35 @@ Each role is defined as a set of four CSS custom properties (e.g., `--ts-type-di
 
 ## Responsive Typography
 
-For display and heading sizes, consider using CSS `clamp()` to create fluid type that scales smoothly between viewport sizes:
+Display and heading type role sizes use CSS `clamp()` by default, providing fluid scaling between mobile and desktop viewports without any extra configuration:
+
+| Role | Min (mobile) | Max (desktop) |
+|---|---|---|
+| **display-lg** | 36px (2.25rem) | 60px (3.75rem) |
+| **display-md** | 32px (2rem) | 48px (3rem) |
+| **display-sm** | 28px (1.75rem) | 36px (2.25rem) |
+| **heading-lg** | 24px (1.5rem) | 30px (1.875rem) |
+| **heading-md** | 20px (1.25rem) | 24px (1.5rem) |
 
 ```css
-/* Example: display-lg that scales from 36px on mobile to 60px on wide screens */
+/* The tokens are already fluid — just use them: */
 h1 {
-  font-size: clamp(
-    var(--ts-font-size-4xl),   /* 36px minimum */
-    5vw + 1rem,                /* fluid middle  */
-    var(--ts-font-size-6xl)    /* 60px maximum  */
-  );
+  font-size: var(--ts-type-display-lg-size);  /* scales automatically */
+}
+```
+
+To override with a fixed size, reassign the token:
+
+```css
+:root {
+  --ts-type-display-lg-size: 3rem;  /* fixed 48px, no scaling */
 }
 ```
 
 **Guidelines:**
-- Body text (`body-sm`, `body-md`, `body-lg`) should remain fixed — fluid scaling at reading sizes harms readability
-- Display sizes (`display-sm/md/lg`) are the best candidates for `clamp()`
-- Heading sizes may benefit from one step reduction on mobile (e.g., `heading-lg` to `heading-md`)
+- Body text (`body-sm`, `body-md`, `body-lg`) remains fixed — fluid scaling at reading sizes harms readability
+- `heading-sm` also remains fixed since it is small enough that scaling is unnecessary
+- Display and heading sizes scale fluidly by default via `clamp()`
 
 ## CJK and Arabic Typography
 

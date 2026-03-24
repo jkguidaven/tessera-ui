@@ -1,0 +1,99 @@
+---
+title: Why Tessera UI?
+description: What makes Tessera UI different from other design systems.
+sidebar:
+  order: 2
+---
+
+Tessera UI is a younger design system, but it was built with the benefit of hindsight. Every architectural decision reflects lessons learned from the systems that came before it.
+
+## Use It Everywhere, Build It Once
+
+Tessera UI ships real Web Components with Shadow DOM — not React components with framework wrappers bolted on after the fact. The same `<ts-button>` works identically in React, Vue, Angular, Svelte, or a plain HTML page. No wrapper libraries to maintain, no version-coupling headaches, no "community ports" that lag behind the primary implementation.
+
+Most established design systems (Carbon, Fluent, Spectrum, Radix) are React-primary or React-only. If your organization runs multiple frameworks — or might switch in the future — that's a problem. Tessera eliminates it at the architecture level.
+
+## A Design Language, Not Just Components
+
+Components are the visible output, but the real product is the design language underneath them:
+
+- **Three-tier token architecture** — global, semantic, and component-level tokens that cascade predictably
+- **13 composite type roles** — a complete typographic system, not ad-hoc font sizes
+- **Shape families** — coordinated border-radius strategies across component categories
+- **Density modes** — compact, comfortable, and spacious layouts from a single codebase
+- **Three theme modes** — light, dark, and high-contrast, all production-ready
+- **Motion choreography** — consistent timing, easing, and sequencing principles
+- **Content guidelines** — voice, tone, and writing conventions documented alongside the components
+
+Every decision traces to documented principles. This is a design language you can reason about, not a collection of styled components you have to reverse-engineer.
+
+## Warm, Distinctive Identity
+
+Enterprise UI is drowning in blue. Tessera uses a warm orange primary paired with a deep teal secondary, built on warm-tinted neutrals. The result is an interface that feels approachable without sacrificing professionalism.
+
+The warmth carries into dark mode — warm-tinted darks rather than cold grays. Your product looks like *your* product, not like every other SaaS dashboard.
+
+## Theme, Density, and Direction Without JavaScript
+
+```html
+<!-- Dark theme on a section -->
+<div data-theme="dark">...</div>
+
+<!-- Compact density in a sidebar -->
+<nav data-density="compact">...</nav>
+
+<!-- RTL for a specific subtree -->
+<section dir="rtl">...</section>
+```
+
+No providers. No React context. No build steps. These are HTML attributes that work at any level of the DOM tree. Mix compact and spacious sections on the same page. Nest a light-themed panel inside a dark layout. It just works.
+
+## Customization at Every Layer
+
+The three-tier token system means you customize at the right abstraction level:
+
+- **Swap the global palette** — every semantic and component token updates automatically
+- **Change a semantic role** — redefine what "primary" means without touching individual components
+- **Override a single component** — fine-tune one element without side effects
+
+Shape families let a single token change all interactive elements simultaneously. All of this cascades through standard CSS `var()` — no build tooling, no JavaScript runtime, no magic.
+
+## Accessibility as Architecture
+
+Accessibility in Tessera is structural, not decorative:
+
+- **WCAG 2.1 AA baseline** across all components
+- **High-contrast theme** with 7:1 AAA color ratios
+- **Forced colors support** for Windows High Contrast Mode
+- **Touch targets** meet WCAG 2.5.8 even in compact density
+- **Focus management** built into overlays and modals
+- **Keyboard navigation** patterns follow WAI-ARIA Authoring Practices
+
+This isn't a checkbox exercise — the token architecture itself enforces contrast ratios, and the component API makes the accessible path the default path.
+
+## Standards-First Tokens
+
+Design tokens ship in **W3C DTCG JSON format** alongside CSS custom properties. This means native compatibility with:
+
+- **Style Dictionary** — transform tokens into any platform format
+- **Figma Token Studio** — sync tokens between design and code
+- **Design-to-code pipelines** — no proprietary translation layer
+
+No vendor lock-in. Your tokens work with the tools you already use.
+
+## How Tessera Compares
+
+| Feature | Tessera UI | Fluent 2 | MD3 | Carbon | Spectrum | Radix/shadcn |
+|---|---|---|---|---|---|---|
+| Framework | Any (Web Components) | React primary | Android/Flutter/Web | React | React | React |
+| Primary color | Warm orange | Blue | Purple | Blue | Blue | Neutral |
+| Theme modes | Light + Dark + High-contrast | Light + Dark + HC | Light + Dark | 4 themes | 4 themes | Light + Dark |
+| Density modes | Compact / Comfortable / Spacious | Yes | Partial | Yes | Yes | No |
+| RTL support | Logical properties | Yes | Yes | Yes | Yes | Partial |
+| Token format | W3C DTCG | Proprietary | Proprietary | Style Dictionary | DTCG | None |
+| Shape families | Yes (unique) | No | Categories | No | No | No |
+| Shadow DOM | Yes | Partial | No | No | No | No |
+
+---
+
+Tessera UI is still growing its component catalog, but the foundation — tokens, theming, accessibility, and framework independence — is production-ready. If you're building for the long term and want a system that won't box you into a single framework, Tessera is worth a serious look.

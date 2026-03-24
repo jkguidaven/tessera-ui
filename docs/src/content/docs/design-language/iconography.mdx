@@ -94,16 +94,95 @@ Tessera UI components provide `prefix` and `suffix` slots for icon placement:
 </ts-alert>
 ```
 
+## Built-in Lucide Icons
+
+Tessera UI ships with the complete [Lucide](https://lucide.dev/) icon set (1,400+ icons) built in. Just use the `name` prop — no registration or imports required:
+
+```html
+<ts-icon name="search" size="md" label="Search"></ts-icon>
+<ts-icon name="settings" size="lg"></ts-icon>
+<ts-icon name="arrow-left"></ts-icon>
+<ts-icon name="heart" color="red"></ts-icon>
+```
+
+Names accept **kebab-case** (`arrow-left`) or **PascalCase** (`ArrowLeft`). Browse all available icons at [lucide.dev/icons](https://lucide.dev/icons).
+
+### Bundle impact
+
+The Lucide icon data (~91KB gzipped) is **lazy-loaded as a separate chunk** — it only fetches the first time a `name` prop is used without a registry match. Consumers who only use `src` or inline SVG slots never load the Lucide chunk at all.
+
+| Usage | Lucide chunk loaded? |
+|---|---|
+| `<ts-icon name="search">` | Yes (lazy, on first use) |
+| `<ts-icon src="/icon.svg">` | No |
+| `<ts-icon><svg>...</svg></ts-icon>` | No |
+| Registry icon + `name` | No (registry resolves first) |
+
+### Disabling built-in Lucide icons
+
+To prevent the Lucide chunk from ever loading, add `data-icons="none"` to any ancestor element. This follows the same pattern as `data-theme` and `data-density`:
+
+```html
+<!-- App-global: disable Lucide entirely -->
+<html data-icons="none">
+  <body>
+    <!-- name prop only resolves from your custom registry -->
+    <ts-icon name="search"></ts-icon>
+  </body>
+</html>
+```
+
+With `data-icons="none"`, the `name` prop still works — it resolves from your custom registry. Only the Lucide fallback is skipped.
+
+### Swapping to a different icon library
+
+To replace Lucide with Phosphor, Heroicons, or any other library:
+
+1. Disable Lucide with `data-icons="none"` on `<html>` or `<body>`
+2. Register your preferred icons via the registry
+
+```html
+<html data-icons="none">
+```
+
+```js
+import { registerIcons } from '@tessera-ui/core';
+
+// Register icons from any library as SVG strings
+registerIcons({
+  'search': '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">...</svg>',
+  'home': '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">...</svg>',
+  'settings': '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">...</svg>',
+});
+```
+
+```html
+<!-- These now resolve from your registry -->
+<ts-icon name="search"></ts-icon>
+<ts-icon name="home"></ts-icon>
+```
+
+### Overriding individual icons
+
+The registry takes priority over Lucide. Register an icon with the same name to override it — no need to disable Lucide globally:
+
+```js
+import { registerIcon } from '@tessera-ui/core';
+
+// Override just the "search" icon with your own version
+registerIcon('search', '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><!-- custom --></svg>');
+```
+
 ## The `ts-icon` Component
 
-Tessera UI provides a `ts-icon` Web Component for consistent icon rendering across your application. It supports inline SVG, external SVG sources, and automatic sizing.
+Tessera UI provides a `ts-icon` Web Component for consistent icon rendering. It resolves icons in this order: **custom registry** → **built-in Lucide** (unless `data-icons="none"`) → **slot fallback**.
 
 ### Props
 
 | Prop | Type | Default | Description |
 |---|---|---|---|
-| `name` | `string` | — | Icon name (used with a registered icon set) |
-| `src` | `string` | — | URL to an external SVG file |
+| `name` | `string` | — | Icon name — resolves from registry first, then Lucide |
+| `src` | `string` | — | URL to an external SVG file (takes priority over `name`) |
 | `size` | `'xs' \| 'sm' \| 'md' \| 'lg' \| 'xl'` | `'md'` | Size variant matching the type scale |
 | `label` | `string` | — | Accessible label (sets `aria-label`; omit for decorative icons) |
 | `color` | `string` | `'currentColor'` | Fill/stroke color |

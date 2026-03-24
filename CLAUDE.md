@@ -11,6 +11,7 @@ Read and follow all instructions in `.ai-instructions.md` — it is the single s
 - Requires **Node 20+** — run `nvm use` before any commands (`.nvmrc` is configured).
 - The reference component is `src/components/button/` — always match that pattern.
 - Design tokens use a **three-tier architecture** (reference → semantic → component). See `.ai-instructions.md` for full token guidelines.
+- Global config uses **`data-*` HTML attributes** (`data-theme`, `data-density`, `data-icons`, `dir`) — never JS config objects. See "Global Configuration Pattern" in `.ai-instructions.md`.
 
 ## Keeping docs in sync
 
