@@ -63,6 +63,14 @@
     "type": "git",
     "url": "https://github.com/jkguidaven/tessera-ui"
   },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild",
+      "puppeteer",
+      "sharp",
+      "@parcel/watcher"
+    ]
+  },
   "keywords": [
     "web-components",
     "stencil",
