@@ -39,6 +39,7 @@ export class TsNavItem {
     this.tsSelect.emit();
   };
 
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   render() {
     const Tag = this.href ? 'a' : 'button';
     const attrs = this.href

@@ -18,7 +18,7 @@ export default {
   },
 };
 
-const Template = (args: Record<string, unknown>) => {
+const Template = (args: Record<string, unknown>): string => {
   const attrs: string[] = [];
   if (args.open) attrs.push('open');
   if (args.trigger !== undefined && args.trigger !== null) attrs.push(`trigger="${args.trigger}"`);
@@ -42,7 +42,7 @@ export const Default = Object.assign(Template.bind({}) as typeof Template & { ar
   },
 });
 
-export const Placements = () => `
+export const Placements = (): string => `
   <div style="display: flex; gap: 24px; flex-wrap: wrap; padding: 80px 20px;">
     <ts-menu placement="bottom-start">
       <ts-button slot="trigger">Bottom Start</ts-button>
@@ -71,7 +71,7 @@ export const Placements = () => `
   </div>
 `;
 
-export const WithDisabledItems = () => `
+export const WithDisabledItems = (): string => `
   <ts-menu>
     <ts-button slot="trigger">File Actions</ts-button>
     <ts-menu-item value="edit">Edit</ts-menu-item>
@@ -82,7 +82,7 @@ export const WithDisabledItems = () => `
   </ts-menu>
 `;
 
-export const HoverTrigger = () => `
+export const HoverTrigger = (): string => `
   <ts-menu trigger="hover">
     <ts-button slot="trigger">Hover Me</ts-button>
     <ts-menu-item value="profile">Profile</ts-menu-item>
@@ -92,7 +92,7 @@ export const HoverTrigger = () => `
   </ts-menu>
 `;
 
-export const WithLinks = () => `
+export const WithLinks = (): string => `
   <ts-menu>
     <ts-button slot="trigger">Navigate</ts-button>
     <ts-menu-item value="docs" href="https://example.com/docs">Documentation</ts-menu-item>
@@ -102,7 +102,7 @@ export const WithLinks = () => `
   </ts-menu>
 `;
 
-export const ContextMenu = () => `
+export const ContextMenu = (): string => `
   <div style="display: flex; gap: 16px;">
     <ts-menu placement="bottom-end">
       <ts-button slot="trigger" appearance="ghost" size="sm">...</ts-button>
@@ -114,7 +114,7 @@ export const ContextMenu = () => `
   </div>
 `;
 
-export const UserMenu = () => `
+export const UserMenu = (): string => `
   <ts-menu placement="bottom-end">
     <ts-button slot="trigger" appearance="ghost">
       <div style="display: flex; align-items: center; gap: 8px;">

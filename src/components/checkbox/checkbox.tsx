@@ -68,6 +68,7 @@ export class TsCheckbox {
     }
   };
 
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   render() {
     const ariaChecked = this.indeterminate ? 'mixed' : this.checked ? 'true' : 'false';
 

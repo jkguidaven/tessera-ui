@@ -40,6 +40,7 @@ export class TsProgress {
     return Math.min(100, Math.max(0, (this.value / this.max) * 100));
   }
 
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   render() {
     const percent = this.percentage;
 

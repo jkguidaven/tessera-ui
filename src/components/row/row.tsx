@@ -27,6 +27,7 @@ export class TsRow {
   /** Breakpoint at which the row stacks vertically. */
   @Prop({ reflect: true, attribute: 'stack-at' }) stackAt: 'sm' | 'md' | 'lg' | 'never' = 'never';
 
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   render() {
     const alignMap: Record<string, string> = {
       start: 'flex-start',

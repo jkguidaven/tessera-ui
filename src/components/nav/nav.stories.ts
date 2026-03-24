@@ -16,7 +16,7 @@ export default {
   },
 };
 
-const Template = (args: Record<string, unknown>) => {
+const Template = (args: Record<string, unknown>): string => {
   const attrs: string[] = [];
   if (args.variant !== undefined) attrs.push(`variant="${args.variant}"`);
   if (args.collapsed) attrs.push('collapsed');
@@ -37,7 +37,7 @@ export const Default = Object.assign(Template.bind({}) as typeof Template & { ar
   },
 });
 
-export const Variants = () => `
+export const Variants = (): string => `
   <div style="display: flex; flex-direction: column; gap: 32px;">
     <div>
       <p style="margin: 0 0 8px; font-family: sans-serif; font-size: 14px; color: #666;">Sidebar variant</p>
@@ -62,7 +62,7 @@ export const Variants = () => `
   </div>
 `;
 
-export const States = () => `
+export const States = (): string => `
   <div style="display: flex; flex-direction: column; gap: 32px;">
     <div>
       <p style="margin: 0 0 8px; font-family: sans-serif; font-size: 14px; color: #666;">Expanded sidebar</p>
@@ -89,7 +89,7 @@ export const States = () => `
   </div>
 `;
 
-export const Composition = () => `
+export const Composition = (): string => `
   <div style="display: flex; border: 1px solid #e2e8f0; border-radius: 8px; height: 400px; overflow: hidden;">
     <div style="width: 240px; border-right: 1px solid #e2e8f0; padding: 16px 0; background: #f8fafc;">
       <div style="padding: 0 16px 16px; font-family: sans-serif; font-weight: 700; font-size: 18px;">Acme App</div>

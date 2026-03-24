@@ -17,7 +17,7 @@ export default {
   },
 };
 
-const Template = (args: Record<string, unknown>) => {
+const Template = (args: Record<string, unknown>): string => {
   const attrs: string[] = [];
   if (args.size !== undefined) attrs.push(`size="${args.size}"`);
   if (args.axis !== undefined) attrs.push(`axis="${args.axis}"`);
@@ -37,7 +37,7 @@ export const Default = Object.assign(Template.bind({}) as typeof Template & { ar
   },
 });
 
-export const Vertical = () => `
+export const Vertical = (): string => `
   <div style="font-family: sans-serif; max-width: 400px;">
     <h2 style="margin: 0;">First Section</h2>
     <p style="margin: 0; color: #64748b;">Some content in the first section.</p>
@@ -50,7 +50,7 @@ export const Vertical = () => `
   </div>
 `;
 
-export const Horizontal = () => `
+export const Horizontal = (): string => `
   <div style="display: flex; align-items: center; font-family: sans-serif;">
     <span style="padding: 8px 16px; background: #e2e8f0; border-radius: 4px;">Left</span>
     <ts-spacer axis="horizontal" size="4" style="background: rgba(59, 130, 246, 0.15);"></ts-spacer>
@@ -60,7 +60,7 @@ export const Horizontal = () => `
   </div>
 `;
 
-export const Sizes = () => `
+export const Sizes = (): string => `
   <div style="font-family: sans-serif;">
     <p style="margin: 0 0 16px; font-size: 14px; color: #666;">Different vertical spacer sizes (highlighted in blue)</p>
     <div style="display: flex; gap: 32px;">

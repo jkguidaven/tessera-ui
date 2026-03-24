@@ -24,7 +24,7 @@ export default {
   },
 };
 
-const Template = (args: Record<string, unknown>) => {
+const Template = (args: Record<string, unknown>): string => {
   const attrs: string[] = [];
   if (args.value !== undefined) attrs.push(`value="${args.value}"`);
   if (args.size !== undefined) attrs.push(`size="${args.size}"`);
@@ -48,7 +48,7 @@ export const Default = Object.assign(Template.bind({}) as typeof Template & { ar
   },
 });
 
-export const Sizes = () => `
+export const Sizes = (): string => `
   <div style="display: flex; flex-direction: column; gap: 16px;">
     <div>
       <p style="margin: 0 0 8px; font-family: sans-serif; font-size: 14px; color: #666;">Small</p>
@@ -77,7 +77,7 @@ export const Sizes = () => `
   </div>
 `;
 
-export const States = () => `
+export const States = (): string => `
   <div style="display: flex; flex-direction: column; gap: 16px;">
     <div>
       <p style="margin: 0 0 8px; font-family: sans-serif; font-size: 14px; color: #666;">Active selection</p>
@@ -114,7 +114,7 @@ export const States = () => `
   </div>
 `;
 
-export const Composition = () => `
+export const Composition = (): string => `
   <div style="max-width: 500px; font-family: sans-serif;">
     <div style="border: 1px solid #e2e8f0; border-radius: 8px; padding: 20px;">
       <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">

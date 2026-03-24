@@ -40,7 +40,7 @@ export default {
   },
 };
 
-const Template = (args: Record<string, unknown>) => {
+const Template = (args: Record<string, unknown>): string => {
   const attrs: string[] = [];
   if (args.value !== undefined) attrs.push(`value="${args.value}"`);
   if (args.min !== undefined) attrs.push(`min="${args.min}"`);
@@ -66,7 +66,7 @@ export const Default = Object.assign(Template.bind({}) as typeof Template & { ar
   },
 });
 
-export const Sizes = () => `
+export const Sizes = (): string => `
   <div style="display: flex; flex-direction: column; gap: 24px; max-width: 400px;">
     <ts-slider value="50" label="Small" show-value size="sm"></ts-slider>
     <ts-slider value="50" label="Medium" show-value size="md"></ts-slider>
@@ -74,14 +74,14 @@ export const Sizes = () => `
   </div>
 `;
 
-export const States = () => `
+export const States = (): string => `
   <div style="display: flex; flex-direction: column; gap: 24px; max-width: 400px;">
     <ts-slider value="70" label="Volume" show-value></ts-slider>
     <ts-slider value="50" label="Disabled slider" show-value disabled></ts-slider>
   </div>
 `;
 
-export const Composition = () => `
+export const Composition = (): string => `
   <div style="max-width: 400px; font-family: sans-serif;">
     <div style="border: 1px solid #e2e8f0; border-radius: 8px; padding: 20px; display: flex; flex-direction: column; gap: 20px;">
       <h4 style="margin: 0;">Audio Settings</h4>

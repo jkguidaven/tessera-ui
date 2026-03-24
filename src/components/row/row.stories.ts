@@ -35,7 +35,7 @@ export default {
   },
 };
 
-const Template = (args: Record<string, unknown>) => {
+const Template = (args: Record<string, unknown>): string => {
   const attrs: string[] = [];
   if (args.gap !== undefined) attrs.push(`gap="${args.gap}"`);
   if (args.align !== undefined) attrs.push(`align="${args.align}"`);
@@ -63,7 +63,7 @@ export const Default = Object.assign(Template.bind({}) as typeof Template & { ar
   },
 });
 
-export const Justify = () => `
+export const Justify = (): string => `
   <div style="display: flex; flex-direction: column; gap: 24px; font-family: sans-serif;">
     <div>
       <p style="margin: 0 0 8px; font-size: 14px; color: #666;">justify="start"</p>
@@ -100,7 +100,7 @@ export const Justify = () => `
   </div>
 `;
 
-export const Alignment = () => `
+export const Alignment = (): string => `
   <div style="display: flex; flex-direction: column; gap: 24px; font-family: sans-serif;">
     <div>
       <p style="margin: 0 0 8px; font-size: 14px; color: #666;">align="start"</p>
@@ -129,7 +129,7 @@ export const Alignment = () => `
   </div>
 `;
 
-export const Wrap = () => `
+export const Wrap = (): string => `
   <div style="font-family: sans-serif;">
     <p style="margin: 0 0 8px; font-size: 14px; color: #666;">Resize browser to see wrapping behavior</p>
     <ts-row gap="2" style="border: 1px dashed #cbd5e1; padding: 8px; max-width: 300px;">
@@ -142,7 +142,7 @@ export const Wrap = () => `
   </div>
 `;
 
-export const StackAt = () => `
+export const StackAt = (): string => `
   <div style="font-family: sans-serif;">
     <p style="margin: 0 0 8px; font-size: 14px; color: #666;">Resize the browser to see stacking at md breakpoint (767px)</p>
     <ts-row stack-at="md" gap="3" style="border: 1px dashed #cbd5e1; padding: 8px;">
@@ -153,7 +153,7 @@ export const StackAt = () => `
   </div>
 `;
 
-export const Composition = () => `
+export const Composition = (): string => `
   <div style="font-family: sans-serif;">
     <div style="border: 1px solid #e2e8f0; border-radius: 8px; padding: 16px;">
       <ts-row justify="between" align="center">

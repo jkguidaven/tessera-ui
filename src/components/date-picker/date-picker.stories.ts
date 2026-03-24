@@ -48,7 +48,7 @@ export default {
   },
 };
 
-const Template = (args: Record<string, unknown>) => {
+const Template = (args: Record<string, unknown>): string => {
   const attrs: string[] = [];
   if (args.value !== undefined && args.value !== '') attrs.push(`value="${args.value}"`);
   if (args.placeholder !== undefined) attrs.push(`placeholder="${args.placeholder}"`);
@@ -73,7 +73,7 @@ export const Default = Object.assign(Template.bind({}) as typeof Template & { ar
   },
 });
 
-export const Sizes = () => `
+export const Sizes = (): string => `
   <div style="display: flex; gap: 16px; flex-wrap: wrap; align-items: flex-start;">
     <ts-date-picker label="Small" size="sm" placeholder="Select date"></ts-date-picker>
     <ts-date-picker label="Medium" size="md" placeholder="Select date"></ts-date-picker>
@@ -81,7 +81,7 @@ export const Sizes = () => `
   </div>
 `;
 
-export const States = () => `
+export const States = (): string => `
   <div style="display: flex; gap: 16px; flex-wrap: wrap; align-items: flex-start;">
     <ts-date-picker label="Default" placeholder="Select date"></ts-date-picker>
     <ts-date-picker label="With value" value="2026-03-15" placeholder="Select date"></ts-date-picker>
@@ -90,7 +90,7 @@ export const States = () => `
   </div>
 `;
 
-export const Composition = () => `
+export const Composition = (): string => `
   <div style="max-width: 400px; font-family: sans-serif;">
     <div style="border: 1px solid #e2e8f0; border-radius: 8px; padding: 20px;">
       <h4 style="margin: 0 0 16px;">Travel Dates</h4>

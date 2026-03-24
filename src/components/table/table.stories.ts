@@ -57,7 +57,7 @@ const sampleTable = `
   </table>
 `;
 
-const Template = (args: Record<string, unknown>) => {
+const Template = (args: Record<string, unknown>): string => {
   const attrs: string[] = [];
   if (args.striped) attrs.push('striped');
   if (args.bordered) attrs.push('bordered');
@@ -77,27 +77,27 @@ export const Default = Object.assign(Template.bind({}) as typeof Template & { ar
   },
 });
 
-export const Striped = () => `
+export const Striped = (): string => `
   <ts-table striped>${sampleTable}</ts-table>
 `;
 
-export const Bordered = () => `
+export const Bordered = (): string => `
   <ts-table bordered>${sampleTable}</ts-table>
 `;
 
-export const Hoverable = () => `
+export const Hoverable = (): string => `
   <ts-table hoverable>${sampleTable}</ts-table>
 `;
 
-export const Compact = () => `
+export const Compact = (): string => `
   <ts-table compact>${sampleTable}</ts-table>
 `;
 
-export const AllFeatures = () => `
+export const AllFeatures = (): string => `
   <ts-table striped bordered hoverable>${sampleTable}</ts-table>
 `;
 
-export const StickyHeader = () => `
+export const StickyHeader = (): string => `
   <div style="max-height: 250px; overflow: auto;">
     <ts-table sticky-header hoverable>
       <table>
@@ -127,7 +127,7 @@ export const StickyHeader = () => `
   </div>
 `;
 
-export const CompactBordered = () => `
+export const CompactBordered = (): string => `
   <ts-table compact bordered striped>
     <table>
       <thead>

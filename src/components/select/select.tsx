@@ -226,6 +226,7 @@ export class TsSelect {
     return selected?.label ?? '';
   }
 
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   render() {
     const hasError = this.error && !!this.errorMessage;
     const labelId = `${this.inputId}-label`;

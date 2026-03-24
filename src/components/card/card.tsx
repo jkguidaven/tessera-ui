@@ -30,6 +30,7 @@ export class TsCard {
   /** Padding size for the card body. */
   @Prop({ reflect: true }) padding: 'none' | 'sm' | 'md' | 'lg' = 'md';
 
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   render() {
     return (
       <Host

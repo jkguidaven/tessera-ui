@@ -20,7 +20,7 @@ export default {
   },
 };
 
-const Template = (args: Record<string, unknown>) => {
+const Template = (args: Record<string, unknown>): string => {
   const attrs: string[] = [];
   if (args.elevation !== undefined && args.elevation !== null) attrs.push(`elevation="${args.elevation}"`);
   if (args.interactive) attrs.push('interactive');
@@ -43,7 +43,7 @@ export const Default = Object.assign(Template.bind({}) as typeof Template & { ar
   },
 });
 
-export const Elevations = () => `
+export const Elevations = (): string => `
   <ts-row gap="4" align="start">
     <div style="text-align: center;">
       <ts-card elevation="none" style="width: 160px;">
@@ -73,7 +73,7 @@ export const Elevations = () => `
   </ts-row>
 `;
 
-export const Padding = () => `
+export const Padding = (): string => `
   <ts-stack gap="3" style="max-width: 400px;">
     <ts-card bordered padding="none">
       <p style="margin: 0;">Padding: none</p>
@@ -90,7 +90,7 @@ export const Padding = () => `
   </ts-stack>
 `;
 
-export const States = () => `
+export const States = (): string => `
   <ts-row gap="4" align="start">
     <ts-card bordered style="width: 240px;">
       <p style="margin: 0;">Bordered card</p>
@@ -104,7 +104,7 @@ export const States = () => `
   </ts-row>
 `;
 
-export const WithSlots = () => `
+export const WithSlots = (): string => `
   <div style="max-width: 400px;">
     <ts-card bordered>
       <span slot="header">
@@ -151,7 +151,7 @@ export const WithSlots = () => `
   </div>
 `;
 
-export const WithMedia = () => `
+export const WithMedia = (): string => `
   <ts-grid columns="auto" min-column-width="280px" gap="4">
     <ts-card bordered style="width: 300px;" padding="none">
       <span slot="media">
@@ -191,7 +191,7 @@ export const WithMedia = () => `
   </ts-grid>
 `;
 
-export const Composition = () => `
+export const Composition = (): string => `
   <ts-stack gap="3" style="max-width: 400px;">
     <ts-card bordered padding="lg">
       <span slot="header">

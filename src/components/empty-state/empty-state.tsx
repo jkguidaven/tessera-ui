@@ -31,6 +31,7 @@ export class TsEmptyState {
   /** The size of the empty state. */
   @Prop({ reflect: true }) size: TsSize = 'md';
 
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   render() {
     return (
       <Host

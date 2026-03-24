@@ -29,7 +29,7 @@ export default {
   },
 };
 
-const Template = (args: Record<string, unknown>) => {
+const Template = (args: Record<string, unknown>): string => {
   const attrs: string[] = [];
   if (args.value !== undefined && args.value !== null && args.value !== '') attrs.push(`value="${args.value}"`);
   if (args.placeholder !== undefined && args.placeholder !== null) attrs.push(`placeholder="${args.placeholder}"`);
@@ -66,7 +66,7 @@ export const Default = Object.assign(Template.bind({}) as typeof Template & { ar
   },
 });
 
-export const Sizes = () => `
+export const Sizes = (): string => `
   <div style="display: flex; flex-direction: column; gap: 16px; max-width: 480px;">
     <ts-textarea size="sm" label="Small" placeholder="Small textarea..." rows="2"></ts-textarea>
     <ts-textarea size="md" label="Medium" placeholder="Medium textarea..." rows="3"></ts-textarea>
@@ -74,7 +74,7 @@ export const Sizes = () => `
   </div>
 `;
 
-export const States = () => `
+export const States = (): string => `
   <div style="display: flex; flex-direction: column; gap: 16px; max-width: 480px;">
     <ts-textarea label="Default" placeholder="Type something..."></ts-textarea>
     <ts-textarea label="With value" value="This textarea has pre-filled content that the user can edit."></ts-textarea>
@@ -85,7 +85,7 @@ export const States = () => `
   </div>
 `;
 
-export const ResizeBehaviors = () => `
+export const ResizeBehaviors = (): string => `
   <div style="display: flex; flex-direction: column; gap: 16px; max-width: 480px;">
     <ts-textarea label="Vertical resize (default)" resize="vertical" placeholder="Drag the bottom-right corner vertically..."></ts-textarea>
     <ts-textarea label="Horizontal resize" resize="horizontal" placeholder="Drag horizontally..."></ts-textarea>
@@ -94,7 +94,7 @@ export const ResizeBehaviors = () => `
   </div>
 `;
 
-export const FeedbackForm = () => `
+export const FeedbackForm = (): string => `
   <div style="display: flex; flex-direction: column; gap: 16px; max-width: 480px;">
     <h3 style="margin: 0; font-family: sans-serif;">Submit Feedback</h3>
     <ts-textarea

@@ -74,6 +74,7 @@ export class TsButton {
     this.tsBlur.emit();
   };
 
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   private renderSpinner() {
     return (
       <span class="button__spinner" part="spinner" aria-hidden="true">
@@ -84,6 +85,7 @@ export class TsButton {
     );
   }
 
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   render() {
     const isLink = !!this.href;
     const Tag = isLink ? 'a' : 'button';

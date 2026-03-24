@@ -11,7 +11,7 @@ export default {
   },
 };
 
-const Template = (args: Record<string, unknown>) => {
+const Template = (args: Record<string, unknown>): string => {
   const attrs: string[] = [];
   if (args.multiple) attrs.push('multiple');
   return `
@@ -38,7 +38,7 @@ export const Default = Object.assign(Template.bind({}) as typeof Template & { ar
   },
 });
 
-export const MultipleOpen = () => `
+export const MultipleOpen = (): string => `
   <ts-accordion multiple>
     <ts-accordion-item heading="What is your return policy?" open>
       You can return any item within 30 days of purchase for a full refund.
@@ -55,7 +55,7 @@ export const MultipleOpen = () => `
   </ts-accordion>
 `;
 
-export const States = () => `
+export const States = (): string => `
   <ts-accordion>
     <ts-accordion-item heading="Open by default" open>
       This item is expanded when the page loads.
@@ -69,7 +69,7 @@ export const States = () => `
   </ts-accordion>
 `;
 
-export const Composition = () => `
+export const Composition = (): string => `
   <div style="max-width: 600px;">
     <h3 style="margin-bottom: 16px; font-family: sans-serif;">Frequently Asked Questions</h3>
     <ts-accordion>

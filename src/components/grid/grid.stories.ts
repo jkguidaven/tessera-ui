@@ -27,7 +27,7 @@ export default {
 
 const cardStyle = 'padding: 24px; background: #f1f5f9; border-radius: 8px; font-family: sans-serif; text-align: center;';
 
-export const Default = () => `
+export const Default = (): string => `
   <ts-grid>
     <div style="${cardStyle}">Card 1</div>
     <div style="${cardStyle}">Card 2</div>
@@ -38,7 +38,7 @@ export const Default = () => `
   </ts-grid>
 `;
 
-export const FixedColumns = () => `
+export const FixedColumns = (): string => `
   <div style="display: flex; flex-direction: column; gap: 32px;">
     <div>
       <p style="margin: 0 0 8px; font-family: sans-serif; font-size: 14px; color: #666;">2 Columns</p>
@@ -72,7 +72,7 @@ export const FixedColumns = () => `
   </div>
 `;
 
-export const CustomMinWidth = () => `
+export const CustomMinWidth = (): string => `
   <div style="display: flex; flex-direction: column; gap: 32px;">
     <div>
       <p style="margin: 0 0 8px; font-family: sans-serif; font-size: 14px; color: #666;">Min width: 150px</p>
@@ -96,7 +96,7 @@ export const CustomMinWidth = () => `
   </div>
 `;
 
-export const Responsive = () => `
+export const Responsive = (): string => `
   <div>
     <p style="margin: 0 0 12px; font-family: sans-serif; font-size: 14px; color: #666;">
       Resize the browser to see the grid reflow automatically.
@@ -111,7 +111,7 @@ export const Responsive = () => `
   </div>
 `;
 
-export const Composition = () => `
+export const Composition = (): string => `
   <ts-container size="lg">
     <div style="display: flex; flex-direction: column; gap: 24px;">
       <h2 style="margin: 0; font-family: sans-serif;">Dashboard</h2>

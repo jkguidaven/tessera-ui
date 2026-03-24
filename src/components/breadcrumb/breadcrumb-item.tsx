@@ -21,6 +21,7 @@ export class TsBreadcrumbItem {
   /** Separator character (set by parent ts-breadcrumb). */
   @Prop() separator?: string;
 
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   render() {
     const isLink = !!this.href && !this.current;
 

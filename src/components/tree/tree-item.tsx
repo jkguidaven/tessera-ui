@@ -43,15 +43,15 @@ export class TsTreeItem {
   @Event({ eventName: 'tsSelect' }) tsSelect!: EventEmitter<{ selected: boolean; value: string }>;
 
   @Watch('expanded')
-  onExpandedChange() {
+  onExpandedChange(): void {
     this.tsToggle.emit({ expanded: this.expanded });
   }
 
-  componentDidLoad() {
+  componentDidLoad(): void {
     this.checkForChildren();
   }
 
-  private checkForChildren() {
+  private checkForChildren(): void {
     const slot = this.hostEl.shadowRoot?.querySelector('slot:not([name])') as HTMLSlotElement;
     if (slot) {
       const assigned = slot.assignedElements();
@@ -85,6 +85,7 @@ export class TsTreeItem {
     this.checkForChildren();
   };
 
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   render() {
     return (
       <Host

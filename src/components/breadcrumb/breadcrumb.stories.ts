@@ -11,7 +11,7 @@ export default {
   },
 };
 
-const Template = (args: Record<string, unknown>) => {
+const Template = (args: Record<string, unknown>): string => {
   const attrs: string[] = [];
   if (args.separator !== undefined && args.separator !== null) attrs.push(`separator="${args.separator}"`);
   return `
@@ -30,7 +30,7 @@ export const Default = Object.assign(Template.bind({}) as typeof Template & { ar
   },
 });
 
-export const Variants = () => `
+export const Variants = (): string => `
   <div style="display: flex; flex-direction: column; gap: 16px;">
     <div>
       <p style="margin: 0 0 8px; font-family: sans-serif; font-size: 14px; color: #666;">Slash separator (default)</p>
@@ -59,7 +59,7 @@ export const Variants = () => `
   </div>
 `;
 
-export const Composition = () => `
+export const Composition = (): string => `
   <div style="display: flex; flex-direction: column; gap: 24px;">
     <div>
       <p style="margin: 0 0 8px; font-family: sans-serif; font-size: 14px; color: #666;">E-commerce navigation</p>

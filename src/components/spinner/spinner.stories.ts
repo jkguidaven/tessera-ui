@@ -14,7 +14,7 @@ export default {
   },
 };
 
-const Template = (args: Record<string, unknown>) => {
+const Template = (args: Record<string, unknown>): string => {
   const attrs: string[] = [];
   if (args.size !== undefined && args.size !== null) attrs.push(`size="${args.size}"`);
   if (args.color !== undefined && args.color !== null && args.color !== 'currentColor') attrs.push(`color="${args.color}"`);
@@ -30,7 +30,7 @@ export const Default = Object.assign(Template.bind({}) as typeof Template & { ar
   },
 });
 
-export const Sizes = () => `
+export const Sizes = (): string => `
   <div style="display: flex; gap: 16px; align-items: center;">
     <div style="text-align: center; font-family: sans-serif;">
       <ts-spinner size="xs"></ts-spinner>
@@ -55,7 +55,7 @@ export const Sizes = () => `
   </div>
 `;
 
-export const CustomColors = () => `
+export const CustomColors = (): string => `
   <div style="display: flex; gap: 24px; align-items: center;">
     <ts-spinner color="#2563eb" label="Loading primary content"></ts-spinner>
     <ts-spinner color="#16a34a" label="Loading success data"></ts-spinner>
@@ -65,7 +65,7 @@ export const CustomColors = () => `
   </div>
 `;
 
-export const LoadingState = () => `
+export const LoadingState = (): string => `
   <div style="display: flex; flex-direction: column; gap: 24px; font-family: sans-serif;">
     <div style="display: flex; align-items: center; gap: 8px;">
       <ts-spinner size="sm" label="Saving changes"></ts-spinner>
@@ -82,7 +82,7 @@ export const LoadingState = () => `
   </div>
 `;
 
-export const OnDarkBackground = () => `
+export const OnDarkBackground = (): string => `
   <div style="display: flex; gap: 24px; align-items: center; padding: 32px; background: #1e293b; border-radius: 8px;">
     <ts-spinner size="sm" color="#ffffff" label="Loading"></ts-spinner>
     <ts-spinner size="md" color="#ffffff" label="Loading"></ts-spinner>

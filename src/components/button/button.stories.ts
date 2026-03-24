@@ -37,7 +37,7 @@ export default {
   },
 };
 
-const Template = (args: Record<string, unknown>) => {
+const Template = (args: Record<string, unknown>): string => {
   const attrs: string[] = [];
   if (args.variant !== undefined && args.variant !== null) attrs.push(`variant="${args.variant}"`);
   if (args.appearance !== undefined && args.appearance !== null) attrs.push(`appearance="${args.appearance}"`);
@@ -64,7 +64,7 @@ export const Default = Object.assign(Template.bind({}) as typeof Template & { ar
   },
 });
 
-export const Variants = () => `
+export const Variants = (): string => `
   <ts-row gap="2">
     <ts-button variant="primary">Primary</ts-button>
     <ts-button variant="secondary">Secondary</ts-button>
@@ -76,7 +76,7 @@ export const Variants = () => `
   </ts-row>
 `;
 
-export const Sizes = () => `
+export const Sizes = (): string => `
   <ts-row gap="2">
     <ts-button size="xs">Extra Small</ts-button>
     <ts-button size="sm">Small</ts-button>
@@ -86,7 +86,7 @@ export const Sizes = () => `
   </ts-row>
 `;
 
-export const Appearances = () => `
+export const Appearances = (): string => `
   <ts-stack gap="4">
     <div>
       <p style="margin: 0 0 8px; font-weight: 600; color: var(--ts-color-text-secondary);">Solid</p>
@@ -121,7 +121,7 @@ export const Appearances = () => `
   </ts-stack>
 `;
 
-export const States = () => `
+export const States = (): string => `
   <ts-stack gap="3">
     <ts-row gap="2">
       <ts-button>Default</ts-button>
@@ -138,7 +138,7 @@ export const States = () => `
   </ts-stack>
 `;
 
-export const WithIcons = () => `
+export const WithIcons = (): string => `
   <ts-row gap="2">
     <ts-button variant="primary">
       <ts-icon slot="prefix" name="plus" size="sm"></ts-icon>
@@ -167,7 +167,7 @@ export const WithIcons = () => `
   </ts-row>
 `;
 
-export const AsLink = () => `
+export const AsLink = (): string => `
   <ts-row gap="2">
     <ts-button href="https://example.com" target="_blank">
       Visit Website
@@ -180,7 +180,7 @@ export const AsLink = () => `
   </ts-row>
 `;
 
-export const Composition = () => `
+export const Composition = (): string => `
   <ts-stack gap="4" style="max-width: 400px;">
     <ts-row gap="2" justify="end">
       <ts-button appearance="outline" variant="neutral">Cancel</ts-button>

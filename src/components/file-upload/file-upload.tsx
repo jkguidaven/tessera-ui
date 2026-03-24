@@ -130,6 +130,7 @@ export class TsFileUpload {
     return validFiles;
   }
 
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   render() {
     return (
       <Host

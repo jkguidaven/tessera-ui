@@ -20,6 +20,7 @@ export class TsSpinner {
   /** Accessible label for screen readers. */
   @Prop() label: string = 'Loading';
 
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   render() {
     return (
       <Host

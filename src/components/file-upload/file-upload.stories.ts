@@ -31,7 +31,7 @@ export default {
   },
 };
 
-const Template = (args: Record<string, unknown>) => {
+const Template = (args: Record<string, unknown>): string => {
   const attrs: string[] = [];
   if (args.accept !== undefined && args.accept !== '') attrs.push(`accept="${args.accept}"`);
   if (args.multiple) attrs.push('multiple');
@@ -50,7 +50,7 @@ export const Default = Object.assign(Template.bind({}) as typeof Template & { ar
   },
 });
 
-export const States = () => `
+export const States = (): string => `
   <div style="display: flex; flex-direction: column; gap: 24px; max-width: 500px;">
     <div>
       <p style="margin: 0 0 8px; font-family: sans-serif; font-size: 14px; color: #666;">Default</p>
@@ -67,7 +67,7 @@ export const States = () => `
   </div>
 `;
 
-export const Variants = () => `
+export const Variants = (): string => `
   <div style="display: flex; flex-direction: column; gap: 24px; max-width: 500px;">
     <div>
       <p style="margin: 0 0 8px; font-family: sans-serif; font-size: 14px; color: #666;">Images only</p>
@@ -84,7 +84,7 @@ export const Variants = () => `
   </div>
 `;
 
-export const Composition = () => `
+export const Composition = (): string => `
   <div style="max-width: 500px; font-family: sans-serif;">
     <div style="border: 1px solid #e2e8f0; border-radius: 8px; padding: 20px;">
       <h4 style="margin: 0 0 4px;">Upload Attachments</h4>

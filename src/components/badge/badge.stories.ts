@@ -21,7 +21,7 @@ export default {
   },
 };
 
-const Template = (args: Record<string, unknown>) => {
+const Template = (args: Record<string, unknown>): string => {
   const attrs: string[] = [];
   if (args.variant !== undefined && args.variant !== null) attrs.push(`variant="${args.variant}"`);
   if (args.size !== undefined && args.size !== null) attrs.push(`size="${args.size}"`);
@@ -42,7 +42,7 @@ export const Default = Object.assign(Template.bind({}) as typeof Template & { ar
   },
 });
 
-export const Variants = () => `
+export const Variants = (): string => `
   <div style="display: flex; gap: 16px; align-items: center; flex-wrap: wrap;">
     <ts-badge variant="primary">Primary</ts-badge>
     <ts-badge variant="secondary">Secondary</ts-badge>
@@ -54,7 +54,7 @@ export const Variants = () => `
   </div>
 `;
 
-export const Sizes = () => `
+export const Sizes = (): string => `
   <div style="display: flex; gap: 16px; align-items: center; flex-wrap: wrap;">
     <ts-badge size="xs">Extra Small</ts-badge>
     <ts-badge size="sm">Small</ts-badge>
@@ -64,7 +64,7 @@ export const Sizes = () => `
   </div>
 `;
 
-export const States = () => `
+export const States = (): string => `
   <div style="display: flex; flex-direction: column; gap: 24px;">
     <div>
       <p style="margin: 0 0 8px; font-weight: 600; color: var(--ts-color-text-secondary);">Solid (default)</p>
@@ -122,7 +122,7 @@ export const States = () => `
   </div>
 `;
 
-export const WithIcons = () => `
+export const WithIcons = (): string => `
   <div style="display: flex; gap: 16px; align-items: center; flex-wrap: wrap;">
     <span style="display: inline-flex; align-items: center; gap: 6px;">
       <ts-icon name="bell" size="sm"></ts-icon>
@@ -142,7 +142,7 @@ export const WithIcons = () => `
   </div>
 `;
 
-export const Composition = () => `
+export const Composition = (): string => `
   <div style="display: flex; flex-direction: column; gap: 16px; max-width: 500px;">
     <ts-card bordered>
       <span slot="header">

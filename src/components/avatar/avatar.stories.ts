@@ -21,7 +21,7 @@ export default {
   },
 };
 
-const Template = (args: Record<string, unknown>) => {
+const Template = (args: Record<string, unknown>): string => {
   const attrs: string[] = [];
   if (args.src !== undefined && args.src !== null && args.src !== '') attrs.push(`src="${args.src}"`);
   if (args.alt !== undefined && args.alt !== null && args.alt !== '') attrs.push(`alt="${args.alt}"`);
@@ -43,7 +43,7 @@ export const Default = Object.assign(Template.bind({}) as typeof Template & { ar
   },
 });
 
-export const Sizes = () => `
+export const Sizes = (): string => `
   <div style="display: flex; gap: 12px; align-items: center;">
     <ts-avatar size="xs" name="Alice Smith" color="#6366f1"></ts-avatar>
     <ts-avatar size="sm" name="Alice Smith" color="#6366f1"></ts-avatar>
@@ -53,7 +53,7 @@ export const Sizes = () => `
   </div>
 `;
 
-export const Variants = () => `
+export const Variants = (): string => `
   <div style="display: flex; gap: 16px; align-items: center;">
     <div style="text-align: center; font-family: sans-serif;">
       <ts-avatar variant="circle" name="James Kennedy" color="#2563eb" size="lg"></ts-avatar>
@@ -66,7 +66,7 @@ export const Variants = () => `
   </div>
 `;
 
-export const InitialsFallback = () => `
+export const InitialsFallback = (): string => `
   <div style="display: flex; gap: 12px; align-items: center;">
     <ts-avatar name="James Kennedy" color="#6366f1" size="lg"></ts-avatar>
     <ts-avatar name="Alice Smith" color="#ec4899" size="lg"></ts-avatar>
@@ -76,7 +76,7 @@ export const InitialsFallback = () => `
   </div>
 `;
 
-export const WithImages = () => `
+export const WithImages = (): string => `
   <div style="display: flex; gap: 12px; align-items: center;">
     <ts-avatar
       src="https://i.pravatar.cc/150?u=user1"
@@ -99,7 +99,7 @@ export const WithImages = () => `
   </div>
 `;
 
-export const ImageErrorFallback = () => `
+export const ImageErrorFallback = (): string => `
   <div style="display: flex; gap: 12px; align-items: center; font-family: sans-serif;">
     <div style="text-align: center;">
       <ts-avatar
@@ -113,7 +113,7 @@ export const ImageErrorFallback = () => `
   </div>
 `;
 
-export const UserList = () => `
+export const UserList = (): string => `
   <div style="display: flex; flex-direction: column; gap: 12px; max-width: 320px; font-family: sans-serif;">
     <div style="display: flex; align-items: center; gap: 12px; padding: 8px;">
       <ts-avatar name="James Kennedy" color="#6366f1" size="sm"></ts-avatar>

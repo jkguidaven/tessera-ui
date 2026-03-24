@@ -48,6 +48,7 @@ export class TsAlert {
     this.close();
   };
 
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   private renderDefaultIcon() {
     const icons: Record<string, string> = {
       info: 'ℹ',
@@ -61,6 +62,7 @@ export class TsAlert {
     return <span aria-hidden="true">{icons[this.variant] || 'ℹ'}</span>;
   }
 
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   render() {
     if (!this.isVisible) return null;
 

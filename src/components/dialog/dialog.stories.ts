@@ -15,7 +15,7 @@ export default {
   },
 };
 
-const Template = (args: Record<string, unknown>) => {
+const Template = (args: Record<string, unknown>): string => {
   const attrs: string[] = [];
   if (args.open) attrs.push('open');
   if (args.heading !== undefined && args.heading !== null) attrs.push(`heading="${args.heading}"`);
@@ -44,7 +44,7 @@ export const Default = Object.assign(Template.bind({}) as typeof Template & { ar
   },
 });
 
-export const Sizes = () => `
+export const Sizes = (): string => `
   <ts-row gap="2">
     <div>
       <ts-button onclick="this.nextElementSibling.show()">Small Dialog</ts-button>
@@ -82,7 +82,7 @@ export const Sizes = () => `
   </ts-row>
 `;
 
-export const DeleteConfirmation = () => `
+export const DeleteConfirmation = (): string => `
   <ts-button variant="danger" onclick="this.nextElementSibling.show()">Delete Item</ts-button>
   <ts-dialog heading="Delete this item?" size="sm">
     <p style="margin: 0; font-family: sans-serif; color: #555;">
@@ -97,7 +97,7 @@ export const DeleteConfirmation = () => `
   </ts-dialog>
 `;
 
-export const UnsavedChanges = () => `
+export const UnsavedChanges = (): string => `
   <ts-button onclick="this.nextElementSibling.show()">Leave Page</ts-button>
   <ts-dialog heading="Unsaved changes" size="sm">
     <p style="margin: 0; font-family: sans-serif; color: #555;">
@@ -112,7 +112,7 @@ export const UnsavedChanges = () => `
   </ts-dialog>
 `;
 
-export const NonDismissible = () => `
+export const NonDismissible = (): string => `
   <ts-button onclick="this.nextElementSibling.show()">Open Non-Dismissible</ts-button>
   <ts-dialog heading="Terms of Service" size="md" dismissible="false">
     <div style="font-family: sans-serif; color: #555;">
@@ -132,7 +132,7 @@ export const NonDismissible = () => `
   </ts-dialog>
 `;
 
-export const FormDialog = () => `
+export const FormDialog = (): string => `
   <ts-button onclick="this.nextElementSibling.show()">Edit Profile</ts-button>
   <ts-dialog heading="Edit Profile" size="md">
     <ts-stack gap="3">

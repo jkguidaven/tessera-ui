@@ -17,7 +17,7 @@ export default {
   },
 };
 
-const Template = (args: Record<string, unknown>) => {
+const Template = (args: Record<string, unknown>): string => {
   const attrs: string[] = [];
   if (args.gap !== undefined) attrs.push(`gap="${args.gap}"`);
   if (args.align !== undefined) attrs.push(`align="${args.align}"`);
@@ -38,7 +38,7 @@ export const Default = Object.assign(Template.bind({}) as typeof Template & { ar
   },
 });
 
-export const Sizes = () => `
+export const Sizes = (): string => `
   <div style="display: flex; gap: 48px; font-family: sans-serif;">
     <div>
       <p style="margin: 0 0 8px; font-size: 14px; color: #666;">gap="1"</p>
@@ -75,7 +75,7 @@ export const Sizes = () => `
   </div>
 `;
 
-export const Alignment = () => `
+export const Alignment = (): string => `
   <div style="display: flex; gap: 48px; font-family: sans-serif;">
     <div>
       <p style="margin: 0 0 8px; font-size: 14px; color: #666;">align="start"</p>
@@ -104,7 +104,7 @@ export const Alignment = () => `
   </div>
 `;
 
-export const Composition = () => `
+export const Composition = (): string => `
   <div style="max-width: 400px; font-family: sans-serif;">
     <div style="border: 1px solid #e2e8f0; border-radius: 8px; padding: 24px;">
       <h3 style="margin: 0 0 4px;">Create Account</h3>

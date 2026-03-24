@@ -19,7 +19,7 @@ export default {
   },
 };
 
-const Template = (args: Record<string, unknown>) => {
+const Template = (args: Record<string, unknown>): string => {
   const attrs: string[] = [];
   if (args.checked) attrs.push('checked');
   if (args.indeterminate) attrs.push('indeterminate');
@@ -45,7 +45,7 @@ export const Default = Object.assign(Template.bind({}) as typeof Template & { ar
   },
 });
 
-export const Sizes = () => `
+export const Sizes = (): string => `
   <ts-stack gap="2">
     <ts-checkbox size="sm" label="Small checkbox"></ts-checkbox>
     <ts-checkbox size="md" label="Medium checkbox"></ts-checkbox>
@@ -53,7 +53,7 @@ export const Sizes = () => `
   </ts-stack>
 `;
 
-export const States = () => `
+export const States = (): string => `
   <ts-stack gap="2">
     <ts-checkbox label="Unchecked"></ts-checkbox>
     <ts-checkbox checked label="Checked"></ts-checkbox>
@@ -65,7 +65,7 @@ export const States = () => `
   </ts-stack>
 `;
 
-export const FormExample = () => `
+export const FormExample = (): string => `
   <ts-stack gap="3" style="max-width: 400px;">
     <h3 style="margin: 0; font-family: sans-serif;">Newsletter Preferences</h3>
     <ts-checkbox name="terms" value="terms" label="I agree to the terms and conditions"></ts-checkbox>
@@ -76,7 +76,7 @@ export const FormExample = () => `
   </ts-stack>
 `;
 
-export const WithSlotContent = () => `
+export const WithSlotContent = (): string => `
   <ts-stack gap="2">
     <ts-checkbox value="custom">
       Accept the <a href="#" style="color: #2563eb;">privacy policy</a>

@@ -18,7 +18,7 @@ export default {
   },
 };
 
-const Template = (args: Record<string, unknown>) => {
+const Template = (args: Record<string, unknown>): string => {
   const attrs: string[] = [];
   if (args.value !== undefined && args.value !== null && args.value !== '') attrs.push(`value="${args.value}"`);
   if (args.variant !== undefined && args.variant !== null) attrs.push(`variant="${args.variant}"`);
@@ -55,7 +55,7 @@ export const Default = Object.assign(Template.bind({}) as typeof Template & { ar
   },
 });
 
-export const Variants = () => `
+export const Variants = (): string => `
   <div style="display: flex; flex-direction: column; gap: 32px;">
     <div>
       <h4 style="margin: 0 0 8px; font-family: sans-serif;">Line (default)</h4>
@@ -102,7 +102,7 @@ export const Variants = () => `
   </div>
 `;
 
-export const Sizes = () => `
+export const Sizes = (): string => `
   <div style="display: flex; flex-direction: column; gap: 32px;">
     <div>
       <h4 style="margin: 0 0 8px; font-family: sans-serif;">Small</h4>
@@ -128,7 +128,7 @@ export const Sizes = () => `
   </div>
 `;
 
-export const WithDisabledTab = () => `
+export const WithDisabledTab = (): string => `
   <ts-tabs value="profile">
     <ts-tab-panel tab="Profile" value="profile">
       <div style="padding: 16px; font-family: sans-serif;">
@@ -153,7 +153,7 @@ export const WithDisabledTab = () => `
   </ts-tabs>
 `;
 
-export const DashboardExample = () => `
+export const DashboardExample = (): string => `
   <ts-tabs variant="enclosed" value="analytics">
     <ts-tab-panel tab="Analytics" value="analytics">
       <div style="padding: 20px; font-family: sans-serif;">

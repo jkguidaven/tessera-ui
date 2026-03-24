@@ -47,6 +47,7 @@ export class TsAvatar {
     return (words[0].charAt(0) + words[words.length - 1].charAt(0)).toUpperCase();
   }
 
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   render() {
     const showImage = this.src && !this.hasError;
     const initials = this.getInitials();

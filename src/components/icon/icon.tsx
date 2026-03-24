@@ -99,8 +99,9 @@ export class TsIcon {
       // 3. Lazy-load Lucide icons (only fetched on first name lookup)
       if (!lucideCache) {
         try {
-          const mod = await import('lucide');
-          lucideCache = (mod as { icons: Record<string, LucideNode> }).icons;
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          const mod: { icons: Record<string, LucideNode> } = await import('lucide') as any;
+          lucideCache = mod.icons;
         } catch {
           this.svgContent = undefined;
           return;
@@ -120,6 +121,7 @@ export class TsIcon {
     }
   }
 
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   render() {
     const hasLabel = !!this.label;
 

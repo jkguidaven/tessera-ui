@@ -16,7 +16,7 @@ export default {
   },
 };
 
-const Template = (args: Record<string, unknown>) => {
+const Template = (args: Record<string, unknown>): string => {
   const attrs: string[] = [];
   if (args.content !== undefined && args.content !== null) attrs.push(`content="${args.content}"`);
   if (args.placement !== undefined && args.placement !== null) attrs.push(`placement="${args.placement}"`);
@@ -40,7 +40,7 @@ export const Default = Object.assign(Template.bind({}) as typeof Template & { ar
   },
 });
 
-export const Placements = () => `
+export const Placements = (): string => `
   <div style="display: flex; flex-direction: column; gap: 16px; align-items: center; padding: 80px 40px;">
     <div style="display: flex; gap: 16px; justify-content: center;">
       <ts-tooltip content="Top Start" placement="top-start">
@@ -93,7 +93,7 @@ export const Placements = () => `
   </div>
 `;
 
-export const States = () => `
+export const States = (): string => `
   <div style="display: flex; gap: 24px; align-items: center; flex-wrap: wrap; padding: 60px 40px;">
     <ts-tooltip content="This tooltip is active" placement="top">
       <ts-button variant="primary">Active Tooltip</ts-button>
@@ -110,7 +110,7 @@ export const States = () => `
   </div>
 `;
 
-export const WithIcons = () => `
+export const WithIcons = (): string => `
   <div style="display: flex; gap: 16px; align-items: center; flex-wrap: wrap; padding: 60px 40px;">
     <ts-tooltip content="Create a new document" placement="top">
       <ts-button appearance="ghost" variant="neutral">
@@ -140,7 +140,7 @@ export const WithIcons = () => `
   </div>
 `;
 
-export const Composition = () => `
+export const Composition = (): string => `
   <div style="display: flex; flex-direction: column; gap: 24px; max-width: 500px; padding: 40px;">
     <ts-card bordered padding="lg">
       <span slot="header">

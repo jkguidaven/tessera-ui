@@ -37,7 +37,7 @@ export default {
   },
 };
 
-const Template = (args: Record<string, unknown>) => {
+const Template = (args: Record<string, unknown>): string => {
   const attrs: string[] = [];
   if (args.variant !== undefined) attrs.push(`variant="${args.variant}"`);
   if (args.size !== undefined) attrs.push(`size="${args.size}"`);
@@ -60,7 +60,7 @@ export const Default = Object.assign(Template.bind({}) as typeof Template & { ar
   },
 });
 
-export const Variants = () => `
+export const Variants = (): string => `
   <div style="display: flex; gap: 8px; flex-wrap: wrap; align-items: center;">
     <ts-chip variant="primary">Primary</ts-chip>
     <ts-chip variant="secondary">Secondary</ts-chip>
@@ -72,7 +72,7 @@ export const Variants = () => `
   </div>
 `;
 
-export const Sizes = () => `
+export const Sizes = (): string => `
   <div style="display: flex; gap: 8px; flex-wrap: wrap; align-items: center;">
     <ts-chip size="sm">Small</ts-chip>
     <ts-chip size="md">Medium</ts-chip>
@@ -80,7 +80,7 @@ export const Sizes = () => `
   </div>
 `;
 
-export const States = () => `
+export const States = (): string => `
   <div style="display: flex; flex-direction: column; gap: 12px;">
     <div style="display: flex; gap: 8px; flex-wrap: wrap; align-items: center;">
       <p style="margin: 0; font-family: sans-serif; font-size: 14px; color: #666; min-width: 80px;">Default</p>
@@ -114,7 +114,7 @@ export const States = () => `
   </div>
 `;
 
-export const Composition = () => `
+export const Composition = (): string => `
   <div style="font-family: sans-serif;">
     <div style="margin-bottom: 24px;">
       <p style="margin: 0 0 8px; font-weight: 600;">Tech Stack</p>

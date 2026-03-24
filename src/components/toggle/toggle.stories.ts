@@ -17,7 +17,7 @@ export default {
   },
 };
 
-const Template = (args: Record<string, unknown>) => {
+const Template = (args: Record<string, unknown>): string => {
   const attrs: string[] = [];
   if (args.checked) attrs.push('checked');
   if (args.size !== undefined && args.size !== null) attrs.push(`size="${args.size}"`);
@@ -36,7 +36,7 @@ export const Default = Object.assign(Template.bind({}) as typeof Template & { ar
   },
 });
 
-export const Sizes = () => `
+export const Sizes = (): string => `
   <div style="display: flex; flex-direction: column; gap: 16px;">
     <ts-toggle size="xs">Extra Small</ts-toggle>
     <ts-toggle size="sm">Small</ts-toggle>
@@ -46,7 +46,7 @@ export const Sizes = () => `
   </div>
 `;
 
-export const States = () => `
+export const States = (): string => `
   <div style="display: flex; flex-direction: column; gap: 16px;">
     <ts-toggle>Unchecked</ts-toggle>
     <ts-toggle checked>Checked</ts-toggle>
@@ -55,7 +55,7 @@ export const States = () => `
   </div>
 `;
 
-export const WithIcons = () => `
+export const WithIcons = (): string => `
   <div style="display: flex; flex-direction: column; gap: 16px; max-width: 400px;">
     <div style="display: flex; align-items: center; gap: 12px;">
       <ts-icon name="moon" size="sm"></ts-icon>
@@ -76,7 +76,7 @@ export const WithIcons = () => `
   </div>
 `;
 
-export const Composition = () => `
+export const Composition = (): string => `
   <div style="display: flex; flex-direction: column; gap: 24px; max-width: 500px;">
     <ts-card bordered padding="lg">
       <span slot="header"><h3 style="margin: 0;">Notification Preferences</h3></span>

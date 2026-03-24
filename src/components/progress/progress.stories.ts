@@ -37,7 +37,7 @@ export default {
   },
 };
 
-const Template = (args: Record<string, unknown>) => {
+const Template = (args: Record<string, unknown>): string => {
   const attrs: string[] = [];
   if (args.value !== undefined) attrs.push(`value="${args.value}"`);
   if (args.max !== undefined) attrs.push(`max="${args.max}"`);
@@ -61,7 +61,7 @@ export const Default = Object.assign(Template.bind({}) as typeof Template & { ar
   },
 });
 
-export const Variants = () => `
+export const Variants = (): string => `
   <div style="display: flex; flex-direction: column; gap: 16px; max-width: 400px;">
     <div>
       <p style="margin: 0 0 4px; font-family: sans-serif; font-size: 14px; color: #666;">Primary</p>
@@ -86,7 +86,7 @@ export const Variants = () => `
   </div>
 `;
 
-export const Sizes = () => `
+export const Sizes = (): string => `
   <div style="display: flex; flex-direction: column; gap: 16px; max-width: 400px;">
     <div>
       <p style="margin: 0 0 4px; font-family: sans-serif; font-size: 14px; color: #666;">Small</p>
@@ -103,7 +103,7 @@ export const Sizes = () => `
   </div>
 `;
 
-export const States = () => `
+export const States = (): string => `
   <div style="display: flex; flex-direction: column; gap: 16px; max-width: 400px;">
     <div>
       <p style="margin: 0 0 4px; font-family: sans-serif; font-size: 14px; color: #666;">Upload progress 65%</p>
@@ -120,7 +120,7 @@ export const States = () => `
   </div>
 `;
 
-export const Composition = () => `
+export const Composition = (): string => `
   <div style="max-width: 400px; font-family: sans-serif;">
     <div style="border: 1px solid #e2e8f0; border-radius: 8px; padding: 20px;">
       <h4 style="margin: 0 0 4px;">Uploading files...</h4>

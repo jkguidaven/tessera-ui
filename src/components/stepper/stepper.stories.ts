@@ -20,7 +20,7 @@ export default {
   },
 };
 
-const Template = (args: Record<string, unknown>) => {
+const Template = (args: Record<string, unknown>): string => {
   const attrs: string[] = [];
   if (args.activeStep !== undefined) attrs.push(`active-step="${args.activeStep}"`);
   if (args.orientation !== undefined) attrs.push(`orientation="${args.orientation}"`);
@@ -42,7 +42,7 @@ export const Default = Object.assign(Template.bind({}) as typeof Template & { ar
   },
 });
 
-export const Variants = () => `
+export const Variants = (): string => `
   <div style="display: flex; flex-direction: column; gap: 32px;">
     <div>
       <p style="margin: 0 0 12px; font-family: sans-serif; font-size: 14px; color: #666;">Horizontal</p>
@@ -63,7 +63,7 @@ export const Variants = () => `
   </div>
 `;
 
-export const States = () => `
+export const States = (): string => `
   <div style="display: flex; flex-direction: column; gap: 32px;">
     <div>
       <p style="margin: 0 0 12px; font-family: sans-serif; font-size: 14px; color: #666;">Step 1 active (no completed steps)</p>
@@ -108,7 +108,7 @@ export const States = () => `
   </div>
 `;
 
-export const Composition = () => `
+export const Composition = (): string => `
   <div style="max-width: 700px; font-family: sans-serif;">
     <div style="border: 1px solid #e2e8f0; border-radius: 8px; padding: 24px;">
       <ts-stepper active-step="1">

@@ -19,6 +19,7 @@ export class TsDivider {
   /** Optional label text displayed in the center of the divider. */
   @Prop() label?: string;
 
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   render() {
     const hasLabel = !!this.label;
 

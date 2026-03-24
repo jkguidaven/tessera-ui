@@ -25,6 +25,7 @@ export class TsSkeleton {
   /** Animation style. */
   @Prop({ reflect: true }) animation: 'pulse' | 'wave' | 'none' = 'pulse';
 
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   render() {
     const style: Record<string, string> = {};
     if (this.width) style['width'] = this.width;

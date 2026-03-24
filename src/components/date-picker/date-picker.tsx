@@ -233,6 +233,7 @@ export class TsDatePicker {
     document.removeEventListener('click', this.handleDocumentClick);
   }
 
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   private renderCalendar() {
     const daysInMonth = this.getDaysInMonth();
     const firstDay = this.getFirstDayOfWeek();
@@ -315,6 +316,7 @@ export class TsDatePicker {
     );
   }
 
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   render() {
     return (
       <Host

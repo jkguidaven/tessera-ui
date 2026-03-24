@@ -23,6 +23,7 @@ export class TsGrid {
   /** Vertical alignment of grid items. */
   @Prop({ reflect: true }) align: 'start' | 'center' | 'end' | 'stretch' = 'stretch';
 
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   render() {
     const gridTemplateColumns =
       this.columns === 'auto'

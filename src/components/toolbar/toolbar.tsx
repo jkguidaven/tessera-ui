@@ -23,6 +23,7 @@ export class TsToolbar {
   /** The toolbar size. */
   @Prop({ reflect: true }) size: TsSize = 'md';
 
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   render() {
     return (
       <Host

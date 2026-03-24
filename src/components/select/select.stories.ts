@@ -22,7 +22,7 @@ export default {
   },
 };
 
-const Template = (args: Record<string, unknown>) => {
+const Template = (args: Record<string, unknown>): string => {
   const attrs: string[] = [];
   if (args.value !== undefined && args.value !== null && args.value !== '') attrs.push(`value="${args.value}"`);
   if (args.placeholder !== undefined && args.placeholder !== null) attrs.push(`placeholder="${args.placeholder}"`);
@@ -62,7 +62,7 @@ export const Default = Object.assign(Template.bind({}) as typeof Template & { ar
   },
 });
 
-export const Sizes = () => `
+export const Sizes = (): string => `
   <div style="display: flex; flex-direction: column; gap: 16px; max-width: 320px;">
     <ts-select size="sm" label="Small" placeholder="Choose...">
       <option value="admin">Admin</option>
@@ -82,7 +82,7 @@ export const Sizes = () => `
   </div>
 `;
 
-export const States = () => `
+export const States = (): string => `
   <div style="display: flex; flex-direction: column; gap: 16px; max-width: 320px;">
     <ts-select label="Default" placeholder="Select an option">
       <option value="a">Option A</option>
@@ -107,7 +107,7 @@ export const States = () => `
   </div>
 `;
 
-export const RoleSelector = () => `
+export const RoleSelector = (): string => `
   <div style="max-width: 320px;">
     <ts-select label="User Role" placeholder="Assign a role" help-text="Determines access permissions." required name="role">
       <option value="owner">Owner</option>
@@ -119,7 +119,7 @@ export const RoleSelector = () => `
   </div>
 `;
 
-export const CategoryFilter = () => `
+export const CategoryFilter = (): string => `
   <div style="max-width: 320px;">
     <ts-select label="Category" placeholder="Filter by category" name="category">
       <option value="electronics">Electronics</option>

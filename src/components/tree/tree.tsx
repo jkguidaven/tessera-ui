@@ -17,7 +17,7 @@ export class TsTree {
   @Prop({ reflect: true }) selectable = false;
 
   @Listen('keydown')
-  handleKeyDown(event: KeyboardEvent) {
+  handleKeyDown(event: KeyboardEvent): void {
     const items = this.getVisibleItems();
     if (items.length === 0) return;
 
@@ -77,6 +77,7 @@ export class TsTree {
     }) as HTMLElement[];
   }
 
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   render() {
     return (
       <Host

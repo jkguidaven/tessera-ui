@@ -29,7 +29,7 @@ export default {
   },
 };
 
-const Template = (args: Record<string, unknown>) => {
+const Template = (args: Record<string, unknown>): string => {
   const attrs: string[] = [];
   if (args.open) attrs.push('open');
   if (args.placement !== undefined) attrs.push(`placement="${args.placement}"`);
@@ -62,7 +62,7 @@ export const Default = Object.assign(Template.bind({}) as typeof Template & { ar
   },
 });
 
-export const Sizes = () => `
+export const Sizes = (): string => `
   <div style="display: flex; gap: 8px;">
     <ts-button appearance="outline" onclick="document.getElementById('drawer-sm').setAttribute('open','')">Small</ts-button>
     <ts-button appearance="outline" onclick="document.getElementById('drawer-md').setAttribute('open','')">Medium</ts-button>
@@ -83,7 +83,7 @@ export const Sizes = () => `
   </ts-drawer>
 `;
 
-export const States = () => `
+export const States = (): string => `
   <div style="display: flex; gap: 8px;">
     <ts-button onclick="document.getElementById('drawer-start').setAttribute('open','')">From Start</ts-button>
     <ts-button onclick="document.getElementById('drawer-end').setAttribute('open','')">From End</ts-button>
@@ -104,7 +104,7 @@ export const States = () => `
   </ts-drawer>
 `;
 
-export const Composition = () => `
+export const Composition = (): string => `
   <ts-button variant="primary" onclick="document.getElementById('drawer-settings').setAttribute('open','')">Open Settings Panel</ts-button>
   <ts-drawer id="drawer-settings" heading="Settings" placement="end" size="md" dismissible>
     <div style="font-family: sans-serif; display: flex; flex-direction: column; gap: 20px;">

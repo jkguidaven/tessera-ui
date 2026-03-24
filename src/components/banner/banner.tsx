@@ -53,6 +53,7 @@ export class TsBanner {
     this.close();
   };
 
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   private renderDefaultIcon() {
     const icons: Record<string, string> = {
       info: '\u2139',
@@ -66,6 +67,7 @@ export class TsBanner {
     return <span aria-hidden="true">{icons[this.variant] || '\u2139'}</span>;
   }
 
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   render() {
     if (!this.isVisible) return null;
 

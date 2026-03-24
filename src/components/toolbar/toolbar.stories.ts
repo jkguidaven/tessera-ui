@@ -17,7 +17,7 @@ export default {
   },
 };
 
-const Template = (args: Record<string, unknown>) => {
+const Template = (args: Record<string, unknown>): string => {
   const attrs: string[] = [];
   if (args.variant !== undefined) attrs.push(`variant="${args.variant}"`);
   if (args.size !== undefined) attrs.push(`size="${args.size}"`);
@@ -42,7 +42,7 @@ export const Default = Object.assign(Template.bind({}) as typeof Template & { ar
   },
 });
 
-export const Variants = () => `
+export const Variants = (): string => `
   <div style="display: flex; flex-direction: column; gap: 24px;">
     <div>
       <p style="margin: 0 0 8px; font-family: sans-serif; font-size: 14px; color: #666;">Default</p>
@@ -74,7 +74,7 @@ export const Variants = () => `
   </div>
 `;
 
-export const Sizes = () => `
+export const Sizes = (): string => `
   <div style="display: flex; flex-direction: column; gap: 24px;">
     <div>
       <p style="margin: 0 0 8px; font-family: sans-serif; font-size: 14px; color: #666;">Small</p>
@@ -109,7 +109,7 @@ export const Sizes = () => `
   </div>
 `;
 
-export const Composition = () => `
+export const Composition = (): string => `
   <div style="max-width: 600px; font-family: sans-serif;">
     <div style="border: 1px solid #e2e8f0; border-radius: 8px; overflow: hidden;">
       <ts-toolbar variant="bordered">

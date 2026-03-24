@@ -17,6 +17,7 @@ export class TsContainer {
   /** Whether to apply horizontal padding. */
   @Prop({ reflect: true }) padding: boolean = true;
 
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   render() {
     return (
       <Host

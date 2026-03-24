@@ -17,6 +17,7 @@ export class TsStack {
   /** Cross-axis alignment of items. */
   @Prop({ reflect: true }) align: 'start' | 'center' | 'end' | 'stretch' = 'stretch';
 
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   render() {
     const alignMap: Record<string, string> = {
       start: 'flex-start',

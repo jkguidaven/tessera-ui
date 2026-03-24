@@ -17,7 +17,7 @@ export default {
   },
 };
 
-const Template = (args: Record<string, unknown>) => {
+const Template = (args: Record<string, unknown>): string => {
   const attrs: string[] = [];
   if (args.open) attrs.push('open');
   if (args.size !== undefined && args.size !== null) attrs.push(`size="${args.size}"`);
@@ -54,7 +54,7 @@ export const Default = Object.assign(Template.bind({}) as typeof Template & { ar
   },
 });
 
-export const Sizes = () => `
+export const Sizes = (): string => `
   <div style="display: flex; gap: 16px; align-items: center; flex-wrap: wrap;">
     <ts-button size="sm" appearance="outline" variant="neutral" onclick="document.getElementById('modal-xs').open = true">Extra Small</ts-button>
     <ts-button size="sm" appearance="outline" variant="neutral" onclick="document.getElementById('modal-sm').open = true">Small</ts-button>
@@ -148,7 +148,7 @@ export const Sizes = () => `
   </ts-modal>
 `;
 
-export const States = () => `
+export const States = (): string => `
   <div style="display: flex; gap: 16px; align-items: center; flex-wrap: wrap;">
     <ts-button variant="danger" onclick="document.getElementById('modal-confirm-delete').open = true">
       <ts-icon slot="prefix" name="trash-2" size="sm"></ts-icon>
@@ -190,7 +190,7 @@ export const States = () => `
   </ts-modal>
 `;
 
-export const Composition = () => `
+export const Composition = (): string => `
   <ts-button variant="primary" onclick="document.getElementById('modal-compose').open = true">
     <ts-icon slot="prefix" name="plus" size="sm"></ts-icon>
     Add Team Member

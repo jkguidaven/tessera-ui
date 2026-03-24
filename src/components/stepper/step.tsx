@@ -52,6 +52,7 @@ export class TsStep {
     return this.hostEl.getAttribute('data-orientation') || 'horizontal';
   }
 
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   private renderIndicatorContent() {
     if (this.completed) {
       return (
@@ -74,6 +75,7 @@ export class TsStep {
     return <span>{this.index + 1}</span>;
   }
 
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   render() {
     return (
       <Host

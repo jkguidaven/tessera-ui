@@ -17,7 +17,7 @@ export default {
   },
 };
 
-const Template = (args: Record<string, unknown>) => {
+const Template = (args: Record<string, unknown>): string => {
   const attrs: string[] = [];
   if (args.checked) attrs.push('checked');
   if (args.disabled) attrs.push('disabled');
@@ -39,7 +39,7 @@ export const Default = Object.assign(Template.bind({}) as typeof Template & { ar
   },
 });
 
-export const Sizes = () => `
+export const Sizes = (): string => `
   <ts-stack gap="2">
     <ts-radio size="sm" label="Small radio" name="size-demo" value="sm"></ts-radio>
     <ts-radio size="md" label="Medium radio" name="size-demo" value="md"></ts-radio>
@@ -47,7 +47,7 @@ export const Sizes = () => `
   </ts-stack>
 `;
 
-export const States = () => `
+export const States = (): string => `
   <ts-stack gap="2">
     <ts-radio label="Unchecked" name="states-demo" value="unchecked"></ts-radio>
     <ts-radio checked label="Checked" name="states-checked" value="checked"></ts-radio>
@@ -56,7 +56,7 @@ export const States = () => `
   </ts-stack>
 `;
 
-export const ShippingOptions = () => `
+export const ShippingOptions = (): string => `
   <ts-stack gap="2" style="max-width: 400px;">
     <h3 style="margin: 0; font-family: sans-serif;">Select Shipping Method</h3>
     <ts-radio name="shipping" value="standard" checked label="Standard shipping (5-7 business days)"></ts-radio>
@@ -66,7 +66,7 @@ export const ShippingOptions = () => `
   </ts-stack>
 `;
 
-export const PaymentMethod = () => `
+export const PaymentMethod = (): string => `
   <ts-stack gap="2" style="max-width: 400px;">
     <h3 style="margin: 0; font-family: sans-serif;">Payment Method</h3>
     <ts-radio name="payment" value="credit" checked label="Credit card"></ts-radio>

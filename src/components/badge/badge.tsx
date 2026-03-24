@@ -27,6 +27,7 @@ export class TsBadge {
   /** Renders an outlined style instead of solid. */
   @Prop({ reflect: true }) outline = false;
 
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   render() {
     return (
       <Host

@@ -15,7 +15,7 @@ export class TsAccordion {
   @Prop() multiple = false;
 
   @Listen('tsToggle')
-  handleToggle(event: CustomEvent<{ open: boolean }>) {
+  handleToggle(event: CustomEvent<{ open: boolean }>): void {
     if (!this.multiple && event.detail.open) {
       const target = event.target as HTMLElement;
       const items = this.hostEl.querySelectorAll('ts-accordion-item');
@@ -28,6 +28,7 @@ export class TsAccordion {
     }
   }
 
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   render() {
     return (
       <Host class="ts-accordion">

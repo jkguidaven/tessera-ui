@@ -29,7 +29,7 @@ export default {
   },
 };
 
-const Template = (args: Record<string, unknown>) => {
+const Template = (args: Record<string, unknown>): string => {
   const attrs: string[] = [];
   if (args.variant !== undefined) attrs.push(`variant="${args.variant}"`);
   if (args.width !== undefined) attrs.push(`width="${args.width}"`);
@@ -48,7 +48,7 @@ export const Default = Object.assign(Template.bind({}) as typeof Template & { ar
   },
 });
 
-export const Variants = () => `
+export const Variants = (): string => `
   <div style="display: flex; flex-direction: column; gap: 24px; max-width: 400px;">
     <div>
       <p style="margin: 0 0 8px; font-family: sans-serif; font-size: 14px; color: #666;">Text (3 lines)</p>
@@ -65,7 +65,7 @@ export const Variants = () => `
   </div>
 `;
 
-export const States = () => `
+export const States = (): string => `
   <div style="display: flex; flex-direction: column; gap: 24px; max-width: 400px;">
     <div>
       <p style="margin: 0 0 8px; font-family: sans-serif; font-size: 14px; color: #666;">Pulse animation (default)</p>
@@ -82,7 +82,7 @@ export const States = () => `
   </div>
 `;
 
-export const LoadingCard = () => `
+export const LoadingCard = (): string => `
   <div style="max-width: 320px; border: 1px solid #e2e8f0; border-radius: 8px; padding: 16px; display: flex; flex-direction: column; gap: 12px;">
     <ts-skeleton variant="rectangular" width="100%" height="180px"></ts-skeleton>
     <ts-skeleton variant="text" width="60%" lines="1"></ts-skeleton>
@@ -94,7 +94,7 @@ export const LoadingCard = () => `
   </div>
 `;
 
-export const LoadingList = () => `
+export const LoadingList = (): string => `
   <div style="max-width: 400px; display: flex; flex-direction: column; gap: 16px;">
     <div style="display: flex; gap: 12px; align-items: center;">
       <ts-skeleton variant="circular" width="40px" height="40px"></ts-skeleton>
@@ -127,7 +127,7 @@ export const LoadingList = () => `
   </div>
 `;
 
-export const Composition = () => `
+export const Composition = (): string => `
   <div style="max-width: 400px; display: flex; flex-direction: column; gap: 16px;">
     <div style="display: flex; gap: 12px; align-items: center;">
       <ts-skeleton variant="circular" width="56px" height="56px"></ts-skeleton>

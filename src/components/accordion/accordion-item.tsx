@@ -34,31 +34,32 @@ export class TsAccordionItem {
   @State() internalOpen = false;
 
   @Watch('open')
-  onOpenChange(newVal: boolean) {
+  onOpenChange(newVal: boolean): void {
     this.internalOpen = newVal;
   }
 
-  connectedCallback() {
+  connectedCallback(): void {
     const id = accordionItemId++;
     this.headerId = `ts-accordion-header-${id}`;
     this.panelId = `ts-accordion-panel-${id}`;
     this.internalOpen = this.open;
   }
 
-  private handleClick = () => {
+  private handleClick = (): void => {
     if (this.disabled) return;
     this.open = !this.open;
     this.internalOpen = this.open;
     this.tsToggle.emit({ open: this.open });
   };
 
-  private handleKeyDown = (event: KeyboardEvent) => {
+  private handleKeyDown = (event: KeyboardEvent): void => {
     if (event.key === 'Enter' || event.key === ' ') {
       event.preventDefault();
       this.handleClick();
     }
   };
 
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   render() {
     return (
       <Host

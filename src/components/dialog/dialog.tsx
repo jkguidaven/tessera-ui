@@ -115,6 +115,7 @@ export class TsDialog {
     this.close();
   };
 
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   render() {
     if (!this.open) return null;
 

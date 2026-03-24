@@ -31,19 +31,19 @@ export class TsSwitchGroup {
   @Event({ eventName: 'tsChange' }) tsChange!: EventEmitter<{ value: string }>;
 
   @Watch('value')
-  onValueChange() {
+  onValueChange(): void {
     this.syncOptions();
   }
 
   @Listen('tsOptionSelect')
-  handleOptionSelect(event: CustomEvent<{ value: string }>) {
+  handleOptionSelect(event: CustomEvent<{ value: string }>): void {
     event.stopPropagation();
     if (this.disabled) return;
     this.selectOption(event.detail.value);
   }
 
   @Listen('keydown')
-  handleKeyDown(event: KeyboardEvent) {
+  handleKeyDown(event: KeyboardEvent): void {
     if (this.disabled) return;
 
     const options = this.getOptions();
@@ -80,7 +80,7 @@ export class TsSwitchGroup {
     }
   }
 
-  componentDidLoad() {
+  componentDidLoad(): void {
     this.syncOptions();
   }
 
@@ -88,7 +88,7 @@ export class TsSwitchGroup {
     return Array.from(this.hostEl.querySelectorAll('ts-switch-option')) as HTMLTsSwitchOptionElement[];
   }
 
-  private selectOption(value: string) {
+  private selectOption(value: string): void {
     if (value !== this.value) {
       this.value = value;
       this.tsChange.emit({ value });
@@ -96,10 +96,10 @@ export class TsSwitchGroup {
     this.syncOptions();
   }
 
-  private syncOptions() {
+  private syncOptions(): void {
     const options = this.getOptions();
     options.forEach(option => {
-      (option as any).active = option.value === this.value;
+      (option as unknown as { active: boolean }).active = option.value === this.value;
     });
   }
 
@@ -107,6 +107,7 @@ export class TsSwitchGroup {
     this.syncOptions();
   };
 
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   render() {
     return (
       <Host

@@ -25,7 +25,7 @@ export default {
   },
 };
 
-const Template = (args: Record<string, unknown>) => {
+const Template = (args: Record<string, unknown>): string => {
   const attrs: string[] = [];
   if (args.open) attrs.push('open');
   if (args.placement !== undefined) attrs.push(`placement="${args.placement}"`);
@@ -55,7 +55,7 @@ export const Default = Object.assign(Template.bind({}) as typeof Template & { ar
   },
 });
 
-export const Variants = () => `
+export const Variants = (): string => `
   <div style="display: flex; gap: 24px; justify-content: center; padding: 120px 0;">
     <ts-popover placement="top" trigger="click">
       <ts-button slot="trigger" appearance="outline">Top</ts-button>
@@ -76,7 +76,7 @@ export const Variants = () => `
   </div>
 `;
 
-export const States = () => `
+export const States = (): string => `
   <div style="display: flex; gap: 24px; justify-content: center; padding: 120px 0;">
     <ts-popover trigger="click">
       <ts-button slot="trigger">Click trigger</ts-button>
@@ -89,7 +89,7 @@ export const States = () => `
   </div>
 `;
 
-export const Composition = () => `
+export const Composition = (): string => `
   <div style="display: flex; justify-content: center; padding: 80px 0 200px;">
     <ts-popover placement="bottom-start" trigger="click">
       <ts-button slot="trigger" variant="primary">User Profile</ts-button>

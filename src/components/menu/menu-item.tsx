@@ -59,6 +59,7 @@ export class TsMenuItem {
     }
   };
 
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   render() {
     const isLink = !!this.href;
     const Tag = isLink ? 'a' : 'div';

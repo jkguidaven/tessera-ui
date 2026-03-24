@@ -25,6 +25,7 @@ export class TsTabPanel {
   /** Optional icon name displayed before the tab label. */
   @Prop() icon?: string;
 
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   render() {
     return (
       <Host>

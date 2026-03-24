@@ -19,7 +19,7 @@ export default {
   },
 };
 
-const Template = (args: Record<string, unknown>) => {
+const Template = (args: Record<string, unknown>): string => {
   const attrs: string[] = [];
   if (args.name) attrs.push(`name="${args.name}"`);
   if (args.size) attrs.push(`size="${args.size}"`);
@@ -36,7 +36,7 @@ export const Default = Object.assign(Template.bind({}) as typeof Template & { ar
   },
 });
 
-export const Sizes = () => `
+export const Sizes = (): string => `
   <div style="display: flex; gap: 16px; align-items: center;">
     <ts-icon name="heart" size="xs"></ts-icon>
     <ts-icon name="heart" size="sm"></ts-icon>
@@ -46,7 +46,7 @@ export const Sizes = () => `
   </div>
 `;
 
-export const CommonIcons = () => `
+export const CommonIcons = (): string => `
   <div style="display: flex; gap: 16px; align-items: center; flex-wrap: wrap;">
     <ts-icon name="search" size="md" label="Search"></ts-icon>
     <ts-icon name="home" size="md" label="Home"></ts-icon>
@@ -67,7 +67,7 @@ export const CommonIcons = () => `
   </div>
 `;
 
-export const NavigationIcons = () => `
+export const NavigationIcons = (): string => `
   <div style="display: flex; gap: 16px; align-items: center;">
     <ts-icon name="arrow-left" size="md"></ts-icon>
     <ts-icon name="arrow-right" size="md"></ts-icon>
@@ -81,7 +81,7 @@ export const NavigationIcons = () => `
   </div>
 `;
 
-export const StatusIcons = () => `
+export const StatusIcons = (): string => `
   <div style="display: flex; gap: 16px; align-items: center;">
     <ts-icon name="check-circle" size="md" color="var(--ts-color-success-600)"></ts-icon>
     <ts-icon name="alert-triangle" size="md" color="var(--ts-color-warning-600)"></ts-icon>
@@ -91,7 +91,7 @@ export const StatusIcons = () => `
   </div>
 `;
 
-export const WithButtons = () => `
+export const WithButtons = (): string => `
   <div style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
     <ts-button appearance="solid" variant="primary">
       <ts-icon slot="prefix" name="save" size="sm"></ts-icon>
@@ -111,7 +111,7 @@ export const WithButtons = () => `
   </div>
 `;
 
-export const CustomColor = () => `
+export const CustomColor = (): string => `
   <div style="display: flex; gap: 16px; align-items: center;">
     <ts-icon name="heart" size="lg" color="var(--ts-color-danger-500)"></ts-icon>
     <ts-icon name="star" size="lg" color="var(--ts-color-warning-500)"></ts-icon>

@@ -15,6 +15,7 @@ export class TsSpacer {
   /** The axis along which the spacer adds space. */
   @Prop({ reflect: true }) axis: 'vertical' | 'horizontal' = 'vertical';
 
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   render() {
     const style =
       this.axis === 'horizontal'

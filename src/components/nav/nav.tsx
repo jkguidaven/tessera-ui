@@ -18,6 +18,7 @@ export class TsNav {
   /** Whether the sidebar nav is collapsed (icons only). */
   @Prop({ reflect: true }) collapsed = false;
 
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   render() {
     return (
       <Host

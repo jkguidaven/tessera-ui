@@ -28,7 +28,7 @@ export default {
   },
 };
 
-const Template = (args: Record<string, unknown>) => {
+const Template = (args: Record<string, unknown>): string => {
   const attrs: string[] = [];
   if (args.variant !== undefined) attrs.push(`variant="${args.variant}"`);
   if (args.dismissible) attrs.push('dismissible');
@@ -45,7 +45,7 @@ export const Default = Object.assign(Template.bind({}) as typeof Template & { ar
   },
 });
 
-export const Variants = () => `
+export const Variants = (): string => `
   <div style="display: flex; flex-direction: column; gap: 12px;">
     <ts-banner variant="info">A new version of the application is available.</ts-banner>
     <ts-banner variant="success">Your payment was processed successfully.</ts-banner>
@@ -56,7 +56,7 @@ export const Variants = () => `
   </div>
 `;
 
-export const States = () => `
+export const States = (): string => `
   <div style="display: flex; flex-direction: column; gap: 12px;">
     <div>
       <p style="margin: 0 0 8px; font-family: sans-serif; font-size: 14px; color: #666;">Dismissible</p>
@@ -76,7 +76,7 @@ export const States = () => `
   </div>
 `;
 
-export const Composition = () => `
+export const Composition = (): string => `
   <div style="display: flex; flex-direction: column; gap: 12px;">
     <ts-banner variant="warning" dismissible>
       Your trial expires in 3 days. Upgrade now to keep access to all features.

@@ -116,6 +116,7 @@ export class TsTabs {
     }
   };
 
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   render() {
     const tabs = this.getTabData();
 

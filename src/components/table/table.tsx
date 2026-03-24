@@ -32,6 +32,7 @@ export class TsTable {
   /** Makes the table header stick to the top on scroll. */
   @Prop({ reflect: true }) stickyHeader = false;
 
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   render() {
     return (
       <Host

@@ -18,7 +18,7 @@ export default {
 
 const contentStyle = 'padding: 24px; background: #f1f5f9; border-radius: 8px; font-family: sans-serif;';
 
-export const Default = () => `
+export const Default = (): string => `
   <ts-container>
     <div style="${contentStyle}">
       <h2 style="margin: 0 0 8px;">Centered Container</h2>
@@ -27,7 +27,7 @@ export const Default = () => `
   </ts-container>
 `;
 
-export const Sizes = () => `
+export const Sizes = (): string => `
   <div style="display: flex; flex-direction: column; gap: 24px; font-family: sans-serif;">
     <div>
       <p style="margin: 0 0 8px; font-size: 14px; color: #666;">sm (640px)</p>
@@ -62,7 +62,7 @@ export const Sizes = () => `
   </div>
 `;
 
-export const NoPadding = () => `
+export const NoPadding = (): string => `
   <div style="display: flex; flex-direction: column; gap: 24px; font-family: sans-serif;">
     <div>
       <p style="margin: 0 0 8px; font-size: 14px; color: #666;">With padding (default)</p>
@@ -79,7 +79,7 @@ export const NoPadding = () => `
   </div>
 `;
 
-export const Composition = () => `
+export const Composition = (): string => `
   <ts-container size="lg">
     <div style="display: flex; flex-direction: column; gap: 24px; font-family: sans-serif;">
       <h1 style="margin: 0;">Page Title</h1>
@@ -106,7 +106,7 @@ export const Composition = () => `
   </ts-container>
 `;
 
-export const DashboardLayout = () => `
+export const DashboardLayout = (): string => `
   <ts-container size="xl">
     <div style="display: flex; gap: 24px; font-family: sans-serif;">
       <nav style="width: 200px; flex-shrink: 0; padding: 16px; background: #f8fafc; border-radius: 8px;">

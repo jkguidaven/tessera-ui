@@ -14,7 +14,7 @@ export default {
   },
 };
 
-const Template = (args: Record<string, unknown>) => {
+const Template = (args: Record<string, unknown>): string => {
   const attrs: string[] = [];
   if (args.variant !== undefined && args.variant !== null) attrs.push(`variant="${args.variant}"`);
   if (args.closable) attrs.push('closable');
@@ -29,7 +29,7 @@ export const Default = Object.assign(Template.bind({}) as typeof Template & { ar
   },
 });
 
-export const Variants = () => `
+export const Variants = (): string => `
   <ts-stack gap="2" style="max-width: 600px;">
     <ts-alert variant="info">A new software update is available. See what's new in version 3.2.</ts-alert>
     <ts-alert variant="success">Your payment of $49.99 has been processed successfully.</ts-alert>
@@ -41,7 +41,7 @@ export const Variants = () => `
   </ts-stack>
 `;
 
-export const States = () => `
+export const States = (): string => `
   <ts-stack gap="2" style="max-width: 600px;">
     <ts-alert variant="info">Standard non-dismissible alert.</ts-alert>
     <ts-alert variant="success" closable>Dismissible alert — click the close button to hide.</ts-alert>
@@ -50,7 +50,7 @@ export const States = () => `
   </ts-stack>
 `;
 
-export const WithIcons = () => `
+export const WithIcons = (): string => `
   <ts-stack gap="2" style="max-width: 600px;">
     <ts-alert variant="info">
       <ts-icon slot="icon" name="info" size="sm"></ts-icon>
@@ -71,7 +71,7 @@ export const WithIcons = () => `
   </ts-stack>
 `;
 
-export const WithActions = () => `
+export const WithActions = (): string => `
   <ts-stack gap="2" style="max-width: 600px;">
     <ts-alert variant="info" closable>
       A new version (v3.2.0) is available.
@@ -102,7 +102,7 @@ export const WithActions = () => `
   </ts-stack>
 `;
 
-export const Composition = () => `
+export const Composition = (): string => `
   <ts-stack gap="4" style="max-width: 500px;">
     <ts-card bordered padding="lg">
       <span slot="header"><h3 style="margin: 0;">Account Settings</h3></span>

@@ -33,7 +33,7 @@ export default {
   },
 };
 
-const Template = (args: Record<string, unknown>) => {
+const Template = (args: Record<string, unknown>): string => {
   const attrs: string[] = [];
   if (args.variant !== undefined) attrs.push(`variant="${args.variant}"`);
   if (args.duration !== undefined) attrs.push(`duration="${args.duration}"`);
@@ -54,7 +54,7 @@ export const Default = Object.assign(Template.bind({}) as typeof Template & { ar
   },
 });
 
-export const Variants = () => `
+export const Variants = (): string => `
   <div style="display: flex; flex-direction: column; gap: 12px; position: relative; min-height: 300px;">
     <ts-toast variant="success" open duration="0" style="position: relative;">Changes saved successfully</ts-toast>
     <ts-toast variant="danger" open duration="0" style="position: relative;">Error: Connection failed</ts-toast>
@@ -64,7 +64,7 @@ export const Variants = () => `
   </div>
 `;
 
-export const States = () => `
+export const States = (): string => `
   <div style="display: flex; flex-direction: column; gap: 12px; position: relative;">
     <div>
       <p style="margin: 0 0 8px; font-family: sans-serif; font-size: 14px; color: #666;">Dismissible</p>
@@ -77,7 +77,7 @@ export const States = () => `
   </div>
 `;
 
-export const Composition = () => `
+export const Composition = (): string => `
   <div style="display: flex; flex-direction: column; gap: 12px; position: relative;">
     <ts-toast variant="success" open duration="0" dismissible style="position: relative;">
       Your profile has been updated

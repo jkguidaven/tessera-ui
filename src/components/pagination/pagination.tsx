@@ -80,12 +80,13 @@ export class TsPagination {
     return range;
   }
 
-  private handlePageClick = (page: number) => {
+  private handlePageClick = (page: number): void => {
     if (page < 1 || page > this.totalPages || page === this.currentPage) return;
     this.currentPage = page;
     this.tsChange.emit({ page });
   };
 
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   render() {
     const pages = this.getPageRange();
     const isFirstPage = this.currentPage <= 1;

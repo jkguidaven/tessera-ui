@@ -35,6 +35,7 @@ export class TsSwitchOption {
     this.tsOptionSelect.emit({ value: this.value || '' });
   };
 
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   render() {
     return (
       <Host

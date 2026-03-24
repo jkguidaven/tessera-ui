@@ -17,7 +17,7 @@ export class TsBreadcrumb {
   /** The separator character between breadcrumb items. */
   @Prop() separator = '/';
 
-  componentDidRender() {
+  componentDidRender(): void {
     const items = this.hostEl.querySelectorAll('ts-breadcrumb-item');
     items.forEach((item, index) => {
       if (index < items.length - 1) {
@@ -28,6 +28,7 @@ export class TsBreadcrumb {
     });
   }
 
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   render() {
     return (
       <Host class="ts-breadcrumb">

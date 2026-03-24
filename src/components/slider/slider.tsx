@@ -63,7 +63,7 @@ export class TsSlider {
     return Math.min(this.max, Math.max(this.min, stepped));
   }
 
-  private updateValueFromPosition(clientX: number) {
+  private updateValueFromPosition(clientX: number): void {
     if (!this.trackEl) return;
     const rect = this.trackEl.getBoundingClientRect();
     const ratio = (clientX - rect.left) / rect.width;
@@ -71,19 +71,19 @@ export class TsSlider {
     this.value = this.clampAndStep(rawValue);
   }
 
-  private handleMouseDown = (event: MouseEvent) => {
+  private handleMouseDown = (event: MouseEvent): void => {
     if (this.disabled) return;
     event.preventDefault();
     this.dragging = true;
     this.updateValueFromPosition(event.clientX);
     this.tsInput.emit({ value: this.value });
 
-    const handleMouseMove = (e: MouseEvent) => {
+    const handleMouseMove = (e: MouseEvent): void => {
       this.updateValueFromPosition(e.clientX);
       this.tsInput.emit({ value: this.value });
     };
 
-    const handleMouseUp = () => {
+    const handleMouseUp = (): void => {
       this.dragging = false;
       this.tsChange.emit({ value: this.value });
       document.removeEventListener('mousemove', handleMouseMove);
@@ -94,7 +94,7 @@ export class TsSlider {
     document.addEventListener('mouseup', handleMouseUp);
   };
 
-  private handleKeyDown = (event: KeyboardEvent) => {
+  private handleKeyDown = (event: KeyboardEvent): void => {
     if (this.disabled) return;
 
     let newValue = this.value;
@@ -138,6 +138,7 @@ export class TsSlider {
     }
   };
 
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   render() {
     const percent = this.percentage;
 

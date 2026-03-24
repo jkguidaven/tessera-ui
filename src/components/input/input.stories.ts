@@ -27,7 +27,7 @@ export default {
   },
 };
 
-const Template = (args: Record<string, unknown>) => {
+const Template = (args: Record<string, unknown>): string => {
   const attrs: string[] = [];
   if (args.value !== undefined && args.value !== null && args.value !== '') attrs.push(`value="${args.value}"`);
   if (args.type !== undefined && args.type !== null) attrs.push(`type="${args.type}"`);
@@ -58,7 +58,7 @@ export const Default = Object.assign(Template.bind({}) as typeof Template & { ar
   },
 });
 
-export const Sizes = () => `
+export const Sizes = (): string => `
   <ts-stack gap="3" style="max-width: 400px;">
     <ts-input size="xs" label="Extra Small" placeholder="xs input"></ts-input>
     <ts-input size="sm" label="Small" placeholder="sm input"></ts-input>
@@ -68,7 +68,7 @@ export const Sizes = () => `
   </ts-stack>
 `;
 
-export const Types = () => `
+export const Types = (): string => `
   <ts-stack gap="3" style="max-width: 400px;">
     <ts-input type="text" label="Username" placeholder="johndoe"></ts-input>
     <ts-input type="email" label="Email Address" placeholder="john@example.com"></ts-input>
@@ -80,7 +80,7 @@ export const Types = () => `
   </ts-stack>
 `;
 
-export const States = () => `
+export const States = (): string => `
   <ts-stack gap="3" style="max-width: 400px;">
     <ts-input label="Default" placeholder="Editable input"></ts-input>
     <ts-input label="With Value" value="jane@example.com" placeholder="Email"></ts-input>
@@ -92,7 +92,7 @@ export const States = () => `
   </ts-stack>
 `;
 
-export const WithIcons = () => `
+export const WithIcons = (): string => `
   <ts-stack gap="3" style="max-width: 400px;">
     <ts-input label="Search" placeholder="Search files...">
       <ts-icon slot="prefix" name="search" size="sm"></ts-icon>
@@ -114,7 +114,7 @@ export const WithIcons = () => `
   </ts-stack>
 `;
 
-export const Composition = () => `
+export const Composition = (): string => `
   <ts-stack gap="4" style="max-width: 400px;">
     <ts-card bordered padding="lg">
       <span slot="header"><h3 style="margin: 0;">Sign In</h3></span>
