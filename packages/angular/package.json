@@ -1,6 +1,6 @@
 {
   "name": "@tessera-ui/angular",
-  "version": "0.1.0",
+  "version": "0.3.0",
   "description": "Angular wrappers for Tessera UI web components",
   "main": "dist/index.cjs.js",
   "module": "dist/index.js",
@@ -11,11 +11,16 @@
   },
   "peerDependencies": {
     "@angular/core": ">=17.0.0",
-    "@tessera-ui/core": "workspace:*"
+    "@tessera-ui/core": ">=0.3.0"
   },
   "devDependencies": {
     "typescript": "^5.6.0",
     "@angular/core": "^18.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jkguidaven/tessera-ui",
+    "directory": "packages/angular"
   },
   "license": "MIT"
 }
