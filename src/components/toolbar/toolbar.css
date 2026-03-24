@@ -34,7 +34,7 @@
 
 :host([variant="elevated"]) .toolbar__base {
   box-shadow: var(--ts-shadow-sm);
-  border-radius: var(--ts-shape-interactive);
+  border-radius: var(--ts-radius-md);
 }
 
 /* ---- Sizes ---- */

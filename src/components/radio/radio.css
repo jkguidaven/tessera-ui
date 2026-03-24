@@ -36,7 +36,7 @@
   justify-content: center;
   width: var(--ts-radio-size);
   height: var(--ts-radio-size);
-  border: 2px solid var(--ts-radio-border-color);
+  border: 1.5px solid var(--ts-radio-border-color);
   border-radius: 50%;
   background-color: var(--ts-color-bg-surface);
   transition:

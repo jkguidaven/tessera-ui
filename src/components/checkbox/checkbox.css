@@ -14,7 +14,7 @@
 
   --ts-checkbox-size: 1.25rem;
   --ts-checkbox-color: var(--ts-color-interactive-primary);
-  --ts-checkbox-radius: var(--ts-shape-interactive);
+  --ts-checkbox-radius: 4px;
   --ts-checkbox-border-color: var(--ts-color-border-default);
 }
 
@@ -38,7 +38,7 @@
   justify-content: center;
   width: var(--ts-checkbox-size);
   height: var(--ts-checkbox-size);
-  border: 2px solid var(--ts-checkbox-border-color);
+  border: 1.5px solid var(--ts-checkbox-border-color);
   border-radius: var(--ts-checkbox-radius);
   background-color: var(--ts-color-bg-surface);
   transition:
@@ -77,6 +77,12 @@
 .checkbox__icon {
   width: 100%;
   height: 100%;
+  transform: scale(1);
+  transition: transform var(--ts-transition-fast);
+}
+
+:host([checked]) .checkbox__icon {
+  animation: none;
 }
 
 /* ---- Sizes ---- */

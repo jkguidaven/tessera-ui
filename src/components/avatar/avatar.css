@@ -27,7 +27,7 @@
 
 /* ---- Variant: square ---- */
 :host([variant="square"]) {
-  --ts-avatar-radius: var(--ts-shape-interactive);
+  --ts-avatar-radius: var(--ts-radius-full);
 }
 
 /* ---- Base container ---- */

@@ -13,7 +13,7 @@
 
   --ts-tabs-border-color: var(--ts-color-border-default);
   --ts-tabs-active-color: var(--ts-color-interactive-primary);
-  --ts-tabs-radius: var(--ts-shape-interactive);
+  --ts-tabs-radius: var(--ts-radius-md);
 }
 
 /* ---- Tab list ---- */

@@ -12,8 +12,8 @@
   display: inline-block;
   font-family: var(--ts-font-family-base);
 
-  --ts-toggle-track-bg: var(--ts-color-border-default);
-  --ts-toggle-track-bg-checked: var(--ts-color-primary-500);
+  --ts-toggle-track-bg: var(--ts-color-neutral-200);
+  --ts-toggle-track-bg-checked: var(--ts-color-primary-600);
   --ts-toggle-thumb-bg: var(--ts-color-bg-surface);
   --ts-toggle-focus-ring: var(--ts-focus-ring);
 }
@@ -35,30 +35,42 @@
   cursor: not-allowed;
 }
 
-/* ---- Track ---- */
+/* ---- Track (M3 — outlined when unchecked) ---- */
 .toggle__track {
   position: relative;
   background-color: var(--ts-toggle-track-bg);
   border-radius: var(--ts-radius-full);
+  border: 2px solid var(--ts-color-border-default);
+  box-shadow: none;
   transition:
     background-color var(--ts-transition-fast),
+    border-color var(--ts-transition-fast),
     box-shadow var(--ts-transition-fast);
   flex-shrink: 0;
 }
 
 :host(.ts-toggle--checked) .toggle__track {
   background-color: var(--ts-toggle-track-bg-checked);
+  border-color: var(--ts-toggle-track-bg-checked);
+  box-shadow: none;
 }
 
 /* ---- Thumb ---- */
 .toggle__thumb {
   position: absolute;
   top: 50%;
-  transform: translateY(-50%);
+  transform: translateY(-50%) scale(1);
   background-color: var(--ts-toggle-thumb-bg);
   border-radius: var(--ts-radius-full);
-  box-shadow: var(--ts-shadow-sm);
-  transition: inset-inline-start var(--ts-transition-fast);
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  transition:
+    inset-inline-start var(--ts-transition-fast),
+    transform var(--ts-transition-fast),
+    box-shadow var(--ts-transition-fast);
+}
+
+:host(.ts-toggle--checked) .toggle__thumb {
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.06);
 }
 
 /* ---- Sizes ---- */

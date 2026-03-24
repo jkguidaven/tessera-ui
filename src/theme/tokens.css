@@ -18,90 +18,90 @@
      Raw values. Never used directly by components.
      ===================================================================== */
 
-  /* ----- Reference: Primary Palette (Orange) ----- */
-  --ts-ref-primary-50:  #fef3eb;
-  --ts-ref-primary-100: #fce0c8;
-  --ts-ref-primary-200: #f9c49e;
-  --ts-ref-primary-300: #f5a674;
-  --ts-ref-primary-400: #f18c4e;
-  --ts-ref-primary-500: #ee7a11;
-  --ts-ref-primary-600: #e45c0e;
-  --ts-ref-primary-700: #c44e0a;
-  --ts-ref-primary-800: #a34108;
-  --ts-ref-primary-900: #7a3106;
+  /* ----- Reference: Primary Palette (Vibrant Blue) ----- */
+  --ts-ref-primary-50:  #e8f0fe;
+  --ts-ref-primary-100: #d2e3fc;
+  --ts-ref-primary-200: #aecbfa;
+  --ts-ref-primary-300: #8ab4f8;
+  --ts-ref-primary-400: #669df6;
+  --ts-ref-primary-500: #4285f4;
+  --ts-ref-primary-600: #1a73e8;
+  --ts-ref-primary-700: #1967d2;
+  --ts-ref-primary-800: #185abc;
+  --ts-ref-primary-900: #174ea6;
 
-  /* ----- Reference: Secondary Palette (Deep Teal) ----- */
-  --ts-ref-secondary-50:  #e8f6f5;
-  --ts-ref-secondary-100: #c0e8e4;
-  --ts-ref-secondary-200: #96d9d3;
-  --ts-ref-secondary-300: #6bcac1;
-  --ts-ref-secondary-400: #49bfb4;
-  --ts-ref-secondary-500: #2ab3a6;
-  --ts-ref-secondary-600: #22a396;
-  --ts-ref-secondary-700: #1a9083;
-  --ts-ref-secondary-800: #137d71;
-  --ts-ref-secondary-900: #0b5d52;
+  /* ----- Reference: Secondary Palette (Neutral Teal) ----- */
+  --ts-ref-secondary-50:  #f0fdfa;
+  --ts-ref-secondary-100: #ccfbf1;
+  --ts-ref-secondary-200: #99f6e4;
+  --ts-ref-secondary-300: #5eead4;
+  --ts-ref-secondary-400: #2dd4bf;
+  --ts-ref-secondary-500: #14b8a6;
+  --ts-ref-secondary-600: #0d9488;
+  --ts-ref-secondary-700: #0f766e;
+  --ts-ref-secondary-800: #115e59;
+  --ts-ref-secondary-900: #134e4a;
 
-  /* ----- Reference: Neutral Palette (Warm undertone) ----- */
+  /* ----- Reference: Neutral Palette (Cool with Blue Tint — M3-aligned) ----- */
   --ts-ref-neutral-0:   #ffffff;
-  --ts-ref-neutral-50:  #f7f6f4;
-  --ts-ref-neutral-100: #f0eeeb;
-  --ts-ref-neutral-200: #e2dfdb;
-  --ts-ref-neutral-300: #d2cec9;
-  --ts-ref-neutral-400: #b5b0a9;
-  --ts-ref-neutral-500: #9a9590;
-  --ts-ref-neutral-600: #706b65;
-  --ts-ref-neutral-700: #55514b;
-  --ts-ref-neutral-800: #38352f;
-  --ts-ref-neutral-900: #1f1d1a;
+  --ts-ref-neutral-50:  #f8f9fc;
+  --ts-ref-neutral-100: #f0f1f5;
+  --ts-ref-neutral-200: #e1e3e8;
+  --ts-ref-neutral-300: #c4c7cf;
+  --ts-ref-neutral-400: #9196a1;
+  --ts-ref-neutral-500: #737884;
+  --ts-ref-neutral-600: #5a5f6a;
+  --ts-ref-neutral-700: #434751;
+  --ts-ref-neutral-800: #2c3038;
+  --ts-ref-neutral-900: #1a1c23;
 
   /* ----- Reference: Success Palette ----- */
-  --ts-ref-success-50:  #edfaf2;
-  --ts-ref-success-100: #c9f0d8;
-  --ts-ref-success-200: #a3e5bd;
-  --ts-ref-success-300: #7ddaa2;
-  --ts-ref-success-400: #60d293;
-  --ts-ref-success-500: #48c78e;
-  --ts-ref-success-600: #3bae7a;
-  --ts-ref-success-700: #2e9465;
-  --ts-ref-success-800: #237a51;
-  --ts-ref-success-900: #155f3c;
+  --ts-ref-success-50:  #f0fdf4;
+  --ts-ref-success-100: #dcfce7;
+  --ts-ref-success-200: #bbf7d0;
+  --ts-ref-success-300: #86efac;
+  --ts-ref-success-400: #4ade80;
+  --ts-ref-success-500: #22c55e;
+  --ts-ref-success-600: #16a34a;
+  --ts-ref-success-700: #15803d;
+  --ts-ref-success-800: #166534;
+  --ts-ref-success-900: #14532d;
 
   /* ----- Reference: Warning Palette ----- */
-  --ts-ref-warning-50:  #fff8e6;
-  --ts-ref-warning-100: #ffecb3;
-  --ts-ref-warning-200: #ffe080;
-  --ts-ref-warning-300: #ffd44d;
-  --ts-ref-warning-400: #ffc826;
-  --ts-ref-warning-500: #ffb70f;
-  --ts-ref-warning-600: #e09d00;
-  --ts-ref-warning-700: #c28600;
-  --ts-ref-warning-800: #a37000;
-  --ts-ref-warning-900: #7a5400;
+  --ts-ref-warning-50:  #fffbeb;
+  --ts-ref-warning-100: #fef3c7;
+  --ts-ref-warning-200: #fde68a;
+  --ts-ref-warning-300: #fcd34d;
+  --ts-ref-warning-400: #fbbf24;
+  --ts-ref-warning-500: #f59e0b;
+  --ts-ref-warning-600: #d97706;
+  --ts-ref-warning-700: #b45309;
+  --ts-ref-warning-800: #92400e;
+  --ts-ref-warning-900: #78350f;
 
   /* ----- Reference: Danger Palette ----- */
-  --ts-ref-danger-50:  #fff0f3;
-  --ts-ref-danger-100: #ffd6de;
-  --ts-ref-danger-200: #ffbcc9;
-  --ts-ref-danger-300: #ffa2b4;
-  --ts-ref-danger-400: #ff8ca3;
-  --ts-ref-danger-500: #ff6685;
-  --ts-ref-danger-600: #f14668;
-  --ts-ref-danger-700: #d4304f;
-  --ts-ref-danger-800: #b71d3a;
-  --ts-ref-danger-900: #8c0e27;
+  --ts-ref-danger-50:  #fef2f2;
+  --ts-ref-danger-100: #fee2e2;
+  --ts-ref-danger-200: #fecaca;
+  --ts-ref-danger-300: #fca5a5;
+  --ts-ref-danger-400: #f87171;
+  --ts-ref-danger-500: #ef4444;
+  --ts-ref-danger-600: #dc2626;
+  --ts-ref-danger-700: #b91c1c;
+  --ts-ref-danger-800: #991b1b;
+  --ts-ref-danger-900: #7f1d1d;
 
   /* ----- Reference: Info Palette ----- */
-  --ts-ref-info-50:  #e8f7ff;
-  --ts-ref-info-100: #bfe8ff;
-  --ts-ref-info-200: #96d9ff;
-  --ts-ref-info-300: #6dcaff;
-  --ts-ref-info-400: #4dc0ff;
-  --ts-ref-info-500: #66d1ff;
-  --ts-ref-info-600: #3db8e8;
-  --ts-ref-info-700: #2a9cc8;
-  --ts-ref-info-800: #1a80a8;
-  --ts-ref-info-900: #0b5f80;
+  --ts-ref-info-50:  #eff6ff;
+  --ts-ref-info-100: #dbeafe;
+  --ts-ref-info-200: #bfdbfe;
+  --ts-ref-info-300: #93c5fd;
+  --ts-ref-info-400: #60a5fa;
+  --ts-ref-info-500: #3b82f6;
+  --ts-ref-info-600: #2563eb;
+  --ts-ref-info-700: #1d4ed8;
+  --ts-ref-info-800: #1e40af;
+  --ts-ref-info-900: #1e3a5f;
 
   /* ----- Reference: Black & White ----- */
   --ts-ref-black: #000000;
@@ -223,10 +223,10 @@
   --ts-color-info-container:       var(--ts-ref-info-50);
   --ts-color-on-info-container:    var(--ts-ref-info-900);
 
-  /* ----- Color: Background Roles ----- */
-  --ts-color-bg-surface:  var(--ts-ref-neutral-0);
-  --ts-color-bg-elevated: var(--ts-ref-neutral-0);
-  --ts-color-bg-subtle:   var(--ts-ref-neutral-50);
+  /* ----- Color: Background Roles (M3 tonal surfaces) ----- */
+  --ts-color-bg-surface:  #fafbff;
+  --ts-color-bg-elevated: #ffffff;
+  --ts-color-bg-subtle:   #f0f3ff;
   --ts-color-bg-overlay:  rgba(0, 0, 0, 0.45);
   --ts-color-bg-disabled: var(--ts-ref-neutral-100);
   --ts-color-bg-hover:    var(--ts-ref-neutral-50);
@@ -237,9 +237,9 @@
   --ts-color-bg-elevated-3: var(--ts-ref-neutral-0);
 
   /* ----- Color: Border Roles ----- */
-  --ts-color-border-default: var(--ts-ref-neutral-300);
-  --ts-color-border-subtle:  var(--ts-ref-neutral-200);
-  --ts-color-border-strong:  var(--ts-ref-neutral-400);
+  --ts-color-border-default: var(--ts-ref-neutral-200);
+  --ts-color-border-subtle:  var(--ts-ref-neutral-100);
+  --ts-color-border-strong:  var(--ts-ref-neutral-300);
 
   /* ----- Color: Interactive ----- */
   --ts-color-interactive-primary:        var(--ts-ref-primary-600);
@@ -250,7 +250,7 @@
   --ts-color-interactive-secondary-subtle: var(--ts-ref-secondary-50);
   --ts-color-interactive-danger:         var(--ts-ref-danger-600);
   --ts-color-interactive-danger-hover:   var(--ts-ref-danger-500);
-  --ts-color-interactive-danger-subtle:  rgba(255, 102, 133, 0.06);
+  --ts-color-interactive-danger-subtle:  rgba(220, 38, 38, 0.06);
 
   /* ----- Color: State Layers (semi-transparent overlays for interaction states) ----- */
   --ts-state-hover-opacity:   0.08;
@@ -265,132 +265,155 @@
   --ts-color-border-selected:   var(--ts-ref-primary-500);
 
   /* ----- Color: Feedback Backgrounds ----- */
-  --ts-color-info-bg:        rgba(102, 209, 255, 0.08);
-  --ts-color-info-border:    rgba(102, 209, 255, 0.25);
-  --ts-color-success-bg:     rgba(72, 199, 142, 0.08);
-  --ts-color-success-border: rgba(72, 199, 142, 0.25);
-  --ts-color-warning-bg:     rgba(255, 183, 15, 0.08);
-  --ts-color-warning-border: rgba(255, 183, 15, 0.25);
-  --ts-color-danger-bg:      rgba(255, 102, 133, 0.08);
-  --ts-color-danger-border:  rgba(255, 102, 133, 0.25);
+  --ts-color-info-bg:        rgba(59, 130, 246, 0.06);
+  --ts-color-info-border:    rgba(59, 130, 246, 0.15);
+  --ts-color-success-bg:     rgba(34, 197, 94, 0.06);
+  --ts-color-success-border: rgba(34, 197, 94, 0.15);
+  --ts-color-warning-bg:     rgba(245, 158, 11, 0.06);
+  --ts-color-warning-border: rgba(245, 158, 11, 0.15);
+  --ts-color-danger-bg:      rgba(220, 38, 38, 0.06);
+  --ts-color-danger-border:  rgba(220, 38, 38, 0.15);
 
   /* ----- Color: Loading/Skeleton ----- */
   --ts-color-skeleton-base:  var(--ts-ref-neutral-200);
   --ts-color-skeleton-pulse: var(--ts-ref-neutral-100);
 
   /* ----- Color: Focus ----- */
-  --ts-color-focus-ring:        rgba(228, 92, 14, 0.4);
-  --ts-color-focus-ring-danger: rgba(255, 102, 133, 0.3);
+  --ts-color-focus-ring:        rgba(26, 115, 232, 0.4);
+  --ts-color-focus-ring-danger: rgba(220, 38, 38, 0.3);
 
-  /* ----- Typography ----- */
-  --ts-font-family-base:    'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  /* ----- Typography (M3-aligned scale) ----- */
+  --ts-font-family-base:    'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --ts-font-family-mono:    'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
   --ts-font-weight-regular: 400;
   --ts-font-weight-medium:  500;
   --ts-font-weight-semi:    600;
   --ts-font-weight-bold:    700;
 
-  --ts-font-size-xs:  0.75rem;   /* 12px */
-  --ts-font-size-sm:  0.875rem;  /* 14px */
-  --ts-font-size-md:  1rem;      /* 16px */
-  --ts-font-size-lg:  1.125rem;  /* 18px */
-  --ts-font-size-xl:  1.25rem;   /* 20px */
-  --ts-font-size-2xl: 1.5rem;    /* 24px */
-  --ts-font-size-3xl: 1.875rem;  /* 30px */
-  --ts-font-size-4xl: 2.25rem;   /* 36px */
-  --ts-font-size-5xl: 3rem;      /* 48px */
-  --ts-font-size-6xl: 3.75rem;   /* 60px */
+  --ts-font-size-2xs: 0.6875rem; /* 11px — M3 label-small */
+  --ts-font-size-xs:  0.75rem;   /* 12px — M3 body-small, label-medium */
+  --ts-font-size-sm:  0.875rem;  /* 14px — M3 body-medium, label-large, title-small */
+  --ts-font-size-md:  1rem;      /* 16px — M3 body-large, title-medium */
+  --ts-font-size-lg:  1.375rem;  /* 22px — M3 title-large */
+  --ts-font-size-xl:  1.5rem;    /* 24px — M3 headline-small */
+  --ts-font-size-2xl: 1.75rem;   /* 28px — M3 headline-medium */
+  --ts-font-size-3xl: 2rem;      /* 32px — M3 headline-large */
+  --ts-font-size-4xl: 2.8125rem; /* 45px — M3 display-small */
+  --ts-font-size-5xl: 3.5625rem; /* 57px — M3 display-medium */
+  --ts-font-size-6xl: 5.5rem;    /* 88px — M3 display-large */
 
-  --ts-line-height-tight:  1.25;
-  --ts-line-height-normal: 1.5;
-  --ts-line-height-loose:  1.75;
+  --ts-line-height-tight:  1.25;  /* headings, labels */
+  --ts-line-height-normal: 1.43;  /* body text (M3: 20/14, 24/16) */
+  --ts-line-height-loose:  1.5;   /* display text (M3: 64/57, 96/88) */
 
-  /* ----- Letter Spacing ----- */
-  --ts-letter-spacing-tighter: -0.04em;
-  --ts-letter-spacing-tight:   -0.02em;
+  /* ----- Letter Spacing (M3-aligned: 0 for most, slight positive for small text) ----- */
+  --ts-letter-spacing-tighter: -0.02em;
+  --ts-letter-spacing-tight:   -0.01em;
   --ts-letter-spacing-normal:  0em;
-  --ts-letter-spacing-wide:    0.02em;
-  --ts-letter-spacing-wider:   0.05em;
-  --ts-letter-spacing-widest:  0.1em;
+  --ts-letter-spacing-wide:    0.006em;  /* ~0.1px at 16px — M3 body-small/label */
+  --ts-letter-spacing-wider:   0.009em;  /* ~0.1px at 11px */
+  --ts-letter-spacing-widest:  0.05em;
 
-  /* ----- Composite Type Roles ----- */
-  --ts-type-display-lg-size:    clamp(2.25rem, 5vw + 1rem, 3.75rem);    /* 36px → 60px */
-  --ts-type-display-lg-weight:  var(--ts-font-weight-bold);
-  --ts-type-display-lg-line:    1.1;
-  --ts-type-display-lg-spacing: var(--ts-letter-spacing-tighter);
+  /* ----- Composite Type Roles (M3-aligned) ----- */
 
-  --ts-type-display-md-size:    clamp(2rem, 4vw + 1rem, 3rem);           /* 32px → 48px */
-  --ts-type-display-md-weight:  var(--ts-font-weight-bold);
-  --ts-type-display-md-line:    1.1;
-  --ts-type-display-md-spacing: var(--ts-letter-spacing-tighter);
+  /* Display — large hero/marketing text */
+  --ts-type-display-lg-size:    clamp(2.8125rem, 5vw + 1rem, 5.5rem);   /* 45px → 88px */
+  --ts-type-display-lg-weight:  var(--ts-font-weight-semi);
+  --ts-type-display-lg-line:    1.09;   /* M3: 96/88 */
+  --ts-type-display-lg-spacing: var(--ts-letter-spacing-normal);
 
-  --ts-type-display-sm-size:    clamp(1.75rem, 3vw + 0.75rem, 2.25rem);  /* 28px → 36px */
-  --ts-type-display-sm-weight:  var(--ts-font-weight-bold);
-  --ts-type-display-sm-line:    1.15;
-  --ts-type-display-sm-spacing: var(--ts-letter-spacing-tight);
+  --ts-type-display-md-size:    clamp(2rem, 4vw + 1rem, 3.5625rem);     /* 32px → 57px */
+  --ts-type-display-md-weight:  var(--ts-font-weight-semi);
+  --ts-type-display-md-line:    1.12;   /* M3: 64/57 */
+  --ts-type-display-md-spacing: var(--ts-letter-spacing-normal);
 
-  --ts-type-heading-lg-size:    clamp(1.5rem, 2vw + 0.5rem, 1.875rem);   /* 24px → 30px */
+  --ts-type-display-sm-size:    clamp(1.75rem, 3vw + 0.75rem, 2.8125rem); /* 28px → 45px */
+  --ts-type-display-sm-weight:  var(--ts-font-weight-semi);
+  --ts-type-display-sm-line:    1.16;   /* M3: 52/45 */
+  --ts-type-display-sm-spacing: var(--ts-letter-spacing-normal);
+
+  /* Headline — page/section headers */
+  --ts-type-heading-lg-size:    clamp(1.5rem, 2vw + 0.5rem, 2rem);      /* 24px → 32px */
   --ts-type-heading-lg-weight:  var(--ts-font-weight-semi);
-  --ts-type-heading-lg-line:    var(--ts-line-height-tight);
-  --ts-type-heading-lg-spacing: var(--ts-letter-spacing-tight);
+  --ts-type-heading-lg-line:    1.25;   /* M3: 40/32 */
+  --ts-type-heading-lg-spacing: var(--ts-letter-spacing-normal);
 
-  --ts-type-heading-md-size:    clamp(1.25rem, 1.5vw + 0.5rem, 1.5rem);  /* 20px → 24px */
+  --ts-type-heading-md-size:    clamp(1.25rem, 1.5vw + 0.5rem, 1.75rem); /* 20px → 28px */
   --ts-type-heading-md-weight:  var(--ts-font-weight-semi);
-  --ts-type-heading-md-line:    var(--ts-line-height-tight);
-  --ts-type-heading-md-spacing: var(--ts-letter-spacing-tight);
+  --ts-type-heading-md-line:    1.29;   /* M3: 36/28 */
+  --ts-type-heading-md-spacing: var(--ts-letter-spacing-normal);
 
-  --ts-type-heading-sm-size:    var(--ts-font-size-xl);
+  --ts-type-heading-sm-size:    var(--ts-font-size-xl);   /* 24px */
   --ts-type-heading-sm-weight:  var(--ts-font-weight-semi);
-  --ts-type-heading-sm-line:    var(--ts-line-height-tight);
+  --ts-type-heading-sm-line:    1.33;   /* M3: 32/24 */
   --ts-type-heading-sm-spacing: var(--ts-letter-spacing-normal);
 
-  --ts-type-body-lg-size:       var(--ts-font-size-lg);
+  /* Title — card headers, dialog titles, nav items */
+  --ts-type-title-lg-size:      var(--ts-font-size-lg);   /* 22px */
+  --ts-type-title-lg-weight:    var(--ts-font-weight-regular);
+  --ts-type-title-lg-line:      1.36;   /* M3: 30/22 */
+  --ts-type-title-lg-spacing:   var(--ts-letter-spacing-normal);
+
+  --ts-type-title-md-size:      var(--ts-font-size-md);   /* 16px */
+  --ts-type-title-md-weight:    var(--ts-font-weight-medium);
+  --ts-type-title-md-line:      1.5;    /* M3: 24/16 */
+  --ts-type-title-md-spacing:   var(--ts-letter-spacing-normal);
+
+  --ts-type-title-sm-size:      var(--ts-font-size-sm);   /* 14px */
+  --ts-type-title-sm-weight:    var(--ts-font-weight-medium);
+  --ts-type-title-sm-line:      1.43;   /* M3: 20/14 */
+  --ts-type-title-sm-spacing:   var(--ts-letter-spacing-normal);
+
+  /* Body — prose, descriptions, content */
+  --ts-type-body-lg-size:       var(--ts-font-size-md);   /* 16px */
   --ts-type-body-lg-weight:     var(--ts-font-weight-regular);
-  --ts-type-body-lg-line:       var(--ts-line-height-normal);
+  --ts-type-body-lg-line:       1.5;    /* M3: 24/16 */
   --ts-type-body-lg-spacing:    var(--ts-letter-spacing-normal);
 
-  --ts-type-body-md-size:       var(--ts-font-size-md);
+  --ts-type-body-md-size:       var(--ts-font-size-sm);   /* 14px */
   --ts-type-body-md-weight:     var(--ts-font-weight-regular);
-  --ts-type-body-md-line:       var(--ts-line-height-normal);
+  --ts-type-body-md-line:       1.43;   /* M3: 20/14 */
   --ts-type-body-md-spacing:    var(--ts-letter-spacing-normal);
 
-  --ts-type-body-sm-size:       var(--ts-font-size-sm);
+  --ts-type-body-sm-size:       var(--ts-font-size-xs);   /* 12px */
   --ts-type-body-sm-weight:     var(--ts-font-weight-regular);
-  --ts-type-body-sm-line:       var(--ts-line-height-normal);
-  --ts-type-body-sm-spacing:    var(--ts-letter-spacing-normal);
+  --ts-type-body-sm-line:       1.33;   /* M3: 16/12 */
+  --ts-type-body-sm-spacing:    var(--ts-letter-spacing-wide);
 
-  --ts-type-label-lg-size:      var(--ts-font-size-md);
+  /* Label — buttons, form labels, badges */
+  --ts-type-label-lg-size:      var(--ts-font-size-sm);   /* 14px */
   --ts-type-label-lg-weight:    var(--ts-font-weight-medium);
-  --ts-type-label-lg-line:      var(--ts-line-height-tight);
+  --ts-type-label-lg-line:      1.43;   /* M3: 20/14 */
   --ts-type-label-lg-spacing:   var(--ts-letter-spacing-normal);
 
-  --ts-type-label-md-size:      var(--ts-font-size-sm);
+  --ts-type-label-md-size:      var(--ts-font-size-xs);   /* 12px */
   --ts-type-label-md-weight:    var(--ts-font-weight-medium);
-  --ts-type-label-md-line:      var(--ts-line-height-tight);
+  --ts-type-label-md-line:      1.33;   /* M3: 16/12 */
   --ts-type-label-md-spacing:   var(--ts-letter-spacing-wide);
 
-  --ts-type-label-sm-size:      var(--ts-font-size-xs);
+  --ts-type-label-sm-size:      var(--ts-font-size-2xs);  /* 11px */
   --ts-type-label-sm-weight:    var(--ts-font-weight-medium);
-  --ts-type-label-sm-line:      var(--ts-line-height-tight);
+  --ts-type-label-sm-line:      1.45;   /* M3: 16/11 */
   --ts-type-label-sm-spacing:   var(--ts-letter-spacing-wider);
 
-  --ts-type-caption-size:       var(--ts-font-size-xs);
+  /* Caption — timestamps, footnotes, fine print */
+  --ts-type-caption-size:       var(--ts-font-size-xs);   /* 12px */
   --ts-type-caption-weight:     var(--ts-font-weight-regular);
-  --ts-type-caption-line:       var(--ts-line-height-normal);
+  --ts-type-caption-line:       1.33;   /* M3: 16/12 */
   --ts-type-caption-spacing:    var(--ts-letter-spacing-wide);
 
-  /* ----- Spacing (4px base unit) ----- */
+  /* ----- Spacing (comfortable default) ----- */
   --ts-spacing-0:   0;
-  --ts-spacing-1:   0.25rem;  /* 4px  */
-  --ts-spacing-2:   0.5rem;   /* 8px  */
-  --ts-spacing-3:   0.75rem;  /* 12px */
-  --ts-spacing-4:   1rem;     /* 16px */
-  --ts-spacing-5:   1.25rem;  /* 20px */
-  --ts-spacing-6:   1.5rem;   /* 24px */
-  --ts-spacing-8:   2rem;     /* 32px */
-  --ts-spacing-10:  2.5rem;   /* 40px */
-  --ts-spacing-12:  3rem;     /* 48px */
-  --ts-spacing-16:  4rem;     /* 64px */
+  --ts-spacing-1:   0.375rem;  /* 6px  */
+  --ts-spacing-2:   0.625rem;  /* 10px */
+  --ts-spacing-3:   1rem;      /* 16px */
+  --ts-spacing-4:   1.25rem;   /* 20px */
+  --ts-spacing-5:   1.5rem;    /* 24px */
+  --ts-spacing-6:   2rem;      /* 32px */
+  --ts-spacing-8:   2.5rem;    /* 40px */
+  --ts-spacing-10:  3rem;      /* 48px */
+  --ts-spacing-12:  4rem;      /* 64px */
+  --ts-spacing-16:  5rem;      /* 80px */
 
   /* ----- Grid ----- */
   --ts-grid-columns: 12;
@@ -404,36 +427,36 @@
   --ts-breakpoint-xl:  1280px;
   --ts-breakpoint-2xl: 1536px;
 
-  /* ----- Border Radius ----- */
+  /* ----- Border Radius (M3 — generous, pillowy) ----- */
   --ts-radius-none: 0;
-  --ts-radius-sm:   0.25rem;  /* 4px  */
-  --ts-radius-md:   0.5rem;   /* 8px  */
-  --ts-radius-lg:   0.75rem;  /* 12px */
-  --ts-radius-xl:   1rem;     /* 16px */
+  --ts-radius-sm:   0.375rem;  /* 6px  */
+  --ts-radius-md:   0.75rem;   /* 12px */
+  --ts-radius-lg:   1rem;      /* 16px */
+  --ts-radius-xl:   1.75rem;   /* 28px */
   --ts-radius-full: 9999px;
 
-  /* ----- Shape Families (semantic shape roles) ----- */
-  --ts-shape-interactive: var(--ts-radius-md);
+  /* ----- Shape Families (M3-aligned semantic shape roles) ----- */
+  --ts-shape-interactive: var(--ts-radius-full);
   --ts-shape-container:   var(--ts-radius-lg);
   --ts-shape-overlay:     var(--ts-radius-xl);
   --ts-shape-badge:       var(--ts-radius-sm);
   --ts-shape-pill:        var(--ts-radius-full);
 
-  /* ----- Shadows / Elevation ----- */
-  --ts-shadow-xs:       0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  --ts-shadow-sm:       0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
-  --ts-shadow-md:       0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
-  --ts-shadow-lg:       0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
-  --ts-shadow-xl:       0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
-  --ts-shadow-inset-sm: inset 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-  --ts-shadow-inset-md: inset 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+  /* ----- Shadows / Elevation (M3 — soft, diffused) ----- */
+  --ts-shadow-xs:       0 1px 2px 0 rgba(0, 0, 0, 0.04);
+  --ts-shadow-sm:       0 1px 3px 1px rgba(0, 0, 0, 0.08), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  --ts-shadow-md:       0 2px 6px 2px rgba(0, 0, 0, 0.08), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  --ts-shadow-lg:       0 4px 8px 3px rgba(0, 0, 0, 0.08), 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+  --ts-shadow-xl:       0 6px 10px 4px rgba(0, 0, 0, 0.08), 0 2px 3px 0 rgba(0, 0, 0, 0.1);
+  --ts-shadow-inset-sm: inset 0 1px 1px 0 rgba(0, 0, 0, 0.03);
+  --ts-shadow-inset-md: inset 0 1px 3px 0 rgba(0, 0, 0, 0.05);
 
   /* ----- Transitions ----- */
-  --ts-transition-fast:   150ms cubic-bezier(0.4, 0, 0.2, 1);
-  --ts-transition-normal: 250ms cubic-bezier(0.4, 0, 0.2, 1);
-  --ts-transition-slow:   350ms cubic-bezier(0.4, 0, 0.2, 1);
-  --ts-transition-micro:  75ms cubic-bezier(0.4, 0, 0.2, 1);
-  --ts-transition-x-slow: 500ms cubic-bezier(0.4, 0, 0.2, 1);
+  --ts-transition-fast:   160ms cubic-bezier(0.25, 0.1, 0.25, 1);
+  --ts-transition-normal: 240ms cubic-bezier(0.25, 0.1, 0.25, 1);
+  --ts-transition-slow:   360ms cubic-bezier(0.25, 0.1, 0.25, 1);
+  --ts-transition-micro:  80ms cubic-bezier(0.25, 0.1, 0.25, 1);
+  --ts-transition-x-slow: 500ms cubic-bezier(0.25, 0.1, 0.25, 1);
 
   /* ----- Easing Curves ----- */
   --ts-ease-standard:   cubic-bezier(0.4, 0, 0.2, 1);
@@ -459,7 +482,7 @@
   --ts-z-tooltip:  1070;
 
   /* ----- Focus Ring ----- */
-  --ts-focus-ring: 0 0 0 3px var(--ts-color-focus-ring);
+  --ts-focus-ring: 0 0 0 2px var(--ts-color-focus-ring);
 
   /* ----- Frosted / Glassmorphism (opt-in) ----- */
   --ts-bg-frosted:      rgba(255, 255, 255, 0.8);
@@ -475,12 +498,12 @@
    Applied via data-density="compact|spacious" on any ancestor.
    ======================================================================= */
 [data-density="compact"] {
-  --ts-spacing-1:  0.125rem;  /* 2px  */
-  --ts-spacing-2:  0.375rem;  /* 6px  */
-  --ts-spacing-3:  0.5rem;    /* 8px  */
-  --ts-spacing-4:  0.75rem;   /* 12px */
-  --ts-spacing-5:  1rem;      /* 16px */
-  --ts-spacing-6:  1.25rem;   /* 20px */
+  --ts-spacing-1:  0.25rem;   /* 4px  */
+  --ts-spacing-2:  0.5rem;    /* 8px  */
+  --ts-spacing-3:  0.75rem;   /* 12px */
+  --ts-spacing-4:  1rem;      /* 16px */
+  --ts-spacing-5:  1.25rem;   /* 20px */
+  --ts-spacing-6:  1.5rem;    /* 24px */
   --ts-font-size-xs: 0.6875rem; /* 11px */
   --ts-font-size-sm: 0.75rem;   /* 12px */
   --ts-font-size-md: 0.875rem;  /* 14px */
@@ -489,12 +512,12 @@
 }
 
 [data-density="spacious"] {
-  --ts-spacing-1:  0.375rem;  /* 6px  */
-  --ts-spacing-2:  0.625rem;  /* 10px */
-  --ts-spacing-3:  1rem;      /* 16px */
-  --ts-spacing-4:  1.25rem;   /* 20px */
-  --ts-spacing-5:  1.5rem;    /* 24px */
-  --ts-spacing-6:  2rem;      /* 32px */
+  --ts-spacing-1:  0.5rem;    /* 8px  */
+  --ts-spacing-2:  0.75rem;   /* 12px */
+  --ts-spacing-3:  1.25rem;   /* 20px */
+  --ts-spacing-4:  1.5rem;    /* 24px */
+  --ts-spacing-5:  2rem;      /* 32px */
+  --ts-spacing-6:  2.5rem;    /* 40px */
   --ts-font-size-sm: 1rem;    /* 16px */
   --ts-font-size-md: 1.125rem; /* 18px */
   --ts-grid-gutter: var(--ts-spacing-8);
@@ -506,99 +529,99 @@
    immutable — they never change between themes.
    ======================================================================= */
 [data-theme="dark"] {
-  /* ----- Neutral scale (warm-tinted dark) ----- */
-  --ts-color-neutral-0:   #1a1917;
-  --ts-color-neutral-50:  #23221f;
-  --ts-color-neutral-100: #2c2a27;
-  --ts-color-neutral-200: #3a3733;
-  --ts-color-neutral-300: #4d4a44;
-  --ts-color-neutral-400: #7a7570;
-  --ts-color-neutral-500: #9a9590;
-  --ts-color-neutral-600: #b5b0a9;
-  --ts-color-neutral-700: #d2cec9;
-  --ts-color-neutral-800: #e2dfdb;
-  --ts-color-neutral-900: #f0eeeb;
+  /* ----- Neutral scale (M3 dark, blue undertone) ----- */
+  --ts-color-neutral-0:   #0e1016;
+  --ts-color-neutral-50:  #14161c;
+  --ts-color-neutral-100: #1e2029;
+  --ts-color-neutral-200: #2a2d36;
+  --ts-color-neutral-300: #3b3e48;
+  --ts-color-neutral-400: #636770;
+  --ts-color-neutral-500: #8b8f98;
+  --ts-color-neutral-600: #a8acb5;
+  --ts-color-neutral-700: #cdd0d8;
+  --ts-color-neutral-800: #e4e6ec;
+  --ts-color-neutral-900: #f4f5f8;
 
   /* ----- Text roles ----- */
-  --ts-color-text-primary:    #f0eeeb;
-  --ts-color-text-secondary:  #d2cec9;
-  --ts-color-text-tertiary:   #9a9590;
-  --ts-color-text-disabled:   #7a7570;
-  --ts-color-text-inverse:    #1a1917;
+  --ts-color-text-primary:    #f4f5f8;
+  --ts-color-text-secondary:  #cdd0d8;
+  --ts-color-text-tertiary:   #8b8f98;
+  --ts-color-text-disabled:   #636770;
+  --ts-color-text-inverse:    #0e1016;
   --ts-color-text-on-primary: #ffffff;
 
   /* ----- On-color (dark mode adjustments) ----- */
-  --ts-color-text-on-warning: #1a1917;
-  --ts-color-text-on-info:    #1a1917;
+  --ts-color-text-on-warning: #0e1016;
+  --ts-color-text-on-info:    #0e1016;
 
   /* ----- Container (dark mode — use darker fills, lighter text) ----- */
-  --ts-color-primary-container:    rgba(228, 92, 14, 0.15);
+  --ts-color-primary-container:    rgba(26, 115, 232, 0.15);
   --ts-color-on-primary-container: var(--ts-ref-primary-200);
-  --ts-color-secondary-container:    rgba(42, 179, 166, 0.15);
+  --ts-color-secondary-container:    rgba(13, 148, 136, 0.15);
   --ts-color-on-secondary-container: var(--ts-ref-secondary-200);
-  --ts-color-success-container:    rgba(72, 199, 142, 0.15);
+  --ts-color-success-container:    rgba(34, 197, 94, 0.15);
   --ts-color-on-success-container: var(--ts-ref-success-200);
-  --ts-color-warning-container:    rgba(255, 183, 15, 0.15);
+  --ts-color-warning-container:    rgba(245, 158, 11, 0.15);
   --ts-color-on-warning-container: var(--ts-ref-warning-200);
-  --ts-color-danger-container:     rgba(255, 102, 133, 0.15);
+  --ts-color-danger-container:     rgba(220, 38, 38, 0.15);
   --ts-color-on-danger-container:  var(--ts-ref-danger-200);
-  --ts-color-info-container:       rgba(102, 209, 255, 0.15);
+  --ts-color-info-container:       rgba(59, 130, 246, 0.15);
   --ts-color-on-info-container:    var(--ts-ref-info-200);
 
-  /* ----- Background roles ----- */
-  --ts-color-bg-surface:  #1a1917;
-  --ts-color-bg-elevated: #23221f;
-  --ts-color-bg-subtle:   #23221f;
+  /* ----- Background roles (M3 — blue-tinted dark surfaces) ----- */
+  --ts-color-bg-surface:  #111318;
+  --ts-color-bg-elevated: #1b1d24;
+  --ts-color-bg-subtle:   #1e2029;
   --ts-color-bg-overlay:  rgba(0, 0, 0, 0.65);
-  --ts-color-bg-disabled: #2c2a27;
-  --ts-color-bg-hover:    #23221f;
+  --ts-color-bg-disabled: #1e2029;
+  --ts-color-bg-hover:    #1b1d24;
 
-  /* ----- Elevation tint (primary-tinted surfaces at higher elevation) ----- */
-  --ts-color-bg-elevated-1: #24221e;
-  --ts-color-bg-elevated-2: #2a2720;
-  --ts-color-bg-elevated-3: #302c23;
+  /* ----- Elevation tint (M3 — blue-tinted dark surfaces at higher elevation) ----- */
+  --ts-color-bg-elevated-1: #181a21;
+  --ts-color-bg-elevated-2: #1e2029;
+  --ts-color-bg-elevated-3: #252730;
 
   /* ----- Border roles ----- */
-  --ts-color-border-default: #4d4a44;
-  --ts-color-border-subtle:  #3a3733;
-  --ts-color-border-strong:  #7a7570;
+  --ts-color-border-default: #2a2d36;
+  --ts-color-border-subtle:  #1e2029;
+  --ts-color-border-strong:  #3b3e48;
 
   /* ----- Interactive ----- */
-  --ts-color-interactive-primary-subtle:   rgba(228, 92, 14, 0.12);
-  --ts-color-interactive-secondary-subtle: rgba(42, 179, 166, 0.12);
-  --ts-color-interactive-danger-subtle:    rgba(255, 102, 133, 0.12);
+  --ts-color-interactive-primary-subtle:   rgba(26, 115, 232, 0.15);
+  --ts-color-interactive-secondary-subtle: rgba(13, 148, 136, 0.12);
+  --ts-color-interactive-danger-subtle:    rgba(220, 38, 38, 0.12);
 
   /* ----- Selected state ----- */
-  --ts-color-bg-selected:       rgba(228, 92, 14, 0.12);
-  --ts-color-bg-selected-hover: rgba(228, 92, 14, 0.18);
+  --ts-color-bg-selected:       rgba(26, 115, 232, 0.12);
+  --ts-color-bg-selected-hover: rgba(26, 115, 232, 0.18);
   --ts-color-text-selected:     var(--ts-ref-primary-300);
   --ts-color-border-selected:   var(--ts-ref-primary-400);
 
   /* ----- Feedback backgrounds (stronger in dark) ----- */
-  --ts-color-info-bg:        rgba(102, 209, 255, 0.12);
-  --ts-color-info-border:    rgba(102, 209, 255, 0.30);
-  --ts-color-success-bg:     rgba(72, 199, 142, 0.12);
-  --ts-color-success-border: rgba(72, 199, 142, 0.30);
-  --ts-color-warning-bg:     rgba(255, 183, 15, 0.12);
-  --ts-color-warning-border: rgba(255, 183, 15, 0.30);
-  --ts-color-danger-bg:      rgba(255, 102, 133, 0.12);
-  --ts-color-danger-border:  rgba(255, 102, 133, 0.30);
+  --ts-color-info-bg:        rgba(59, 130, 246, 0.12);
+  --ts-color-info-border:    rgba(59, 130, 246, 0.25);
+  --ts-color-success-bg:     rgba(34, 197, 94, 0.12);
+  --ts-color-success-border: rgba(34, 197, 94, 0.25);
+  --ts-color-warning-bg:     rgba(245, 158, 11, 0.12);
+  --ts-color-warning-border: rgba(245, 158, 11, 0.25);
+  --ts-color-danger-bg:      rgba(220, 38, 38, 0.12);
+  --ts-color-danger-border:  rgba(220, 38, 38, 0.25);
 
   /* ----- Skeleton ----- */
-  --ts-color-skeleton-base:  #3a3733;
-  --ts-color-skeleton-pulse: #2c2a27;
+  --ts-color-skeleton-base:  #2a2d36;
+  --ts-color-skeleton-pulse: #1e2029;
 
   /* ----- Frosted (dark) ----- */
-  --ts-bg-frosted: rgba(26, 25, 23, 0.8);
+  --ts-bg-frosted: rgba(17, 19, 24, 0.8);
 
   /* ----- Shadows ----- */
-  --ts-shadow-xs:       0 1px 2px 0 rgba(0, 0, 0, 0.3);
-  --ts-shadow-sm:       0 1px 3px 0 rgba(0, 0, 0, 0.4), 0 1px 2px -1px rgba(0, 0, 0, 0.3);
-  --ts-shadow-md:       0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -2px rgba(0, 0, 0, 0.3);
-  --ts-shadow-lg:       0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -4px rgba(0, 0, 0, 0.3);
-  --ts-shadow-xl:       0 20px 25px -5px rgba(0, 0, 0, 0.4), 0 8px 10px -6px rgba(0, 0, 0, 0.3);
-  --ts-shadow-inset-sm: inset 0 1px 2px 0 rgba(0, 0, 0, 0.2);
-  --ts-shadow-inset-md: inset 0 2px 4px 0 rgba(0, 0, 0, 0.3);
+  --ts-shadow-xs:       0 1px 2px 0 rgba(0, 0, 0, 0.2);
+  --ts-shadow-sm:       0 1px 2px 0 rgba(0, 0, 0, 0.3);
+  --ts-shadow-md:       0 2px 4px -1px rgba(0, 0, 0, 0.25), 0 1px 2px -1px rgba(0, 0, 0, 0.2);
+  --ts-shadow-lg:       0 4px 8px -2px rgba(0, 0, 0, 0.3), 0 2px 4px -2px rgba(0, 0, 0, 0.2);
+  --ts-shadow-xl:       0 8px 16px -4px rgba(0, 0, 0, 0.35), 0 4px 6px -4px rgba(0, 0, 0, 0.2);
+  --ts-shadow-inset-sm: inset 0 1px 1px 0 rgba(0, 0, 0, 0.15);
+  --ts-shadow-inset-md: inset 0 1px 3px 0 rgba(0, 0, 0, 0.25);
 }
 
 /* =======================================================================
@@ -632,13 +655,13 @@
   --ts-color-border-subtle:  #4a4a4a;
   --ts-color-border-strong:  #000000;
 
-  --ts-color-interactive-primary:       #b34500;
-  --ts-color-interactive-primary-hover: #8c3600;
-  --ts-color-interactive-danger:        #c00030;
-  --ts-color-interactive-danger-hover:  #9a0025;
+  --ts-color-interactive-primary:       #185abc;
+  --ts-color-interactive-primary-hover: #174ea6;
+  --ts-color-interactive-danger:        #b91c1c;
+  --ts-color-interactive-danger-hover:  #991b1b;
 
   --ts-color-focus-ring: rgba(0, 0, 0, 0.6);
-  --ts-focus-ring: 0 0 0 3px var(--ts-color-focus-ring);
+  --ts-focus-ring: 0 0 0 2px var(--ts-color-focus-ring);
 
   --ts-shadow-sm: 0 0 0 1px #000000;
   --ts-shadow-md: 0 0 0 1px #000000;

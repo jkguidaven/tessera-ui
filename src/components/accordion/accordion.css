@@ -12,7 +12,7 @@
 
   --ts-accordion-border-color: var(--ts-color-border-default);
   --ts-accordion-header-bg: transparent;
-  --ts-accordion-radius: var(--ts-shape-interactive);
+  --ts-accordion-radius: var(--ts-radius-lg);
 }
 
 ::slotted(ts-accordion-item) {

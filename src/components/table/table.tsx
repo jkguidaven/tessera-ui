@@ -4,17 +4,15 @@ import { Component, Prop, h, Host, Element } from '@stencil/core';
  * A styled wrapper for native HTML tables. Consumers place standard
  * `<table>`, `<thead>`, `<tbody>`, `<tr>`, `<th>`, `<td>` elements inside.
  *
- * The component provides a scrollable wrapper, sticky header support,
- * and CSS custom properties for consistent table styling.
+ * Uses light DOM (no Shadow DOM) so nested table elements can be
+ * styled directly via the component's CSS.
  *
  * @slot - Default slot for the native `<table>` element.
- *
- * @part wrapper - The scrollable wrapper div.
  */
 @Component({
   tag: 'ts-table',
   styleUrl: 'table.css',
-  shadow: true,
+  shadow: false,
 })
 export class TsTable {
   @Element() hostEl!: HTMLElement;
@@ -46,7 +44,7 @@ export class TsTable {
           'ts-table--sticky-header': this.stickyHeader,
         }}
       >
-        <div class="table__wrapper" part="wrapper" role="region" tabindex={0}>
+        <div class="table__wrapper" role="region" tabindex={0}>
           <slot />
         </div>
       </Host>

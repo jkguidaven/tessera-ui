@@ -27,7 +27,7 @@
   justify-content: center;
   padding: var(--ts-spacing-4);
   background-color: var(--ts-modal-overlay-bg);
-  animation: ts-fade-in 200ms ease-out;
+  animation: ts-fade-in 240ms cubic-bezier(0.25, 0.1, 0.25, 1);
 }
 
 /* ---- Dialog ---- */
@@ -38,7 +38,7 @@
   box-shadow: var(--ts-modal-shadow);
   max-height: calc(100vh - var(--ts-spacing-16));
   overflow-y: auto;
-  animation: ts-scale-in 250ms cubic-bezier(0.16, 1, 0.3, 1);
+  animation: ts-scale-in 280ms cubic-bezier(0.16, 1, 0.3, 1);
   outline: none;
 }
 

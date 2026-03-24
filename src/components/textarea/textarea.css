@@ -14,7 +14,7 @@
 
   --ts-textarea-bg: var(--ts-color-bg-surface);
   --ts-textarea-border-color: var(--ts-color-border-default);
-  --ts-textarea-radius: var(--ts-shape-interactive);
+  --ts-textarea-radius: var(--ts-radius-md);
   --ts-textarea-focus-ring: var(--ts-focus-ring);
 }
 

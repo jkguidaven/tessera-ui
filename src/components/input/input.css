@@ -13,10 +13,10 @@
   display: block;
   font-family: var(--ts-font-family-base);
 
-  --ts-input-bg: var(--ts-color-bg-surface);
+  --ts-input-bg: var(--ts-color-neutral-50);
   --ts-input-color: var(--ts-color-text-primary);
   --ts-input-border-color: var(--ts-color-border-default);
-  --ts-input-radius: var(--ts-shape-interactive);
+  --ts-input-radius: var(--ts-radius-md);
   --ts-input-focus-ring: var(--ts-focus-ring);
 }
 
@@ -39,12 +39,14 @@
   display: flex;
   align-items: center;
   gap: var(--ts-spacing-2);
-  border: 2px solid var(--ts-input-border-color);
+  border: 1px solid var(--ts-input-border-color);
   border-radius: var(--ts-input-radius);
   background-color: var(--ts-input-bg);
+  box-shadow: none;
   transition:
     border-color var(--ts-transition-fast),
-    box-shadow var(--ts-transition-fast);
+    box-shadow var(--ts-transition-fast),
+    background-color var(--ts-transition-fast);
   overflow: hidden;
 }
 

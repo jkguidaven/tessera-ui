@@ -13,7 +13,7 @@
 
   --ts-file-upload-border-color: var(--ts-color-border-default);
   --ts-file-upload-bg: var(--ts-color-bg-surface);
-  --ts-file-upload-radius: var(--ts-shape-interactive);
+  --ts-file-upload-radius: var(--ts-radius-md);
 }
 
 /* ---- Dropzone ---- */

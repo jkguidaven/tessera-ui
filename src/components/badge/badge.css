@@ -12,7 +12,7 @@
   font-family: var(--ts-font-family-base);
 
   --ts-badge-radius: var(--ts-shape-badge);
-  --ts-badge-font-weight: var(--ts-font-weight-semi);
+  --ts-badge-font-weight: var(--ts-font-weight-medium);
 }
 
 .badge__base {
@@ -20,18 +20,19 @@
   align-items: center;
   justify-content: center;
   font-weight: var(--ts-badge-font-weight);
+  letter-spacing: 0;
   line-height: 1;
   white-space: nowrap;
   border-radius: var(--ts-badge-radius);
-  border: 2px solid transparent;
+  border: 1px solid transparent;
 }
 
 /* ---- Sizes ---- */
-:host([size="xs"]) .badge__base { padding: 1px var(--ts-spacing-1); font-size: 0.625rem; }
-:host([size="sm"]) .badge__base { padding: 2px var(--ts-spacing-1); font-size: var(--ts-font-size-xs); }
-:host([size="md"]) .badge__base { padding: var(--ts-spacing-1) var(--ts-spacing-2); font-size: var(--ts-font-size-xs); }
-:host([size="lg"]) .badge__base { padding: var(--ts-spacing-1) var(--ts-spacing-3); font-size: var(--ts-font-size-sm); }
-:host([size="xl"]) .badge__base { padding: var(--ts-spacing-2) var(--ts-spacing-3); font-size: var(--ts-font-size-md); }
+:host([size="xs"]) .badge__base { padding: 2px var(--ts-spacing-1); font-size: 0.625rem; }
+:host([size="sm"]) .badge__base { padding: 3px var(--ts-spacing-2); font-size: var(--ts-font-size-xs); }
+:host([size="md"]) .badge__base { padding: var(--ts-spacing-1) var(--ts-spacing-3); font-size: var(--ts-font-size-xs); }
+:host([size="lg"]) .badge__base { padding: var(--ts-spacing-2) var(--ts-spacing-3); font-size: var(--ts-font-size-sm); }
+:host([size="xl"]) .badge__base { padding: var(--ts-spacing-2) var(--ts-spacing-4); font-size: var(--ts-font-size-md); }
 
 /* ---- Pill ---- */
 :host([pill]) .badge__base {

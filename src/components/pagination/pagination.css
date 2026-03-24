@@ -30,7 +30,7 @@
   block-size: var(--ts-pagination-button-size);
   padding-inline: var(--ts-spacing-2);
   border: 1px solid var(--ts-color-border-default);
-  border-radius: var(--ts-shape-interactive);
+  border-radius: var(--ts-radius-md);
   background: transparent;
   color: var(--ts-color-text-primary);
   font-family: var(--ts-font-family-base);

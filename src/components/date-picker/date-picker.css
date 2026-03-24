@@ -12,8 +12,8 @@
   position: relative;
   font-family: var(--ts-font-family-base);
 
-  --ts-date-picker-bg: var(--ts-color-bg-surface);
-  --ts-date-picker-radius: var(--ts-shape-interactive);
+  --ts-date-picker-bg: var(--ts-color-neutral-50);
+  --ts-date-picker-radius: var(--ts-radius-md);
   --ts-date-picker-focus-ring: var(--ts-focus-ring);
 }
 
@@ -93,9 +93,9 @@
   z-index: var(--ts-z-dropdown, 100);
   margin-block-start: var(--ts-spacing-1);
   padding: var(--ts-spacing-3);
-  background-color: var(--ts-date-picker-bg);
-  border: 1px solid var(--ts-color-border-default);
-  border-radius: var(--ts-date-picker-radius);
+  background-color: var(--ts-color-bg-elevated);
+  border: 1px solid var(--ts-color-border-subtle);
+  border-radius: var(--ts-radius-lg);
   box-shadow: var(--ts-shadow-lg);
   min-inline-size: 280px;
   animation: ts-dp-fade-in 150ms ease-out;

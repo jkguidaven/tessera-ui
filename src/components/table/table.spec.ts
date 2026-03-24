@@ -13,7 +13,7 @@ describe('ts-table', () => {
     });
 
     expect(page.root).not.toBeNull();
-    const wrapper = page.root?.shadowRoot?.querySelector('.table__wrapper');
+    const wrapper = page.root?.querySelector('.table__wrapper');
     expect(wrapper).not.toBeNull();
     expect(wrapper?.getAttribute('role')).toBe('region');
   });
@@ -74,7 +74,7 @@ describe('ts-table', () => {
       html: '<ts-table><table></table></ts-table>',
     });
 
-    const wrapper = page.root?.shadowRoot?.querySelector('.table__wrapper');
+    const wrapper = page.root?.querySelector('.table__wrapper');
     expect(wrapper?.getAttribute('tabindex')).toBe('0');
   });
 

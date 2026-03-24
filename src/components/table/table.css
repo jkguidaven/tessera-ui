@@ -1,5 +1,8 @@
 /* ==========================================================================
-   ts-table — Shadow DOM Scoped Styles
+   ts-table — Light DOM Styles
+
+   Uses light DOM (no Shadow DOM) so nested <table>, <th>, <td>, <tr>
+   elements can be styled directly.
 
    Component tokens (Tier 3):
      --ts-table-bg             Table background color
@@ -11,38 +14,38 @@
      --ts-table-cell-padding   Cell padding
    ========================================================================== */
 
-:host {
+ts-table {
   display: block;
   font-family: var(--ts-font-family-base);
 
   --ts-table-bg: var(--ts-color-bg-surface);
-  --ts-table-border-color: var(--ts-color-border-default);
+  --ts-table-border-color: var(--ts-color-border-subtle);
   --ts-table-header-bg: var(--ts-color-bg-subtle);
   --ts-table-header-color: var(--ts-color-text-primary);
   --ts-table-row-hover-bg: var(--ts-color-bg-hover);
-  --ts-table-stripe-bg: var(--ts-color-bg-muted, rgba(0, 0, 0, 0.02));
+  --ts-table-stripe-bg: var(--ts-color-bg-subtle);
   --ts-table-cell-padding: var(--ts-spacing-3) var(--ts-spacing-4);
 }
 
-:host([compact]) {
+ts-table[compact] {
   --ts-table-cell-padding: var(--ts-spacing-1) var(--ts-spacing-2);
 }
 
 /* ---- Scrollable Wrapper ---- */
-.table__wrapper {
+ts-table .table__wrapper {
   overflow-x: auto;
   background-color: var(--ts-table-bg);
-  border-radius: var(--ts-shape-container, var(--ts-radius-md));
+  border-radius: var(--ts-shape-container);
   border: 1px solid var(--ts-table-border-color);
 }
 
-.table__wrapper:focus-visible {
+ts-table .table__wrapper:focus-visible {
   box-shadow: var(--ts-focus-ring);
   outline: none;
 }
 
-/* ---- Slotted table ---- */
-::slotted(table) {
+/* ---- Table ---- */
+ts-table table {
   width: 100%;
   border-collapse: collapse;
   border-spacing: 0;
@@ -50,13 +53,60 @@
   color: var(--ts-color-text-secondary);
 }
 
-/* ---- Bordered variant ---- */
-:host([bordered]) .table__wrapper {
+/* ---- Header ---- */
+ts-table th {
+  padding: var(--ts-table-cell-padding);
+  text-align: start;
+  font-weight: var(--ts-font-weight-medium);
+  font-size: var(--ts-font-size-xs);
+  color: var(--ts-table-header-color);
+  background-color: var(--ts-table-header-bg);
+  border-bottom: 1px solid var(--ts-table-border-color);
+  white-space: nowrap;
+  letter-spacing: var(--ts-letter-spacing-wide);
+  text-transform: uppercase;
+}
+
+/* ---- Cells ---- */
+ts-table td {
+  padding: var(--ts-table-cell-padding);
+  border-bottom: 1px solid var(--ts-table-border-color);
+  vertical-align: middle;
+}
+
+/* ---- Last row — no bottom border ---- */
+ts-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* ---- Striped ---- */
+ts-table.ts-table--striped tbody tr:nth-child(even) {
+  background-color: var(--ts-table-stripe-bg);
+}
+
+/* ---- Hoverable ---- */
+ts-table.ts-table--hoverable tbody tr {
+  transition: background-color var(--ts-transition-fast);
+}
+
+ts-table.ts-table--hoverable tbody tr:hover {
+  background-color: var(--ts-table-row-hover-bg);
+}
+
+/* ---- Bordered ---- */
+ts-table.ts-table--bordered th,
+ts-table.ts-table--bordered td {
   border: 1px solid var(--ts-table-border-color);
 }
 
 /* ---- Sticky header ---- */
-:host([sticky-header]) .table__wrapper {
+ts-table.ts-table--sticky-header .table__wrapper {
   max-block-size: 24rem;
   overflow-y: auto;
+}
+
+ts-table.ts-table--sticky-header th {
+  position: sticky;
+  top: 0;
+  z-index: 1;
 }

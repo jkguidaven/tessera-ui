@@ -12,9 +12,9 @@
   display: block;
   font-family: var(--ts-font-family-base);
 
-  --ts-select-bg: var(--ts-color-bg-surface);
+  --ts-select-bg: var(--ts-color-neutral-50);
   --ts-select-border-color: var(--ts-color-border-default);
-  --ts-select-radius: var(--ts-shape-interactive);
+  --ts-select-radius: var(--ts-radius-md);
   --ts-select-focus-ring: var(--ts-focus-ring);
 }
 
@@ -44,7 +44,7 @@
   justify-content: space-between;
   gap: var(--ts-spacing-2);
   width: 100%;
-  border: 2px solid var(--ts-select-border-color);
+  border: 1px solid var(--ts-select-border-color);
   border-radius: var(--ts-select-radius);
   background-color: var(--ts-select-bg);
   font-family: inherit;
@@ -116,7 +116,7 @@
   z-index: 1000;
   background-color: var(--ts-color-bg-surface);
   border: 1px solid var(--ts-color-border-default);
-  border-radius: var(--ts-select-radius);
+  border-radius: var(--ts-radius-md);
   box-shadow: var(--ts-shadow-lg);
   max-height: 15rem;
   overflow-y: auto;
@@ -137,7 +137,7 @@
 }
 
 .select__option:hover:not(.select__option--disabled) {
-  background-color: var(--ts-color-bg-subtle);
+  background-color: var(--ts-color-interactive-primary-subtle);
 }
 
 .select__option--focused {

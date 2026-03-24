@@ -14,7 +14,7 @@
   font-family: var(--ts-font-family-base);
   pointer-events: none;
 
-  --ts-toast-radius: var(--ts-shape-interactive);
+  --ts-toast-radius: var(--ts-radius-xl);
   --ts-toast-shadow: var(--ts-shadow-lg);
   --ts-toast-max-width: 420px;
 }
