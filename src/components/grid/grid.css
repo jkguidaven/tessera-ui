@@ -1,0 +1,11 @@
+/* ==========================================================================
+   ts-grid — Shadow DOM Scoped Styles
+
+   CSS Grid layout component with responsive auto-fill columns.
+   ========================================================================== */
+
+:host {
+  display: grid;
+  width: 100%;
+  box-sizing: border-box;
+}

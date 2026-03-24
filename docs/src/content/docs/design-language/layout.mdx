@@ -146,6 +146,111 @@ Modals provide five size options for different content needs:
 | `lg` | 720px | Complex forms, data entry |
 | `xl` | 960px | Tables, rich content |
 
+## Layout Components
+
+Tessera UI provides five layout primitives that eliminate the need for manual `display: flex` / `display: grid` styling. Default to these components for all structural layout.
+
+### Stack-first approach
+
+Start with `<ts-stack>` for vertical flow and `<ts-row>` for horizontal flow. These cover the majority of layout needs with built-in gap support using the spacing scale.
+
+### Component reference
+
+#### `<ts-stack>` — Vertical flex layout
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `gap` | `0–16` | `4` | Spacing between children (maps to `--ts-spacing-{n}`) |
+| `align` | `start \| center \| end \| stretch` | `stretch` | Cross-axis alignment |
+
+#### `<ts-row>` — Horizontal flex row
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `gap` | `0–16` | `2` | Spacing between children |
+| `align` | `start \| center \| end \| stretch \| baseline` | `center` | Cross-axis alignment |
+| `justify` | `start \| center \| end \| between \| around \| evenly` | `start` | Main-axis distribution |
+| `wrap` | `boolean` | `true` | Whether items wrap to the next line |
+| `stack-at` | `sm \| md \| lg \| xl \| 2xl` | — | Breakpoint at which the row stacks vertically |
+
+#### `<ts-grid>` — CSS Grid layout
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `columns` | `1–12 \| auto` | `3` | Number of columns, or `auto` for auto-fill |
+| `gap` | `0–16` | `4` | Spacing between grid items |
+| `min-column-width` | CSS length | `200px` | Minimum column width when `columns="auto"` |
+
+#### `<ts-container>` — Centered max-width wrapper
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `size` | `sm \| md \| lg \| xl \| full` | `lg` | Max-width preset (`sm`=640px, `md`=768px, `lg`=1024px, `xl`=1280px) |
+| `padding` | `boolean` | `true` | Whether to add horizontal padding |
+
+#### `<ts-spacer>` — Explicit spacing element
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `size` | `0–16` | `4` | Vertical space (maps to `--ts-spacing-{n}`) |
+
+### Responsive stacking
+
+Use the `stack-at` prop on `<ts-row>` to collapse a horizontal row into a vertical stack at a given breakpoint:
+
+```html
+<ts-row gap="4" stack-at="md">
+  <ts-card>Sidebar</ts-card>
+  <ts-card>Main content</ts-card>
+</ts-row>
+```
+
+Below the `md` breakpoint (768px), the row becomes a stack automatically.
+
+### Auto-grid
+
+Set `columns="auto"` with a `min-column-width` to create a responsive grid that fills columns based on available space — no media queries needed:
+
+```html
+<ts-grid columns="auto" min-column-width="280px" gap="4">
+  <ts-card>Item 1</ts-card>
+  <ts-card>Item 2</ts-card>
+  <ts-card>Item 3</ts-card>
+  <ts-card>Item 4</ts-card>
+</ts-grid>
+```
+
+### Container widths
+
+Use `<ts-container>` to center page content with a maximum width:
+
+```html
+<ts-container size="lg">
+  <p>This content is constrained to 1024px and centered on the page.</p>
+</ts-container>
+```
+
+### Nesting layout components
+
+Combine all layout primitives to build complete page structures:
+
+```html
+<ts-container size="lg">
+  <ts-stack gap="6">
+    <h1>Dashboard</h1>
+    <ts-grid columns="auto" min-column-width="280px" gap="4">
+      <ts-card>...</ts-card>
+      <ts-card>...</ts-card>
+      <ts-card>...</ts-card>
+    </ts-grid>
+    <ts-row gap="2" justify="end">
+      <ts-button>Cancel</ts-button>
+      <ts-button variant="primary">Save</ts-button>
+    </ts-row>
+  </ts-stack>
+</ts-container>
+```
+
 ## Responsive Considerations
 
 Tessera UI components are Web Components — they adapt to their container rather than the viewport. Components do not ship with built-in responsive breakpoints. Instead:

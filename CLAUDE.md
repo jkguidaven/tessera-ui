@@ -43,8 +43,8 @@ Run all three checks after any component change:
 
 ```bash
 pnpm build                    # Must pass — verifies all output targets compile
-pnpm test                     # Must pass — unit tests (331 tests across 39 suites)
-pnpm test.e2e                 # Must pass — e2e tests (137 tests across 39 suites)
+pnpm test                     # Must pass — unit tests (373 tests across 44 suites)
+pnpm test.e2e                 # Must pass — e2e tests (154 tests across 44 suites)
 npx eslint src --ext .ts,.tsx # Must have 0 errors (warnings are acceptable)
 ```
 

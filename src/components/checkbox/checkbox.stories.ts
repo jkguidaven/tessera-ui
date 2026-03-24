@@ -46,15 +46,15 @@ export const Default = Object.assign(Template.bind({}) as typeof Template & { ar
 });
 
 export const Sizes = () => `
-  <div style="display: flex; flex-direction: column; gap: 12px;">
+  <ts-stack gap="2">
     <ts-checkbox size="sm" label="Small checkbox"></ts-checkbox>
     <ts-checkbox size="md" label="Medium checkbox"></ts-checkbox>
     <ts-checkbox size="lg" label="Large checkbox"></ts-checkbox>
-  </div>
+  </ts-stack>
 `;
 
 export const States = () => `
-  <div style="display: flex; flex-direction: column; gap: 12px;">
+  <ts-stack gap="2">
     <ts-checkbox label="Unchecked"></ts-checkbox>
     <ts-checkbox checked label="Checked"></ts-checkbox>
     <ts-checkbox indeterminate label="Indeterminate"></ts-checkbox>
@@ -62,27 +62,27 @@ export const States = () => `
     <ts-checkbox disabled checked label="Disabled checked"></ts-checkbox>
     <ts-checkbox error label="Error state"></ts-checkbox>
     <ts-checkbox error checked label="Error checked"></ts-checkbox>
-  </div>
+  </ts-stack>
 `;
 
 export const FormExample = () => `
-  <div style="display: flex; flex-direction: column; gap: 16px; max-width: 400px;">
+  <ts-stack gap="3" style="max-width: 400px;">
     <h3 style="margin: 0; font-family: sans-serif;">Newsletter Preferences</h3>
     <ts-checkbox name="terms" value="terms" label="I agree to the terms and conditions"></ts-checkbox>
     <ts-checkbox name="newsletter" value="newsletter" checked label="Subscribe to weekly newsletter"></ts-checkbox>
     <ts-checkbox name="remember" value="remember" label="Remember me on this device"></ts-checkbox>
     <ts-checkbox name="marketing" value="marketing" label="Receive marketing communications"></ts-checkbox>
     <ts-checkbox name="beta" value="beta" disabled label="Join beta program (currently unavailable)"></ts-checkbox>
-  </div>
+  </ts-stack>
 `;
 
 export const WithSlotContent = () => `
-  <div style="display: flex; flex-direction: column; gap: 12px;">
+  <ts-stack gap="2">
     <ts-checkbox value="custom">
       Accept the <a href="#" style="color: #2563eb;">privacy policy</a>
     </ts-checkbox>
     <ts-checkbox value="styled">
       <strong>Important:</strong> Enable two-factor authentication
     </ts-checkbox>
-  </div>
+  </ts-stack>
 `;

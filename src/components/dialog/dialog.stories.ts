@@ -25,9 +25,11 @@ const Template = (args: Record<string, unknown>) => {
     <ts-button onclick="this.nextElementSibling.show()">Open Dialog</ts-button>
     <ts-dialog ${attrs.join(' ')}>
       <p style="margin: 0; font-family: sans-serif;">This is the dialog body content. You can place any content here.</p>
-      <div slot="footer" style="display: flex; gap: 8px; justify-content: flex-end;">
-        <ts-button appearance="outline" onclick="this.closest('ts-dialog').close()">Cancel</ts-button>
-        <ts-button variant="primary" onclick="this.closest('ts-dialog').close()">Confirm</ts-button>
+      <div slot="footer">
+        <ts-row gap="2" justify="end">
+          <ts-button appearance="outline" onclick="this.closest('ts-dialog').close()">Cancel</ts-button>
+          <ts-button variant="primary" onclick="this.closest('ts-dialog').close()">Confirm</ts-button>
+        </ts-row>
       </div>
     </ts-dialog>
   `;
@@ -43,13 +45,15 @@ export const Default = Object.assign(Template.bind({}) as typeof Template & { ar
 });
 
 export const Sizes = () => `
-  <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+  <ts-row gap="2">
     <div>
       <ts-button onclick="this.nextElementSibling.show()">Small Dialog</ts-button>
       <ts-dialog heading="Small Dialog" size="sm">
         <p style="margin: 0; font-family: sans-serif;">This is a small dialog, suitable for simple confirmations.</p>
-        <div slot="footer" style="display: flex; gap: 8px; justify-content: flex-end;">
-          <ts-button appearance="outline" onclick="this.closest('ts-dialog').close()">Close</ts-button>
+        <div slot="footer">
+          <ts-row gap="2" justify="end">
+            <ts-button appearance="outline" onclick="this.closest('ts-dialog').close()">Close</ts-button>
+          </ts-row>
         </div>
       </ts-dialog>
     </div>
@@ -57,8 +61,10 @@ export const Sizes = () => `
       <ts-button onclick="this.nextElementSibling.show()">Medium Dialog</ts-button>
       <ts-dialog heading="Medium Dialog" size="md">
         <p style="margin: 0; font-family: sans-serif;">This is a medium dialog with more room for content. It works well for forms and moderate amounts of information.</p>
-        <div slot="footer" style="display: flex; gap: 8px; justify-content: flex-end;">
-          <ts-button appearance="outline" onclick="this.closest('ts-dialog').close()">Close</ts-button>
+        <div slot="footer">
+          <ts-row gap="2" justify="end">
+            <ts-button appearance="outline" onclick="this.closest('ts-dialog').close()">Close</ts-button>
+          </ts-row>
         </div>
       </ts-dialog>
     </div>
@@ -66,12 +72,14 @@ export const Sizes = () => `
       <ts-button onclick="this.nextElementSibling.show()">Large Dialog</ts-button>
       <ts-dialog heading="Large Dialog" size="lg">
         <p style="margin: 0; font-family: sans-serif;">This is a large dialog, ideal for complex content like data tables, multi-step forms, or detailed previews.</p>
-        <div slot="footer" style="display: flex; gap: 8px; justify-content: flex-end;">
-          <ts-button appearance="outline" onclick="this.closest('ts-dialog').close()">Close</ts-button>
+        <div slot="footer">
+          <ts-row gap="2" justify="end">
+            <ts-button appearance="outline" onclick="this.closest('ts-dialog').close()">Close</ts-button>
+          </ts-row>
         </div>
       </ts-dialog>
     </div>
-  </div>
+  </ts-row>
 `;
 
 export const DeleteConfirmation = () => `
@@ -80,9 +88,11 @@ export const DeleteConfirmation = () => `
     <p style="margin: 0; font-family: sans-serif; color: #555;">
       Are you sure you want to delete this item? This action cannot be undone and all associated data will be permanently removed.
     </p>
-    <div slot="footer" style="display: flex; gap: 8px; justify-content: flex-end;">
-      <ts-button appearance="outline" onclick="this.closest('ts-dialog').close()">Cancel</ts-button>
-      <ts-button variant="danger" onclick="this.closest('ts-dialog').close()">Delete</ts-button>
+    <div slot="footer">
+      <ts-row gap="2" justify="end">
+        <ts-button appearance="outline" onclick="this.closest('ts-dialog').close()">Cancel</ts-button>
+        <ts-button variant="danger" onclick="this.closest('ts-dialog').close()">Delete</ts-button>
+      </ts-row>
     </div>
   </ts-dialog>
 `;
@@ -93,9 +103,11 @@ export const UnsavedChanges = () => `
     <p style="margin: 0; font-family: sans-serif; color: #555;">
       You have unsaved changes. If you leave this page, your changes will be lost. Would you like to save before leaving?
     </p>
-    <div slot="footer" style="display: flex; gap: 8px; justify-content: flex-end;">
-      <ts-button appearance="outline" onclick="this.closest('ts-dialog').close()">Discard</ts-button>
-      <ts-button variant="primary" onclick="this.closest('ts-dialog').close()">Save Changes</ts-button>
+    <div slot="footer">
+      <ts-row gap="2" justify="end">
+        <ts-button appearance="outline" onclick="this.closest('ts-dialog').close()">Discard</ts-button>
+        <ts-button variant="primary" onclick="this.closest('ts-dialog').close()">Save Changes</ts-button>
+      </ts-row>
     </div>
   </ts-dialog>
 `;
@@ -112,8 +124,10 @@ export const NonDismissible = () => `
         <p style="margin: 0;">4. We reserve the right to update these terms.</p>
       </div>
     </div>
-    <div slot="footer" style="display: flex; gap: 8px; justify-content: flex-end;">
-      <ts-button variant="primary" onclick="this.closest('ts-dialog').close()">I Accept</ts-button>
+    <div slot="footer">
+      <ts-row gap="2" justify="end">
+        <ts-button variant="primary" onclick="this.closest('ts-dialog').close()">I Accept</ts-button>
+      </ts-row>
     </div>
   </ts-dialog>
 `;
@@ -121,14 +135,16 @@ export const NonDismissible = () => `
 export const FormDialog = () => `
   <ts-button onclick="this.nextElementSibling.show()">Edit Profile</ts-button>
   <ts-dialog heading="Edit Profile" size="md">
-    <div style="display: flex; flex-direction: column; gap: 16px;">
+    <ts-stack gap="3">
       <ts-input label="Full Name" placeholder="Enter your name" value="James Kennedy"></ts-input>
       <ts-input label="Email" placeholder="Enter your email" value="james@example.com"></ts-input>
       <ts-textarea label="Bio" placeholder="Tell us about yourself..." rows="3"></ts-textarea>
-    </div>
-    <div slot="footer" style="display: flex; gap: 8px; justify-content: flex-end;">
-      <ts-button appearance="outline" onclick="this.closest('ts-dialog').close()">Cancel</ts-button>
-      <ts-button variant="primary" onclick="this.closest('ts-dialog').close()">Save</ts-button>
+    </ts-stack>
+    <div slot="footer">
+      <ts-row gap="2" justify="end">
+        <ts-button appearance="outline" onclick="this.closest('ts-dialog').close()">Cancel</ts-button>
+        <ts-button variant="primary" onclick="this.closest('ts-dialog').close()">Save</ts-button>
+      </ts-row>
     </div>
   </ts-dialog>
 `;

@@ -1,0 +1,42 @@
+/* ==========================================================================
+   ts-row — Shadow DOM Scoped Styles
+
+   A horizontal flex row layout primitive with wrap and responsive stacking.
+   ========================================================================== */
+
+:host {
+  display: flex;
+  flex-direction: row;
+}
+
+:host([reverse]) {
+  flex-direction: row-reverse;
+}
+
+/* ---- Responsive stacking ---- */
+@media (max-width: 639px) {
+  :host([stack-at="sm"]) {
+    flex-direction: column;
+  }
+  :host([stack-at="sm"][reverse]) {
+    flex-direction: column-reverse;
+  }
+}
+
+@media (max-width: 767px) {
+  :host([stack-at="md"]) {
+    flex-direction: column;
+  }
+  :host([stack-at="md"][reverse]) {
+    flex-direction: column-reverse;
+  }
+}
+
+@media (max-width: 1023px) {
+  :host([stack-at="lg"]) {
+    flex-direction: column;
+  }
+  :host([stack-at="lg"][reverse]) {
+    flex-direction: column-reverse;
+  }
+}

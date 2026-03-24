@@ -44,7 +44,7 @@ export const Default = Object.assign(Template.bind({}) as typeof Template & { ar
 });
 
 export const Elevations = () => `
-  <div style="display: flex; gap: 24px; flex-wrap: wrap; align-items: flex-start;">
+  <ts-row gap="4" align="start">
     <div style="text-align: center;">
       <ts-card elevation="none" style="width: 160px;">
         <p style="margin: 0; font-size: 14px;">None</p>
@@ -70,11 +70,11 @@ export const Elevations = () => `
         <p style="margin: 0; font-size: 14px;">Extra Large</p>
       </ts-card>
     </div>
-  </div>
+  </ts-row>
 `;
 
 export const Padding = () => `
-  <div style="display: flex; flex-direction: column; gap: 16px; max-width: 400px;">
+  <ts-stack gap="3" style="max-width: 400px;">
     <ts-card bordered padding="none">
       <p style="margin: 0;">Padding: none</p>
     </ts-card>
@@ -87,11 +87,11 @@ export const Padding = () => `
     <ts-card bordered padding="lg">
       <p style="margin: 0;">Padding: large</p>
     </ts-card>
-  </div>
+  </ts-stack>
 `;
 
 export const States = () => `
-  <div style="display: flex; gap: 24px; flex-wrap: wrap; align-items: flex-start;">
+  <ts-row gap="4" align="start">
     <ts-card bordered style="width: 240px;">
       <p style="margin: 0;">Bordered card</p>
     </ts-card>
@@ -101,58 +101,58 @@ export const States = () => `
     <ts-card interactive bordered style="width: 240px;">
       <p style="margin: 0;">Interactive + bordered</p>
     </ts-card>
-  </div>
+  </ts-row>
 `;
 
 export const WithSlots = () => `
   <div style="max-width: 400px;">
     <ts-card bordered>
       <span slot="header">
-        <div style="display: flex; justify-content: space-between; align-items: center;">
+        <ts-row gap="2" justify="between" align="center">
           <h3 style="margin: 0;">Team Members</h3>
           <ts-badge variant="primary" pill>3 online</ts-badge>
-        </div>
+        </ts-row>
       </span>
-      <div style="display: flex; flex-direction: column; gap: 12px;">
-        <div style="display: flex; align-items: center; gap: 12px;">
+      <ts-stack gap="2">
+        <ts-row gap="2">
           <ts-icon name="user" size="sm"></ts-icon>
           <div>
             <div style="font-weight: 600;">Sarah Chen</div>
             <div style="font-size: 13px; color: var(--ts-color-text-secondary);">Engineering Lead</div>
           </div>
           <ts-badge variant="success" pill size="sm" style="margin-left: auto;">Active</ts-badge>
-        </div>
-        <div style="display: flex; align-items: center; gap: 12px;">
+        </ts-row>
+        <ts-row gap="2">
           <ts-icon name="user" size="sm"></ts-icon>
           <div>
             <div style="font-weight: 600;">Alex Rivera</div>
             <div style="font-size: 13px; color: var(--ts-color-text-secondary);">Product Designer</div>
           </div>
           <ts-badge variant="success" pill size="sm" style="margin-left: auto;">Active</ts-badge>
-        </div>
-        <div style="display: flex; align-items: center; gap: 12px;">
+        </ts-row>
+        <ts-row gap="2">
           <ts-icon name="user" size="sm"></ts-icon>
           <div>
             <div style="font-weight: 600;">Jordan Lee</div>
             <div style="font-size: 13px; color: var(--ts-color-text-secondary);">Backend Developer</div>
           </div>
           <ts-badge variant="neutral" pill size="sm" style="margin-left: auto;">Away</ts-badge>
-        </div>
-      </div>
+        </ts-row>
+      </ts-stack>
       <span slot="footer">
-        <div style="display: flex; justify-content: flex-end; gap: 8px;">
+        <ts-row gap="1" justify="end">
           <ts-button size="sm" appearance="ghost" variant="primary">
             <ts-icon slot="prefix" name="user-plus" size="sm"></ts-icon>
             Invite Member
           </ts-button>
-        </div>
+        </ts-row>
       </span>
     </ts-card>
   </div>
 `;
 
 export const WithMedia = () => `
-  <div style="display: flex; gap: 24px; flex-wrap: wrap;">
+  <ts-grid columns="auto" min-column-width="280px" gap="4">
     <ts-card bordered style="width: 300px;" padding="none">
       <span slot="media">
         <div style="height: 160px; background: linear-gradient(135deg, var(--ts-color-primary-400), var(--ts-color-primary-700)); display: flex; align-items: center; justify-content: center;">
@@ -164,10 +164,10 @@ export const WithMedia = () => `
         <p style="margin: 0; font-size: 14px; color: var(--ts-color-text-secondary);">A next-generation design system built for speed and accessibility.</p>
       </div>
       <span slot="footer">
-        <div style="display: flex; justify-content: space-between; align-items: center; padding: 0 16px 16px;">
+        <ts-row gap="2" justify="between" style="padding: 0 16px 16px;">
           <ts-badge variant="info" pill size="sm">In Progress</ts-badge>
           <ts-button size="sm" appearance="ghost" variant="primary">View Project</ts-button>
-        </div>
+        </ts-row>
       </span>
     </ts-card>
 
@@ -182,44 +182,44 @@ export const WithMedia = () => `
         <p style="margin: 0; font-size: 14px; color: var(--ts-color-text-secondary);">Analytics dashboard with real-time data visualization and reporting.</p>
       </div>
       <span slot="footer">
-        <div style="display: flex; justify-content: space-between; align-items: center; padding: 0 16px 16px;">
+        <ts-row gap="2" justify="between" style="padding: 0 16px 16px;">
           <ts-badge variant="success" pill size="sm">Completed</ts-badge>
           <ts-button size="sm" appearance="ghost" variant="primary">View Project</ts-button>
-        </div>
+        </ts-row>
       </span>
     </ts-card>
-  </div>
+  </ts-grid>
 `;
 
 export const Composition = () => `
-  <div style="display: flex; flex-direction: column; gap: 16px; max-width: 400px;">
+  <ts-stack gap="3" style="max-width: 400px;">
     <ts-card bordered padding="lg">
       <span slot="header">
-        <div style="display: flex; align-items: center; gap: 8px;">
+        <ts-row gap="1">
           <ts-icon name="credit-card" size="sm"></ts-icon>
           <h3 style="margin: 0;">Payment Method</h3>
-        </div>
+        </ts-row>
       </span>
-      <div style="display: flex; flex-direction: column; gap: 12px;">
+      <ts-stack gap="2">
         <ts-input label="Card Number" placeholder="4242 4242 4242 4242">
           <ts-icon slot="prefix" name="credit-card" size="sm"></ts-icon>
         </ts-input>
-        <div style="display: flex; gap: 12px;">
+        <ts-row gap="2">
           <ts-input label="Expiry" placeholder="MM/YY" style="flex: 1;"></ts-input>
           <ts-input label="CVC" placeholder="123" style="flex: 1;">
             <ts-icon slot="suffix" name="lock" size="sm"></ts-icon>
           </ts-input>
-        </div>
-      </div>
+        </ts-row>
+      </ts-stack>
       <span slot="footer">
-        <div style="display: flex; justify-content: flex-end; gap: 12px; padding-top: 8px;">
+        <ts-row gap="2" justify="end" style="padding-top: 8px;">
           <ts-button appearance="outline" variant="neutral">Cancel</ts-button>
           <ts-button variant="primary">
             <ts-icon slot="prefix" name="lock" size="sm"></ts-icon>
             Pay $49.99
           </ts-button>
-        </div>
+        </ts-row>
       </span>
     </ts-card>
-  </div>
+  </ts-stack>
 `;

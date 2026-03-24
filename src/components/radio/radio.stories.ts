@@ -40,38 +40,38 @@ export const Default = Object.assign(Template.bind({}) as typeof Template & { ar
 });
 
 export const Sizes = () => `
-  <div style="display: flex; flex-direction: column; gap: 12px;">
+  <ts-stack gap="2">
     <ts-radio size="sm" label="Small radio" name="size-demo" value="sm"></ts-radio>
     <ts-radio size="md" label="Medium radio" name="size-demo" value="md"></ts-radio>
     <ts-radio size="lg" label="Large radio" name="size-demo" value="lg"></ts-radio>
-  </div>
+  </ts-stack>
 `;
 
 export const States = () => `
-  <div style="display: flex; flex-direction: column; gap: 12px;">
+  <ts-stack gap="2">
     <ts-radio label="Unchecked" name="states-demo" value="unchecked"></ts-radio>
     <ts-radio checked label="Checked" name="states-checked" value="checked"></ts-radio>
     <ts-radio disabled label="Disabled" name="states-disabled" value="disabled"></ts-radio>
     <ts-radio disabled checked label="Disabled checked" name="states-disabled-checked" value="disabled-checked"></ts-radio>
-  </div>
+  </ts-stack>
 `;
 
 export const ShippingOptions = () => `
-  <div style="display: flex; flex-direction: column; gap: 16px; max-width: 400px;">
+  <ts-stack gap="2" style="max-width: 400px;">
     <h3 style="margin: 0; font-family: sans-serif;">Select Shipping Method</h3>
     <ts-radio name="shipping" value="standard" checked label="Standard shipping (5-7 business days)"></ts-radio>
     <ts-radio name="shipping" value="express" label="Express shipping (2-3 business days)"></ts-radio>
     <ts-radio name="shipping" value="overnight" label="Overnight shipping (next business day)"></ts-radio>
     <ts-radio name="shipping" value="pickup" disabled label="In-store pickup (unavailable in your area)"></ts-radio>
-  </div>
+  </ts-stack>
 `;
 
 export const PaymentMethod = () => `
-  <div style="display: flex; flex-direction: column; gap: 16px; max-width: 400px;">
+  <ts-stack gap="2" style="max-width: 400px;">
     <h3 style="margin: 0; font-family: sans-serif;">Payment Method</h3>
     <ts-radio name="payment" value="credit" checked label="Credit card"></ts-radio>
     <ts-radio name="payment" value="debit" label="Debit card"></ts-radio>
     <ts-radio name="payment" value="paypal" label="PayPal"></ts-radio>
     <ts-radio name="payment" value="bank" label="Bank transfer"></ts-radio>
-  </div>
+  </ts-stack>
 `;

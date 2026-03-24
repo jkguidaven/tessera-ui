@@ -30,7 +30,7 @@ export const Default = Object.assign(Template.bind({}) as typeof Template & { ar
 });
 
 export const Variants = () => `
-  <div style="display: flex; flex-direction: column; gap: 16px; max-width: 600px;">
+  <ts-stack gap="2" style="max-width: 600px;">
     <ts-alert variant="info">A new software update is available. See what's new in version 3.2.</ts-alert>
     <ts-alert variant="success">Your payment of $49.99 has been processed successfully.</ts-alert>
     <ts-alert variant="warning">Your free trial expires in 3 days. Upgrade now to keep your data.</ts-alert>
@@ -38,20 +38,20 @@ export const Variants = () => `
     <ts-alert variant="primary">Welcome back! You have 5 unread notifications.</ts-alert>
     <ts-alert variant="secondary">This feature is in beta. Your feedback helps us improve.</ts-alert>
     <ts-alert variant="neutral">Scheduled maintenance will occur on Sunday from 2-4 AM UTC.</ts-alert>
-  </div>
+  </ts-stack>
 `;
 
 export const States = () => `
-  <div style="display: flex; flex-direction: column; gap: 16px; max-width: 600px;">
+  <ts-stack gap="2" style="max-width: 600px;">
     <ts-alert variant="info">Standard non-dismissible alert.</ts-alert>
     <ts-alert variant="success" closable>Dismissible alert — click the close button to hide.</ts-alert>
     <ts-alert variant="warning" closable>Your session will expire in 10 minutes. Save your work.</ts-alert>
     <ts-alert variant="danger" closable>Failed to save changes. Please try again.</ts-alert>
-  </div>
+  </ts-stack>
 `;
 
 export const WithIcons = () => `
-  <div style="display: flex; flex-direction: column; gap: 16px; max-width: 600px;">
+  <ts-stack gap="2" style="max-width: 600px;">
     <ts-alert variant="info">
       <ts-icon slot="icon" name="info" size="sm"></ts-icon>
       Two-factor authentication is now available for your account.
@@ -68,11 +68,11 @@ export const WithIcons = () => `
       <ts-icon slot="icon" name="x-circle" size="sm"></ts-icon>
       Build failed: 3 test suites did not pass. Check the logs for details.
     </ts-alert>
-  </div>
+  </ts-stack>
 `;
 
 export const WithActions = () => `
-  <div style="display: flex; flex-direction: column; gap: 16px; max-width: 600px;">
+  <ts-stack gap="2" style="max-width: 600px;">
     <ts-alert variant="info" closable>
       A new version (v3.2.0) is available.
       <span slot="action">
@@ -99,14 +99,14 @@ export const WithActions = () => `
         <ts-button size="sm" appearance="link" variant="primary">View File</ts-button>
       </span>
     </ts-alert>
-  </div>
+  </ts-stack>
 `;
 
 export const Composition = () => `
-  <div style="display: flex; flex-direction: column; gap: 24px; max-width: 500px;">
+  <ts-stack gap="4" style="max-width: 500px;">
     <ts-card bordered padding="lg">
       <span slot="header"><h3 style="margin: 0;">Account Settings</h3></span>
-      <div style="display: flex; flex-direction: column; gap: 16px;">
+      <ts-stack gap="3">
         <ts-alert variant="warning">
           <ts-icon slot="icon" name="alert-triangle" size="sm"></ts-icon>
           Your email address has not been verified.
@@ -121,13 +121,13 @@ export const Composition = () => `
           <ts-icon slot="prefix" name="phone" size="sm"></ts-icon>
         </ts-input>
         <ts-toggle checked>Enable two-factor authentication</ts-toggle>
-      </div>
+      </ts-stack>
       <span slot="footer">
-        <div style="display: flex; justify-content: flex-end; gap: 12px; padding-top: 8px;">
+        <ts-row gap="2" justify="end" style="padding-top: 8px;">
           <ts-button appearance="outline" variant="neutral">Discard</ts-button>
           <ts-button variant="primary">Save Settings</ts-button>
-        </div>
+        </ts-row>
       </span>
     </ts-card>
-  </div>
+  </ts-stack>
 `;

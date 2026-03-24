@@ -65,7 +65,7 @@ export const Default = Object.assign(Template.bind({}) as typeof Template & { ar
 });
 
 export const Variants = () => `
-  <div style="display: flex; gap: 16px; align-items: center; flex-wrap: wrap;">
+  <ts-row gap="2">
     <ts-button variant="primary">Primary</ts-button>
     <ts-button variant="secondary">Secondary</ts-button>
     <ts-button variant="success">Publish Now</ts-button>
@@ -73,73 +73,73 @@ export const Variants = () => `
     <ts-button variant="danger">Delete Account</ts-button>
     <ts-button variant="info">Learn More</ts-button>
     <ts-button variant="neutral">Cancel</ts-button>
-  </div>
+  </ts-row>
 `;
 
 export const Sizes = () => `
-  <div style="display: flex; gap: 16px; align-items: center; flex-wrap: wrap;">
+  <ts-row gap="2">
     <ts-button size="xs">Extra Small</ts-button>
     <ts-button size="sm">Small</ts-button>
     <ts-button size="md">Medium</ts-button>
     <ts-button size="lg">Large</ts-button>
     <ts-button size="xl">Extra Large</ts-button>
-  </div>
+  </ts-row>
 `;
 
 export const Appearances = () => `
-  <div style="display: flex; flex-direction: column; gap: 24px;">
+  <ts-stack gap="4">
     <div>
       <p style="margin: 0 0 8px; font-weight: 600; color: var(--ts-color-text-secondary);">Solid</p>
-      <div style="display: flex; gap: 16px; align-items: center; flex-wrap: wrap;">
+      <ts-row gap="2">
         <ts-button appearance="solid" variant="primary">Save Changes</ts-button>
         <ts-button appearance="solid" variant="danger">Delete</ts-button>
         <ts-button appearance="solid" variant="neutral">Cancel</ts-button>
-      </div>
+      </ts-row>
     </div>
     <div>
       <p style="margin: 0 0 8px; font-weight: 600; color: var(--ts-color-text-secondary);">Outline</p>
-      <div style="display: flex; gap: 16px; align-items: center; flex-wrap: wrap;">
+      <ts-row gap="2">
         <ts-button appearance="outline" variant="primary">Edit Profile</ts-button>
         <ts-button appearance="outline" variant="danger">Remove Item</ts-button>
         <ts-button appearance="outline" variant="neutral">View Details</ts-button>
-      </div>
+      </ts-row>
     </div>
     <div>
       <p style="margin: 0 0 8px; font-weight: 600; color: var(--ts-color-text-secondary);">Ghost</p>
-      <div style="display: flex; gap: 16px; align-items: center; flex-wrap: wrap;">
+      <ts-row gap="2">
         <ts-button appearance="ghost" variant="primary">Settings</ts-button>
         <ts-button appearance="ghost" variant="neutral">More Options</ts-button>
-      </div>
+      </ts-row>
     </div>
     <div>
       <p style="margin: 0 0 8px; font-weight: 600; color: var(--ts-color-text-secondary);">Link</p>
-      <div style="display: flex; gap: 16px; align-items: center; flex-wrap: wrap;">
+      <ts-row gap="2">
         <ts-button appearance="link" variant="primary">Forgot Password?</ts-button>
         <ts-button appearance="link" variant="primary">View Documentation</ts-button>
-      </div>
+      </ts-row>
     </div>
-  </div>
+  </ts-stack>
 `;
 
 export const States = () => `
-  <div style="display: flex; flex-direction: column; gap: 16px;">
-    <div style="display: flex; gap: 16px; align-items: center; flex-wrap: wrap;">
+  <ts-stack gap="3">
+    <ts-row gap="2">
       <ts-button>Default</ts-button>
       <ts-button disabled>Disabled</ts-button>
       <ts-button loading>Saving...</ts-button>
       <ts-button loading variant="danger">Deleting...</ts-button>
-    </div>
+    </ts-row>
     <div>
       <ts-button block>Full Width Submit</ts-button>
     </div>
     <div>
       <ts-button block loading>Processing Payment...</ts-button>
     </div>
-  </div>
+  </ts-stack>
 `;
 
 export const WithIcons = () => `
-  <div style="display: flex; gap: 16px; align-items: center; flex-wrap: wrap;">
+  <ts-row gap="2">
     <ts-button variant="primary">
       <ts-icon slot="prefix" name="plus" size="sm"></ts-icon>
       New Project
@@ -164,11 +164,11 @@ export const WithIcons = () => `
       <ts-icon slot="prefix" name="log-in" size="sm"></ts-icon>
       Sign In
     </ts-button>
-  </div>
+  </ts-row>
 `;
 
 export const AsLink = () => `
-  <div style="display: flex; gap: 16px; align-items: center; flex-wrap: wrap;">
+  <ts-row gap="2">
     <ts-button href="https://example.com" target="_blank">
       Visit Website
       <ts-icon slot="suffix" name="external-link" size="sm"></ts-icon>
@@ -177,43 +177,43 @@ export const AsLink = () => `
       <ts-icon slot="prefix" name="book-open" size="sm"></ts-icon>
       Documentation
     </ts-button>
-  </div>
+  </ts-row>
 `;
 
 export const Composition = () => `
-  <div style="display: flex; flex-direction: column; gap: 24px; max-width: 400px;">
-    <div style="display: flex; gap: 12px; justify-content: flex-end;">
+  <ts-stack gap="4" style="max-width: 400px;">
+    <ts-row gap="2" justify="end">
       <ts-button appearance="outline" variant="neutral">Cancel</ts-button>
       <ts-button variant="primary">
         <ts-icon slot="prefix" name="save" size="sm"></ts-icon>
         Save Changes
       </ts-button>
-    </div>
+    </ts-row>
 
     <ts-card bordered>
       <span slot="header"><h3 style="margin: 0;">Danger Zone</h3></span>
       <p style="margin: 0; color: var(--ts-color-text-secondary);">Once you delete your account, there is no going back. Please be certain.</p>
       <span slot="footer">
-        <div style="display: flex; gap: 12px; justify-content: flex-end;">
+        <ts-row gap="2" justify="end">
           <ts-button variant="danger" appearance="outline">
             <ts-icon slot="prefix" name="trash-2" size="sm"></ts-icon>
             Delete Account
           </ts-button>
-        </div>
+        </ts-row>
       </span>
     </ts-card>
 
-    <div style="display: flex; gap: 8px;">
+    <ts-row gap="1">
       <ts-button size="sm" appearance="ghost" variant="neutral">
         <ts-icon slot="prefix" name="chevron-left" size="sm"></ts-icon>
         Back
       </ts-button>
-      <div style="flex: 1;"></div>
+      <ts-spacer></ts-spacer>
       <ts-button size="sm" appearance="outline" variant="neutral">Skip</ts-button>
       <ts-button size="sm" variant="primary">
         Continue
         <ts-icon slot="suffix" name="chevron-right" size="sm"></ts-icon>
       </ts-button>
-    </div>
-  </div>
+    </ts-row>
+  </ts-stack>
 `;

@@ -63,3 +63,8 @@ export { TsDatePicker } from './components/date-picker/date-picker';
 export { TsFileUpload } from './components/file-upload/file-upload';
 export { TsStepper } from './components/stepper/stepper';
 export { TsStep } from './components/stepper/step';
+export { TsGrid } from './components/grid/grid';
+export { TsContainer } from './components/container/container';
+export { TsStack } from './components/stack/stack';
+export { TsRow } from './components/row/row';
+export { TsSpacer } from './components/spacer/spacer';

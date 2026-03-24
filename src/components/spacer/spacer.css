@@ -1,0 +1,13 @@
+/* ==========================================================================
+   ts-spacer — Shadow DOM Scoped Styles
+
+   An explicit spacing element for vertical or horizontal space.
+   ========================================================================== */
+
+:host {
+  display: block;
+}
+
+:host([axis="horizontal"]) {
+  display: inline-block;
+}

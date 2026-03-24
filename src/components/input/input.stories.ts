@@ -59,17 +59,17 @@ export const Default = Object.assign(Template.bind({}) as typeof Template & { ar
 });
 
 export const Sizes = () => `
-  <div style="display: flex; flex-direction: column; gap: 16px; max-width: 400px;">
+  <ts-stack gap="3" style="max-width: 400px;">
     <ts-input size="xs" label="Extra Small" placeholder="xs input"></ts-input>
     <ts-input size="sm" label="Small" placeholder="sm input"></ts-input>
     <ts-input size="md" label="Medium" placeholder="md input"></ts-input>
     <ts-input size="lg" label="Large" placeholder="lg input"></ts-input>
     <ts-input size="xl" label="Extra Large" placeholder="xl input"></ts-input>
-  </div>
+  </ts-stack>
 `;
 
 export const Types = () => `
-  <div style="display: flex; flex-direction: column; gap: 16px; max-width: 400px;">
+  <ts-stack gap="3" style="max-width: 400px;">
     <ts-input type="text" label="Username" placeholder="johndoe"></ts-input>
     <ts-input type="email" label="Email Address" placeholder="john@example.com"></ts-input>
     <ts-input type="password" label="Password" placeholder="Enter password"></ts-input>
@@ -77,11 +77,11 @@ export const Types = () => `
     <ts-input type="tel" label="Phone Number" placeholder="+1 (555) 000-0000"></ts-input>
     <ts-input type="url" label="Website" placeholder="https://example.com"></ts-input>
     <ts-input type="search" label="Search" placeholder="Search products..."></ts-input>
-  </div>
+  </ts-stack>
 `;
 
 export const States = () => `
-  <div style="display: flex; flex-direction: column; gap: 16px; max-width: 400px;">
+  <ts-stack gap="3" style="max-width: 400px;">
     <ts-input label="Default" placeholder="Editable input"></ts-input>
     <ts-input label="With Value" value="jane@example.com" placeholder="Email"></ts-input>
     <ts-input label="Disabled" placeholder="Cannot edit" disabled></ts-input>
@@ -89,11 +89,11 @@ export const States = () => `
     <ts-input label="Required" placeholder="This field is required" required></ts-input>
     <ts-input label="With Help Text" placeholder="Choose a username" help-text="Must be 3-20 characters, letters and numbers only."></ts-input>
     <ts-input label="Error State" value="invalid-email" error="Please enter a valid email address."></ts-input>
-  </div>
+  </ts-stack>
 `;
 
 export const WithIcons = () => `
-  <div style="display: flex; flex-direction: column; gap: 16px; max-width: 400px;">
+  <ts-stack gap="3" style="max-width: 400px;">
     <ts-input label="Search" placeholder="Search files...">
       <ts-icon slot="prefix" name="search" size="sm"></ts-icon>
     </ts-input>
@@ -111,36 +111,36 @@ export const WithIcons = () => `
       <ts-icon slot="prefix" name="lock" size="sm"></ts-icon>
       <ts-icon slot="suffix" name="eye" size="sm"></ts-icon>
     </ts-input>
-  </div>
+  </ts-stack>
 `;
 
 export const Composition = () => `
-  <div style="display: flex; flex-direction: column; gap: 24px; max-width: 400px;">
+  <ts-stack gap="4" style="max-width: 400px;">
     <ts-card bordered padding="lg">
       <span slot="header"><h3 style="margin: 0;">Sign In</h3></span>
-      <div style="display: flex; flex-direction: column; gap: 16px;">
+      <ts-stack gap="3">
         <ts-input label="Email" type="email" placeholder="john@example.com" required>
           <ts-icon slot="prefix" name="mail" size="sm"></ts-icon>
         </ts-input>
         <ts-input label="Password" type="password" placeholder="Enter your password" required>
           <ts-icon slot="prefix" name="lock" size="sm"></ts-icon>
         </ts-input>
-      </div>
+      </ts-stack>
       <span slot="footer">
-        <div style="display: flex; flex-direction: column; gap: 12px; padding-top: 8px;">
+        <ts-stack gap="2" style="padding-top: 8px;">
           <ts-button block variant="primary">Sign In</ts-button>
           <ts-button appearance="link" variant="primary">Forgot your password?</ts-button>
-        </div>
+        </ts-stack>
       </span>
     </ts-card>
 
-    <div style="display: flex; gap: 12px; align-items: flex-end;">
+    <ts-row gap="2" align="end">
       <div style="flex: 1;">
         <ts-input placeholder="Enter invite code" label="Invite Code">
           <ts-icon slot="prefix" name="ticket" size="sm"></ts-icon>
         </ts-input>
       </div>
       <ts-button variant="primary">Redeem</ts-button>
-    </div>
-  </div>
+    </ts-row>
+  </ts-stack>
 `;

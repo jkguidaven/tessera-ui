@@ -1,0 +1,10 @@
+/* ==========================================================================
+   ts-stack — Shadow DOM Scoped Styles
+
+   A vertical stack layout primitive with consistent gap spacing.
+   ========================================================================== */
+
+:host {
+  display: flex;
+  flex-direction: column;
+}
