@@ -70,6 +70,8 @@ Do NOT commit if any of these fail. Fix the issue first.
 | `pnpm storybook` | Storybook only (needs prior `pnpm build`) |
 | `pnpm lint` | ESLint |
 | `pnpm -C docs build` | Build docs site (needs prior `pnpm build`) |
+| `pnpm version:bump` | Bump all package versions via Lerna (fixed versioning) |
+| `pnpm publish:packages` | Build all packages and publish to npm via Lerna |
 
 ### Docs site
 

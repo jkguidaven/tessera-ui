@@ -178,12 +178,35 @@ pnpm build && pnpm -C docs build
 
 ## Releasing
 
-Create a [GitHub Release](https://docs.github.com/en/repositories/releasing-projects-on-github/managing-releases-in-a-repository) with a tag (e.g., `v0.2.0`). This triggers the release workflow which:
+Tessera UI uses [Lerna](https://lerna.js.org/) with fixed versioning — all packages share the same version.
 
-1. Builds the component library
-2. Builds Storybook
-3. Generates and builds the documentation site with the release version
-4. Deploys docs + Storybook to GitHub Pages
+### 1. Bump versions
+
+```bash
+pnpm version:bump          # Lerna bumps all package versions and creates a commit + tag
+```
+
+### 2. Push and create a GitHub Release
+
+```bash
+git push && git push --tags
+```
+
+Then create a [GitHub Release](https://docs.github.com/en/repositories/releasing-projects-on-github/managing-releases-in-a-repository) from the new tag. This triggers the release workflow which:
+
+1. **Publishes to npm** — all `@tessera-ui/*` packages (`core`, `react`, `vue`, `angular`)
+2. Builds the component library
+3. Builds Storybook
+4. Generates and builds the documentation site with the release version
+5. Deploys docs + Storybook to GitHub Pages
+
+### CI Setup (required once)
+
+The npm publish job requires an `NPM_TOKEN` secret in the GitHub repository settings:
+
+1. Create the `tessera-ui` org at [npmjs.com/org/create](https://www.npmjs.com/org/create)
+2. Generate an **Automation** token at [npmjs.com/settings/~/tokens](https://www.npmjs.com/settings/~/tokens)
+3. Add it as `NPM_TOKEN` under **Settings → Secrets and variables → Actions**
 
 ## Architecture
 
