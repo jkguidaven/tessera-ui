@@ -1,21 +1,11 @@
 ---
 title: Iconography
-description: Icon guidelines, sizing, integration, and recommended libraries for Tessera UI.
+description: Icon design principles — sizing, stroke width, alignment, and accessibility guidelines.
 ---
 
-Tessera UI **does not ship its own icon set**. Instead, it provides guidelines and integration patterns that work with any icon library. This keeps the bundle lean and gives teams the freedom to choose icons that match their brand.
+Icons communicate meaning quickly and reinforce text labels. Tessera UI provides design guidelines that work with any icon library, plus a built-in `ts-icon` component with [Lucide](https://lucide.dev/) icons available out of the box.
 
-## Recommended Icon Libraries
-
-These libraries are well-maintained, accessible, and work seamlessly with Web Components:
-
-| Library | Style | License | Best For |
-|---|---|---|---|
-| **Lucide** | Outlined, geometric | ISC | General-purpose UI |
-| **Phosphor** | Six weight variants | MIT | Flexible, multi-weight designs |
-| **Heroicons** | Outlined + solid | MIT | Tailwind-adjacent projects |
-| **Material Symbols** | Outlined + filled + rounded | Apache 2.0 | Material Design ecosystems |
-| **Tabler Icons** | Outlined, consistent stroke | MIT | Clean, minimal UI |
+For setup and configuration details, see the [Icons setup guide](/tessera-ui/getting-started/icons/).
 
 ## Sizing
 
@@ -45,9 +35,8 @@ For outlined icon libraries, maintain consistent stroke width across all icons:
 Icons should vertically center with their adjacent text. Tessera UI components handle this automatically via `inline-flex` and `align-items: center`:
 
 ```html
-<!-- Button with icon — alignment handled by component -->
 <ts-button>
-  <svg slot="prefix" width="16" height="16"><!-- icon --></svg>
+  <ts-icon slot="prefix" name="save" size="sm"></ts-icon>
   Save
 </ts-button>
 ```
@@ -58,7 +47,7 @@ For standalone icons next to text, use flexbox:
 .icon-text {
   display: inline-flex;
   align-items: center;
-  gap: var(--ts-spacing-2);  /* 8px gap between icon and text */
+  gap: var(--ts-spacing-2);
 }
 ```
 
@@ -70,9 +59,9 @@ Tessera UI components provide `prefix` and `suffix` slots for icon placement:
 
 ```html
 <ts-button>
-  <svg slot="prefix" width="16" height="16"><!-- leading icon --></svg>
-  Label
-  <svg slot="suffix" width="16" height="16"><!-- trailing icon --></svg>
+  <ts-icon slot="prefix" name="download" size="sm"></ts-icon>
+  Download
+  <ts-icon slot="suffix" name="external-link" size="sm"></ts-icon>
 </ts-button>
 ```
 
@@ -80,8 +69,7 @@ Tessera UI components provide `prefix` and `suffix` slots for icon placement:
 
 ```html
 <ts-input label="Search">
-  <svg slot="prefix" width="16" height="16"><!-- search icon --></svg>
-  <svg slot="suffix" width="16" height="16"><!-- clear icon --></svg>
+  <ts-icon slot="prefix" name="search" size="md"></ts-icon>
 </ts-input>
 ```
 
@@ -89,168 +77,41 @@ Tessera UI components provide `prefix` and `suffix` slots for icon placement:
 
 ```html
 <ts-alert variant="info">
-  <svg slot="icon" width="16" height="16"><!-- info icon --></svg>
+  <ts-icon slot="icon" name="info" size="md"></ts-icon>
   Your changes have been saved.
 </ts-alert>
 ```
 
-## Built-in Lucide Icons
-
-Tessera UI ships with the complete [Lucide](https://lucide.dev/) icon set (1,400+ icons) built in. Just use the `name` prop — no registration or imports required:
-
-```html
-<ts-icon name="search" size="md" label="Search"></ts-icon>
-<ts-icon name="settings" size="lg"></ts-icon>
-<ts-icon name="arrow-left"></ts-icon>
-<ts-icon name="heart" color="red"></ts-icon>
-```
-
-Names accept **kebab-case** (`arrow-left`) or **PascalCase** (`ArrowLeft`). Browse all available icons at [lucide.dev/icons](https://lucide.dev/icons).
-
-### Bundle impact
-
-The Lucide icon data (~91KB gzipped) is **lazy-loaded as a separate chunk** — it only fetches the first time a `name` prop is used without a registry match. Consumers who only use `src` or inline SVG slots never load the Lucide chunk at all.
-
-| Usage | Lucide chunk loaded? |
-|---|---|
-| `<ts-icon name="search">` | Yes (lazy, on first use) |
-| `<ts-icon src="/icon.svg">` | No |
-| `<ts-icon><svg>...</svg></ts-icon>` | No |
-| Registry icon + `name` | No (registry resolves first) |
-
-### Disabling built-in Lucide icons
-
-To prevent the Lucide chunk from ever loading, add `data-icons="none"` to any ancestor element. This follows the same pattern as `data-theme` and `data-density`:
-
-```html
-<!-- App-global: disable Lucide entirely -->
-<html data-icons="none">
-  <body>
-    <!-- name prop only resolves from your custom registry -->
-    <ts-icon name="search"></ts-icon>
-  </body>
-</html>
-```
-
-With `data-icons="none"`, the `name` prop still works — it resolves from your custom registry. Only the Lucide fallback is skipped.
-
-### Swapping to a different icon library
-
-To replace Lucide with Phosphor, Heroicons, or any other library:
-
-1. Disable Lucide with `data-icons="none"` on `<html>` or `<body>`
-2. Register your preferred icons via the registry
-
-```html
-<html data-icons="none">
-```
-
-```js
-import { registerIcons } from '@tessera-ui/core';
-
-// Register icons from any library as SVG strings
-registerIcons({
-  'search': '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">...</svg>',
-  'home': '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">...</svg>',
-  'settings': '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">...</svg>',
-});
-```
-
-```html
-<!-- These now resolve from your registry -->
-<ts-icon name="search"></ts-icon>
-<ts-icon name="home"></ts-icon>
-```
-
-### Overriding individual icons
-
-The registry takes priority over Lucide. Register an icon with the same name to override it — no need to disable Lucide globally:
-
-```js
-import { registerIcon } from '@tessera-ui/core';
-
-// Override just the "search" icon with your own version
-registerIcon('search', '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><!-- custom --></svg>');
-```
-
-## The `ts-icon` Component
-
-Tessera UI provides a `ts-icon` Web Component for consistent icon rendering. It resolves icons in this order: **custom registry** → **built-in Lucide** (unless `data-icons="none"`) → **slot fallback**.
-
-### Props
-
-| Prop | Type | Default | Description |
-|---|---|---|---|
-| `name` | `string` | — | Icon name — resolves from registry first, then Lucide |
-| `src` | `string` | — | URL to an external SVG file (takes priority over `name`) |
-| `size` | `'xs' \| 'sm' \| 'md' \| 'lg' \| 'xl'` | `'md'` | Size variant matching the type scale |
-| `label` | `string` | — | Accessible label (sets `aria-label`; omit for decorative icons) |
-| `color` | `string` | `'currentColor'` | Fill/stroke color |
-
-### Usage with inline SVG
-
-Pass SVG markup as a child of `ts-icon`. The component handles sizing and color inheritance:
-
-```html
-<ts-icon size="md" label="Search">
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-    <circle cx="11" cy="11" r="8"/>
-    <path d="m21 21-4.35-4.35"/>
-  </svg>
-</ts-icon>
-```
-
-### Usage with `src`
-
-Load an external SVG file. The component fetches and inlines the SVG for full style control:
-
-```html
-<ts-icon src="/icons/check.svg" size="sm" label="Complete"></ts-icon>
-```
-
-### Size variants
-
-| Size | Pixel Value | Matching Font Token |
-|---|---|---|
-| `xs` | 12px | `--ts-font-size-xs` |
-| `sm` | 14px | `--ts-font-size-sm` |
-| `md` | 16px | `--ts-font-size-md` |
-| `lg` | 18px | `--ts-font-size-lg` |
-| `xl` | 20px | `--ts-font-size-xl` |
-
-### Pairing with other components
-
-```html
-<!-- Button with ts-icon -->
-<ts-button>
-  <ts-icon slot="prefix" size="sm" name="save"></ts-icon>
-  Save Changes
-</ts-button>
-
-<!-- Input with ts-icon -->
-<ts-input label="Search">
-  <ts-icon slot="prefix" size="md" name="search"></ts-icon>
-</ts-input>
-```
-
 ## Accessibility
 
-- **Decorative icons** (next to text that already conveys meaning): add `aria-hidden="true"` to the SVG
-- **Meaningful icons** (no adjacent text): add `role="img"` and `aria-label="description"` to the SVG
+- **Decorative icons** (next to text that conveys meaning): omit the `label` prop — `ts-icon` sets `aria-hidden="true"` automatically
+- **Meaningful icons** (no adjacent text): set the `label` prop — `ts-icon` sets `role="img"` and `aria-label` automatically
 - **Icon-only buttons**: always provide an `aria-label` on the button
 
 ```html
-<!-- Decorative icon — text conveys meaning -->
+<!-- Decorative — text conveys meaning, icon is supplementary -->
 <ts-button>
-  <svg slot="prefix" aria-hidden="true"><!-- icon --></svg>
+  <ts-icon slot="prefix" name="trash-2"></ts-icon>
   Delete
 </ts-button>
 
-<!-- Meaningful icon — no text, icon IS the label -->
+<!-- Meaningful — icon IS the label -->
 <ts-button aria-label="Close">
-  <svg slot="prefix" role="img" aria-label="Close"><!-- X icon --></svg>
+  <ts-icon slot="prefix" name="x" label="Close"></ts-icon>
 </ts-button>
 ```
+
+## Choosing an Icon Library
+
+| Library | Style | License | Best For |
+|---|---|---|---|
+| **Lucide** (built-in) | Outlined, geometric | ISC | General-purpose UI |
+| **Phosphor** | Six weight variants | MIT | Flexible, multi-weight designs |
+| **Heroicons** | Outlined + solid | MIT | Tailwind-adjacent projects |
+| **Material Symbols** | Outlined + filled + rounded | Apache 2.0 | Material Design ecosystems |
+| **Tabler Icons** | Outlined, consistent stroke | MIT | Clean, minimal UI |
+
+Lucide is available out of the box. To use a different library, see [Swapping icon libraries](/tessera-ui/getting-started/icons/#swapping-to-a-different-icon-library).
 
 ## Guidelines
 
@@ -258,4 +119,4 @@ Load an external SVG file. The component fetches and inlines the SVG for full st
 2. **Use semantic icons.** A trash can means "delete," a pencil means "edit." Don't repurpose icons for unrelated actions.
 3. **Don't use icons as the sole indicator of state.** Always pair icons with text or ARIA labels for accessibility.
 4. **Size icons to match text.** An oversized icon next to small text looks unbalanced. Use the sizing table above.
-5. **Prefer SVG over icon fonts.** SVG icons are sharper, more accessible, and tree-shakeable.
+5. **Prefer `ts-icon` over raw SVG.** The component handles sizing, color inheritance, and accessibility attributes consistently.
