@@ -1,0 +1,84 @@
+/* ==========================================================================
+   ts-file-upload — Shadow DOM Scoped Styles
+
+   Component tokens (Tier 3):
+     --ts-file-upload-border-color  Dropzone border color
+     --ts-file-upload-bg            Dropzone background
+     --ts-file-upload-radius        Dropzone border radius
+   ========================================================================== */
+
+:host {
+  display: block;
+  font-family: var(--ts-font-family-base);
+
+  --ts-file-upload-border-color: var(--ts-color-border-default);
+  --ts-file-upload-bg: var(--ts-color-bg-surface);
+  --ts-file-upload-radius: var(--ts-shape-interactive);
+}
+
+/* ---- Dropzone ---- */
+.file-upload__dropzone {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-block-size: 120px;
+  padding: var(--ts-spacing-6);
+  border: 2px dashed var(--ts-file-upload-border-color);
+  border-radius: var(--ts-file-upload-radius);
+  background-color: var(--ts-file-upload-bg);
+  cursor: pointer;
+  outline: none;
+  transition:
+    border-color var(--ts-transition-fast),
+    background-color var(--ts-transition-fast),
+    box-shadow var(--ts-transition-fast);
+}
+
+.file-upload__dropzone:hover:not([aria-disabled="true"]) {
+  border-color: var(--ts-color-interactive-primary);
+  background-color: var(--ts-color-interactive-primary-subtle, rgba(59, 130, 246, 0.05));
+}
+
+.file-upload__dropzone:focus-visible {
+  box-shadow: var(--ts-focus-ring);
+  border-color: var(--ts-color-interactive-primary);
+}
+
+/* ---- Drag over state ---- */
+.file-upload__dropzone--drag-over {
+  border-color: var(--ts-color-interactive-primary);
+  background-color: var(--ts-color-interactive-primary-subtle, rgba(59, 130, 246, 0.1));
+  border-style: solid;
+}
+
+/* ---- Disabled ---- */
+:host([disabled]) .file-upload__dropzone {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* ---- Label ---- */
+.file-upload__label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--ts-spacing-2);
+  font-size: var(--ts-font-size-sm);
+  color: var(--ts-color-text-secondary);
+  text-align: center;
+  pointer-events: none;
+}
+
+/* ---- Hidden file input ---- */
+.file-upload__input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}

@@ -1,0 +1,191 @@
+import { Component, Prop, State, Event, Watch, h, Host, Element, Method } from '@stencil/core';
+import type { EventEmitter } from '@stencil/core';
+import type { TsSize, TsChangeEventDetail } from '../../types';
+import { generateId } from '../../utils/aria';
+
+/**
+ * @part base - The outer wrapper.
+ * @part label - The label element.
+ * @part textarea - The native textarea element.
+ * @part help-text - The help text wrapper.
+ * @part error-text - The error message wrapper.
+ */
+@Component({
+  tag: 'ts-textarea',
+  styleUrl: 'textarea.css',
+  shadow: true,
+})
+export class TsTextarea {
+  @Element() hostEl!: HTMLElement;
+
+  private textareaEl?: HTMLTextAreaElement;
+  private inputId = generateId('ts-textarea');
+
+  /** The textarea's value. */
+  @Prop({ mutable: true, reflect: true }) value = '';
+
+  /** Placeholder text. */
+  @Prop() placeholder?: string;
+
+  /** Renders the textarea as disabled. */
+  @Prop({ reflect: true }) disabled = false;
+
+  /** Renders the textarea as readonly. */
+  @Prop({ reflect: true }) readonly = false;
+
+  /** The textarea size. */
+  @Prop({ reflect: true }) size: TsSize = 'md';
+
+  /** Label text displayed above the textarea. */
+  @Prop() label?: string;
+
+  /** Help text displayed below the textarea. */
+  @Prop() helpText?: string;
+
+  /** Renders the textarea in an error state. */
+  @Prop({ reflect: true }) error = false;
+
+  /** Error message displayed below the textarea. */
+  @Prop() errorMessage?: string;
+
+  /** Makes the textarea required. */
+  @Prop({ reflect: true }) required = false;
+
+  /** Name attribute for form submission. */
+  @Prop() name?: string;
+
+  /** Number of visible text rows. */
+  @Prop() rows = 3;
+
+  /** Resize behavior. */
+  @Prop({ reflect: true }) resize: 'none' | 'vertical' | 'horizontal' | 'both' = 'vertical';
+
+  /** Maximum character length. */
+  @Prop() maxlength?: number;
+
+  /** Whether the textarea is currently focused. */
+  @State() hasFocus = false;
+
+  /** Emitted on every keystroke. */
+  @Event({ eventName: 'tsInput' }) tsInput!: EventEmitter<TsChangeEventDetail<string>>;
+
+  /** Emitted when the value changes (on blur / commit). */
+  @Event({ eventName: 'tsChange' }) tsChange!: EventEmitter<TsChangeEventDetail<string>>;
+
+  /** Emitted when the textarea gains focus. */
+  @Event({ eventName: 'tsFocus' }) tsFocus!: EventEmitter<void>;
+
+  /** Emitted when the textarea loses focus. */
+  @Event({ eventName: 'tsBlur' }) tsBlur!: EventEmitter<void>;
+
+  @Watch('value')
+  handleValueChange(newValue: string, oldValue: string): void {
+    if (newValue !== oldValue && this.textareaEl) {
+      this.textareaEl.value = newValue;
+    }
+  }
+
+  /** Programmatically focus the textarea. */
+  @Method()
+  async setFocus(): Promise<void> {
+    this.textareaEl?.focus();
+  }
+
+  /** Programmatically select the textarea text. */
+  @Method()
+  async selectText(): Promise<void> {
+    this.textareaEl?.select();
+  }
+
+  private handleInput = (event: Event): void => {
+    const target = event.target as HTMLTextAreaElement;
+    const previousValue = this.value;
+    this.value = target.value;
+    this.tsInput.emit({ value: this.value, previousValue });
+  };
+
+  private handleChange = (): void => {
+    this.tsChange.emit({ value: this.value, previousValue: this.value });
+  };
+
+  private handleFocus = (): void => {
+    this.hasFocus = true;
+    this.tsFocus.emit();
+  };
+
+  private handleBlur = (): void => {
+    this.hasFocus = false;
+    this.tsBlur.emit();
+  };
+
+  render() {
+    const hasError = this.error && !!this.errorMessage;
+    const labelId = `${this.inputId}-label`;
+    const helpId = `${this.inputId}-help`;
+    const errorId = `${this.inputId}-error`;
+
+    return (
+      <Host
+        class={{
+          'ts-textarea': true,
+          [`ts-textarea--${this.size}`]: true,
+          'ts-textarea--focused': this.hasFocus,
+          'ts-textarea--disabled': this.disabled,
+          'ts-textarea--error': this.error,
+        }}
+      >
+        {this.label && (
+          <label class="textarea__label" part="label" id={labelId} htmlFor={this.inputId}>
+            {this.label}
+            {this.required && <span class="textarea__required" aria-hidden="true"> *</span>}
+          </label>
+        )}
+
+        <div
+          class={{
+            'textarea__wrapper': true,
+            'textarea__wrapper--focused': this.hasFocus,
+            'textarea__wrapper--error': this.error,
+            'textarea__wrapper--disabled': this.disabled,
+          }}
+          part="base"
+        >
+          <textarea
+            ref={(el) => (this.textareaEl = el)}
+            id={this.inputId}
+            class="textarea__native"
+            part="textarea"
+            value={this.value}
+            placeholder={this.placeholder}
+            disabled={this.disabled}
+            readOnly={this.readonly}
+            required={this.required}
+            maxlength={this.maxlength}
+            name={this.name}
+            rows={this.rows}
+            aria-labelledby={this.label ? labelId : undefined}
+            aria-describedby={hasError ? errorId : this.helpText ? helpId : undefined}
+            aria-invalid={this.error ? 'true' : undefined}
+            aria-required={this.required ? 'true' : undefined}
+            onInput={this.handleInput}
+            onChange={this.handleChange}
+            onFocus={this.handleFocus}
+            onBlur={this.handleBlur}
+          />
+        </div>
+
+        {hasError && (
+          <div class="textarea__error" part="error-text" id={errorId} role="alert">
+            {this.errorMessage}
+          </div>
+        )}
+
+        {!hasError && this.helpText && (
+          <div class="textarea__help" part="help-text" id={helpId}>
+            {this.helpText}
+          </div>
+        )}
+      </Host>
+    );
+  }
+}

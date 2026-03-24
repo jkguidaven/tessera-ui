@@ -1,0 +1,134 @@
+/* ==========================================================================
+   ts-tabs — Shadow DOM Scoped Styles
+
+   Component tokens (Tier 3):
+     --ts-tabs-border-color   Border color for tab bar
+     --ts-tabs-active-color   Active tab indicator color
+     --ts-tabs-radius         Border radius for enclosed/pill tabs
+   ========================================================================== */
+
+:host {
+  display: block;
+  font-family: var(--ts-font-family-base);
+
+  --ts-tabs-border-color: var(--ts-color-border-default);
+  --ts-tabs-active-color: var(--ts-color-interactive-primary);
+  --ts-tabs-radius: var(--ts-shape-interactive);
+}
+
+/* ---- Tab list ---- */
+.tabs__tablist {
+  display: flex;
+  gap: var(--ts-spacing-1);
+  border-block-end: 2px solid var(--ts-tabs-border-color);
+}
+
+/* ---- Tab button base ---- */
+.tabs__tab {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ts-spacing-1);
+  border: none;
+  background: transparent;
+  font-family: inherit;
+  font-weight: var(--ts-font-weight-semi);
+  color: var(--ts-color-text-secondary);
+  cursor: pointer;
+  position: relative;
+  white-space: nowrap;
+  transition:
+    color var(--ts-transition-fast),
+    background-color var(--ts-transition-fast),
+    border-color var(--ts-transition-fast);
+  outline: none;
+  margin-block-end: -2px;
+  border-block-end: 2px solid transparent;
+}
+
+.tabs__tab:focus-visible {
+  box-shadow: var(--ts-focus-ring);
+}
+
+.tabs__tab:hover:not([disabled]) {
+  color: var(--ts-color-text-primary);
+}
+
+/* ---- Active tab (line variant) ---- */
+.tabs__tab--active {
+  color: var(--ts-tabs-active-color);
+  border-block-end-color: var(--ts-tabs-active-color);
+}
+
+/* ---- Disabled ---- */
+.tabs__tab--disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ---- Sizes ---- */
+:host([size="sm"]) .tabs__tab {
+  padding: var(--ts-spacing-1) var(--ts-spacing-3);
+  font-size: var(--ts-font-size-sm);
+}
+
+:host([size="md"]) .tabs__tab {
+  padding: var(--ts-spacing-2) var(--ts-spacing-4);
+  font-size: var(--ts-font-size-md);
+}
+
+:host([size="lg"]) .tabs__tab {
+  padding: var(--ts-spacing-3) var(--ts-spacing-5);
+  font-size: var(--ts-font-size-lg);
+}
+
+/* ---- Enclosed variant ---- */
+:host([variant="enclosed"]) .tabs__tablist {
+  gap: 0;
+  border-block-end: 2px solid var(--ts-tabs-border-color);
+}
+
+:host([variant="enclosed"]) .tabs__tab {
+  border: 2px solid transparent;
+  border-block-end: 2px solid var(--ts-tabs-border-color);
+  border-start-start-radius: var(--ts-tabs-radius);
+  border-start-end-radius: var(--ts-tabs-radius);
+  margin-block-end: -2px;
+}
+
+:host([variant="enclosed"]) .tabs__tab--active {
+  border-color: var(--ts-tabs-border-color);
+  border-block-end-color: var(--ts-color-bg-surface);
+  background-color: var(--ts-color-bg-surface);
+  color: var(--ts-tabs-active-color);
+}
+
+/* ---- Pill variant ---- */
+:host([variant="pill"]) .tabs__tablist {
+  border-block-end: none;
+  gap: var(--ts-spacing-1);
+  background-color: var(--ts-color-bg-subtle);
+  border-radius: var(--ts-tabs-radius);
+  padding: var(--ts-spacing-1);
+}
+
+:host([variant="pill"]) .tabs__tab {
+  border-block-end: none;
+  border-radius: var(--ts-tabs-radius);
+  margin-block-end: 0;
+}
+
+:host([variant="pill"]) .tabs__tab--active {
+  background-color: var(--ts-color-bg-surface);
+  color: var(--ts-tabs-active-color);
+  box-shadow: var(--ts-shadow-sm);
+}
+
+/* ---- Panels ---- */
+.tabs__panels {
+  padding-block-start: var(--ts-spacing-4);
+}
+
+/* ---- Tab icon ---- */
+.tabs__tab-icon {
+  font-size: 1em;
+}

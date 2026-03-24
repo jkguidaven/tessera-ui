@@ -1,0 +1,96 @@
+import { Component, Prop, h, Host, Element, Listen } from '@stencil/core';
+
+/**
+ * @slot - Default slot for ts-tree-item children.
+ *
+ * @part base - The tree container.
+ */
+@Component({
+  tag: 'ts-tree',
+  styleUrl: 'tree.css',
+  shadow: true,
+})
+export class TsTree {
+  @Element() hostEl!: HTMLElement;
+
+  /** Enable item selection mode. */
+  @Prop({ reflect: true }) selectable = false;
+
+  @Listen('keydown')
+  handleKeyDown(event: KeyboardEvent) {
+    const items = this.getVisibleItems();
+    if (items.length === 0) return;
+
+    const focused = document.activeElement as HTMLElement;
+    const currentIndex = items.indexOf(focused);
+    if (currentIndex === -1) return;
+
+    const currentItem = items[currentIndex] as HTMLTsTreeItemElement;
+
+    switch (event.key) {
+      case 'ArrowDown':
+        event.preventDefault();
+        if (currentIndex < items.length - 1) {
+          items[currentIndex + 1].focus();
+        }
+        break;
+      case 'ArrowUp':
+        event.preventDefault();
+        if (currentIndex > 0) {
+          items[currentIndex - 1].focus();
+        }
+        break;
+      case 'ArrowRight':
+        event.preventDefault();
+        if (currentItem && !currentItem.expanded) {
+          currentItem.expanded = true;
+        }
+        break;
+      case 'ArrowLeft':
+        event.preventDefault();
+        if (currentItem && currentItem.expanded) {
+          currentItem.expanded = false;
+        }
+        break;
+      case 'Home':
+        event.preventDefault();
+        items[0].focus();
+        break;
+      case 'End':
+        event.preventDefault();
+        items[items.length - 1].focus();
+        break;
+    }
+  }
+
+  private getVisibleItems(): HTMLElement[] {
+    const allItems = Array.from(this.hostEl.querySelectorAll('ts-tree-item'));
+    return allItems.filter(item => {
+      let parent = item.parentElement;
+      while (parent && parent !== this.hostEl) {
+        if (parent.tagName === 'TS-TREE-ITEM' && !(parent as HTMLTsTreeItemElement).expanded) {
+          return false;
+        }
+        parent = parent.parentElement;
+      }
+      return true;
+    }) as HTMLElement[];
+  }
+
+  render() {
+    return (
+      <Host
+        class={{ 'ts-tree': true }}
+        role="tree"
+      >
+        <div class="tree__base" part="base">
+          <slot />
+        </div>
+      </Host>
+    );
+  }
+}
+
+interface HTMLTsTreeItemElement extends HTMLElement {
+  expanded: boolean;
+}

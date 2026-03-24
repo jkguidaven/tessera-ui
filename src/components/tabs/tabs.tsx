@@ -1,0 +1,161 @@
+import { Component, Prop, Event, h, Host, Element, Watch } from '@stencil/core';
+import type { EventEmitter } from '@stencil/core';
+
+/**
+ * @slot - Default slot for `ts-tab-panel` children.
+ *
+ * @part tablist - The tab button container.
+ * @part tab - Each individual tab button.
+ * @part tab-active - The currently active tab button.
+ * @part panels - The panel container.
+ */
+@Component({
+  tag: 'ts-tabs',
+  styleUrl: 'tabs.css',
+  shadow: true,
+})
+export class TsTabs {
+  @Element() hostEl!: HTMLElement;
+
+  /** The value of the currently active tab. */
+  @Prop({ mutable: true, reflect: true }) value?: string;
+
+  /** Visual variant of the tab bar. */
+  @Prop({ reflect: true }) variant: 'line' | 'enclosed' | 'pill' = 'line';
+
+  /** The size of the tab buttons. */
+  @Prop({ reflect: true }) size: 'sm' | 'md' | 'lg' = 'md';
+
+  /** Emitted when the active tab changes. */
+  @Event({ eventName: 'tsChange' }) tsChange!: EventEmitter<{ value: string }>;
+
+  @Watch('value')
+  handleValueChange(): void {
+    this.updatePanelVisibility();
+  }
+
+  componentDidLoad(): void {
+    // Default to first non-disabled tab if no value set
+    if (!this.value) {
+      const panels = this.getPanels();
+      const firstEnabled = panels.find((p) => !p.hasAttribute('disabled'));
+      if (firstEnabled) {
+        this.value = firstEnabled.getAttribute('value') || '';
+      }
+    }
+    this.updatePanelVisibility();
+  }
+
+  private getPanels(): Element[] {
+    return Array.from(this.hostEl.querySelectorAll('ts-tab-panel'));
+  }
+
+  private getTabData(): Array<{ tab: string; value: string; disabled: boolean; icon?: string }> {
+    return this.getPanels().map((panel) => ({
+      tab: panel.getAttribute('tab') || '',
+      value: panel.getAttribute('value') || '',
+      disabled: panel.hasAttribute('disabled'),
+      icon: panel.getAttribute('icon') || undefined,
+    }));
+  }
+
+  private updatePanelVisibility(): void {
+    this.getPanels().forEach((panel) => {
+      const isActive = panel.getAttribute('value') === this.value;
+      (panel as HTMLElement).style.display = isActive ? '' : 'none';
+    });
+  }
+
+  private handleTabClick(tabValue: string, disabled: boolean): void {
+    if (disabled || tabValue === this.value) return;
+    this.value = tabValue;
+    this.tsChange.emit({ value: tabValue });
+    this.updatePanelVisibility();
+  }
+
+  private handleKeydown = (event: KeyboardEvent): void => {
+    const tabs = this.getTabData();
+    const enabledTabs = tabs.filter((t) => !t.disabled);
+    const currentIndex = enabledTabs.findIndex((t) => t.value === this.value);
+
+    let newIndex = currentIndex;
+
+    switch (event.key) {
+      case 'ArrowRight':
+      case 'ArrowDown':
+        event.preventDefault();
+        newIndex = (currentIndex + 1) % enabledTabs.length;
+        break;
+      case 'ArrowLeft':
+      case 'ArrowUp':
+        event.preventDefault();
+        newIndex = (currentIndex - 1 + enabledTabs.length) % enabledTabs.length;
+        break;
+      case 'Home':
+        event.preventDefault();
+        newIndex = 0;
+        break;
+      case 'End':
+        event.preventDefault();
+        newIndex = enabledTabs.length - 1;
+        break;
+      default:
+        return;
+    }
+
+    const newTab = enabledTabs[newIndex];
+    if (newTab) {
+      this.value = newTab.value;
+      this.tsChange.emit({ value: newTab.value });
+      this.updatePanelVisibility();
+
+      // Focus the new tab button
+      const tabButtons = this.hostEl.shadowRoot?.querySelectorAll<HTMLButtonElement>('[role="tab"]');
+      const allTabIndex = tabs.findIndex((t) => t.value === newTab.value);
+      tabButtons?.[allTabIndex]?.focus();
+    }
+  };
+
+  render() {
+    const tabs = this.getTabData();
+
+    return (
+      <Host
+        class={{
+          'ts-tabs': true,
+          [`ts-tabs--${this.variant}`]: true,
+          [`ts-tabs--${this.size}`]: true,
+        }}
+      >
+        <div class="tabs__tablist" part="tablist" role="tablist" onKeyDown={this.handleKeydown}>
+          {tabs.map((t) => {
+            const isActive = t.value === this.value;
+            return (
+              <button
+                class={{
+                  'tabs__tab': true,
+                  'tabs__tab--active': isActive,
+                  'tabs__tab--disabled': t.disabled,
+                }}
+                part={isActive ? 'tab tab-active' : 'tab'}
+                role="tab"
+                type="button"
+                aria-selected={isActive ? 'true' : 'false'}
+                aria-disabled={t.disabled ? 'true' : undefined}
+                tabindex={isActive ? 0 : -1}
+                disabled={t.disabled}
+                onClick={() => this.handleTabClick(t.value, t.disabled)}
+              >
+                {t.icon && <ts-icon name={t.icon} class="tabs__tab-icon" />}
+                {t.tab}
+              </button>
+            );
+          })}
+        </div>
+        <div class="tabs__panels" part="panels">
+          <slot />
+        </div>
+      </Host>
+    );
+  }
+}

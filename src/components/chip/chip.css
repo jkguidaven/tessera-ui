@@ -1,0 +1,210 @@
+/* ==========================================================================
+   ts-chip — Shadow DOM Scoped Styles
+
+   Component tokens (Tier 3):
+     --ts-chip-radius     Border radius (pill shape)
+     --ts-chip-height     Chip height per size
+   ========================================================================== */
+
+:host {
+  display: inline-block;
+  vertical-align: middle;
+  font-family: var(--ts-font-family-base);
+
+  --ts-chip-radius: var(--ts-radius-full, 9999px);
+  --ts-chip-height: 2rem;
+}
+
+/* ---- Base ---- */
+.chip__base {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ts-spacing-1);
+  block-size: var(--ts-chip-height);
+  padding-inline: var(--ts-spacing-3);
+  border-radius: var(--ts-chip-radius);
+  font-size: var(--ts-font-size-sm);
+  font-weight: var(--ts-font-weight-medium);
+  line-height: 1;
+  cursor: pointer;
+  user-select: none;
+  border: 1px solid transparent;
+  outline: none;
+  transition:
+    background-color var(--ts-transition-fast),
+    border-color var(--ts-transition-fast),
+    color var(--ts-transition-fast),
+    box-shadow var(--ts-transition-fast);
+}
+
+.chip__base:focus-visible {
+  box-shadow: var(--ts-focus-ring);
+}
+
+/* ---- Sizes ---- */
+:host([size="sm"]) {
+  --ts-chip-height: 1.5rem;
+}
+:host([size="sm"]) .chip__base {
+  padding-inline: var(--ts-spacing-2);
+  font-size: var(--ts-font-size-xs);
+}
+
+:host([size="lg"]) {
+  --ts-chip-height: 2.5rem;
+}
+:host([size="lg"]) .chip__base {
+  padding-inline: var(--ts-spacing-4);
+  font-size: var(--ts-font-size-md);
+}
+
+/* ---- Solid Variants ---- */
+:host([variant="neutral"]:not([outline])) .chip__base {
+  background-color: var(--ts-color-neutral-200);
+  color: var(--ts-color-neutral-800);
+}
+:host([variant="neutral"]:not([outline])) .chip__base:hover {
+  background-color: var(--ts-color-neutral-300);
+}
+
+:host([variant="primary"]:not([outline])) .chip__base {
+  background-color: var(--ts-color-primary-100, var(--ts-color-primary-500));
+  color: var(--ts-color-primary-700, var(--ts-color-neutral-0));
+}
+:host([variant="primary"]:not([outline])) .chip__base:hover {
+  background-color: var(--ts-color-primary-200, var(--ts-color-primary-600));
+}
+
+:host([variant="success"]:not([outline])) .chip__base {
+  background-color: var(--ts-color-success-bg);
+  color: var(--ts-color-success-600);
+}
+
+:host([variant="warning"]:not([outline])) .chip__base {
+  background-color: var(--ts-color-warning-bg);
+  color: var(--ts-color-warning-600);
+}
+
+:host([variant="danger"]:not([outline])) .chip__base {
+  background-color: var(--ts-color-danger-bg);
+  color: var(--ts-color-danger-600);
+}
+
+:host([variant="info"]:not([outline])) .chip__base {
+  background-color: var(--ts-color-info-bg);
+  color: var(--ts-color-info-600);
+}
+
+:host([variant="secondary"]:not([outline])) .chip__base {
+  background-color: var(--ts-color-neutral-100);
+  color: var(--ts-color-neutral-700);
+}
+
+/* ---- Outline Variants ---- */
+:host([outline]) .chip__base {
+  background-color: transparent;
+}
+
+:host([outline][variant="neutral"]) .chip__base {
+  border-color: var(--ts-color-border-strong);
+  color: var(--ts-color-text-secondary);
+}
+:host([outline][variant="neutral"]) .chip__base:hover {
+  background-color: var(--ts-color-bg-subtle);
+}
+
+:host([outline][variant="primary"]) .chip__base {
+  border-color: var(--ts-color-primary-500);
+  color: var(--ts-color-primary-600);
+}
+:host([outline][variant="primary"]) .chip__base:hover {
+  background-color: var(--ts-color-primary-100, var(--ts-color-interactive-primary-subtle));
+}
+
+:host([outline][variant="danger"]) .chip__base {
+  border-color: var(--ts-color-danger-500);
+  color: var(--ts-color-danger-600);
+}
+
+:host([outline][variant="success"]) .chip__base {
+  border-color: var(--ts-color-success-500, var(--ts-color-success-border));
+  color: var(--ts-color-success-600);
+}
+
+:host([outline][variant="warning"]) .chip__base {
+  border-color: var(--ts-color-warning-500, var(--ts-color-warning-border));
+  color: var(--ts-color-warning-600);
+}
+
+:host([outline][variant="info"]) .chip__base {
+  border-color: var(--ts-color-info-500, var(--ts-color-info-border));
+  color: var(--ts-color-info-600);
+}
+
+/* ---- Selected state ---- */
+:host([selected]) .chip__base {
+  background-color: var(--ts-color-interactive-primary);
+  color: var(--ts-color-text-on-primary);
+  border-color: var(--ts-color-interactive-primary);
+}
+:host([selected]) .chip__base:hover {
+  background-color: var(--ts-color-interactive-primary-hover);
+  border-color: var(--ts-color-interactive-primary-hover);
+}
+
+/* ---- Disabled ---- */
+:host([disabled]) .chip__base {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* ---- Prefix ---- */
+.chip__prefix {
+  display: inline-flex;
+  align-items: center;
+}
+
+.chip__prefix:empty {
+  display: none;
+}
+
+/* ---- Label ---- */
+.chip__label {
+  display: inline-flex;
+  align-items: center;
+}
+
+/* ---- Remove button ---- */
+.chip__remove {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: 1.1em;
+  block-size: 1.1em;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  color: currentColor;
+  opacity: 0.6;
+  cursor: pointer;
+  font-size: 0.75em;
+  padding: 0;
+  margin-inline-start: var(--ts-spacing-1);
+  line-height: 1;
+  transition: opacity var(--ts-transition-fast);
+}
+
+.chip__remove:hover {
+  opacity: 1;
+}
+
+.chip__remove:focus-visible {
+  box-shadow: var(--ts-focus-ring);
+  opacity: 1;
+}
+
+.chip__remove:disabled {
+  cursor: not-allowed;
+  pointer-events: none;
+}

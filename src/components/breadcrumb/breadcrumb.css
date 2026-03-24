@@ -1,0 +1,26 @@
+/* ==========================================================================
+   ts-breadcrumb — Shadow DOM Scoped Styles
+
+   Component tokens (Tier 3):
+     --ts-breadcrumb-separator-color   Separator color
+     --ts-breadcrumb-link-color        Link color
+   ========================================================================== */
+
+:host {
+  display: block;
+
+  --ts-breadcrumb-separator-color: var(--ts-color-text-tertiary);
+  --ts-breadcrumb-link-color: var(--ts-color-interactive-primary);
+}
+
+.breadcrumb__list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--ts-spacing-1);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-family: var(--ts-font-family-base);
+  font-size: var(--ts-font-size-sm);
+}

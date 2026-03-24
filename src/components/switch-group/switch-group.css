@@ -1,0 +1,51 @@
+/* ==========================================================================
+   ts-switch-group — Shadow DOM Scoped Styles
+
+   Component tokens (Tier 3):
+     --ts-switch-group-bg          Background color
+     --ts-switch-group-active-bg   Active segment background
+     --ts-switch-group-radius      Border radius
+   ========================================================================== */
+
+:host {
+  display: inline-flex;
+  font-family: var(--ts-font-family-base);
+
+  --ts-switch-group-bg: var(--ts-color-neutral-100);
+  --ts-switch-group-active-bg: var(--ts-color-neutral-0);
+  --ts-switch-group-radius: var(--ts-shape-interactive);
+}
+
+:host([full-width]) {
+  display: flex;
+  inline-size: 100%;
+}
+
+.switch-group__base {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ts-spacing-1);
+  padding: var(--ts-spacing-1);
+  background-color: var(--ts-switch-group-bg);
+  border-radius: var(--ts-switch-group-radius);
+  inline-size: 100%;
+}
+
+/* ---- Sizes ---- */
+:host([size="sm"]) .switch-group__base {
+  font-size: var(--ts-font-size-sm);
+}
+
+:host([size="md"]) .switch-group__base {
+  font-size: var(--ts-font-size-md);
+}
+
+:host([size="lg"]) .switch-group__base {
+  font-size: var(--ts-font-size-lg);
+}
+
+/* ---- Disabled ---- */
+:host([disabled]) {
+  opacity: 0.5;
+  pointer-events: none;
+}

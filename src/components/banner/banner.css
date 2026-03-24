@@ -1,0 +1,129 @@
+/* ==========================================================================
+   ts-banner — Shadow DOM Scoped Styles
+
+   Component tokens (Tier 3):
+     --ts-banner-bg             Background color
+     --ts-banner-border-color   Border color
+   ========================================================================== */
+
+:host {
+  display: block;
+  font-family: var(--ts-font-family-base);
+
+  --ts-banner-bg: var(--ts-color-info-bg);
+  --ts-banner-border-color: var(--ts-color-info-border);
+}
+
+:host([sticky]) {
+  position: sticky;
+  inset-block-start: 0;
+  z-index: var(--ts-z-sticky, 100);
+}
+
+.banner__base {
+  display: flex;
+  align-items: center;
+  gap: var(--ts-spacing-3);
+  padding-inline: var(--ts-spacing-4);
+  padding-block: var(--ts-spacing-3);
+  background-color: var(--ts-banner-bg);
+  border-block-end: 1px solid var(--ts-banner-border-color);
+  font-size: var(--ts-font-size-sm);
+  line-height: var(--ts-line-height-normal);
+  inline-size: 100%;
+}
+
+/* ---- Variants ---- */
+:host([variant="info"]) {
+  --ts-banner-bg: var(--ts-color-info-bg);
+  --ts-banner-border-color: var(--ts-color-info-border);
+}
+:host([variant="info"]) .banner__base {
+  color: var(--ts-color-info-600);
+}
+
+:host([variant="success"]) {
+  --ts-banner-bg: var(--ts-color-success-bg);
+  --ts-banner-border-color: var(--ts-color-success-border);
+}
+:host([variant="success"]) .banner__base {
+  color: var(--ts-color-success-600);
+}
+
+:host([variant="warning"]) {
+  --ts-banner-bg: var(--ts-color-warning-bg);
+  --ts-banner-border-color: var(--ts-color-warning-border);
+}
+:host([variant="warning"]) .banner__base {
+  color: var(--ts-color-warning-600);
+}
+
+:host([variant="danger"]) {
+  --ts-banner-bg: var(--ts-color-danger-bg);
+  --ts-banner-border-color: var(--ts-color-danger-border);
+}
+:host([variant="danger"]) .banner__base {
+  color: var(--ts-color-danger-600);
+}
+
+:host([variant="neutral"]) {
+  --ts-banner-bg: var(--ts-color-bg-subtle);
+  --ts-banner-border-color: var(--ts-color-border-subtle);
+}
+:host([variant="neutral"]) .banner__base {
+  color: var(--ts-color-text-secondary);
+}
+
+/* ---- Icon ---- */
+.banner__icon {
+  display: flex;
+  align-items: center;
+  font-size: 1.15em;
+  flex-shrink: 0;
+}
+
+/* ---- Message ---- */
+.banner__message {
+  flex: 1;
+  min-inline-size: 0;
+}
+
+/* ---- Action ---- */
+.banner__action {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.banner__action:empty {
+  display: none;
+}
+
+/* ---- Close Button ---- */
+.banner__close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  inline-size: 1.5rem;
+  block-size: 1.5rem;
+  border: none;
+  border-radius: var(--ts-radius-sm);
+  background: transparent;
+  color: currentColor;
+  opacity: 0.6;
+  cursor: pointer;
+  font-size: 0.8em;
+  transition: opacity var(--ts-transition-fast);
+  padding: 0;
+  line-height: 1;
+}
+
+.banner__close:hover {
+  opacity: 1;
+}
+
+.banner__close:focus-visible {
+  box-shadow: var(--ts-focus-ring);
+  opacity: 1;
+}

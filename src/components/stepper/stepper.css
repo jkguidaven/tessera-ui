@@ -1,0 +1,32 @@
+/* ==========================================================================
+   ts-stepper — Shadow DOM Scoped Styles
+
+   Component tokens (Tier 3):
+     --ts-stepper-active-color     Active step indicator color
+     --ts-stepper-completed-color  Completed step indicator color
+     --ts-stepper-connector-color  Connector line color
+   ========================================================================== */
+
+:host {
+  display: block;
+  font-family: var(--ts-font-family-base);
+
+  --ts-stepper-active-color: var(--ts-color-interactive-primary);
+  --ts-stepper-completed-color: var(--ts-color-success-600);
+  --ts-stepper-connector-color: var(--ts-color-border-default);
+}
+
+.stepper__container {
+  display: flex;
+}
+
+/* ---- Horizontal ---- */
+:host([orientation="horizontal"]) .stepper__container {
+  flex-direction: row;
+  align-items: flex-start;
+}
+
+/* ---- Vertical ---- */
+:host([orientation="vertical"]) .stepper__container {
+  flex-direction: column;
+}

@@ -1,0 +1,89 @@
+/* ==========================================================================
+   ts-toolbar — Shadow DOM Scoped Styles
+
+   Component tokens (Tier 3):
+     --ts-toolbar-bg            Background color
+     --ts-toolbar-border-color  Border color
+     --ts-toolbar-padding       Padding
+     --ts-toolbar-gap           Gap between items
+   ========================================================================== */
+
+:host {
+  display: block;
+  font-family: var(--ts-font-family-base);
+
+  --ts-toolbar-bg: var(--ts-color-bg-surface);
+  --ts-toolbar-border-color: var(--ts-color-border-subtle);
+  --ts-toolbar-padding: var(--ts-spacing-3);
+  --ts-toolbar-gap: var(--ts-spacing-2);
+}
+
+.toolbar__base {
+  display: flex;
+  align-items: center;
+  gap: var(--ts-toolbar-gap);
+  padding-inline: var(--ts-toolbar-padding);
+  padding-block: var(--ts-toolbar-padding);
+  background-color: var(--ts-toolbar-bg);
+}
+
+/* ---- Variants ---- */
+:host([variant="bordered"]) .toolbar__base {
+  border-block-end: 1px solid var(--ts-toolbar-border-color);
+}
+
+:host([variant="elevated"]) .toolbar__base {
+  box-shadow: var(--ts-shadow-sm);
+  border-radius: var(--ts-shape-interactive);
+}
+
+/* ---- Sizes ---- */
+:host([size="sm"]) .toolbar__base {
+  padding-inline: var(--ts-spacing-2);
+  padding-block: var(--ts-spacing-1);
+  gap: var(--ts-spacing-1);
+  font-size: var(--ts-font-size-sm);
+}
+
+:host([size="md"]) .toolbar__base {
+  padding-inline: var(--ts-spacing-3);
+  padding-block: var(--ts-spacing-2);
+  gap: var(--ts-spacing-2);
+  font-size: var(--ts-font-size-md);
+}
+
+:host([size="lg"]) .toolbar__base {
+  padding-inline: var(--ts-spacing-4);
+  padding-block: var(--ts-spacing-3);
+  gap: var(--ts-spacing-3);
+  font-size: var(--ts-font-size-lg);
+}
+
+/* ---- Layout sections ---- */
+.toolbar__start {
+  display: flex;
+  align-items: center;
+  gap: var(--ts-toolbar-gap);
+  flex-shrink: 0;
+}
+
+.toolbar__center {
+  display: flex;
+  align-items: center;
+  gap: var(--ts-toolbar-gap);
+  flex: 1;
+  min-inline-size: 0;
+}
+
+.toolbar__end {
+  display: flex;
+  align-items: center;
+  gap: var(--ts-toolbar-gap);
+  flex-shrink: 0;
+  margin-inline-start: auto;
+}
+
+.toolbar__start:empty,
+.toolbar__end:empty {
+  display: none;
+}

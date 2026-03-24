@@ -1,0 +1,94 @@
+/* ==========================================================================
+   ts-divider — Shadow DOM Scoped Styles
+
+   Component tokens (Tier 3):
+     --ts-divider-color     Line color
+     --ts-divider-spacing   Spacing above/below (or left/right for vertical)
+   ========================================================================== */
+
+:host {
+  display: block;
+  font-family: var(--ts-font-family-base);
+
+  --ts-divider-color: var(--ts-color-border-subtle);
+  --ts-divider-spacing: var(--ts-spacing-3);
+}
+
+/* ---- Horizontal ---- */
+:host([orientation="horizontal"]) {
+  inline-size: 100%;
+  padding-block: var(--ts-divider-spacing);
+}
+
+:host([orientation="horizontal"]) .divider__base {
+  display: flex;
+  align-items: center;
+  inline-size: 100%;
+}
+
+:host([orientation="horizontal"]:not([class*="has-label"])) .divider__line {
+  flex: 1;
+  block-size: 0;
+  border-block-start: 1px solid var(--ts-divider-color);
+}
+
+:host([orientation="horizontal"]) .divider__line--start,
+:host([orientation="horizontal"]) .divider__line--end {
+  flex: 1;
+  block-size: 0;
+  border-block-start: 1px solid var(--ts-divider-color);
+}
+
+/* ---- Dashed ---- */
+:host([variant="dashed"]) .divider__line,
+:host([variant="dashed"]) .divider__line--start,
+:host([variant="dashed"]) .divider__line--end {
+  border-block-start-style: dashed;
+}
+
+/* ---- Dotted ---- */
+:host([variant="dotted"]) .divider__line,
+:host([variant="dotted"]) .divider__line--start,
+:host([variant="dotted"]) .divider__line--end {
+  border-block-start-style: dotted;
+}
+
+/* ---- Label ---- */
+.divider__label {
+  padding-inline: var(--ts-spacing-3);
+  font-size: var(--ts-font-size-xs);
+  color: var(--ts-color-text-secondary);
+  white-space: nowrap;
+  line-height: 1;
+}
+
+/* ---- Vertical ---- */
+:host([orientation="vertical"]) {
+  display: inline-block;
+  block-size: 100%;
+  padding-inline: var(--ts-divider-spacing);
+}
+
+:host([orientation="vertical"]) .divider__base {
+  display: flex;
+  block-size: 100%;
+}
+
+:host([orientation="vertical"]) .divider__line {
+  inline-size: 0;
+  block-size: 100%;
+  border-inline-start: 1px solid var(--ts-divider-color);
+}
+
+:host([orientation="vertical"][variant="dashed"]) .divider__line {
+  border-inline-start-style: dashed;
+}
+
+:host([orientation="vertical"][variant="dotted"]) .divider__line {
+  border-inline-start-style: dotted;
+}
+
+/* ---- Has-label class (for horizontal with text) ---- */
+.ts-divider--has-label .divider__line {
+  /* overridden by --start/--end when label present */
+}

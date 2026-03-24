@@ -1,0 +1,23 @@
+/* ==========================================================================
+   ts-tree — Shadow DOM Scoped Styles
+
+   Component tokens (Tier 3):
+     --ts-tree-indent         Indentation per level
+     --ts-tree-item-height    Item height
+     --ts-tree-active-bg      Active item background
+   ========================================================================== */
+
+:host {
+  display: block;
+  font-family: var(--ts-font-family-base);
+
+  --ts-tree-indent: var(--ts-spacing-5);
+  --ts-tree-item-height: 2rem;
+  --ts-tree-active-bg: var(--ts-color-interactive-primary-subtle);
+}
+
+.tree__base {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}

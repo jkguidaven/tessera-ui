@@ -1,0 +1,128 @@
+/* ==========================================================================
+   ts-dialog — Shadow DOM Scoped Styles
+
+   Component tokens (Tier 3):
+     --ts-dialog-bg          Dialog background
+     --ts-dialog-radius      Dialog border radius
+     --ts-dialog-shadow      Dialog box-shadow
+     --ts-dialog-overlay-bg  Overlay background
+   ========================================================================== */
+
+:host {
+  font-family: var(--ts-font-family-base);
+
+  --ts-dialog-bg: var(--ts-color-bg-surface);
+  --ts-dialog-radius: var(--ts-shape-overlay);
+  --ts-dialog-shadow: var(--ts-shadow-xl);
+  --ts-dialog-overlay-bg: var(--ts-color-bg-overlay);
+}
+
+/* ---- Overlay ---- */
+.dialog__overlay {
+  position: fixed;
+  inset: 0;
+  z-index: var(--ts-z-modal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--ts-spacing-4);
+  background-color: var(--ts-dialog-overlay-bg);
+  animation: ts-dialog-fade-in 200ms ease-out;
+}
+
+/* ---- Panel ---- */
+.dialog__panel {
+  position: relative;
+  background-color: var(--ts-dialog-bg);
+  border-radius: var(--ts-dialog-radius);
+  box-shadow: var(--ts-dialog-shadow);
+  max-height: calc(100vh - var(--ts-spacing-16));
+  overflow-y: auto;
+  animation: ts-dialog-scale-in 250ms cubic-bezier(0.16, 1, 0.3, 1);
+  outline: none;
+}
+
+/* ---- Sizes ---- */
+.dialog__panel--sm { width: 100%; max-width: 400px; }
+.dialog__panel--md { width: 100%; max-width: 520px; }
+.dialog__panel--lg { width: 100%; max-width: 680px; }
+
+/* ---- Close Button ---- */
+.dialog__close {
+  position: absolute;
+  inset-block-start: var(--ts-spacing-3);
+  inset-inline-end: var(--ts-spacing-3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border: none;
+  border-radius: var(--ts-radius-md);
+  background: transparent;
+  color: var(--ts-color-text-tertiary);
+  font-size: var(--ts-font-size-md);
+  cursor: pointer;
+  transition:
+    background-color var(--ts-transition-fast),
+    color var(--ts-transition-fast);
+  z-index: 1;
+  padding: 0;
+  line-height: 1;
+}
+
+.dialog__close:hover {
+  background-color: var(--ts-color-bg-hover);
+  color: var(--ts-color-text-secondary);
+}
+
+.dialog__close:focus-visible {
+  box-shadow: var(--ts-focus-ring);
+}
+
+/* ---- Header ---- */
+.dialog__header {
+  padding: var(--ts-spacing-5) var(--ts-spacing-6) var(--ts-spacing-3);
+  font-size: var(--ts-font-size-lg);
+  font-weight: var(--ts-font-weight-semi);
+  color: var(--ts-color-text-primary);
+  padding-inline-end: var(--ts-spacing-10);
+}
+
+/* ---- Body ---- */
+.dialog__body {
+  padding: var(--ts-spacing-3) var(--ts-spacing-6);
+  font-size: var(--ts-font-size-md);
+  color: var(--ts-color-text-secondary);
+  line-height: var(--ts-line-height-normal);
+}
+
+/* ---- Footer ---- */
+.dialog__footer {
+  padding: var(--ts-spacing-3) var(--ts-spacing-6) var(--ts-spacing-5);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--ts-spacing-2);
+}
+
+.dialog__footer:empty {
+  display: none;
+}
+
+/* ---- Animations ---- */
+@keyframes ts-dialog-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes ts-dialog-scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}

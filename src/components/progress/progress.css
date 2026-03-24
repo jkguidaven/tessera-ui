@@ -1,0 +1,89 @@
+/* ==========================================================================
+   ts-progress — Shadow DOM Scoped Styles
+
+   Component tokens (Tier 3):
+     --ts-progress-track-bg     Track background color
+     --ts-progress-fill-bg      Fill bar background color
+     --ts-progress-radius       Border radius
+     --ts-progress-height       Track height
+   ========================================================================== */
+
+:host {
+  display: flex;
+  align-items: center;
+  gap: var(--ts-spacing-2);
+
+  --ts-progress-track-bg: var(--ts-color-neutral-200);
+  --ts-progress-fill-bg: var(--ts-color-interactive-primary);
+  --ts-progress-radius: var(--ts-radius-full);
+  --ts-progress-height: 0.5rem;
+}
+
+/* ---- Track ---- */
+.progress__track {
+  flex: 1;
+  block-size: var(--ts-progress-height);
+  background-color: var(--ts-progress-track-bg);
+  border-radius: var(--ts-progress-radius);
+  overflow: hidden;
+  position: relative;
+}
+
+/* ---- Fill ---- */
+.progress__fill {
+  block-size: 100%;
+  background-color: var(--ts-progress-fill-bg);
+  border-radius: var(--ts-progress-radius);
+  transition: width var(--ts-transition-normal);
+}
+
+/* ---- Label ---- */
+.progress__label {
+  font-family: var(--ts-font-family-base);
+  font-size: var(--ts-font-size-sm);
+  font-weight: var(--ts-font-weight-semi);
+  color: var(--ts-color-text-secondary);
+  min-inline-size: 3ch;
+  text-align: end;
+}
+
+/* ---- Sizes ---- */
+:host([size="sm"]) {
+  --ts-progress-height: 0.25rem;
+}
+
+:host([size="lg"]) {
+  --ts-progress-height: 0.75rem;
+}
+
+/* ---- Variants ---- */
+:host([variant="success"]) {
+  --ts-progress-fill-bg: var(--ts-color-success-600);
+}
+
+:host([variant="warning"]) {
+  --ts-progress-fill-bg: var(--ts-color-warning-600);
+}
+
+:host([variant="danger"]) {
+  --ts-progress-fill-bg: var(--ts-color-danger-500);
+}
+
+:host([variant="info"]) {
+  --ts-progress-fill-bg: var(--ts-color-info-500);
+}
+
+/* ---- Indeterminate animation ---- */
+:host([indeterminate]) .progress__fill {
+  width: 40%;
+  animation: ts-progress-slide 1.5s ease-in-out infinite;
+}
+
+@keyframes ts-progress-slide {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(350%);
+  }
+}

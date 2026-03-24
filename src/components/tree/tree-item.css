@@ -1,0 +1,97 @@
+/* ==========================================================================
+   ts-tree-item — Shadow DOM Scoped Styles
+   ========================================================================== */
+
+:host {
+  display: block;
+  font-family: var(--ts-font-family-base);
+  outline: none;
+}
+
+.tree-item__base {
+  display: flex;
+  align-items: center;
+  gap: var(--ts-spacing-1);
+  min-block-size: var(--ts-tree-item-height, 2rem);
+  padding-inline: var(--ts-spacing-2);
+  padding-block: var(--ts-spacing-1);
+  border-radius: var(--ts-radius-sm);
+  cursor: pointer;
+  user-select: none;
+  font-size: var(--ts-font-size-sm);
+  line-height: var(--ts-line-height-tight);
+  color: var(--ts-color-text-primary);
+  transition:
+    background-color var(--ts-transition-fast),
+    color var(--ts-transition-fast);
+}
+
+.tree-item__base:hover {
+  background-color: var(--ts-color-bg-subtle);
+}
+
+:host(:focus-visible) .tree-item__base {
+  box-shadow: var(--ts-focus-ring);
+}
+
+/* ---- Selected ---- */
+:host([selected]) .tree-item__base {
+  background-color: var(--ts-tree-active-bg, var(--ts-color-interactive-primary-subtle));
+  color: var(--ts-color-interactive-primary);
+}
+
+/* ---- Disabled ---- */
+:host([disabled]) .tree-item__base {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* ---- Chevron ---- */
+.tree-item__chevron {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  inline-size: 1.25rem;
+  block-size: 1.25rem;
+  transition: transform var(--ts-transition-fast);
+}
+
+.tree-item__chevron svg {
+  inline-size: 0.875rem;
+  block-size: 0.875rem;
+}
+
+:host(.ts-tree-item--expanded) .tree-item__chevron {
+  transform: rotate(90deg);
+}
+
+.tree-item__chevron--hidden {
+  visibility: hidden;
+}
+
+/* ---- Icon ---- */
+.tree-item__icon {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+/* ---- Label ---- */
+.tree-item__label {
+  flex: 1;
+  min-inline-size: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ---- Children ---- */
+.tree-item__children {
+  padding-inline-start: var(--ts-tree-indent, var(--ts-spacing-5));
+}
+
+.tree-item__children--collapsed {
+  display: none;
+}

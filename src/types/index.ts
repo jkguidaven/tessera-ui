@@ -40,6 +40,17 @@ export interface TsToggleEventDetail {
   checked: boolean;
 }
 
+/** Shared event detail for checkbox/radio change events */
+export interface TsCheckboxChangeEventDetail {
+  checked: boolean;
+  value: string;
+}
+
+/** Shared event detail for select change events */
+export interface TsSelectChangeEventDetail {
+  value: string;
+}
+
 /** Shared event detail for form validation */
 export interface TsValidationEventDetail {
   valid: boolean;

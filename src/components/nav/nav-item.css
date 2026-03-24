@@ -1,0 +1,73 @@
+/* ==========================================================================
+   ts-nav-item — Shadow DOM Scoped Styles
+   ========================================================================== */
+
+:host {
+  display: block;
+  font-family: var(--ts-font-family-base);
+}
+
+.nav-item__wrapper {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-item__link {
+  display: flex;
+  align-items: center;
+  gap: var(--ts-spacing-2);
+  padding: var(--ts-spacing-2) var(--ts-spacing-3);
+  border: none;
+  border-radius: var(--ts-radius-md);
+  background: transparent;
+  color: var(--ts-color-text-secondary);
+  font-family: var(--ts-font-family-base);
+  font-size: var(--ts-font-size-sm);
+  font-weight: var(--ts-font-weight-medium);
+  text-decoration: none;
+  cursor: pointer;
+  width: 100%;
+  text-align: start;
+  transition:
+    background-color var(--ts-transition-fast),
+    color var(--ts-transition-fast);
+}
+
+.nav-item__link:hover:not([disabled]):not([aria-disabled="true"]) {
+  background-color: var(--ts-color-bg-hover);
+  color: var(--ts-color-text-primary);
+}
+
+.nav-item__link:focus-visible {
+  box-shadow: var(--ts-focus-ring);
+  outline: none;
+}
+
+/* ---- Active state ---- */
+:host([active]) .nav-item__link {
+  background-color: var(--ts-color-interactive-primary-subtle, rgba(59, 130, 246, 0.1));
+  color: var(--ts-color-interactive-primary);
+  font-weight: var(--ts-font-weight-semi);
+}
+
+/* ---- Disabled state ---- */
+:host([disabled]) .nav-item__link {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* ---- Icon ---- */
+.nav-item__icon {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+/* ---- Label ---- */
+.nav-item__label {
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+}

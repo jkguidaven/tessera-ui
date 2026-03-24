@@ -1,0 +1,89 @@
+/* ==========================================================================
+   ts-skeleton — Shadow DOM Scoped Styles
+
+   Component tokens (Tier 3):
+     --ts-skeleton-radius     Border radius
+     --ts-skeleton-height     Default line height
+   ========================================================================== */
+
+:host {
+  display: block;
+  font-family: var(--ts-font-family-base);
+
+  --ts-skeleton-radius: var(--ts-radius-sm);
+  --ts-skeleton-height: 1em;
+  --ts-color-skeleton-base: var(--ts-color-neutral-200);
+  --ts-color-skeleton-pulse: var(--ts-color-neutral-300);
+}
+
+.skeleton__base {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ts-spacing-2);
+  width: 100%;
+  height: 100%;
+}
+
+/* ---- Line (text variant) ---- */
+.skeleton__line {
+  block-size: var(--ts-skeleton-height);
+  inline-size: 100%;
+  border-radius: var(--ts-skeleton-radius);
+  background-color: var(--ts-color-skeleton-base);
+}
+
+.skeleton__line--last {
+  inline-size: 75%;
+}
+
+/* ---- Circular variant ---- */
+:host([variant="circular"]) .skeleton__base {
+  border-radius: 50%;
+  background-color: var(--ts-color-skeleton-base);
+  aspect-ratio: 1;
+}
+
+/* ---- Rectangular variant ---- */
+:host([variant="rectangular"]) .skeleton__base {
+  border-radius: var(--ts-skeleton-radius);
+  background-color: var(--ts-color-skeleton-base);
+  min-block-size: var(--ts-skeleton-height);
+}
+
+/* ---- Pulse animation ---- */
+:host([animation="pulse"]) .skeleton__line,
+:host([animation="pulse"][variant="circular"]) .skeleton__base,
+:host([animation="pulse"][variant="rectangular"]) .skeleton__base {
+  animation: ts-skeleton-pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes ts-skeleton-pulse {
+  0%, 100% { background-color: var(--ts-color-skeleton-base); }
+  50% { background-color: var(--ts-color-skeleton-pulse); }
+}
+
+/* ---- Wave animation ---- */
+:host([animation="wave"]) .skeleton__line,
+:host([animation="wave"][variant="circular"]) .skeleton__base,
+:host([animation="wave"][variant="rectangular"]) .skeleton__base {
+  background: linear-gradient(
+    90deg,
+    var(--ts-color-skeleton-base) 25%,
+    var(--ts-color-skeleton-pulse) 50%,
+    var(--ts-color-skeleton-base) 75%
+  );
+  background-size: 200% 100%;
+  animation: ts-skeleton-wave 1.5s ease-in-out infinite;
+}
+
+@keyframes ts-skeleton-wave {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* ---- No animation ---- */
+:host([animation="none"]) .skeleton__line,
+:host([animation="none"][variant="circular"]) .skeleton__base,
+:host([animation="none"][variant="rectangular"]) .skeleton__base {
+  animation: none;
+}

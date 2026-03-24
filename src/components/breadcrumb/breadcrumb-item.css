@@ -1,0 +1,44 @@
+/* ==========================================================================
+   ts-breadcrumb-item — Shadow DOM Scoped Styles
+   ========================================================================== */
+
+:host {
+  display: contents;
+}
+
+.breadcrumb-item__li {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ts-spacing-1);
+}
+
+.breadcrumb-item__link {
+  color: var(--ts-breadcrumb-link-color, var(--ts-color-interactive-primary));
+  text-decoration: none;
+  transition: color var(--ts-transition-fast);
+}
+
+.breadcrumb-item__link:hover {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.breadcrumb-item__link:focus-visible {
+  box-shadow: var(--ts-focus-ring);
+  border-radius: var(--ts-radius-sm);
+  outline: none;
+}
+
+.breadcrumb-item__text {
+  color: var(--ts-color-text-primary);
+}
+
+:host(.ts-breadcrumb-item--current) .breadcrumb-item__text {
+  font-weight: var(--ts-font-weight-semi);
+}
+
+.breadcrumb-item__separator {
+  color: var(--ts-breadcrumb-separator-color, var(--ts-color-text-tertiary));
+  margin-inline: var(--ts-spacing-1);
+  user-select: none;
+}

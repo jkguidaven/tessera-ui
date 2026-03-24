@@ -1,0 +1,109 @@
+/* ==========================================================================
+   ts-radio — Shadow DOM Scoped Styles
+
+   Component tokens (Tier 3):
+     --ts-radio-size           Radio circle size
+     --ts-radio-color          Selected color
+     --ts-radio-border-color   Default border color
+   ========================================================================== */
+
+:host {
+  display: inline-block;
+  font-family: var(--ts-font-family-base);
+
+  --ts-radio-size: 1.25rem;
+  --ts-radio-color: var(--ts-color-interactive-primary);
+  --ts-radio-border-color: var(--ts-color-border-default);
+}
+
+/* ---- Base container ---- */
+.radio__base {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ts-spacing-2);
+  cursor: pointer;
+  outline: none;
+}
+
+.radio__base:focus-visible .radio__control {
+  box-shadow: var(--ts-focus-ring);
+}
+
+/* ---- Control circle ---- */
+.radio__control {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--ts-radio-size);
+  height: var(--ts-radio-size);
+  border: 2px solid var(--ts-radio-border-color);
+  border-radius: 50%;
+  background-color: var(--ts-color-bg-surface);
+  transition:
+    background-color var(--ts-transition-fast),
+    border-color var(--ts-transition-fast),
+    box-shadow var(--ts-transition-fast);
+  flex-shrink: 0;
+}
+
+/* ---- Inner dot ---- */
+.radio__dot {
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background-color: var(--ts-color-text-on-primary);
+  transition:
+    width var(--ts-transition-fast),
+    height var(--ts-transition-fast);
+}
+
+/* ---- Checked state ---- */
+:host([checked]) .radio__control {
+  background-color: var(--ts-radio-color);
+  border-color: var(--ts-radio-color);
+}
+
+:host([checked]) .radio__dot {
+  width: 40%;
+  height: 40%;
+}
+
+/* ---- Hover ---- */
+.radio__base:hover:not([aria-disabled="true"]) .radio__control {
+  border-color: var(--ts-color-primary-500);
+}
+
+/* ---- Disabled state ---- */
+:host([disabled]) .radio__base {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* ---- Sizes ---- */
+:host([size="sm"]) {
+  --ts-radio-size: 1rem;
+}
+
+:host([size="sm"]) .radio__label {
+  font-size: var(--ts-font-size-sm);
+}
+
+:host([size="md"]) .radio__label {
+  font-size: var(--ts-font-size-md);
+}
+
+:host([size="lg"]) {
+  --ts-radio-size: 1.5rem;
+}
+
+:host([size="lg"]) .radio__label {
+  font-size: var(--ts-font-size-lg);
+}
+
+/* ---- Label ---- */
+.radio__label {
+  color: var(--ts-color-text-primary);
+  line-height: var(--ts-line-height-normal);
+  user-select: none;
+}

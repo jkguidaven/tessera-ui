@@ -1,0 +1,202 @@
+/* ==========================================================================
+   ts-drawer — Shadow DOM Scoped Styles
+
+   Component tokens (Tier 3):
+     --ts-drawer-bg          Panel background
+     --ts-drawer-shadow      Panel box-shadow
+     --ts-drawer-overlay-bg  Overlay background
+   ========================================================================== */
+
+:host {
+  font-family: var(--ts-font-family-base);
+
+  --ts-drawer-bg: var(--ts-color-bg-surface);
+  --ts-drawer-shadow: var(--ts-shadow-xl);
+  --ts-drawer-overlay-bg: var(--ts-color-bg-overlay);
+}
+
+/* ---- Overlay ---- */
+.drawer__overlay {
+  position: fixed;
+  inset: 0;
+  z-index: var(--ts-z-modal);
+  background-color: var(--ts-drawer-overlay-bg);
+  animation: ts-drawer-fade-in 200ms ease-out;
+}
+
+/* ---- Panel ---- */
+.drawer__panel {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--ts-drawer-bg);
+  box-shadow: var(--ts-drawer-shadow);
+  outline: none;
+  overflow-y: auto;
+}
+
+/* ---- Placement ---- */
+.drawer__panel--start {
+  inset-block-start: 0;
+  inset-block-end: 0;
+  inset-inline-start: 0;
+  animation: ts-drawer-slide-start 250ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.drawer__panel--end {
+  inset-block-start: 0;
+  inset-block-end: 0;
+  inset-inline-end: 0;
+  animation: ts-drawer-slide-end 250ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.drawer__panel--top {
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  inset-inline-end: 0;
+  animation: ts-drawer-slide-top 250ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.drawer__panel--bottom {
+  inset-block-end: 0;
+  inset-inline-start: 0;
+  inset-inline-end: 0;
+  animation: ts-drawer-slide-bottom 250ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ---- Sizes — horizontal placement (start/end) ---- */
+.drawer__panel--start.drawer__panel--sm,
+.drawer__panel--end.drawer__panel--sm {
+  inline-size: 320px;
+}
+
+.drawer__panel--start.drawer__panel--md,
+.drawer__panel--end.drawer__panel--md {
+  inline-size: 440px;
+}
+
+.drawer__panel--start.drawer__panel--lg,
+.drawer__panel--end.drawer__panel--lg {
+  inline-size: 640px;
+}
+
+.drawer__panel--start.drawer__panel--full,
+.drawer__panel--end.drawer__panel--full {
+  inline-size: 100%;
+}
+
+/* ---- Sizes — vertical placement (top/bottom) ---- */
+.drawer__panel--top.drawer__panel--sm,
+.drawer__panel--bottom.drawer__panel--sm {
+  block-size: 320px;
+}
+
+.drawer__panel--top.drawer__panel--md,
+.drawer__panel--bottom.drawer__panel--md {
+  block-size: 440px;
+}
+
+.drawer__panel--top.drawer__panel--lg,
+.drawer__panel--bottom.drawer__panel--lg {
+  block-size: 640px;
+}
+
+.drawer__panel--top.drawer__panel--full,
+.drawer__panel--bottom.drawer__panel--full {
+  block-size: 100%;
+}
+
+/* ---- Header ---- */
+.drawer__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--ts-spacing-4) var(--ts-spacing-5);
+  border-block-end: 1px solid var(--ts-color-border-default);
+}
+
+.drawer__title {
+  font-size: var(--ts-font-size-lg);
+  font-weight: var(--ts-font-weight-semi);
+  color: var(--ts-color-text-primary);
+}
+
+/* ---- Close Button ---- */
+.drawer__close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border: none;
+  border-radius: var(--ts-radius-md);
+  background: transparent;
+  color: var(--ts-color-text-tertiary);
+  font-size: var(--ts-font-size-md);
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
+  margin-inline-start: auto;
+  transition:
+    background-color var(--ts-transition-fast),
+    color var(--ts-transition-fast);
+}
+
+.drawer__close:hover {
+  background-color: var(--ts-color-bg-hover);
+  color: var(--ts-color-text-secondary);
+}
+
+.drawer__close:focus-visible {
+  box-shadow: var(--ts-focus-ring);
+}
+
+/* ---- Body ---- */
+.drawer__body {
+  flex: 1;
+  padding: var(--ts-spacing-4) var(--ts-spacing-5);
+  font-size: var(--ts-font-size-md);
+  color: var(--ts-color-text-secondary);
+  line-height: var(--ts-line-height-normal);
+  overflow-y: auto;
+}
+
+/* ---- Footer ---- */
+.drawer__footer {
+  padding: var(--ts-spacing-4) var(--ts-spacing-5);
+  border-block-start: 1px solid var(--ts-color-border-default);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--ts-spacing-2);
+}
+
+.drawer__footer:empty {
+  display: none;
+}
+
+/* ---- Animations ---- */
+@keyframes ts-drawer-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes ts-drawer-slide-start {
+  from { transform: translateX(-100%); }
+  to   { transform: translateX(0); }
+}
+
+@keyframes ts-drawer-slide-end {
+  from { transform: translateX(100%); }
+  to   { transform: translateX(0); }
+}
+
+@keyframes ts-drawer-slide-top {
+  from { transform: translateY(-100%); }
+  to   { transform: translateY(0); }
+}
+
+@keyframes ts-drawer-slide-bottom {
+  from { transform: translateY(100%); }
+  to   { transform: translateY(0); }
+}

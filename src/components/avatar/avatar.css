@@ -1,0 +1,63 @@
+/* ==========================================================================
+   ts-avatar — Shadow DOM Scoped Styles
+
+   Component tokens (Tier 3):
+     --ts-avatar-size       Avatar dimensions
+     --ts-avatar-bg         Background color for initials/slot
+     --ts-avatar-color      Text color for initials
+     --ts-avatar-radius     Border radius
+   ========================================================================== */
+
+:host {
+  display: inline-flex;
+  vertical-align: middle;
+
+  --ts-avatar-size: 2.5rem;
+  --ts-avatar-bg: var(--ts-color-neutral-200);
+  --ts-avatar-color: var(--ts-color-text-primary);
+  --ts-avatar-radius: var(--ts-shape-full);
+}
+
+/* ---- Sizes ---- */
+:host([size="xs"]) { --ts-avatar-size: 1.5rem;  font-size: var(--ts-font-size-xs); }
+:host([size="sm"]) { --ts-avatar-size: 2rem;    font-size: var(--ts-font-size-sm); }
+:host([size="md"]) { --ts-avatar-size: 2.5rem;  font-size: var(--ts-font-size-md); }
+:host([size="lg"]) { --ts-avatar-size: 3rem;    font-size: var(--ts-font-size-lg); }
+:host([size="xl"]) { --ts-avatar-size: 4rem;    font-size: var(--ts-font-size-xl); }
+
+/* ---- Variant: square ---- */
+:host([variant="square"]) {
+  --ts-avatar-radius: var(--ts-shape-interactive);
+}
+
+/* ---- Base container ---- */
+.avatar__base {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--ts-avatar-size);
+  height: var(--ts-avatar-size);
+  border-radius: var(--ts-avatar-radius);
+  background-color: var(--ts-avatar-bg);
+  color: var(--ts-avatar-color);
+  overflow: hidden;
+  user-select: none;
+  flex-shrink: 0;
+}
+
+/* ---- Image ---- */
+.avatar__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: inherit;
+}
+
+/* ---- Initials ---- */
+.avatar__initials {
+  font-family: var(--ts-font-family-base);
+  font-weight: var(--ts-font-weight-semi);
+  font-size: inherit;
+  line-height: 1;
+  text-transform: uppercase;
+}

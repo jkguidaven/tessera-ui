@@ -1,0 +1,123 @@
+/* ==========================================================================
+   ts-slider — Shadow DOM Scoped Styles
+
+   Component tokens (Tier 3):
+     --ts-slider-track-bg      Track background color
+     --ts-slider-fill-bg       Fill background color
+     --ts-slider-thumb-bg      Thumb background color
+     --ts-slider-thumb-size    Thumb dimensions
+   ========================================================================== */
+
+:host {
+  display: block;
+
+  --ts-slider-track-bg: var(--ts-color-neutral-200);
+  --ts-slider-fill-bg: var(--ts-color-interactive-primary);
+  --ts-slider-thumb-bg: var(--ts-color-neutral-0);
+  --ts-slider-thumb-size: 1.25rem;
+}
+
+/* ---- Label ---- */
+.slider__label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--ts-font-family-base);
+  font-size: var(--ts-font-size-sm);
+  font-weight: var(--ts-font-weight-semi);
+  color: var(--ts-color-text-primary);
+  margin-block-end: var(--ts-spacing-2);
+}
+
+.slider__value {
+  font-family: var(--ts-font-family-base);
+  font-size: var(--ts-font-size-sm);
+  font-weight: var(--ts-font-weight-semi);
+  color: var(--ts-color-text-secondary);
+}
+
+/* ---- Track ---- */
+.slider__track {
+  position: relative;
+  block-size: var(--ts-slider-thumb-size);
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.slider__track::before {
+  content: '';
+  position: absolute;
+  inset-inline: 0;
+  block-size: 4px;
+  background-color: var(--ts-slider-track-bg);
+  border-radius: var(--ts-radius-full);
+}
+
+/* ---- Fill ---- */
+.slider__fill {
+  position: absolute;
+  inset-inline-start: 0;
+  block-size: 4px;
+  background-color: var(--ts-slider-fill-bg);
+  border-radius: var(--ts-radius-full);
+  pointer-events: none;
+}
+
+/* ---- Thumb ---- */
+.slider__thumb {
+  position: absolute;
+  inline-size: var(--ts-slider-thumb-size);
+  block-size: var(--ts-slider-thumb-size);
+  border-radius: var(--ts-radius-full);
+  background-color: var(--ts-slider-thumb-bg);
+  border: 2px solid var(--ts-slider-fill-bg);
+  box-shadow: var(--ts-shadow-sm);
+  transform: translateX(-50%);
+  cursor: grab;
+  outline: none;
+  transition:
+    box-shadow var(--ts-transition-fast),
+    transform var(--ts-transition-fast);
+}
+
+.slider__thumb:focus-visible {
+  box-shadow: var(--ts-focus-ring);
+}
+
+.slider__thumb:active {
+  cursor: grabbing;
+  transform: translateX(-50%) scale(1.1);
+}
+
+/* ---- Sizes ---- */
+:host([size="sm"]) {
+  --ts-slider-thumb-size: 1rem;
+}
+
+:host([size="sm"]) .slider__track::before,
+:host([size="sm"]) .slider__fill {
+  block-size: 3px;
+}
+
+:host([size="lg"]) {
+  --ts-slider-thumb-size: 1.5rem;
+}
+
+:host([size="lg"]) .slider__track::before,
+:host([size="lg"]) .slider__fill {
+  block-size: 6px;
+}
+
+/* ---- Disabled ---- */
+:host(.ts-slider--disabled) {
+  opacity: 0.5;
+}
+
+:host(.ts-slider--disabled) .slider__track {
+  cursor: not-allowed;
+}
+
+:host(.ts-slider--disabled) .slider__thumb {
+  cursor: not-allowed;
+}

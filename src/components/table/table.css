@@ -1,0 +1,62 @@
+/* ==========================================================================
+   ts-table — Shadow DOM Scoped Styles
+
+   Component tokens (Tier 3):
+     --ts-table-bg             Table background color
+     --ts-table-border-color   Border color for cells and edges
+     --ts-table-header-bg      Header row background
+     --ts-table-header-color   Header text color
+     --ts-table-row-hover-bg   Row hover background
+     --ts-table-stripe-bg      Alternating row background
+     --ts-table-cell-padding   Cell padding
+   ========================================================================== */
+
+:host {
+  display: block;
+  font-family: var(--ts-font-family-base);
+
+  --ts-table-bg: var(--ts-color-bg-surface);
+  --ts-table-border-color: var(--ts-color-border-default);
+  --ts-table-header-bg: var(--ts-color-bg-subtle);
+  --ts-table-header-color: var(--ts-color-text-primary);
+  --ts-table-row-hover-bg: var(--ts-color-bg-hover);
+  --ts-table-stripe-bg: var(--ts-color-bg-muted, rgba(0, 0, 0, 0.02));
+  --ts-table-cell-padding: var(--ts-spacing-3) var(--ts-spacing-4);
+}
+
+:host([compact]) {
+  --ts-table-cell-padding: var(--ts-spacing-1) var(--ts-spacing-2);
+}
+
+/* ---- Scrollable Wrapper ---- */
+.table__wrapper {
+  overflow-x: auto;
+  background-color: var(--ts-table-bg);
+  border-radius: var(--ts-shape-container, var(--ts-radius-md));
+  border: 1px solid var(--ts-table-border-color);
+}
+
+.table__wrapper:focus-visible {
+  box-shadow: var(--ts-focus-ring);
+  outline: none;
+}
+
+/* ---- Slotted table ---- */
+::slotted(table) {
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  font-size: var(--ts-font-size-sm);
+  color: var(--ts-color-text-secondary);
+}
+
+/* ---- Bordered variant ---- */
+:host([bordered]) .table__wrapper {
+  border: 1px solid var(--ts-table-border-color);
+}
+
+/* ---- Sticky header ---- */
+:host([sticky-header]) .table__wrapper {
+  max-block-size: 24rem;
+  overflow-y: auto;
+}

@@ -1,0 +1,172 @@
+/* ==========================================================================
+   ts-step — Shadow DOM Scoped Styles
+   ========================================================================== */
+
+:host {
+  display: flex;
+  font-family: var(--ts-font-family-base);
+}
+
+/* ---- Horizontal layout ---- */
+:host(.ts-step--horizontal) {
+  flex: 1;
+  flex-direction: column;
+}
+
+/* ---- Vertical layout ---- */
+:host(.ts-step--vertical) {
+  flex-direction: column;
+}
+
+.step__wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+:host(.ts-step--horizontal) .step__wrapper {
+  flex-direction: column;
+  align-items: center;
+}
+
+:host(.ts-step--vertical) .step__wrapper {
+  flex-direction: row;
+  align-items: flex-start;
+}
+
+.step__header {
+  display: flex;
+  align-items: center;
+  gap: var(--ts-spacing-2);
+}
+
+:host(.ts-step--horizontal) .step__header {
+  flex-direction: column;
+  text-align: center;
+}
+
+:host(.ts-step--vertical) .step__header {
+  flex-direction: row;
+}
+
+/* ---- Indicator ---- */
+.step__indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: 2rem;
+  block-size: 2rem;
+  border-radius: var(--ts-radius-full);
+  border: 2px solid var(--ts-color-border-default);
+  background-color: var(--ts-color-bg-surface);
+  color: var(--ts-color-text-tertiary);
+  font-size: var(--ts-font-size-sm);
+  font-weight: var(--ts-font-weight-semi);
+  flex-shrink: 0;
+  transition:
+    background-color var(--ts-transition-fast),
+    border-color var(--ts-transition-fast),
+    color var(--ts-transition-fast);
+}
+
+.step__indicator--active {
+  border-color: var(--ts-stepper-active-color, var(--ts-color-interactive-primary));
+  background-color: var(--ts-stepper-active-color, var(--ts-color-interactive-primary));
+  color: var(--ts-color-text-on-primary, #fff);
+}
+
+.step__indicator--completed {
+  border-color: var(--ts-stepper-completed-color, var(--ts-color-success-600));
+  background-color: var(--ts-stepper-completed-color, var(--ts-color-success-600));
+  color: var(--ts-color-neutral-0, #fff);
+}
+
+.step__indicator--error {
+  border-color: var(--ts-color-danger-500);
+  background-color: var(--ts-color-danger-500);
+  color: var(--ts-color-neutral-0, #fff);
+}
+
+.step__icon {
+  inline-size: 1em;
+  block-size: 1em;
+}
+
+/* ---- Text ---- */
+.step__text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ts-spacing-0, 2px);
+}
+
+.step__label {
+  font-size: var(--ts-font-size-sm);
+  font-weight: var(--ts-font-weight-semi);
+  color: var(--ts-color-text-primary);
+}
+
+:host(.ts-step--active) .step__label {
+  color: var(--ts-stepper-active-color, var(--ts-color-interactive-primary));
+}
+
+:host(.ts-step--disabled) .step__label {
+  color: var(--ts-color-text-tertiary);
+}
+
+.step__description {
+  font-size: var(--ts-font-size-xs);
+  color: var(--ts-color-text-tertiary);
+}
+
+/* ---- Connector ---- */
+.step__connector {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+}
+
+:host(.ts-step--horizontal) .step__connector {
+  padding-inline: var(--ts-spacing-2);
+  min-inline-size: var(--ts-spacing-4);
+  padding-block-start: var(--ts-spacing-4);
+}
+
+:host(.ts-step--vertical) .step__connector {
+  padding-block: var(--ts-spacing-2);
+  min-block-size: var(--ts-spacing-4);
+  margin-inline-start: calc(1rem - 1px);
+}
+
+.step__connector-line {
+  background-color: var(--ts-stepper-connector-color, var(--ts-color-border-default));
+  transition: background-color var(--ts-transition-fast);
+}
+
+:host(.ts-step--horizontal) .step__connector-line {
+  block-size: 2px;
+  inline-size: 100%;
+}
+
+:host(.ts-step--vertical) .step__connector-line {
+  inline-size: 2px;
+  block-size: 100%;
+  min-block-size: var(--ts-spacing-6);
+}
+
+.step__connector-line--completed {
+  background-color: var(--ts-stepper-completed-color, var(--ts-color-success-600));
+}
+
+/* ---- Content ---- */
+.step__content {
+  padding-block-start: var(--ts-spacing-2);
+}
+
+.step__content:empty {
+  display: none;
+}
+
+/* ---- Disabled ---- */
+:host(.ts-step--disabled) {
+  opacity: 0.5;
+}

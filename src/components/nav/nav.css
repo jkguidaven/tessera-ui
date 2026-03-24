@@ -1,0 +1,48 @@
+/* ==========================================================================
+   ts-nav — Shadow DOM Scoped Styles
+
+   Component tokens (Tier 3):
+     --ts-nav-bg            Navigation background
+     --ts-nav-active-bg     Active item background
+     --ts-nav-active-color  Active item text color
+     --ts-nav-width         Sidebar width
+   ========================================================================== */
+
+:host {
+  display: block;
+  font-family: var(--ts-font-family-base);
+
+  --ts-nav-bg: transparent;
+  --ts-nav-active-bg: var(--ts-color-interactive-primary-subtle);
+  --ts-nav-active-color: var(--ts-color-interactive-primary);
+  --ts-nav-width: 240px;
+}
+
+.nav__native {
+  background-color: var(--ts-nav-bg);
+}
+
+.nav__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+/* ---- Sidebar variant ---- */
+:host([variant="sidebar"]) .nav__list {
+  flex-direction: column;
+  gap: var(--ts-spacing-1);
+  inline-size: var(--ts-nav-width);
+}
+
+:host([variant="sidebar"][collapsed]) .nav__list {
+  inline-size: auto;
+}
+
+/* ---- Horizontal variant ---- */
+:host([variant="horizontal"]) .nav__list {
+  flex-direction: row;
+  gap: var(--ts-spacing-1);
+  align-items: center;
+}

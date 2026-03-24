@@ -1,0 +1,146 @@
+/* ==========================================================================
+   ts-textarea — Shadow DOM Scoped Styles
+
+   Component tokens (Tier 3):
+     --ts-textarea-bg              Textarea background
+     --ts-textarea-border-color    Default border color
+     --ts-textarea-radius          Border radius
+     --ts-textarea-focus-ring      Focus ring box-shadow
+   ========================================================================== */
+
+:host {
+  display: block;
+  font-family: var(--ts-font-family-base);
+
+  --ts-textarea-bg: var(--ts-color-bg-surface);
+  --ts-textarea-border-color: var(--ts-color-border-default);
+  --ts-textarea-radius: var(--ts-shape-interactive);
+  --ts-textarea-focus-ring: var(--ts-focus-ring);
+}
+
+/* ---- Label ---- */
+.textarea__label {
+  display: block;
+  margin-block-end: var(--ts-spacing-1);
+  font-size: var(--ts-font-size-sm);
+  font-weight: var(--ts-font-weight-medium);
+  color: var(--ts-color-text-secondary);
+  line-height: var(--ts-line-height-normal);
+}
+
+.textarea__required {
+  color: var(--ts-color-danger-500);
+}
+
+/* ---- Wrapper ---- */
+.textarea__wrapper {
+  display: flex;
+  border: 2px solid var(--ts-textarea-border-color);
+  border-radius: var(--ts-textarea-radius);
+  background-color: var(--ts-textarea-bg);
+  transition:
+    border-color var(--ts-transition-fast),
+    box-shadow var(--ts-transition-fast);
+  overflow: hidden;
+}
+
+.textarea__wrapper--focused {
+  border-color: var(--ts-color-primary-500);
+  box-shadow: var(--ts-textarea-focus-ring);
+}
+
+.textarea__wrapper--error {
+  border-color: var(--ts-color-danger-500);
+}
+
+.textarea__wrapper--error.textarea__wrapper--focused {
+  box-shadow: 0 0 0 3px var(--ts-color-focus-ring-danger);
+}
+
+.textarea__wrapper--disabled {
+  background-color: var(--ts-color-bg-disabled);
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* ---- Native Textarea ---- */
+.textarea__native {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-family: inherit;
+  color: var(--ts-color-text-primary);
+  width: 100%;
+  min-width: 0;
+  line-height: var(--ts-line-height-normal);
+}
+
+.textarea__native::placeholder {
+  color: var(--ts-color-text-tertiary);
+}
+
+.textarea__native:disabled {
+  cursor: not-allowed;
+}
+
+/* ---- Resize ---- */
+:host([resize="none"]) .textarea__native {
+  resize: none;
+}
+
+:host([resize="vertical"]) .textarea__native {
+  resize: vertical;
+}
+
+:host([resize="horizontal"]) .textarea__native {
+  resize: horizontal;
+}
+
+:host([resize="both"]) .textarea__native {
+  resize: both;
+}
+
+/* ---- Sizes ---- */
+:host([size="sm"]) .textarea__wrapper {
+  border-radius: var(--ts-radius-sm);
+}
+:host([size="sm"]) .textarea__native {
+  padding: var(--ts-spacing-1) var(--ts-spacing-2);
+  font-size: var(--ts-font-size-sm);
+}
+
+:host([size="md"]) .textarea__native {
+  padding: var(--ts-spacing-2) var(--ts-spacing-3);
+  font-size: var(--ts-font-size-md);
+}
+
+:host([size="lg"]) .textarea__native {
+  padding: var(--ts-spacing-3) var(--ts-spacing-4);
+  font-size: var(--ts-font-size-lg);
+}
+
+:host([size="xl"]) .textarea__wrapper {
+  border-radius: var(--ts-radius-lg);
+}
+:host([size="xl"]) .textarea__native {
+  padding: var(--ts-spacing-4) var(--ts-spacing-5);
+  font-size: var(--ts-font-size-xl);
+}
+
+/* ---- Help & Error Text ---- */
+.textarea__help,
+.textarea__error {
+  margin-block-start: var(--ts-spacing-1);
+  font-size: var(--ts-font-size-xs);
+  line-height: var(--ts-line-height-normal);
+}
+
+.textarea__help {
+  color: var(--ts-color-text-tertiary);
+}
+
+.textarea__error {
+  color: var(--ts-color-danger-600);
+  font-weight: var(--ts-font-weight-medium);
+}

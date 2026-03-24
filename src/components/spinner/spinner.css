@@ -1,0 +1,49 @@
+/* ==========================================================================
+   ts-spinner — Shadow DOM Scoped Styles
+
+   Component tokens (Tier 3):
+     --ts-spinner-size          Spinner dimensions
+     --ts-spinner-color         Spinning indicator color
+     --ts-spinner-track-color   Background track color
+   ========================================================================== */
+
+:host {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  --ts-spinner-size: 1.5rem;
+  --ts-spinner-color: var(--ts-color-interactive-primary);
+  --ts-spinner-track-color: var(--ts-color-neutral-200);
+}
+
+/* ---- Sizes ---- */
+:host([size="xs"]) { --ts-spinner-size: 0.875rem; }
+:host([size="sm"]) { --ts-spinner-size: 1.125rem; }
+:host([size="md"]) { --ts-spinner-size: 1.5rem; }
+:host([size="lg"]) { --ts-spinner-size: 2rem; }
+:host([size="xl"]) { --ts-spinner-size: 3rem; }
+
+/* ---- SVG ---- */
+.spinner__svg {
+  width: var(--ts-spinner-size);
+  height: var(--ts-spinner-size);
+  animation: ts-spinner-rotate 0.75s linear infinite;
+}
+
+/* ---- Track ---- */
+.spinner__track {
+  stroke: var(--ts-spinner-track-color);
+}
+
+/* ---- Indicator ---- */
+.spinner__indicator {
+  stroke: var(--ts-spinner-color);
+}
+
+/* ---- Animation ---- */
+@keyframes ts-spinner-rotate {
+  to {
+    transform: rotate(360deg);
+  }
+}

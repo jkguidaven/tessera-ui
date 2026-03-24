@@ -1,0 +1,64 @@
+/* ==========================================================================
+   ts-switch-option — Shadow DOM Scoped Styles
+   ========================================================================== */
+
+:host {
+  display: inline-flex;
+  flex: 1;
+  outline: none;
+}
+
+.switch-option__base {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--ts-spacing-1);
+  inline-size: 100%;
+  padding-inline: var(--ts-spacing-3);
+  padding-block: var(--ts-spacing-1);
+  border-radius: calc(var(--ts-switch-group-radius, var(--ts-shape-interactive)) - 2px);
+  cursor: pointer;
+  user-select: none;
+  white-space: nowrap;
+  font-weight: var(--ts-font-weight-medium);
+  color: var(--ts-color-text-secondary);
+  transition:
+    background-color var(--ts-transition-fast),
+    color var(--ts-transition-fast),
+    box-shadow var(--ts-transition-fast);
+}
+
+.switch-option__base:hover {
+  color: var(--ts-color-text-primary);
+}
+
+:host(:focus-visible) .switch-option__base {
+  box-shadow: var(--ts-focus-ring);
+}
+
+/* ---- Active ---- */
+:host([active]) .switch-option__base {
+  background-color: var(--ts-switch-group-active-bg, var(--ts-color-neutral-0));
+  color: var(--ts-color-text-primary);
+  box-shadow: var(--ts-shadow-sm);
+}
+
+/* ---- Disabled ---- */
+:host([disabled]) .switch-option__base {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* ---- Icon ---- */
+.switch-option__icon {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+/* ---- Label ---- */
+.switch-option__label {
+  display: inline-flex;
+  align-items: center;
+}

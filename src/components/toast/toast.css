@@ -1,0 +1,166 @@
+/* ==========================================================================
+   ts-toast — Shadow DOM Scoped Styles
+
+   Component tokens (Tier 3):
+     --ts-toast-radius      Border radius
+     --ts-toast-shadow      Box shadow
+     --ts-toast-max-width   Maximum width
+   ========================================================================== */
+
+:host {
+  display: block;
+  position: fixed;
+  z-index: var(--ts-z-toast, 9000);
+  font-family: var(--ts-font-family-base);
+  pointer-events: none;
+
+  --ts-toast-radius: var(--ts-shape-interactive);
+  --ts-toast-shadow: var(--ts-shadow-lg);
+  --ts-toast-max-width: 420px;
+}
+
+/* ---- Positions ---- */
+:host([position="top-right"]) {
+  inset-block-start: var(--ts-spacing-4);
+  inset-inline-end: var(--ts-spacing-4);
+}
+
+:host([position="top-left"]) {
+  inset-block-start: var(--ts-spacing-4);
+  inset-inline-start: var(--ts-spacing-4);
+}
+
+:host([position="bottom-right"]) {
+  inset-block-end: var(--ts-spacing-4);
+  inset-inline-end: var(--ts-spacing-4);
+}
+
+:host([position="bottom-left"]) {
+  inset-block-end: var(--ts-spacing-4);
+  inset-inline-start: var(--ts-spacing-4);
+}
+
+:host([position="top-center"]) {
+  inset-block-start: var(--ts-spacing-4);
+  inset-inline-start: 50%;
+  transform: translateX(-50%);
+}
+
+:host([position="bottom-center"]) {
+  inset-block-end: var(--ts-spacing-4);
+  inset-inline-start: 50%;
+  transform: translateX(-50%);
+}
+
+/* ---- Base ---- */
+.toast__base {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--ts-spacing-3);
+  padding: var(--ts-spacing-3) var(--ts-spacing-4);
+  border-radius: var(--ts-toast-radius);
+  box-shadow: var(--ts-toast-shadow);
+  max-inline-size: var(--ts-toast-max-width);
+  pointer-events: auto;
+  border: 1px solid transparent;
+  font-size: var(--ts-font-size-sm);
+  line-height: var(--ts-line-height-normal);
+  animation: ts-toast-slide-in 0.3s ease-out;
+}
+
+@keyframes ts-toast-slide-in {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ---- Variants ---- */
+:host([variant="info"]) .toast__base {
+  background-color: var(--ts-color-info-bg);
+  border-color: var(--ts-color-info-border);
+  color: var(--ts-color-info-600);
+}
+
+:host([variant="success"]) .toast__base {
+  background-color: var(--ts-color-success-bg);
+  border-color: var(--ts-color-success-border);
+  color: var(--ts-color-success-600);
+}
+
+:host([variant="warning"]) .toast__base {
+  background-color: var(--ts-color-warning-bg);
+  border-color: var(--ts-color-warning-border);
+  color: var(--ts-color-warning-600);
+}
+
+:host([variant="danger"]) .toast__base {
+  background-color: var(--ts-color-danger-bg);
+  border-color: var(--ts-color-danger-border);
+  color: var(--ts-color-danger-600);
+}
+
+:host([variant="neutral"]) .toast__base {
+  background-color: var(--ts-color-bg-subtle);
+  border-color: var(--ts-color-border-subtle);
+  color: var(--ts-color-text-secondary);
+}
+
+/* ---- Icon ---- */
+.toast__icon {
+  display: flex;
+  align-items: center;
+  font-size: 1.15em;
+  flex-shrink: 0;
+  margin-block-start: 1px;
+}
+
+/* ---- Message ---- */
+.toast__message {
+  flex: 1;
+  min-inline-size: 0;
+}
+
+/* ---- Action ---- */
+.toast__action {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.toast__action:empty {
+  display: none;
+}
+
+/* ---- Close button ---- */
+.toast__close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  inline-size: 1.5rem;
+  block-size: 1.5rem;
+  border: none;
+  border-radius: var(--ts-radius-sm);
+  background: transparent;
+  color: currentColor;
+  opacity: 0.6;
+  cursor: pointer;
+  font-size: 0.8em;
+  transition: opacity var(--ts-transition-fast);
+  padding: 0;
+  line-height: 1;
+}
+
+.toast__close:hover {
+  opacity: 1;
+}
+
+.toast__close:focus-visible {
+  box-shadow: var(--ts-focus-ring);
+  opacity: 1;
+}

@@ -1,0 +1,81 @@
+/* ==========================================================================
+   ts-menu — Shadow DOM Scoped Styles
+
+   Component tokens (Tier 3):
+     --ts-menu-bg        Menu panel background
+     --ts-menu-radius    Menu panel border radius
+     --ts-menu-shadow    Menu panel elevation shadow
+   ========================================================================== */
+
+:host {
+  display: inline-block;
+  position: relative;
+  font-family: var(--ts-font-family-base);
+
+  --ts-menu-bg: var(--ts-color-bg-surface);
+  --ts-menu-radius: var(--ts-shape-overlay);
+  --ts-menu-shadow: var(--ts-shadow-lg);
+}
+
+/* ---- Trigger ---- */
+.menu__trigger {
+  display: inline-flex;
+}
+
+/* ---- Panel ---- */
+.menu__panel {
+  position: absolute;
+  z-index: var(--ts-z-tooltip);
+  display: none;
+  flex-direction: column;
+  min-inline-size: 10rem;
+  padding-block: var(--ts-spacing-1);
+  background-color: var(--ts-menu-bg);
+  border-radius: var(--ts-menu-radius);
+  box-shadow: var(--ts-menu-shadow);
+  border: 1px solid var(--ts-color-border-default);
+  overflow-y: auto;
+  max-block-size: 20rem;
+  animation: ts-menu-fade-in 150ms ease-out;
+}
+
+.menu__panel--open {
+  display: flex;
+}
+
+/* ---- Placement ---- */
+.menu__panel--bottom-start {
+  inset-block-start: 100%;
+  inset-inline-start: 0;
+  margin-block-start: var(--ts-spacing-1);
+}
+
+.menu__panel--bottom-end {
+  inset-block-start: 100%;
+  inset-inline-end: 0;
+  margin-block-start: var(--ts-spacing-1);
+}
+
+.menu__panel--top-start {
+  inset-block-end: 100%;
+  inset-inline-start: 0;
+  margin-block-end: var(--ts-spacing-1);
+}
+
+.menu__panel--top-end {
+  inset-block-end: 100%;
+  inset-inline-end: 0;
+  margin-block-end: var(--ts-spacing-1);
+}
+
+/* ---- Animation ---- */
+@keyframes ts-menu-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

@@ -1,0 +1,31 @@
+/* ==========================================================================
+   ts-accordion — Shadow DOM Scoped Styles
+
+   Component tokens (Tier 3):
+     --ts-accordion-border-color    Border color between items
+     --ts-accordion-header-bg       Header background color
+     --ts-accordion-radius          Border radius
+   ========================================================================== */
+
+:host {
+  display: block;
+
+  --ts-accordion-border-color: var(--ts-color-border-default);
+  --ts-accordion-header-bg: transparent;
+  --ts-accordion-radius: var(--ts-shape-interactive);
+}
+
+::slotted(ts-accordion-item) {
+  border-block-end: 1px solid var(--ts-accordion-border-color);
+}
+
+::slotted(ts-accordion-item:first-child) {
+  border-start-start-radius: var(--ts-accordion-radius);
+  border-start-end-radius: var(--ts-accordion-radius);
+}
+
+::slotted(ts-accordion-item:last-child) {
+  border-end-start-radius: var(--ts-accordion-radius);
+  border-end-end-radius: var(--ts-accordion-radius);
+  border-block-end: none;
+}

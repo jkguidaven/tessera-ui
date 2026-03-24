@@ -1,0 +1,150 @@
+/* ==========================================================================
+   ts-popover — Shadow DOM Scoped Styles
+
+   Component tokens (Tier 3):
+     --ts-popover-bg          Background color
+     --ts-popover-radius      Border radius
+     --ts-popover-shadow      Box shadow
+     --ts-popover-max-width   Max width
+   ========================================================================== */
+
+:host {
+  display: inline-block;
+  position: relative;
+  font-family: var(--ts-font-family-base);
+
+  --ts-popover-bg: var(--ts-color-bg-surface, #fff);
+  --ts-popover-radius: var(--ts-shape-interactive);
+  --ts-popover-shadow: var(--ts-shadow-lg);
+  --ts-popover-max-width: 320px;
+}
+
+.popover__trigger {
+  display: inline-block;
+  cursor: pointer;
+}
+
+/* ---- Panel ---- */
+.popover__panel {
+  position: absolute;
+  z-index: var(--ts-z-popover, 1000);
+  padding: var(--ts-spacing-4);
+  background-color: var(--ts-popover-bg);
+  border-radius: var(--ts-popover-radius);
+  box-shadow: var(--ts-popover-shadow);
+  max-inline-size: var(--ts-popover-max-width);
+  border: 1px solid var(--ts-color-border-subtle);
+  font-size: var(--ts-font-size-sm);
+  line-height: var(--ts-line-height-normal);
+  opacity: 0;
+  transform: scale(0.95);
+  pointer-events: none;
+  transition:
+    opacity var(--ts-transition-fast),
+    transform var(--ts-transition-fast);
+}
+
+.popover__panel--visible {
+  opacity: 1;
+  transform: scale(1);
+  pointer-events: auto;
+}
+
+/* ---- Placements ---- */
+.popover__panel--top {
+  bottom: calc(100% + 10px);
+  left: 50%;
+  margin-left: -50%;
+}
+.popover__panel--top-start {
+  bottom: calc(100% + 10px);
+  inset-inline-start: 0;
+}
+.popover__panel--top-end {
+  bottom: calc(100% + 10px);
+  inset-inline-end: 0;
+}
+
+.popover__panel--bottom {
+  top: calc(100% + 10px);
+  left: 50%;
+  margin-left: -50%;
+}
+.popover__panel--bottom-start {
+  top: calc(100% + 10px);
+  inset-inline-start: 0;
+}
+.popover__panel--bottom-end {
+  top: calc(100% + 10px);
+  inset-inline-end: 0;
+}
+
+.popover__panel--left {
+  inset-inline-end: calc(100% + 10px);
+  top: 50%;
+  transform: translateY(-50%) scale(0.95);
+}
+.popover__panel--left.popover__panel--visible {
+  transform: translateY(-50%) scale(1);
+}
+
+.popover__panel--right {
+  inset-inline-start: calc(100% + 10px);
+  top: 50%;
+  transform: translateY(-50%) scale(0.95);
+}
+.popover__panel--right.popover__panel--visible {
+  transform: translateY(-50%) scale(1);
+}
+
+/* ---- Arrow ---- */
+.popover__arrow {
+  position: absolute;
+  inline-size: 10px;
+  block-size: 10px;
+  background: var(--ts-popover-bg);
+  border: 1px solid var(--ts-color-border-subtle);
+  transform: rotate(45deg);
+}
+
+.popover__panel--top .popover__arrow,
+.popover__panel--top-start .popover__arrow,
+.popover__panel--top-end .popover__arrow {
+  bottom: -6px;
+  left: 50%;
+  margin-left: -5px;
+  border-top: none;
+  border-left: none;
+}
+
+.popover__panel--bottom .popover__arrow,
+.popover__panel--bottom-start .popover__arrow,
+.popover__panel--bottom-end .popover__arrow {
+  top: -6px;
+  left: 50%;
+  margin-left: -5px;
+  border-bottom: none;
+  border-right: none;
+}
+
+.popover__panel--left .popover__arrow {
+  inset-inline-end: -6px;
+  top: 50%;
+  margin-top: -5px;
+  border-bottom: none;
+  border-left: none;
+}
+
+.popover__panel--right .popover__arrow {
+  inset-inline-start: -6px;
+  top: 50%;
+  margin-top: -5px;
+  border-top: none;
+  border-right: none;
+}
+
+/* ---- Content ---- */
+.popover__content {
+  position: relative;
+  z-index: 1;
+}
