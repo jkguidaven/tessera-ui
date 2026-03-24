@@ -28,13 +28,14 @@ pnpm start           # Builds Stencil + starts Storybook with hot-reload
 
 ### Creating a new component
 
-1. Create the component directory and four files: `.tsx`, `.css`, `.spec.ts`, `.e2e.ts`
-2. Stories are **auto-generated** by the Stencil build — do NOT create `.stories.ts` manually
+1. Create the component directory and five files: `.tsx`, `.css`, `.spec.ts`, `.e2e.ts`, `.stories.ts`
+2. **Hand-write stories** — do NOT use `@auto-generated`. Stories must showcase all variants, sizes, states, and realistic composition examples. See `src/components/button/button.stories.ts` as reference.
 3. Follow the pattern in `src/components/button/` as a reference
 4. Export from `src/index.ts`
 5. Use `import type { EventEmitter }` (not value import) to satisfy lint
 6. Use CSS **logical properties** for RTL support (`padding-inline-start`, not `padding-left`)
 7. Use **shape family tokens** for border-radius (`var(--ts-shape-interactive)`, not `var(--ts-radius-md)`)
+8. For compound components (e.g., tabs + tab-panel), put the stories in the parent's file only. Create a stub file for the child: `// Stories for this component are in the parent component's stories file`
 
 ### Verification checklist (MANDATORY before committing)
 
@@ -42,19 +43,21 @@ Run all three checks after any component change:
 
 ```bash
 pnpm build                    # Must pass — verifies all output targets compile
-pnpm test                     # Must pass — unit tests (57 tests across 9 suites)
-pnpm test.e2e                 # Must pass — e2e tests (30 tests across 9 suites)
+pnpm test                     # Must pass — unit tests (331 tests across 39 suites)
+pnpm test.e2e                 # Must pass — e2e tests (137 tests across 39 suites)
 npx eslint src --ext .ts,.tsx # Must have 0 errors (warnings are acceptable)
 ```
 
 Do NOT commit if any of these fail. Fix the issue first.
 
-### Auto-generated Storybook stories
+### Storybook stories
 
-- `scripts/storybook-output-target.js` generates `.stories.ts` files on every Stencil build
-- Files with `// @auto-generated` marker are overwritten on each build
-- To hand-write stories: remove the `@auto-generated` marker — the generator will skip that file
-- Adding/removing `@Prop()` on a component automatically updates its stories on next build
+- All stories are **hand-written** — the auto-generator is disabled for all 39 components
+- Stories must NOT contain `@auto-generated` in the file (this marker triggers overwrite on build)
+- When creating or updating a component, **always update its stories** to reflect new props/variants/states
+- Stories should showcase: Default (with controls), Variants, Sizes, States (disabled/error/loading), Composition (realistic multi-component usage)
+- Use realistic content (e.g., "Save Changes", "john@example.com") — never generic "Content" or "Label"
+- Use `<ts-icon name="...">` with Lucide icon names in examples where appropriate
 
 ### Key scripts
 
