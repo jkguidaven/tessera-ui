@@ -68,7 +68,7 @@ export class TsTreeItem {
   private handleSelect = (): void => {
     if (this.disabled) return;
     const tree = this.hostEl.closest('ts-tree');
-    if (tree && (tree as any).selectable) {
+    if (tree && (tree as unknown as { selectable: boolean }).selectable) {
       this.selected = !this.selected;
       this.tsSelect.emit({ selected: this.selected, value: this.label || '' });
     }
