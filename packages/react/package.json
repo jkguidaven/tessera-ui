@@ -1,6 +1,6 @@
 {
   "name": "@tessera-ui/react",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "React wrappers for Tessera UI web components",
   "main": "dist/index.cjs.js",
   "module": "dist/index.js",
