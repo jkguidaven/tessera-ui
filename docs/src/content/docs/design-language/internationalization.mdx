@@ -1,0 +1,122 @@
+---
+title: Internationalization
+description: RTL support, text expansion, CJK typography, and i18n testing guidance for Tessera UI.
+---
+
+Tessera UI is built with internationalization (i18n) in mind. Components use logical CSS properties, handle text expansion gracefully, and support right-to-left (RTL) scripts without additional configuration.
+
+## RTL Support
+
+Tessera UI components use **CSS logical properties** throughout. This means that `padding-inline-start` is used instead of `padding-left`, `margin-inline-end` instead of `margin-right`, and so on. When the document direction changes, all spacing and layout adapts automatically.
+
+### Activating RTL
+
+Set the `dir` attribute on the `<html>` element or any ancestor:
+
+```html
+<html dir="rtl" lang="ar">
+  <!-- All Tessera UI components automatically mirror -->
+</html>
+```
+
+### What adapts automatically
+
+| Feature | LTR | RTL |
+|---|---|---|
+| Text alignment | Left-aligned | Right-aligned |
+| Icon placement (prefix/suffix) | Prefix on left, suffix on right | Prefix on right, suffix on left |
+| Padding/margin | `padding-inline-start/end` | Swapped automatically |
+| Border radius | Applied per-corner via logical properties | Mirrored |
+| Modal close button | Top-right | Top-left |
+| Toggle label position | Label on right of track | Label on left of track |
+
+### What does NOT adapt automatically
+
+- **Icons with directional meaning** (arrows, progress indicators) — you must provide mirrored SVG variants or use `transform: scaleX(-1)` selectively
+- **Charts and data visualizations** — these require application-level RTL handling
+- **Phone number and date formats** — use the `Intl` API for locale-aware formatting
+
+## Text Expansion
+
+When text is translated from English to other languages, it typically gets longer. Plan for expansion in your layouts:
+
+| Target Language | Typical Expansion | Example |
+|---|---|---|
+| German | +30% | "Save" -> "Speichern" |
+| Finnish | +30–60% | "Settings" -> "Asetukset" |
+| French | +15–20% | "Delete" -> "Supprimer" |
+| Japanese | -10–30% (shorter) | "Notification" -> "通知" |
+| Arabic | +25% | "Cancel" -> "إلغاء الأمر" |
+
+### Design recommendations
+
+- **Buttons:** Use flexible widths. Never set a fixed `width` on buttons — use `min-width` if needed.
+- **Navigation items:** Allow wrapping or overflow handling for nav labels.
+- **Tables:** Column headers should allow wrapping. Avoid fixed-width columns for text content.
+- **Tooltips:** Max-width should accommodate at least 150% of the English text length.
+- **Badges and tags:** Use `white-space: nowrap` with `overflow: hidden; text-overflow: ellipsis` for bounded containers.
+
+## Truncation Patterns
+
+When text must fit a fixed space, use consistent truncation:
+
+### Single-line truncation
+
+```css
+.truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+```
+
+### Multi-line truncation
+
+```css
+.truncate-2-lines {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+```
+
+**Guidelines:**
+- Always provide the full text via `title` attribute or tooltip for truncated content
+- Never truncate error messages, alerts, or critical instructions
+- Truncation should be a last resort — prefer reflowing layout to accommodate longer text
+
+## CJK Typography Considerations
+
+Chinese, Japanese, and Korean scripts have unique typographic requirements:
+
+- **Line height:** CJK text typically needs `line-height: 1.7–1.8` instead of the default `1.5`. Override `--ts-line-height-normal` in CJK contexts:
+  ```css
+  :lang(zh), :lang(ja), :lang(ko) {
+    --ts-line-height-normal: 1.75;
+  }
+  ```
+- **Letter spacing:** Do not apply letter-spacing tokens to CJK text — the characters are already monospaced.
+- **Font families:** Append CJK-specific fonts to the font stack:
+  ```css
+  :lang(zh) { --ts-font-family-base: 'Inter', 'Noto Sans SC', sans-serif; }
+  :lang(ja) { --ts-font-family-base: 'Inter', 'Noto Sans JP', sans-serif; }
+  :lang(ko) { --ts-font-family-base: 'Inter', 'Noto Sans KR', sans-serif; }
+  ```
+- **Word break:** CJK text does not use spaces between words. Use `word-break: break-all` or `overflow-wrap: anywhere` for CJK content in constrained containers.
+
+## Testing Checklist for i18n
+
+Use this checklist when verifying internationalization support:
+
+- [ ] **RTL layout:** Set `dir="rtl"` and verify all components mirror correctly
+- [ ] **Text expansion:** Test with German or Finnish translations (or use pseudo-localization)
+- [ ] **Long strings:** Test with very long single-word strings (e.g., German compound words)
+- [ ] **Truncation:** Verify truncated text has accessible full-text alternatives
+- [ ] **Number formatting:** Use `Intl.NumberFormat` for locale-aware numbers
+- [ ] **Date formatting:** Use `Intl.DateTimeFormat` for locale-aware dates
+- [ ] **Pluralization:** Handle zero, one, and many cases (use `Intl.PluralRules`)
+- [ ] **CJK line height:** Verify readability with CJK text at default settings
+- [ ] **Icon directionality:** Confirm directional icons (arrows, progress) mirror in RTL
+- [ ] **Form validation:** Error messages display correctly in all target languages
+- [ ] **Keyboard shortcuts:** Verify shortcuts work with non-Latin keyboard layouts

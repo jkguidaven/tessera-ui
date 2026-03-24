@@ -1,0 +1,137 @@
+{
+  "$description": "Tessera UI typography tokens in W3C DTCG format",
+  "font": {
+    "family": {
+      "base": {
+        "$value": "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+        "$type": "fontFamily",
+        "$description": "Base font family"
+      },
+      "mono": {
+        "$value": "'JetBrains Mono', 'Fira Code', 'Consolas', monospace",
+        "$type": "fontFamily",
+        "$description": "Monospace font family"
+      }
+    },
+    "weight": {
+      "regular": { "$value": 400, "$type": "fontWeight", "$description": "Regular weight" },
+      "medium":  { "$value": 500, "$type": "fontWeight", "$description": "Medium weight" },
+      "semi":    { "$value": 600, "$type": "fontWeight", "$description": "Semi-bold weight" },
+      "bold":    { "$value": 700, "$type": "fontWeight", "$description": "Bold weight" }
+    },
+    "size": {
+      "xs":  { "$value": "0.75rem",  "$type": "dimension", "$description": "12px" },
+      "sm":  { "$value": "0.875rem", "$type": "dimension", "$description": "14px" },
+      "md":  { "$value": "1rem",     "$type": "dimension", "$description": "16px" },
+      "lg":  { "$value": "1.125rem", "$type": "dimension", "$description": "18px" },
+      "xl":  { "$value": "1.25rem",  "$type": "dimension", "$description": "20px" },
+      "2xl": { "$value": "1.5rem",   "$type": "dimension", "$description": "24px" },
+      "3xl": { "$value": "1.875rem", "$type": "dimension", "$description": "30px" },
+      "4xl": { "$value": "2.25rem",  "$type": "dimension", "$description": "36px" },
+      "5xl": { "$value": "3rem",     "$type": "dimension", "$description": "48px" },
+      "6xl": { "$value": "3.75rem",  "$type": "dimension", "$description": "60px" }
+    },
+    "lineHeight": {
+      "tight":  { "$value": 1.25, "$type": "number", "$description": "Tight line height" },
+      "normal": { "$value": 1.5,  "$type": "number", "$description": "Normal line height" },
+      "loose":  { "$value": 1.75, "$type": "number", "$description": "Loose line height" }
+    },
+    "letterSpacing": {
+      "tighter": { "$value": "-0.04em", "$type": "dimension", "$description": "Tighter letter spacing" },
+      "tight":   { "$value": "-0.02em", "$type": "dimension", "$description": "Tight letter spacing" },
+      "normal":  { "$value": "0em",     "$type": "dimension", "$description": "Normal letter spacing" },
+      "wide":    { "$value": "0.02em",  "$type": "dimension", "$description": "Wide letter spacing" },
+      "wider":   { "$value": "0.05em",  "$type": "dimension", "$description": "Wider letter spacing" },
+      "widest":  { "$value": "0.1em",   "$type": "dimension", "$description": "Widest letter spacing" }
+    }
+  },
+  "type": {
+    "$description": "Composite type roles combining size, weight, line height, and letter spacing",
+    "display": {
+      "lg": {
+        "size":    { "$value": "{font.size.6xl}",              "$type": "dimension", "$description": "Display large font size" },
+        "weight":  { "$value": "{font.weight.bold}",           "$type": "fontWeight", "$description": "Display large font weight" },
+        "line":    { "$value": 1.1,                            "$type": "number", "$description": "Display large line height" },
+        "spacing": { "$value": "{font.letterSpacing.tighter}", "$type": "dimension", "$description": "Display large letter spacing" }
+      },
+      "md": {
+        "size":    { "$value": "{font.size.5xl}",              "$type": "dimension", "$description": "Display medium font size" },
+        "weight":  { "$value": "{font.weight.bold}",           "$type": "fontWeight", "$description": "Display medium font weight" },
+        "line":    { "$value": 1.1,                            "$type": "number", "$description": "Display medium line height" },
+        "spacing": { "$value": "{font.letterSpacing.tighter}", "$type": "dimension", "$description": "Display medium letter spacing" }
+      },
+      "sm": {
+        "size":    { "$value": "{font.size.4xl}",            "$type": "dimension", "$description": "Display small font size" },
+        "weight":  { "$value": "{font.weight.bold}",         "$type": "fontWeight", "$description": "Display small font weight" },
+        "line":    { "$value": 1.15,                         "$type": "number", "$description": "Display small line height" },
+        "spacing": { "$value": "{font.letterSpacing.tight}", "$type": "dimension", "$description": "Display small letter spacing" }
+      }
+    },
+    "heading": {
+      "lg": {
+        "size":    { "$value": "{font.size.3xl}",              "$type": "dimension", "$description": "Heading large font size" },
+        "weight":  { "$value": "{font.weight.semi}",           "$type": "fontWeight", "$description": "Heading large font weight" },
+        "line":    { "$value": "{font.lineHeight.tight}",      "$type": "number", "$description": "Heading large line height" },
+        "spacing": { "$value": "{font.letterSpacing.tight}",   "$type": "dimension", "$description": "Heading large letter spacing" }
+      },
+      "md": {
+        "size":    { "$value": "{font.size.2xl}",              "$type": "dimension", "$description": "Heading medium font size" },
+        "weight":  { "$value": "{font.weight.semi}",           "$type": "fontWeight", "$description": "Heading medium font weight" },
+        "line":    { "$value": "{font.lineHeight.tight}",      "$type": "number", "$description": "Heading medium line height" },
+        "spacing": { "$value": "{font.letterSpacing.tight}",   "$type": "dimension", "$description": "Heading medium letter spacing" }
+      },
+      "sm": {
+        "size":    { "$value": "{font.size.xl}",               "$type": "dimension", "$description": "Heading small font size" },
+        "weight":  { "$value": "{font.weight.semi}",           "$type": "fontWeight", "$description": "Heading small font weight" },
+        "line":    { "$value": "{font.lineHeight.tight}",      "$type": "number", "$description": "Heading small line height" },
+        "spacing": { "$value": "{font.letterSpacing.normal}",  "$type": "dimension", "$description": "Heading small letter spacing" }
+      }
+    },
+    "body": {
+      "lg": {
+        "size":    { "$value": "{font.size.lg}",               "$type": "dimension", "$description": "Body large font size" },
+        "weight":  { "$value": "{font.weight.regular}",        "$type": "fontWeight", "$description": "Body large font weight" },
+        "line":    { "$value": "{font.lineHeight.normal}",     "$type": "number", "$description": "Body large line height" },
+        "spacing": { "$value": "{font.letterSpacing.normal}",  "$type": "dimension", "$description": "Body large letter spacing" }
+      },
+      "md": {
+        "size":    { "$value": "{font.size.md}",               "$type": "dimension", "$description": "Body medium font size" },
+        "weight":  { "$value": "{font.weight.regular}",        "$type": "fontWeight", "$description": "Body medium font weight" },
+        "line":    { "$value": "{font.lineHeight.normal}",     "$type": "number", "$description": "Body medium line height" },
+        "spacing": { "$value": "{font.letterSpacing.normal}",  "$type": "dimension", "$description": "Body medium letter spacing" }
+      },
+      "sm": {
+        "size":    { "$value": "{font.size.sm}",               "$type": "dimension", "$description": "Body small font size" },
+        "weight":  { "$value": "{font.weight.regular}",        "$type": "fontWeight", "$description": "Body small font weight" },
+        "line":    { "$value": "{font.lineHeight.normal}",     "$type": "number", "$description": "Body small line height" },
+        "spacing": { "$value": "{font.letterSpacing.normal}",  "$type": "dimension", "$description": "Body small letter spacing" }
+      }
+    },
+    "label": {
+      "lg": {
+        "size":    { "$value": "{font.size.md}",               "$type": "dimension", "$description": "Label large font size" },
+        "weight":  { "$value": "{font.weight.medium}",         "$type": "fontWeight", "$description": "Label large font weight" },
+        "line":    { "$value": "{font.lineHeight.tight}",      "$type": "number", "$description": "Label large line height" },
+        "spacing": { "$value": "{font.letterSpacing.normal}",  "$type": "dimension", "$description": "Label large letter spacing" }
+      },
+      "md": {
+        "size":    { "$value": "{font.size.sm}",               "$type": "dimension", "$description": "Label medium font size" },
+        "weight":  { "$value": "{font.weight.medium}",         "$type": "fontWeight", "$description": "Label medium font weight" },
+        "line":    { "$value": "{font.lineHeight.tight}",      "$type": "number", "$description": "Label medium line height" },
+        "spacing": { "$value": "{font.letterSpacing.wide}",    "$type": "dimension", "$description": "Label medium letter spacing" }
+      },
+      "sm": {
+        "size":    { "$value": "{font.size.xs}",               "$type": "dimension", "$description": "Label small font size" },
+        "weight":  { "$value": "{font.weight.medium}",         "$type": "fontWeight", "$description": "Label small font weight" },
+        "line":    { "$value": "{font.lineHeight.tight}",      "$type": "number", "$description": "Label small line height" },
+        "spacing": { "$value": "{font.letterSpacing.wider}",   "$type": "dimension", "$description": "Label small letter spacing" }
+      }
+    },
+    "caption": {
+      "size":    { "$value": "{font.size.xs}",              "$type": "dimension", "$description": "Caption font size" },
+      "weight":  { "$value": "{font.weight.regular}",       "$type": "fontWeight", "$description": "Caption font weight" },
+      "line":    { "$value": "{font.lineHeight.normal}",    "$type": "number", "$description": "Caption line height" },
+      "spacing": { "$value": "{font.letterSpacing.wide}",   "$type": "dimension", "$description": "Caption letter spacing" }
+    }
+  }
+}

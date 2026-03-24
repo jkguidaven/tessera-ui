@@ -19,6 +19,15 @@ Motion brings interfaces to life — but only when used with purpose. Tessera UI
 | `--ts-transition-fast` | `150ms` | Micro-interactions: button hover, toggle switch, focus ring, color changes |
 | `--ts-transition-normal` | `250ms` | State transitions: card hover elevation, component enter/exit |
 | `--ts-transition-slow` | `350ms` | Layout shifts: accordion expand, panel slide, page transitions |
+| `--ts-transition-micro` | `75ms` | Instant-feeling micro-feedback: checkbox tick, ripple start |
+| `--ts-transition-x-slow` | `500ms` | Large-scale transitions: page-level entrances, complex orchestrations |
+
+### Loading Animation Durations
+
+| Token | Value | Usage |
+|---|---|---|
+| `--ts-loading-pulse-duration` | `1.5s` | Skeleton pulse cycle |
+| `--ts-loading-shimmer-duration` | `1.8s` | Shimmer/sweep animation |
 
 ### When to use each
 
@@ -26,17 +35,23 @@ Motion brings interfaces to life — but only when used with purpose. Tessera UI
 - **`normal` (250ms)** — Use for visual transitions that involve spatial change: a card lifting on hover, a modal scaling in, a tooltip appearing. Slightly longer to let the eye track the motion.
 - **`slow` (350ms)** — Use sparingly for larger layout changes: accordion sections expanding, panels sliding in from the edge. Reserved for motions that affect page layout.
 
-## Easing Curve
+## Easing Curves
 
-All transitions use the same easing function:
+Tessera UI provides four easing curves as tokens, each suited to a different type of motion:
 
-```css
-cubic-bezier(0.4, 0, 0.2, 1)
-```
+| Token | Value | Usage |
+|---|---|---|
+| `--ts-ease-standard` | `cubic-bezier(0.4, 0, 0.2, 1)` | Default for all transitions — natural deceleration |
+| `--ts-ease-decelerate` | `cubic-bezier(0, 0, 0.2, 1)` | Elements entering the screen — starts fast, slows into place |
+| `--ts-ease-accelerate` | `cubic-bezier(0.4, 0, 1, 1)` | Elements leaving the screen — starts slow, accelerates out |
+| `--ts-ease-spring` | `cubic-bezier(0.16, 1, 0.3, 1)` | Playful, bouncy motion — modal entrance, toast pop-in |
 
-This is a standard **ease-out** curve — elements decelerate as they reach their final position, creating a natural, physical feel. It's the same curve used by Material Design (standard easing).
+### When to use each
 
-**Why a single curve?** Multiple easing curves create subtle visual inconsistency. A single curve applied universally produces a cohesive motion language without additional complexity.
+- **Standard** — The workhorse. Use for hover effects, color transitions, and most state changes.
+- **Decelerate** — Use when an element enters the viewport (slide-in panels, toasts appearing). The fast start draws the user's eye.
+- **Accelerate** — Use when an element exits. The slow start gives the user a moment to register the departure.
+- **Spring** — Use sparingly for emphasis. Modal entrances and toast notifications benefit from the slight overshoot.
 
 ## Animation Patterns
 
@@ -113,6 +128,45 @@ transition:
 /* Bad — triggers layout recalculation for every property */
 transition: all var(--ts-transition-fast);
 ```
+
+## Choreography / Stagger System
+
+When multiple elements enter the screen at once (list items, grid cards, dashboard widgets), stagger their entrance to create a choreographed sequence rather than a simultaneous flash.
+
+Tessera UI provides a stagger interval token:
+
+| Token | Value | Usage |
+|---|---|---|
+| `--ts-stagger-interval` | `50ms` | Delay between each item's entrance animation |
+
+**Implementation example:**
+
+```css
+.stagger-list > * {
+  opacity: 0;
+  transform: translateY(8px);
+  animation: ts-stagger-enter var(--ts-transition-normal) var(--ts-ease-decelerate) forwards;
+}
+
+/* Each child delays by its index * interval */
+.stagger-list > *:nth-child(1) { animation-delay: calc(1 * var(--ts-stagger-interval)); }
+.stagger-list > *:nth-child(2) { animation-delay: calc(2 * var(--ts-stagger-interval)); }
+.stagger-list > *:nth-child(3) { animation-delay: calc(3 * var(--ts-stagger-interval)); }
+.stagger-list > *:nth-child(4) { animation-delay: calc(4 * var(--ts-stagger-interval)); }
+/* ... continue as needed, or use a CSS custom property with JavaScript */
+
+@keyframes ts-stagger-enter {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+```
+
+**Guidelines for stagger:**
+- Cap stagger at 8-10 items — beyond that, the total delay becomes noticeable
+- Total stagger sequence should not exceed `500ms` (`--ts-transition-x-slow`)
+- Use `prefers-reduced-motion` to disable stagger entirely, showing all items immediately
 
 ## Reduced Motion
 

@@ -75,6 +75,92 @@ Used behind modals and drawers to dim underlying content. Dark mode uses a stron
 
 Applied to disabled inputs and interactive elements to visually communicate non-interactivity.
 
+## Frosted / Glassmorphism
+
+Tessera UI provides opt-in tokens for frosted glass surfaces — translucent backgrounds with a blur effect. These are useful for floating toolbars, sticky headers, and overlay panels that need to remain legible while hinting at the content beneath.
+
+| Token | Light | Dark | Usage |
+|---|---|---|---|
+| `--ts-bg-frosted` | `rgba(255,255,255, 0.8)` | `rgba(26,25,23, 0.8)` | Frosted surface background |
+| `--ts-bg-frosted-blur` | `12px` | `12px` | Backdrop blur radius |
+
+**Usage:**
+```css
+.frosted-header {
+  background-color: var(--ts-bg-frosted);
+  backdrop-filter: blur(var(--ts-bg-frosted-blur));
+  -webkit-backdrop-filter: blur(var(--ts-bg-frosted-blur));
+}
+```
+
+**Guidelines:**
+- Frosted surfaces are opt-in — they are not used by default in any Tessera UI component
+- Always provide a solid fallback for browsers that do not support `backdrop-filter`
+- Test contrast of text on frosted surfaces with varying background content beneath
+
+## State Layer System
+
+State layers are semi-transparent overlays applied on top of a component's surface to indicate interaction state. The overlay color matches the component's key color (e.g., primary, danger) at a prescribed opacity.
+
+| State | Opacity Token | Value | Visual Effect |
+|---|---|---|---|
+| Hover | `--ts-state-hover-opacity` | `0.08` (8%) | Subtle darkening/lightening |
+| Focus | `--ts-state-focus-opacity` | `0.12` (12%) | Slightly stronger than hover |
+| Pressed | `--ts-state-pressed-opacity` | `0.12` (12%) | Equal to focus (combined with scale) |
+| Dragged | `--ts-state-dragged-opacity` | `0.16` (16%) | Strongest overlay for active drag |
+
+**Implementation pattern:**
+```css
+.interactive-element::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: currentColor;
+  opacity: 0;
+  transition: opacity var(--ts-transition-fast);
+  pointer-events: none;
+}
+
+.interactive-element:hover::before {
+  opacity: var(--ts-state-hover-opacity);
+}
+
+.interactive-element:active::before {
+  opacity: var(--ts-state-pressed-opacity);
+}
+```
+
+This approach ensures consistent state feedback regardless of the element's base color.
+
+## Skeleton / Loading Materials
+
+Skeleton screens use placeholder shapes that pulse to indicate loading content. Two tokens define the animation colors:
+
+| Token | Light | Dark | Usage |
+|---|---|---|---|
+| `--ts-color-skeleton-base` | `neutral-200` | `#3a3733` | Skeleton shape fill |
+| `--ts-color-skeleton-pulse` | `neutral-100` | `#2c2a27` | Pulse animation target color |
+
+Animation durations for loading states:
+
+| Token | Value | Usage |
+|---|---|---|
+| `--ts-loading-pulse-duration` | `1.5s` | Standard skeleton pulse cycle |
+| `--ts-loading-shimmer-duration` | `1.8s` | Shimmer/sweep animation cycle |
+
+```css
+@keyframes ts-skeleton-pulse {
+  0%, 100% { background-color: var(--ts-color-skeleton-base); }
+  50%      { background-color: var(--ts-color-skeleton-pulse); }
+}
+
+.skeleton {
+  animation: ts-skeleton-pulse var(--ts-loading-pulse-duration) ease-in-out infinite;
+  border-radius: var(--ts-radius-sm);
+}
+```
+
 ## Borders
 
 Borders create structure and separation without relying on shadows:

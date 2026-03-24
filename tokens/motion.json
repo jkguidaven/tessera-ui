@@ -1,0 +1,46 @@
+{
+  "$description": "Tessera UI motion tokens in W3C DTCG format",
+  "transition": {
+    "$description": "Composite transition presets combining duration and easing",
+    "micro":  {
+      "$description": "Micro interaction (75ms) — checkboxes, toggles",
+      "duration": { "$value": "75ms",  "$type": "duration" },
+      "easing":   { "$value": [0.4, 0, 0.2, 1], "$type": "cubicBezier" }
+    },
+    "fast": {
+      "$description": "Fast transition (150ms) — hover states, color changes",
+      "duration": { "$value": "150ms", "$type": "duration" },
+      "easing":   { "$value": [0.4, 0, 0.2, 1], "$type": "cubicBezier" }
+    },
+    "normal": {
+      "$description": "Normal transition (250ms) — general animations",
+      "duration": { "$value": "250ms", "$type": "duration" },
+      "easing":   { "$value": [0.4, 0, 0.2, 1], "$type": "cubicBezier" }
+    },
+    "slow": {
+      "$description": "Slow transition (350ms) — complex animations",
+      "duration": { "$value": "350ms", "$type": "duration" },
+      "easing":   { "$value": [0.4, 0, 0.2, 1], "$type": "cubicBezier" }
+    },
+    "x-slow": {
+      "$description": "Extra-slow transition (500ms) — page transitions",
+      "duration": { "$value": "500ms", "$type": "duration" },
+      "easing":   { "$value": [0.4, 0, 0.2, 1], "$type": "cubicBezier" }
+    }
+  },
+  "easing": {
+    "$description": "Easing curves for different motion intents",
+    "standard":   { "$value": [0.4, 0, 0.2, 1],  "$type": "cubicBezier", "$description": "Standard easing — general purpose" },
+    "decelerate": { "$value": [0, 0, 0.2, 1],     "$type": "cubicBezier", "$description": "Decelerate — entering elements" },
+    "accelerate": { "$value": [0.4, 0, 1, 1],     "$type": "cubicBezier", "$description": "Accelerate — exiting elements" },
+    "spring":     { "$value": [0.16, 1, 0.3, 1],  "$type": "cubicBezier", "$description": "Spring — playful/bouncy motion" }
+  },
+  "loading": {
+    "$description": "Loading and skeleton animation durations",
+    "pulse-duration":   { "$value": "1.5s", "$type": "duration", "$description": "Skeleton pulse animation cycle" },
+    "shimmer-duration": { "$value": "1.8s", "$type": "duration", "$description": "Skeleton shimmer animation cycle" }
+  },
+  "stagger": {
+    "interval": { "$value": "50ms", "$type": "duration", "$description": "Stagger interval for choreographed list entrances" }
+  }
+}

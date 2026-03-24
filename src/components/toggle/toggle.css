@@ -58,21 +58,21 @@
   background-color: var(--ts-toggle-thumb-bg);
   border-radius: var(--ts-radius-full);
   box-shadow: var(--ts-shadow-sm);
-  transition: left var(--ts-transition-fast);
+  transition: inset-inline-start var(--ts-transition-fast);
 }
 
 /* ---- Sizes ---- */
 :host([size="sm"]) .toggle__track { width: 32px; height: 18px; }
-:host([size="sm"]) .toggle__thumb { width: 14px; height: 14px; left: 2px; }
-:host(.ts-toggle--checked[size="sm"]) .toggle__thumb { left: 16px; }
+:host([size="sm"]) .toggle__thumb { width: 14px; height: 14px; inset-inline-start: 2px; }
+:host(.ts-toggle--checked[size="sm"]) .toggle__thumb { inset-inline-start: 16px; }
 
 :host([size="md"]) .toggle__track { width: 40px; height: 22px; }
-:host([size="md"]) .toggle__thumb { width: 18px; height: 18px; left: 2px; }
-:host(.ts-toggle--checked[size="md"]) .toggle__thumb { left: 20px; }
+:host([size="md"]) .toggle__thumb { width: 18px; height: 18px; inset-inline-start: 2px; }
+:host(.ts-toggle--checked[size="md"]) .toggle__thumb { inset-inline-start: 20px; }
 
 :host([size="lg"]) .toggle__track { width: 50px; height: 28px; }
-:host([size="lg"]) .toggle__thumb { width: 24px; height: 24px; left: 2px; }
-:host(.ts-toggle--checked[size="lg"]) .toggle__thumb { left: 24px; }
+:host([size="lg"]) .toggle__thumb { width: 24px; height: 24px; inset-inline-start: 2px; }
+:host(.ts-toggle--checked[size="lg"]) .toggle__thumb { inset-inline-start: 24px; }
 
 /* ---- Label ---- */
 .toggle__label {

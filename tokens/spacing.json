@@ -1,0 +1,34 @@
+{
+  "$description": "Tessera UI spacing tokens in W3C DTCG format",
+  "spacing": {
+    "$description": "Spacing scale based on 4px base unit",
+    "0":  { "$value": "0",       "$type": "dimension", "$description": "No spacing" },
+    "1":  { "$value": "0.25rem", "$type": "dimension", "$description": "4px" },
+    "2":  { "$value": "0.5rem",  "$type": "dimension", "$description": "8px" },
+    "3":  { "$value": "0.75rem", "$type": "dimension", "$description": "12px" },
+    "4":  { "$value": "1rem",    "$type": "dimension", "$description": "16px" },
+    "5":  { "$value": "1.25rem", "$type": "dimension", "$description": "20px" },
+    "6":  { "$value": "1.5rem",  "$type": "dimension", "$description": "24px" },
+    "8":  { "$value": "2rem",    "$type": "dimension", "$description": "32px" },
+    "10": { "$value": "2.5rem",  "$type": "dimension", "$description": "40px" },
+    "12": { "$value": "3rem",    "$type": "dimension", "$description": "48px" },
+    "16": { "$value": "4rem",    "$type": "dimension", "$description": "64px" }
+  },
+  "grid": {
+    "columns": { "$value": 12,                    "$type": "number",    "$description": "Number of grid columns" },
+    "gutter":  { "$value": "{spacing.6}",          "$type": "dimension", "$description": "Grid gutter width" },
+    "margin":  { "$value": "{spacing.4}",          "$type": "dimension", "$description": "Grid outer margin" }
+  },
+  "breakpoint": {
+    "$description": "Breakpoints for responsive layouts (for JS access; cannot be used in CSS media queries)",
+    "sm":  { "$value": "640px",  "$type": "dimension", "$description": "Small breakpoint" },
+    "md":  { "$value": "768px",  "$type": "dimension", "$description": "Medium breakpoint" },
+    "lg":  { "$value": "1024px", "$type": "dimension", "$description": "Large breakpoint" },
+    "xl":  { "$value": "1280px", "$type": "dimension", "$description": "Extra-large breakpoint" },
+    "2xl": { "$value": "1536px", "$type": "dimension", "$description": "2x extra-large breakpoint" }
+  },
+  "touchTarget": {
+    "min":     { "$value": "44px", "$type": "dimension", "$description": "Minimum touch target size (WCAG)" },
+    "compact": { "$value": "32px", "$type": "dimension", "$description": "Compact touch target size" }
+  }
+}

@@ -1,0 +1,169 @@
+---
+title: Content Guidelines
+description: Voice and tone, action labels, error messages, and copy patterns for Tessera UI.
+---
+
+Content is part of the design system. These guidelines ensure that text across your application is clear, consistent, and helpful — regardless of who writes it.
+
+## Voice and Tone
+
+Tessera UI's content voice is:
+
+- **Clear** — Say exactly what you mean. Avoid jargon, marketing language, and ambiguity.
+- **Concise** — Use the fewest words that convey the message completely. Every word should earn its place.
+- **Helpful** — Guide the user toward their goal. Tell them what to do, not just what happened.
+
+### Tone by context
+
+| Context | Tone | Example |
+|---|---|---|
+| **Success** | Warm, confirming | "Your changes have been saved." |
+| **Error** | Calm, solution-oriented | "That email address is already in use. Try signing in instead." |
+| **Warning** | Direct, informative | "Unsaved changes will be lost if you leave this page." |
+| **Neutral / Info** | Factual, brief | "You have 3 pending invitations." |
+| **Empty state** | Encouraging, actionable | "No projects yet. Create your first project to get started." |
+
+## Action Labels
+
+Use strong, specific verbs for action labels. The label should describe what will happen when the user interacts.
+
+### Preferred patterns
+
+| Do | Don't | Why |
+|---|---|---|
+| Save | Submit | "Save" is more intuitive for preserving work |
+| Delete | Remove | "Delete" conveys permanence more clearly |
+| Create | Add | "Create" implies something new coming into existence |
+| Sign in | Log in | "Sign in" is the more widely understood term |
+| Sign out | Log out | Consistent with "Sign in" |
+| Cancel | Close / Nevermind | "Cancel" is the standard destructive-avoidance term |
+| Continue | Next / Proceed | "Continue" feels natural in multi-step flows |
+| Download | Get / Fetch | "Download" is specific and unambiguous |
+| Upload | Attach | "Upload" is specific when files are sent to a server |
+
+### Button label format
+
+- **Primary action:** Verb + noun — "Create Project", "Save Changes", "Send Invitation"
+- **Secondary action:** Single verb — "Cancel", "Skip", "Back"
+- **Icon-only buttons:** Always include an `aria-label` with verb + noun — `aria-label="Delete item"`
+
+## Error Messages
+
+Error messages must answer two questions: **What happened?** and **What should the user do?**
+
+### Structure
+
+```
+[What went wrong]. [What to do about it].
+```
+
+### Examples
+
+| Do | Don't |
+|---|---|
+| "That email is already in use. Try signing in instead." | "Error: duplicate email" |
+| "Password must be at least 8 characters." | "Invalid password" |
+| "Unable to load your data. Check your connection and try again." | "Network error" |
+| "File must be smaller than 10 MB." | "File too large" |
+| "Enter a valid phone number, like (555) 123-4567." | "Invalid input" |
+
+### Guidelines
+
+- Never use technical error codes as the primary message (e.g., "Error 422")
+- Do not blame the user — say "That email is already in use" not "You entered a duplicate email"
+- Provide a recovery path whenever possible
+- Use inline validation (below the field) for form errors, not just a summary at the top
+
+## Empty States
+
+Empty states are opportunities to guide users. Always include:
+
+1. **A clear explanation** of what belongs here
+2. **A primary action** to fill the empty state
+
+```
+┌────────────────────────────┐
+│                            │
+│     📋 No tasks yet        │
+│                            │
+│   Create a task to start   │
+│   tracking your work.      │
+│                            │
+│   [ Create Task ]          │
+│                            │
+└────────────────────────────┘
+```
+
+**Do not** leave empty states completely blank. An empty table with just headers and no explanation is confusing.
+
+## Confirmation Dialogs
+
+Confirmation dialogs protect users from accidental destructive actions. Keep them focused:
+
+### Structure
+
+- **Title:** State the action — "Delete this project?"
+- **Body:** Explain the consequence — "This will permanently delete 'My Project' and all its tasks. This action cannot be undone."
+- **Primary action:** Use the destructive verb, not "OK" — "Delete Project"
+- **Secondary action:** "Cancel"
+
+### When to use confirmations
+
+| Use confirmation | Skip confirmation |
+|---|---|
+| Deleting data permanently | Saving changes |
+| Cancelling a multi-step process | Closing a non-destructive modal |
+| Removing a team member | Dismissing a notification |
+| Sending a communication to many people | Navigation between pages |
+
+## Capitalization
+
+Use **sentence case** for all UI text. This means capitalizing only the first word and proper nouns.
+
+| Do (Sentence case) | Don't (Title Case) |
+|---|---|
+| Create new project | Create New Project |
+| Save changes | Save Changes |
+| Account settings | Account Settings |
+| Last modified | Last Modified |
+
+**Exceptions:**
+- Product names and brand terms maintain their official capitalization
+- Acronyms remain uppercase (API, URL, ID)
+- Proper nouns are capitalized (GitHub, Google)
+
+## Placeholder Text
+
+Placeholder text in inputs should show the **format** of expected input, not repeat the label.
+
+| Do | Don't |
+|---|---|
+| `placeholder="jane@example.com"` | `placeholder="Enter your email"` |
+| `placeholder="(555) 123-4567"` | `placeholder="Phone Number"` |
+| `placeholder="Search by name or ID..."` | `placeholder="Search"` |
+
+**Guidelines:**
+- Placeholder text disappears on focus — it must not contain essential information
+- Always use a visible `<label>` alongside placeholder text
+- Placeholder color uses `--ts-color-text-tertiary` for clear visual distinction from entered text
+
+## Recommended Copy Lengths
+
+These are guidelines for keeping text effective within component contexts:
+
+| Context | Recommended Length | Maximum |
+|---|---|---|
+| **Button label** | 1–3 words | 4 words |
+| **Input label** | 1–4 words | 6 words |
+| **Input help text** | 1 sentence | 2 sentences |
+| **Error message** | 1–2 sentences | 3 sentences |
+| **Tooltip** | 1 sentence | 2 sentences |
+| **Alert message** | 1–2 sentences | 3 sentences |
+| **Modal title** | 2–6 words | 8 words |
+| **Modal body** | 1–3 sentences | 1 paragraph |
+| **Empty state heading** | 2–5 words | 6 words |
+| **Empty state body** | 1–2 sentences | 3 sentences |
+| **Badge label** | 1 word or number | 2 words |
+| **Toast message** | 1 sentence | 2 sentences |
+
+Exceeding these lengths is not a hard error, but it usually indicates the copy needs editing. Short, scannable text is always more effective in UI.

@@ -11,7 +11,7 @@ Tessera UI uses a **three-tier token architecture** implemented as CSS custom pr
 
 | Tier | Prefix | Purpose | Example |
 |---|---|---|---|
-| **1. Reference** | `--ts-ref-*` | Raw palette values | `--ts-ref-primary-600: #4c6ef5` |
+| **1. Reference** | `--ts-ref-*` | Raw palette values | `--ts-ref-primary-600: #e45c0e` |
 | **2. Semantic** | `--ts-*` | Role-based aliases | `--ts-color-interactive-primary: var(--ts-ref-primary-600)` |
 | **3. Component** | `--ts-{component}-*` | Per-component overrides | `--ts-button-radius: var(--ts-radius-md)` |
 
@@ -20,12 +20,16 @@ Tessera UI uses a **three-tier token architecture** implemented as CSS custom pr
 ```
 Tier 1 (Reference)          Tier 2 (Semantic)                 Tier 3 (Component)
 --ts-ref-primary-600   ←──  --ts-color-interactive-primary  ←──  --ts-button-bg
-#4c6ef5                     var(--ts-ref-primary-600)             var(--ts-color-interactive-primary)
+#e45c0e                     var(--ts-ref-primary-600)             var(--ts-color-interactive-primary)
 ```
 
 - **Reference tokens** hold raw hex/rem values. They never change between themes.
 - **Semantic tokens** map reference tokens to roles (text, background, border, interactive). Dark mode remaps these.
 - **Component tokens** are defined on each component's `:host` and default to semantic tokens. Consumers override these for customization.
+
+## DTCG JSON Format
+
+The token values defined in `src/theme/tokens.css` are also available as W3C Design Tokens Community Group (DTCG) JSON files in the `src/tokens/` directory (when generated). These JSON files follow the [DTCG specification](https://tr.designtokens.org/format/) and can be consumed by tools like Style Dictionary, Figma Token Studio, and other design-to-code pipelines.
 
 ## Customization Examples
 
@@ -38,12 +42,21 @@ ts-button {
 }
 ```
 
-### Override the entire system
+### Override the entire system — primary
 
 ```css
 :root {
   --ts-color-interactive-primary: #e63946;
   --ts-color-interactive-primary-hover: #c1121f;
+}
+```
+
+### Override the entire system — secondary
+
+```css
+:root {
+  --ts-color-interactive-secondary: #0077b6;
+  --ts-color-interactive-secondary-hover: #005f8a;
 }
 ```
 
@@ -61,6 +74,7 @@ Each component exposes a curated set of tokens:
 | `ts-toggle` | `--ts-toggle-track-bg`, `--ts-toggle-track-bg-checked`, `--ts-toggle-thumb-bg`, `--ts-toggle-focus-ring` |
 | `ts-badge` | `--ts-badge-radius`, `--ts-badge-font-weight` |
 | `ts-tooltip` | `--ts-tooltip-bg`, `--ts-tooltip-color`, `--ts-tooltip-radius` |
+| `ts-icon` | `--ts-icon-size`, `--ts-icon-color` |
 
 ## Semantic Token Categories
 
@@ -88,6 +102,7 @@ For detailed documentation on each category, see the [Design Language](/tessera-
 | `--ts-color-border-default` | Standard borders |
 | `--ts-color-border-subtle` | Dividers |
 | `--ts-color-interactive-primary` | Primary interactive color |
+| `--ts-color-interactive-secondary` | Secondary interactive color |
 | `--ts-color-interactive-danger` | Danger interactive color |
 | `--ts-color-focus-ring` | Focus ring color |
 
@@ -132,6 +147,24 @@ For detailed documentation on each category, see the [Design Language](/tessera-
 | `--ts-transition-fast` | `150ms` — micro-interactions |
 | `--ts-transition-normal` | `250ms` — state transitions |
 | `--ts-transition-slow` | `350ms` — layout shifts |
+
+## Density Modes
+
+Tessera UI supports three density modes that remap spacing and font-size tokens. Apply via `data-density` on any ancestor:
+
+```html
+<div data-density="compact">
+  <!-- Tighter spacing for data-dense layouts -->
+</div>
+```
+
+| Mode | Attribute | Spacing Effect | Best For |
+|---|---|---|---|
+| **Compact** | `data-density="compact"` | Spacing reduced ~25-50% | Data tables, admin panels |
+| **Comfortable** | (default) | Standard spacing | General-purpose UI |
+| **Spacious** | `data-density="spacious"` | Spacing increased ~25-50% | Marketing, onboarding |
+
+Density affects `--ts-spacing-*`, `--ts-font-size-*`, `--ts-touch-target-min`, and `--ts-grid-gutter`. See [Layout](/tessera-ui/design-language/layout/) for the full comparison table.
 
 ## Dark Mode
 

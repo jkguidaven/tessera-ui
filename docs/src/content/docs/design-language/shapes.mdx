@@ -16,6 +16,30 @@ Shape is a subtle but powerful tool for communicating interactivity, hierarchy, 
 | `--ts-radius-xl` | `1rem` | 16px | Prominent rounding — modals, large containers |
 | `--ts-radius-full` | `9999px` | Pill / circle | Pill shapes — toggle tracks, pill badges |
 
+## Shape Families
+
+Shape families are semantic shape roles that group components by their visual purpose. Rather than assigning radii per-component, families ensure that related components share the same shape language.
+
+| Family Token | Default Value | Components |
+|---|---|---|
+| `--ts-shape-interactive` | `radius-md` (8px) | Buttons, inputs, selects, toggles |
+| `--ts-shape-container` | `radius-lg` (12px) | Cards, panels, form containers |
+| `--ts-shape-overlay` | `radius-xl` (16px) | Modals, drawers, dialogs |
+| `--ts-shape-badge` | `radius-sm` (4px) | Badges, tooltips, tags |
+| `--ts-shape-pill` | `radius-full` (9999px) | Toggle tracks, pill badges, progress bars |
+
+Override a shape family to globally change all components in that group:
+
+```css
+:root {
+  /* Make all interactive elements fully rounded */
+  --ts-shape-interactive: var(--ts-radius-full);
+
+  /* Make all containers sharp */
+  --ts-shape-container: var(--ts-radius-sm);
+}
+```
+
 ## Component Shape Defaults
 
 Each component uses a radius appropriate to its size and purpose:

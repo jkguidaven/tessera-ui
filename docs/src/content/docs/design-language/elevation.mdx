@@ -39,6 +39,38 @@ Five elevation levels provide a clear visual hierarchy from flat to floating:
 --ts-shadow-xl:  0 20px 25px -5px rgba(0, 0, 0, 0.4), 0 8px 10px -6px rgba(0, 0, 0, 0.3);
 ```
 
+### Inset Shadows
+
+Inset shadows create the visual impression of recessed or pressed-in surfaces. Use them for input fields, toggle tracks, and pressed states:
+
+| Token | Value (Light) | Value (Dark) |
+|---|---|---|
+| `--ts-shadow-inset-sm` | `inset 0 1px 2px 0 rgba(0,0,0,0.06)` | `inset 0 1px 2px 0 rgba(0,0,0,0.2)` |
+| `--ts-shadow-inset-md` | `inset 0 2px 4px 0 rgba(0,0,0,0.1)` | `inset 0 2px 4px 0 rgba(0,0,0,0.3)` |
+
+### Elevation Tint in Dark Mode
+
+In dark mode, box-shadows become less effective for communicating depth because the base surface is already dark. To compensate, Tessera UI provides **elevation tint tokens** — progressively lighter surface colors that make higher-elevation elements visually distinct:
+
+| Token | Light | Dark | Usage |
+|---|---|---|---|
+| `--ts-color-bg-elevated-1` | `neutral-0` | `#24221e` | Lowest elevated surface (cards at rest) |
+| `--ts-color-bg-elevated-2` | `neutral-0` | `#2a2720` | Mid-level elevated surface (hovered cards, popovers) |
+| `--ts-color-bg-elevated-3` | `neutral-0` | `#302c23` | Highest elevated surface (modals, floating panels) |
+
+In light mode, all three levels map to `neutral-0` (white) because shadows alone provide sufficient visual separation. In dark mode, each step adds a subtle warm primary tint, creating a natural "closer to the light source" effect.
+
+**Usage example:**
+```css
+/* Card at rest */
+background-color: var(--ts-color-bg-elevated-1);
+box-shadow: var(--ts-shadow-sm);
+
+/* Card on hover */
+background-color: var(--ts-color-bg-elevated-2);
+box-shadow: var(--ts-shadow-md);
+```
+
 ## Layering Model
 
 Elements at rest occupy different conceptual layers:

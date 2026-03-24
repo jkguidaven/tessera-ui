@@ -20,3 +20,6 @@ export type {
 export { generateId, announce, prefersReducedMotion, trapFocus } from './utils/aria';
 export { debounce, clamp, hasSlotContent } from './utils/dom';
 export { emitEvent } from './utils/events';
+
+// Components
+export { TsIcon } from './components/icon/icon';

@@ -10,7 +10,7 @@
   display: block;
   font-family: var(--ts-font-family-base);
 
-  --ts-alert-radius: var(--ts-radius-md);
+  --ts-alert-radius: var(--ts-shape-interactive);
   --ts-alert-font-size: var(--ts-font-size-sm);
 }
 

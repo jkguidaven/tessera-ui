@@ -12,7 +12,7 @@
   font-family: var(--ts-font-family-base);
 
   --ts-card-bg: var(--ts-color-bg-surface);
-  --ts-card-radius: var(--ts-radius-lg);
+  --ts-card-radius: var(--ts-shape-container);
   --ts-card-border-color: var(--ts-color-border-subtle);
 }
 

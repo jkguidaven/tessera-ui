@@ -1,0 +1,85 @@
+{
+  "$description": "Tessera UI elevation tokens in W3C DTCG format",
+  "shadow": {
+    "$description": "Shadow scale for elevation levels",
+    "xs": {
+      "$value": [
+        { "offsetX": "0", "offsetY": "1px", "blur": "2px", "spread": "0", "color": "rgba(0, 0, 0, 0.05)" }
+      ],
+      "$type": "shadow",
+      "$description": "Extra-small shadow — subtle lift"
+    },
+    "sm": {
+      "$value": [
+        { "offsetX": "0", "offsetY": "1px", "blur": "3px", "spread": "0", "color": "rgba(0, 0, 0, 0.1)" },
+        { "offsetX": "0", "offsetY": "1px", "blur": "2px", "spread": "-1px", "color": "rgba(0, 0, 0, 0.1)" }
+      ],
+      "$type": "shadow",
+      "$description": "Small shadow — cards, dropdowns"
+    },
+    "md": {
+      "$value": [
+        { "offsetX": "0", "offsetY": "4px", "blur": "6px", "spread": "-1px", "color": "rgba(0, 0, 0, 0.1)" },
+        { "offsetX": "0", "offsetY": "2px", "blur": "4px", "spread": "-2px", "color": "rgba(0, 0, 0, 0.1)" }
+      ],
+      "$type": "shadow",
+      "$description": "Medium shadow — floating elements"
+    },
+    "lg": {
+      "$value": [
+        { "offsetX": "0", "offsetY": "10px", "blur": "15px", "spread": "-3px", "color": "rgba(0, 0, 0, 0.1)" },
+        { "offsetX": "0", "offsetY": "4px", "blur": "6px", "spread": "-4px", "color": "rgba(0, 0, 0, 0.1)" }
+      ],
+      "$type": "shadow",
+      "$description": "Large shadow — modals, popovers"
+    },
+    "xl": {
+      "$value": [
+        { "offsetX": "0", "offsetY": "20px", "blur": "25px", "spread": "-5px", "color": "rgba(0, 0, 0, 0.1)" },
+        { "offsetX": "0", "offsetY": "8px", "blur": "10px", "spread": "-6px", "color": "rgba(0, 0, 0, 0.1)" }
+      ],
+      "$type": "shadow",
+      "$description": "Extra-large shadow — high-elevation overlays"
+    },
+    "inset-sm": {
+      "$value": [
+        { "offsetX": "0", "offsetY": "1px", "blur": "2px", "spread": "0", "color": "rgba(0, 0, 0, 0.06)", "inset": true }
+      ],
+      "$type": "shadow",
+      "$description": "Small inset shadow — pressed states"
+    },
+    "inset-md": {
+      "$value": [
+        { "offsetX": "0", "offsetY": "2px", "blur": "4px", "spread": "0", "color": "rgba(0, 0, 0, 0.1)", "inset": true }
+      ],
+      "$type": "shadow",
+      "$description": "Medium inset shadow — recessed containers"
+    }
+  },
+  "zIndex": {
+    "$description": "Z-index scale for layering",
+    "dropdown": { "$value": 1000, "$type": "number", "$description": "Dropdowns and select menus" },
+    "sticky":   { "$value": 1020, "$type": "number", "$description": "Sticky headers and elements" },
+    "fixed":    { "$value": 1030, "$type": "number", "$description": "Fixed position elements" },
+    "overlay":  { "$value": 1040, "$type": "number", "$description": "Overlay/scrim backdrop" },
+    "modal":    { "$value": 1050, "$type": "number", "$description": "Modal dialogs" },
+    "popover":  { "$value": 1060, "$type": "number", "$description": "Popovers" },
+    "tooltip":  { "$value": 1070, "$type": "number", "$description": "Tooltips (highest layer)" }
+  },
+  "elevation": {
+    "$description": "Elevation tint tokens for dark mode surface differentiation",
+    "tint-1": { "$value": "{color.background.elevated-1}", "$type": "color", "$description": "Elevation level 1 surface tint" },
+    "tint-2": { "$value": "{color.background.elevated-2}", "$type": "color", "$description": "Elevation level 2 surface tint" },
+    "tint-3": { "$value": "{color.background.elevated-3}", "$type": "color", "$description": "Elevation level 3 surface tint" }
+  },
+  "focusRing": {
+    "$description": "Focus ring shadow token",
+    "default": {
+      "$value": [
+        { "offsetX": "0", "offsetY": "0", "blur": "0", "spread": "3px", "color": "rgba(228, 92, 14, 0.4)" }
+      ],
+      "$type": "shadow",
+      "$description": "Default focus ring — primary color"
+    }
+  }
+}

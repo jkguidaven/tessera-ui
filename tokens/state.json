@@ -1,0 +1,39 @@
+{
+  "$description": "Tessera UI state tokens in W3C DTCG format",
+  "state": {
+    "$description": "State layer opacities for interaction feedback",
+    "hover-opacity":   { "$value": 0.08, "$type": "number", "$description": "Hover state layer opacity" },
+    "focus-opacity":   { "$value": 0.12, "$type": "number", "$description": "Focus state layer opacity" },
+    "pressed-opacity": { "$value": 0.12, "$type": "number", "$description": "Pressed/active state layer opacity" },
+    "dragged-opacity": { "$value": 0.16, "$type": "number", "$description": "Dragged state layer opacity" }
+  },
+  "selected": {
+    "$description": "Selected state tokens",
+    "background":       { "$value": "{color.primary.50}",  "$type": "color", "$description": "Selected item background" },
+    "background-hover": { "$value": "{color.primary.100}", "$type": "color", "$description": "Selected item hover background" },
+    "text":             { "$value": "{color.primary.700}", "$type": "color", "$description": "Selected item text color" },
+    "border":           { "$value": "{color.primary.500}", "$type": "color", "$description": "Selected item border color" }
+  },
+  "focus": {
+    "$description": "Focus ring tokens",
+    "ring": {
+      "$value": [
+        { "offsetX": "0", "offsetY": "0", "blur": "0", "spread": "3px", "color": "rgba(228, 92, 14, 0.4)" }
+      ],
+      "$type": "shadow",
+      "$description": "Default focus ring shadow"
+    },
+    "ring-color":        { "$value": "rgba(228, 92, 14, 0.4)",  "$type": "color", "$description": "Focus ring color — primary" },
+    "ring-color-danger": { "$value": "rgba(255, 102, 133, 0.3)", "$type": "color", "$description": "Focus ring color — danger" }
+  },
+  "skeleton": {
+    "$description": "Skeleton/loading placeholder colors",
+    "base":  { "$value": "{color.neutral.200}", "$type": "color", "$description": "Skeleton base color" },
+    "pulse": { "$value": "{color.neutral.100}", "$type": "color", "$description": "Skeleton pulse highlight color" }
+  },
+  "frosted": {
+    "$description": "Frosted/glassmorphism effect tokens (opt-in)",
+    "background": { "$value": "rgba(255, 255, 255, 0.8)", "$type": "color", "$description": "Frosted glass background" },
+    "blur":       { "$value": "12px", "$type": "dimension", "$description": "Frosted glass backdrop blur" }
+  }
+}

@@ -24,6 +24,23 @@ The primary palette is a warm orange hue used for interactive elements, emphasis
 | `--ts-ref-primary-800` | `#a34108` | Active/pressed states |
 | `--ts-ref-primary-900` | `#7a3106` | High contrast text on light backgrounds |
 
+## Secondary Palette
+
+The secondary palette is a deep teal hue used for complementary actions, secondary emphasis, and accent elements.
+
+| Token | Value | Usage |
+|---|---|---|
+| `--ts-ref-secondary-50` | `#e8f6f5` | Subtle backgrounds, hover states |
+| `--ts-ref-secondary-100` | `#c0e8e4` | Light accents |
+| `--ts-ref-secondary-200` | `#96d9d3` | Borders, dividers |
+| `--ts-ref-secondary-300` | `#6bcac1` | Secondary accents |
+| `--ts-ref-secondary-400` | `#49bfb4` | — |
+| `--ts-ref-secondary-500` | `#2ab3a6` | Default secondary |
+| `--ts-ref-secondary-600` | `#22a396` | Interactive elements (secondary buttons, links) |
+| `--ts-ref-secondary-700` | `#1a9083` | Hover states |
+| `--ts-ref-secondary-800` | `#137d71` | Active/pressed states |
+| `--ts-ref-secondary-900` | `#0b5d52` | High contrast text on light backgrounds |
+
 ## Neutral Palette
 
 Neutrals form the backbone of the UI — text, backgrounds, borders, and surfaces. The palette carries a subtle **warm undertone** for a natural, approachable feel rather than cold gray.
@@ -68,6 +85,43 @@ Rather than using palette tokens directly, components use **role-based tokens** 
 | `--ts-color-text-inverse` | `neutral-0` | `#1a1917` | Text on dark/light backgrounds |
 | `--ts-color-text-on-primary` | `white` | `white` | Text on primary color backgrounds |
 
+### On-Color Tokens
+
+On-color tokens provide accessible text for use on filled semantic backgrounds. Each token is tuned so that text meets WCAG AA contrast against its corresponding filled color.
+
+| Token | Light | Dark | Usage |
+|---|---|---|---|
+| `--ts-color-text-on-primary` | `white` | `white` | Text on primary-filled backgrounds |
+| `--ts-color-text-on-secondary` | `white` | `white` | Text on secondary-filled backgrounds |
+| `--ts-color-text-on-success` | `white` | `white` | Text on success-filled backgrounds |
+| `--ts-color-text-on-warning` | `neutral-900` | `#1a1917` | Text on warning-filled backgrounds (dark text for contrast) |
+| `--ts-color-text-on-danger` | `white` | `white` | Text on danger-filled backgrounds |
+| `--ts-color-text-on-info` | `neutral-900` | `#1a1917` | Text on info-filled backgrounds (dark text for contrast) |
+
+### Container Tokens
+
+Container tokens provide subtle background fills paired with high-contrast text for banners, chips, and status indicators. In dark mode, containers use low-opacity tints instead of the light palette step.
+
+| Background Token | Text Token | Light BG | Dark BG |
+|---|---|---|---|
+| `--ts-color-primary-container` | `--ts-color-on-primary-container` | `primary-50` | `rgba(228,92,14, 0.15)` |
+| `--ts-color-secondary-container` | `--ts-color-on-secondary-container` | `secondary-50` | `rgba(42,179,166, 0.15)` |
+| `--ts-color-success-container` | `--ts-color-on-success-container` | `success-50` | `rgba(72,199,142, 0.15)` |
+| `--ts-color-warning-container` | `--ts-color-on-warning-container` | `warning-50` | `rgba(255,183,15, 0.15)` |
+| `--ts-color-danger-container` | `--ts-color-on-danger-container` | `danger-50` | `rgba(255,102,133, 0.15)` |
+| `--ts-color-info-container` | `--ts-color-on-info-container` | `info-50` | `rgba(102,209,255, 0.15)` |
+
+### Selected State Tokens
+
+Selected state tokens are used for highlighting active items in lists, tabs, and navigation.
+
+| Token | Light | Dark | Usage |
+|---|---|---|---|
+| `--ts-color-bg-selected` | `primary-50` | `rgba(228,92,14, 0.12)` | Selected item background |
+| `--ts-color-bg-selected-hover` | `primary-100` | `rgba(228,92,14, 0.18)` | Hovered selected item background |
+| `--ts-color-text-selected` | `primary-700` | `primary-300` | Selected item text |
+| `--ts-color-border-selected` | `primary-500` | `primary-400` | Selected item border/indicator |
+
 ### Background Colors
 
 | Token | Light | Dark | Usage |
@@ -98,6 +152,28 @@ Used by `ts-alert` and similar status components. These use low-opacity tints of
 | `--ts-color-warning-bg` | `rgba(255,183,15, 0.08)` | `rgba(255,183,15, 0.12)` |
 | `--ts-color-danger-bg` | `rgba(255,102,133, 0.08)` | `rgba(255,102,133, 0.12)` |
 
+## State Layer Opacity System
+
+Interactive elements use semi-transparent overlays ("state layers") to communicate hover, focus, pressed, and dragged states. The opacity values are defined as tokens so that custom-themed components stay consistent:
+
+| Token | Opacity | State |
+|---|---|---|
+| `--ts-state-hover-opacity` | `0.08` (8%) | Hover |
+| `--ts-state-focus-opacity` | `0.12` (12%) | Focus |
+| `--ts-state-pressed-opacity` | `0.12` (12%) | Pressed / active |
+| `--ts-state-dragged-opacity` | `0.16` (16%) | Drag in progress |
+
+State layers are applied by overlaying the component's key color (e.g., primary, danger) at the specified opacity. This approach works in both light and dark mode because the overlay is relative to the underlying surface.
+
+## Skeleton / Loading Colors
+
+Skeleton placeholders pulse between two neutral tones to indicate loading content:
+
+| Token | Light | Dark | Usage |
+|---|---|---|---|
+| `--ts-color-skeleton-base` | `neutral-200` | `#3a3733` | Skeleton shape fill |
+| `--ts-color-skeleton-pulse` | `neutral-100` | `#2c2a27` | Pulse animation target |
+
 ## Accessibility
 
 All color combinations used for text and interactive elements must meet WCAG 2.1 AA contrast requirements:
@@ -112,6 +188,26 @@ All color combinations used for text and interactive elements must meet WCAG 2.1
 - Never rely on color alone to convey meaning — pair with icons, labels, or patterns
 - Semantic colors (success, warning, danger) always include the status in text, not just the color
 - Focus indicators use a 3px orange ring with sufficient contrast against all backgrounds
+
+## High-Contrast Mode
+
+For users who require maximum contrast ratios, Tessera UI provides a high-contrast theme:
+
+```html
+<body data-theme="high-contrast">
+  <!-- All components use maximum-contrast colors -->
+</body>
+```
+
+**How it works:**
+- Neutral scale is remapped to pure grays without a warm undertone, maximizing contrast between steps
+- Text uses pure black (`#000000`) and secondary text uses `#1a1a1a`
+- Borders switch to `#000000` for maximum visibility
+- Interactive colors are darkened to ensure at least **7:1** contrast against white backgrounds
+- Shadows are replaced with solid borders (`0 0 0 1px #000000`) so elevation remains visible regardless of display settings
+- Focus rings use a stronger 60% opacity for unambiguous visibility
+
+High-contrast mode also responds to the `forced-colors` media query. See the [Accessibility](/tessera-ui/design-language/accessibility/) page for details on forced-colors support.
 
 ## Dark Mode
 

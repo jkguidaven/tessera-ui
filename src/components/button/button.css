@@ -11,7 +11,7 @@
   display: inline-block;
   vertical-align: middle;
 
-  --ts-button-radius: var(--ts-radius-md);
+  --ts-button-radius: var(--ts-shape-interactive);
   --ts-button-font-weight: var(--ts-font-weight-semi);
   --ts-button-focus-ring: var(--ts-focus-ring);
 }

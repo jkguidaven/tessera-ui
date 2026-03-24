@@ -27,6 +27,9 @@ The type scale uses `rem` units based on a 16px root size. Each step provides a 
 | `--ts-font-size-xl` | `1.25rem` | 20px | Section headers, prominent text |
 | `--ts-font-size-2xl` | `1.5rem` | 24px | Page headers |
 | `--ts-font-size-3xl` | `1.875rem` | 30px | Hero text, display headings |
+| `--ts-font-size-4xl` | `2.25rem` | 36px | Display small |
+| `--ts-font-size-5xl` | `3rem` | 48px | Display medium |
+| `--ts-font-size-6xl` | `3.75rem` | 60px | Display large, marketing hero |
 
 ## Font Weights
 
@@ -44,6 +47,75 @@ The type scale uses `rem` units based on a 16px root size. Each step provides a 
 | `--ts-line-height-tight` | `1.25` | Headings, buttons, compact layouts |
 | `--ts-line-height-normal` | `1.5` | Body text, default prose |
 | `--ts-line-height-loose` | `1.75` | Long-form reading, relaxed layouts |
+
+## Letter Spacing
+
+Letter spacing tokens adjust tracking for different typographic contexts. Display sizes use tighter spacing for visual density; labels and captions use wider spacing for legibility at small sizes.
+
+| Token | Value | Usage |
+|---|---|---|
+| `--ts-letter-spacing-tighter` | `-0.04em` | Display text (4xl–6xl) |
+| `--ts-letter-spacing-tight` | `-0.02em` | Headings (xl–3xl) |
+| `--ts-letter-spacing-normal` | `0em` | Body text, default |
+| `--ts-letter-spacing-wide` | `0.02em` | Labels (md), captions |
+| `--ts-letter-spacing-wider` | `0.05em` | Small labels, overlines |
+| `--ts-letter-spacing-widest` | `0.1em` | All-caps text, legal fine print |
+
+## Composite Type Roles
+
+Type roles combine size, weight, line height, and letter spacing into a single semantic purpose. Use these roles to maintain consistent typography across your application rather than assembling individual tokens.
+
+| Role | Size Token | Weight | Line Height | Letter Spacing | Usage |
+|---|---|---|---|---|---|
+| **display-lg** | `6xl` (60px) | `bold` (700) | `1.1` | `tighter` (-0.04em) | Marketing hero, landing page headlines |
+| **display-md** | `5xl` (48px) | `bold` (700) | `1.1` | `tighter` (-0.04em) | Section hero, feature highlights |
+| **display-sm** | `4xl` (36px) | `bold` (700) | `1.15` | `tight` (-0.02em) | Page titles, onboarding headers |
+| **heading-lg** | `3xl` (30px) | `semi` (600) | `1.25` | `tight` (-0.02em) | Page section headers |
+| **heading-md** | `2xl` (24px) | `semi` (600) | `1.25` | `tight` (-0.02em) | Card headers, dialog titles |
+| **heading-sm** | `xl` (20px) | `semi` (600) | `1.25` | `normal` (0em) | Subsection headers |
+| **body-lg** | `lg` (18px) | `regular` (400) | `1.5` | `normal` (0em) | Introductory paragraphs, lead text |
+| **body-md** | `md` (16px) | `regular` (400) | `1.5` | `normal` (0em) | Default body text |
+| **body-sm** | `sm` (14px) | `regular` (400) | `1.5` | `normal` (0em) | Secondary body text, descriptions |
+| **label-lg** | `md` (16px) | `medium` (500) | `1.25` | `normal` (0em) | Form labels (lg), navigation items |
+| **label-md** | `sm` (14px) | `medium` (500) | `1.25` | `wide` (0.02em) | Form labels (md), button text |
+| **label-sm** | `xs` (12px) | `medium` (500) | `1.25` | `wider` (0.05em) | Badge labels, helper text, overlines |
+| **caption** | `xs` (12px) | `regular` (400) | `1.5` | `wide` (0.02em) | Timestamps, footnotes, fine print |
+
+Each role is defined as a set of four CSS custom properties (e.g., `--ts-type-display-lg-size`, `--ts-type-display-lg-weight`, `--ts-type-display-lg-line`, `--ts-type-display-lg-spacing`), making them easy to apply and override.
+
+## Responsive Typography
+
+For display and heading sizes, consider using CSS `clamp()` to create fluid type that scales smoothly between viewport sizes:
+
+```css
+/* Example: display-lg that scales from 36px on mobile to 60px on wide screens */
+h1 {
+  font-size: clamp(
+    var(--ts-font-size-4xl),   /* 36px minimum */
+    5vw + 1rem,                /* fluid middle  */
+    var(--ts-font-size-6xl)    /* 60px maximum  */
+  );
+}
+```
+
+**Guidelines:**
+- Body text (`body-sm`, `body-md`, `body-lg`) should remain fixed — fluid scaling at reading sizes harms readability
+- Display sizes (`display-sm/md/lg`) are the best candidates for `clamp()`
+- Heading sizes may benefit from one step reduction on mobile (e.g., `heading-lg` to `heading-md`)
+
+## CJK and Arabic Typography
+
+When supporting CJK (Chinese, Japanese, Korean) or Arabic scripts:
+
+- Append CJK-specific font families to `--ts-font-family-base`:
+  ```css
+  :root {
+    --ts-font-family-base: 'Inter', 'Noto Sans SC', 'Noto Sans JP', sans-serif;
+  }
+  ```
+- CJK text typically needs `line-height: 1.7–1.8` instead of the default `1.5`
+- Arabic and Hebrew scripts require RTL layout — see the [Internationalization](/tessera-ui/design-language/internationalization/) page
+- Avoid `letter-spacing` adjustments for CJK — the glyphs are already monospaced by design
 
 ## Hierarchy in Components
 

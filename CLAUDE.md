@@ -32,6 +32,8 @@ pnpm start           # Builds Stencil + starts Storybook with hot-reload
 3. Follow the pattern in `src/components/button/` as a reference
 4. Export from `src/index.ts`
 5. Use `import type { EventEmitter }` (not value import) to satisfy lint
+6. Use CSS **logical properties** for RTL support (`padding-inline-start`, not `padding-left`)
+7. Use **shape family tokens** for border-radius (`var(--ts-shape-interactive)`, not `var(--ts-radius-md)`)
 
 ### Verification checklist (MANDATORY before committing)
 
@@ -39,8 +41,8 @@ Run all three checks after any component change:
 
 ```bash
 pnpm build                    # Must pass — verifies all output targets compile
-pnpm test                     # Must pass — unit tests (50 tests across 8 suites)
-pnpm test.e2e                 # Must pass — e2e tests (26 tests across 8 suites)
+pnpm test                     # Must pass — unit tests (57 tests across 9 suites)
+pnpm test.e2e                 # Must pass — e2e tests (30 tests across 9 suites)
 npx eslint src --ext .ts,.tsx # Must have 0 errors (warnings are acceptable)
 ```
 

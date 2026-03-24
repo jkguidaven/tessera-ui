@@ -1,0 +1,164 @@
+{
+  "$description": "Tessera UI color tokens in W3C DTCG format",
+  "color": {
+    "primary": {
+      "50":  { "$value": "#fef3eb", "$type": "color", "$description": "Lightest primary tint" },
+      "100": { "$value": "#fce0c8", "$type": "color", "$description": "Light primary tint" },
+      "200": { "$value": "#f9c49e", "$type": "color", "$description": "Primary 200" },
+      "300": { "$value": "#f5a674", "$type": "color", "$description": "Primary 300" },
+      "400": { "$value": "#f18c4e", "$type": "color", "$description": "Primary 400" },
+      "500": { "$value": "#ee7a11", "$type": "color", "$description": "Primary base" },
+      "600": { "$value": "#e45c0e", "$type": "color", "$description": "Primary 600 — default interactive" },
+      "700": { "$value": "#c44e0a", "$type": "color", "$description": "Primary 700 — hover interactive" },
+      "800": { "$value": "#a34108", "$type": "color", "$description": "Primary 800" },
+      "900": { "$value": "#7a3106", "$type": "color", "$description": "Darkest primary shade" }
+    },
+    "secondary": {
+      "50":  { "$value": "#e8f6f5", "$type": "color", "$description": "Lightest secondary tint" },
+      "100": { "$value": "#c0e8e4", "$type": "color", "$description": "Light secondary tint" },
+      "200": { "$value": "#96d9d3", "$type": "color", "$description": "Secondary 200" },
+      "300": { "$value": "#6bcac1", "$type": "color", "$description": "Secondary 300" },
+      "400": { "$value": "#49bfb4", "$type": "color", "$description": "Secondary 400" },
+      "500": { "$value": "#2ab3a6", "$type": "color", "$description": "Secondary base" },
+      "600": { "$value": "#22a396", "$type": "color", "$description": "Secondary 600 — default interactive" },
+      "700": { "$value": "#1a9083", "$type": "color", "$description": "Secondary 700 — hover interactive" },
+      "800": { "$value": "#137d71", "$type": "color", "$description": "Secondary 800" },
+      "900": { "$value": "#0b5d52", "$type": "color", "$description": "Darkest secondary shade" }
+    },
+    "neutral": {
+      "0":   { "$value": "#ffffff", "$type": "color", "$description": "White" },
+      "50":  { "$value": "#f7f6f4", "$type": "color", "$description": "Lightest neutral (warm undertone)" },
+      "100": { "$value": "#f0eeeb", "$type": "color", "$description": "Neutral 100" },
+      "200": { "$value": "#e2dfdb", "$type": "color", "$description": "Neutral 200" },
+      "300": { "$value": "#d2cec9", "$type": "color", "$description": "Neutral 300" },
+      "400": { "$value": "#b5b0a9", "$type": "color", "$description": "Neutral 400" },
+      "500": { "$value": "#9a9590", "$type": "color", "$description": "Neutral midpoint" },
+      "600": { "$value": "#706b65", "$type": "color", "$description": "Neutral 600" },
+      "700": { "$value": "#55514b", "$type": "color", "$description": "Neutral 700" },
+      "800": { "$value": "#38352f", "$type": "color", "$description": "Neutral 800" },
+      "900": { "$value": "#1f1d1a", "$type": "color", "$description": "Darkest neutral" }
+    },
+    "success": {
+      "50":  { "$value": "#edfaf2", "$type": "color", "$description": "Lightest success tint" },
+      "100": { "$value": "#c9f0d8", "$type": "color", "$description": "Success 100" },
+      "200": { "$value": "#a3e5bd", "$type": "color", "$description": "Success 200" },
+      "300": { "$value": "#7ddaa2", "$type": "color", "$description": "Success 300" },
+      "400": { "$value": "#60d293", "$type": "color", "$description": "Success 400" },
+      "500": { "$value": "#48c78e", "$type": "color", "$description": "Success base" },
+      "600": { "$value": "#3bae7a", "$type": "color", "$description": "Success 600" },
+      "700": { "$value": "#2e9465", "$type": "color", "$description": "Success 700" },
+      "800": { "$value": "#237a51", "$type": "color", "$description": "Success 800" },
+      "900": { "$value": "#155f3c", "$type": "color", "$description": "Darkest success shade" }
+    },
+    "warning": {
+      "50":  { "$value": "#fff8e6", "$type": "color", "$description": "Lightest warning tint" },
+      "100": { "$value": "#ffecb3", "$type": "color", "$description": "Warning 100" },
+      "200": { "$value": "#ffe080", "$type": "color", "$description": "Warning 200" },
+      "300": { "$value": "#ffd44d", "$type": "color", "$description": "Warning 300" },
+      "400": { "$value": "#ffc826", "$type": "color", "$description": "Warning 400" },
+      "500": { "$value": "#ffb70f", "$type": "color", "$description": "Warning base" },
+      "600": { "$value": "#e09d00", "$type": "color", "$description": "Warning 600" },
+      "700": { "$value": "#c28600", "$type": "color", "$description": "Warning 700" },
+      "800": { "$value": "#a37000", "$type": "color", "$description": "Warning 800" },
+      "900": { "$value": "#7a5400", "$type": "color", "$description": "Darkest warning shade" }
+    },
+    "danger": {
+      "50":  { "$value": "#fff0f3", "$type": "color", "$description": "Lightest danger tint" },
+      "100": { "$value": "#ffd6de", "$type": "color", "$description": "Danger 100" },
+      "200": { "$value": "#ffbcc9", "$type": "color", "$description": "Danger 200" },
+      "300": { "$value": "#ffa2b4", "$type": "color", "$description": "Danger 300" },
+      "400": { "$value": "#ff8ca3", "$type": "color", "$description": "Danger 400" },
+      "500": { "$value": "#ff6685", "$type": "color", "$description": "Danger base" },
+      "600": { "$value": "#f14668", "$type": "color", "$description": "Danger 600" },
+      "700": { "$value": "#d4304f", "$type": "color", "$description": "Danger 700" },
+      "800": { "$value": "#b71d3a", "$type": "color", "$description": "Danger 800" },
+      "900": { "$value": "#8c0e27", "$type": "color", "$description": "Darkest danger shade" }
+    },
+    "info": {
+      "50":  { "$value": "#e8f7ff", "$type": "color", "$description": "Lightest info tint" },
+      "100": { "$value": "#bfe8ff", "$type": "color", "$description": "Info 100" },
+      "200": { "$value": "#96d9ff", "$type": "color", "$description": "Info 200" },
+      "300": { "$value": "#6dcaff", "$type": "color", "$description": "Info 300" },
+      "400": { "$value": "#4dc0ff", "$type": "color", "$description": "Info 400" },
+      "500": { "$value": "#66d1ff", "$type": "color", "$description": "Info base" },
+      "600": { "$value": "#3db8e8", "$type": "color", "$description": "Info 600" },
+      "700": { "$value": "#2a9cc8", "$type": "color", "$description": "Info 700" },
+      "800": { "$value": "#1a80a8", "$type": "color", "$description": "Info 800" },
+      "900": { "$value": "#0b5f80", "$type": "color", "$description": "Darkest info shade" }
+    },
+    "black": { "$value": "#000000", "$type": "color", "$description": "Pure black" },
+    "white": { "$value": "#ffffff", "$type": "color", "$description": "Pure white" },
+    "text": {
+      "primary":      { "$value": "{color.neutral.900}", "$type": "color", "$description": "Primary text color" },
+      "secondary":    { "$value": "{color.neutral.700}", "$type": "color", "$description": "Secondary text color" },
+      "tertiary":     { "$value": "{color.neutral.500}", "$type": "color", "$description": "Tertiary text color" },
+      "disabled":     { "$value": "{color.neutral.400}", "$type": "color", "$description": "Disabled text color" },
+      "inverse":      { "$value": "{color.neutral.0}",   "$type": "color", "$description": "Inverse text color for dark backgrounds" },
+      "on-primary":   { "$value": "{color.white}",       "$type": "color", "$description": "Text on primary-filled backgrounds" },
+      "on-secondary": { "$value": "{color.white}",       "$type": "color", "$description": "Text on secondary-filled backgrounds" },
+      "on-success":   { "$value": "{color.white}",       "$type": "color", "$description": "Text on success-filled backgrounds" },
+      "on-warning":   { "$value": "{color.neutral.900}", "$type": "color", "$description": "Text on warning-filled backgrounds" },
+      "on-danger":    { "$value": "{color.white}",       "$type": "color", "$description": "Text on danger-filled backgrounds" },
+      "on-info":      { "$value": "{color.neutral.900}", "$type": "color", "$description": "Text on info-filled backgrounds" },
+      "selected":     { "$value": "{color.primary.700}", "$type": "color", "$description": "Selected item text color" }
+    },
+    "container": {
+      "primary":        { "$value": "{color.primary.50}",   "$type": "color", "$description": "Primary container background" },
+      "on-primary":     { "$value": "{color.primary.900}",  "$type": "color", "$description": "Text on primary container" },
+      "secondary":      { "$value": "{color.secondary.50}", "$type": "color", "$description": "Secondary container background" },
+      "on-secondary":   { "$value": "{color.secondary.900}","$type": "color", "$description": "Text on secondary container" },
+      "success":        { "$value": "{color.success.50}",   "$type": "color", "$description": "Success container background" },
+      "on-success":     { "$value": "{color.success.900}",  "$type": "color", "$description": "Text on success container" },
+      "warning":        { "$value": "{color.warning.50}",   "$type": "color", "$description": "Warning container background" },
+      "on-warning":     { "$value": "{color.warning.900}",  "$type": "color", "$description": "Text on warning container" },
+      "danger":         { "$value": "{color.danger.50}",    "$type": "color", "$description": "Danger container background" },
+      "on-danger":      { "$value": "{color.danger.900}",   "$type": "color", "$description": "Text on danger container" },
+      "info":           { "$value": "{color.info.50}",      "$type": "color", "$description": "Info container background" },
+      "on-info":        { "$value": "{color.info.900}",     "$type": "color", "$description": "Text on info container" }
+    },
+    "background": {
+      "surface":     { "$value": "{color.neutral.0}",  "$type": "color", "$description": "Default surface background" },
+      "elevated":    { "$value": "{color.neutral.0}",  "$type": "color", "$description": "Elevated surface background" },
+      "subtle":      { "$value": "{color.neutral.50}", "$type": "color", "$description": "Subtle background" },
+      "overlay":     { "$value": "rgba(0, 0, 0, 0.45)", "$type": "color", "$description": "Overlay/scrim background" },
+      "disabled":    { "$value": "{color.neutral.100}", "$type": "color", "$description": "Disabled element background" },
+      "hover":       { "$value": "{color.neutral.50}",  "$type": "color", "$description": "Hover state background" },
+      "elevated-1":  { "$value": "{color.neutral.0}", "$type": "color", "$description": "Elevation level 1 tint" },
+      "elevated-2":  { "$value": "{color.neutral.0}", "$type": "color", "$description": "Elevation level 2 tint" },
+      "elevated-3":  { "$value": "{color.neutral.0}", "$type": "color", "$description": "Elevation level 3 tint" },
+      "selected":    { "$value": "{color.primary.50}",  "$type": "color", "$description": "Selected item background" },
+      "selected-hover": { "$value": "{color.primary.100}", "$type": "color", "$description": "Selected item hover background" }
+    },
+    "border": {
+      "default":  { "$value": "{color.neutral.300}", "$type": "color", "$description": "Default border" },
+      "subtle":   { "$value": "{color.neutral.200}", "$type": "color", "$description": "Subtle border" },
+      "strong":   { "$value": "{color.neutral.400}", "$type": "color", "$description": "Strong/emphasized border" },
+      "selected": { "$value": "{color.primary.500}", "$type": "color", "$description": "Selected item border" }
+    },
+    "interactive": {
+      "primary":          { "$value": "{color.primary.600}",   "$type": "color", "$description": "Primary interactive color" },
+      "primary-hover":    { "$value": "{color.primary.700}",   "$type": "color", "$description": "Primary interactive hover" },
+      "primary-subtle":   { "$value": "{color.primary.50}",    "$type": "color", "$description": "Primary interactive subtle background" },
+      "secondary":        { "$value": "{color.secondary.600}", "$type": "color", "$description": "Secondary interactive color" },
+      "secondary-hover":  { "$value": "{color.secondary.700}", "$type": "color", "$description": "Secondary interactive hover" },
+      "secondary-subtle": { "$value": "{color.secondary.50}",  "$type": "color", "$description": "Secondary interactive subtle background" },
+      "danger":           { "$value": "{color.danger.600}",    "$type": "color", "$description": "Danger interactive color" },
+      "danger-hover":     { "$value": "{color.danger.500}",    "$type": "color", "$description": "Danger interactive hover" },
+      "danger-subtle":    { "$value": "rgba(255, 102, 133, 0.06)", "$type": "color", "$description": "Danger interactive subtle background" }
+    },
+    "feedback": {
+      "info-bg":         { "$value": "rgba(102, 209, 255, 0.08)", "$type": "color", "$description": "Info feedback background" },
+      "info-border":     { "$value": "rgba(102, 209, 255, 0.25)", "$type": "color", "$description": "Info feedback border" },
+      "success-bg":      { "$value": "rgba(72, 199, 142, 0.08)",  "$type": "color", "$description": "Success feedback background" },
+      "success-border":  { "$value": "rgba(72, 199, 142, 0.25)",  "$type": "color", "$description": "Success feedback border" },
+      "warning-bg":      { "$value": "rgba(255, 183, 15, 0.08)",  "$type": "color", "$description": "Warning feedback background" },
+      "warning-border":  { "$value": "rgba(255, 183, 15, 0.25)",  "$type": "color", "$description": "Warning feedback border" },
+      "danger-bg":       { "$value": "rgba(255, 102, 133, 0.08)", "$type": "color", "$description": "Danger feedback background" },
+      "danger-border":   { "$value": "rgba(255, 102, 133, 0.25)", "$type": "color", "$description": "Danger feedback border" }
+    },
+    "focus": {
+      "ring":        { "$value": "rgba(228, 92, 14, 0.4)",  "$type": "color", "$description": "Default focus ring color" },
+      "ring-danger": { "$value": "rgba(255, 102, 133, 0.3)", "$type": "color", "$description": "Danger focus ring color" }
+    }
+  }
+}

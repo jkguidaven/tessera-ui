@@ -41,6 +41,9 @@ export default defineConfig({
             { label: 'Material', slug: 'design-language/material' },
             { label: 'Motion', slug: 'design-language/motion' },
             { label: 'Iconography', slug: 'design-language/iconography' },
+            { label: 'Accessibility', slug: 'design-language/accessibility' },
+            { label: 'Internationalization', slug: 'design-language/internationalization' },
+            { label: 'Content Guidelines', slug: 'design-language/content-guidelines' },
           ],
         },
         {

@@ -55,6 +55,84 @@ Every spacing value is a multiple of 4px. This ensures all elements align to a c
 | Label ↔ input field | `4px` | `spacing-1` |
 | Input ↔ help text | `4px` | `spacing-1` |
 
+## Grid Tokens
+
+Tessera UI provides grid tokens for building consistent page layouts:
+
+| Token | Value | Usage |
+|---|---|---|
+| `--ts-grid-columns` | `12` | Number of columns in the grid |
+| `--ts-grid-gutter` | `var(--ts-spacing-6)` (24px) | Gap between columns |
+| `--ts-grid-margin` | `var(--ts-spacing-4)` (16px) | Outer margin of the grid container |
+
+These tokens are designed for use with CSS Grid:
+
+```css
+.page-grid {
+  display: grid;
+  grid-template-columns: repeat(var(--ts-grid-columns), 1fr);
+  gap: var(--ts-grid-gutter);
+  padding-inline: var(--ts-grid-margin);
+}
+```
+
+Grid values adapt automatically in density modes — compact density reduces the gutter to `spacing-4`, and spacious density increases it to `spacing-8`.
+
+## Breakpoint Tokens
+
+Breakpoint values are available as CSS custom properties for reference and JavaScript access. Because CSS custom properties cannot be used in `@media` queries, use the raw values in your media queries but reference these tokens as the source of truth.
+
+| Token | Value | Usage |
+|---|---|---|
+| `--ts-breakpoint-sm` | `640px` | Mobile |
+| `--ts-breakpoint-md` | `768px` | Tablet |
+| `--ts-breakpoint-lg` | `1024px` | Desktop |
+| `--ts-breakpoint-xl` | `1280px` | Wide desktop |
+| `--ts-breakpoint-2xl` | `1536px` | Ultra-wide |
+
+## Density Modes
+
+Tessera UI supports three density modes that remap spacing and font-size tokens globally. Apply a density by adding `data-density` to any ancestor element:
+
+```html
+<body data-density="compact">
+  <!-- All components use tighter spacing -->
+</body>
+```
+
+### Spacing comparison across densities
+
+| Token | Compact | Comfortable (default) | Spacious |
+|---|---|---|---|
+| `--ts-spacing-1` | 2px | 4px | 6px |
+| `--ts-spacing-2` | 6px | 8px | 10px |
+| `--ts-spacing-3` | 8px | 12px | 16px |
+| `--ts-spacing-4` | 12px | 16px | 20px |
+| `--ts-spacing-5` | 16px | 20px | 24px |
+| `--ts-spacing-6` | 20px | 24px | 32px |
+| `--ts-font-size-xs` | 11px | 12px | 12px |
+| `--ts-font-size-sm` | 12px | 14px | 16px |
+| `--ts-font-size-md` | 14px | 16px | 18px |
+| `--ts-grid-gutter` | `spacing-4` | `spacing-6` | `spacing-8` |
+
+**When to use each density:**
+- **Compact** — Data-dense UIs (tables, dashboards, admin panels) where screen real estate is at a premium
+- **Comfortable** (default) — General-purpose applications with balanced readability and density
+- **Spacious** — Content-focused pages (marketing, documentation, onboarding) where breathing room aids comprehension
+
+Density can be applied at any level of the DOM tree, so you can mix densities within a single page (e.g., a compact data table inside a comfortable page layout).
+
+## Touch Target Minimum Sizes
+
+Interactive elements must meet minimum size requirements for accessible touch input:
+
+| Token | Value | Usage |
+|---|---|---|
+| `--ts-touch-target-min` | `44px` | Default minimum (WCAG 2.5.5 AAA) |
+| `--ts-touch-target-compact` | `32px` | Compact mode minimum (WCAG 2.5.8 AA) |
+
+In compact density mode, `--ts-touch-target-min` is automatically remapped to the compact value. Even in compact mode, ensure touch targets are never smaller than 32px.
+
 ## Container Patterns
 
 ### Modal widths
@@ -77,13 +155,21 @@ Tessera UI components are Web Components — they adapt to their container rathe
 - **Modal widths use `max-width`** — they naturally shrink on narrow viewports
 - **Spacing tokens are `rem`-based** — they scale if the user changes their browser font size
 
-### Recommended application-level breakpoints
+### Container Queries
 
-These are suggestions for your application layout, not enforced by Tessera UI:
+Because Tessera UI components are Web Components with Shadow DOM, container queries are a natural fit for responsive component behavior. Wrap components in a container-type element to adapt layout based on available space rather than viewport width:
 
-| Name | Width | Typical usage |
-|---|---|---|
-| `sm` | `640px` | Mobile |
-| `md` | `768px` | Tablet |
-| `lg` | `1024px` | Desktop |
-| `xl` | `1280px` | Wide desktop |
+```css
+.component-wrapper {
+  container-type: inline-size;
+}
+
+@container (max-width: 400px) {
+  /* Stack buttons vertically in narrow containers */
+  .button-group {
+    flex-direction: column;
+  }
+}
+```
+
+Container queries are preferred over media queries for component-level responsiveness because they respond to the component's actual space, not the page viewport.

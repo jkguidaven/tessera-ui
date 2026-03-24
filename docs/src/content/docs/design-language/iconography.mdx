@@ -94,6 +94,66 @@ Tessera UI components provide `prefix` and `suffix` slots for icon placement:
 </ts-alert>
 ```
 
+## The `ts-icon` Component
+
+Tessera UI provides a `ts-icon` Web Component for consistent icon rendering across your application. It supports inline SVG, external SVG sources, and automatic sizing.
+
+### Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `name` | `string` | — | Icon name (used with a registered icon set) |
+| `src` | `string` | — | URL to an external SVG file |
+| `size` | `'xs' \| 'sm' \| 'md' \| 'lg' \| 'xl'` | `'md'` | Size variant matching the type scale |
+| `label` | `string` | — | Accessible label (sets `aria-label`; omit for decorative icons) |
+| `color` | `string` | `'currentColor'` | Fill/stroke color |
+
+### Usage with inline SVG
+
+Pass SVG markup as a child of `ts-icon`. The component handles sizing and color inheritance:
+
+```html
+<ts-icon size="md" label="Search">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+    <circle cx="11" cy="11" r="8"/>
+    <path d="m21 21-4.35-4.35"/>
+  </svg>
+</ts-icon>
+```
+
+### Usage with `src`
+
+Load an external SVG file. The component fetches and inlines the SVG for full style control:
+
+```html
+<ts-icon src="/icons/check.svg" size="sm" label="Complete"></ts-icon>
+```
+
+### Size variants
+
+| Size | Pixel Value | Matching Font Token |
+|---|---|---|
+| `xs` | 12px | `--ts-font-size-xs` |
+| `sm` | 14px | `--ts-font-size-sm` |
+| `md` | 16px | `--ts-font-size-md` |
+| `lg` | 18px | `--ts-font-size-lg` |
+| `xl` | 20px | `--ts-font-size-xl` |
+
+### Pairing with other components
+
+```html
+<!-- Button with ts-icon -->
+<ts-button>
+  <ts-icon slot="prefix" size="sm" name="save"></ts-icon>
+  Save Changes
+</ts-button>
+
+<!-- Input with ts-icon -->
+<ts-input label="Search">
+  <ts-icon slot="prefix" size="md" name="search"></ts-icon>
+</ts-input>
+```
+
 ## Accessibility
 
 - **Decorative icons** (next to text that already conveys meaning): add `aria-hidden="true"` to the SVG

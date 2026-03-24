@@ -13,7 +13,7 @@
 
   --ts-modal-bg: var(--ts-color-bg-surface);
   --ts-modal-overlay-bg: var(--ts-color-bg-overlay);
-  --ts-modal-radius: var(--ts-radius-xl);
+  --ts-modal-radius: var(--ts-shape-overlay);
   --ts-modal-shadow: var(--ts-shadow-xl);
 }
 
@@ -53,7 +53,7 @@
 .modal__close {
   position: absolute;
   top: var(--ts-spacing-3);
-  right: var(--ts-spacing-3);
+  inset-inline-end: var(--ts-spacing-3);
   display: flex;
   align-items: center;
   justify-content: center;

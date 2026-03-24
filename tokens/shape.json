@@ -1,0 +1,20 @@
+{
+  "$description": "Tessera UI shape tokens in W3C DTCG format",
+  "radius": {
+    "$description": "Border radius scale",
+    "none": { "$value": "0",      "$type": "dimension", "$description": "No border radius" },
+    "sm":   { "$value": "0.25rem", "$type": "dimension", "$description": "4px — small radius" },
+    "md":   { "$value": "0.5rem",  "$type": "dimension", "$description": "8px — medium radius" },
+    "lg":   { "$value": "0.75rem", "$type": "dimension", "$description": "12px — large radius" },
+    "xl":   { "$value": "1rem",    "$type": "dimension", "$description": "16px — extra-large radius" },
+    "full": { "$value": "9999px",  "$type": "dimension", "$description": "Fully rounded (pill/circle)" }
+  },
+  "shape": {
+    "$description": "Semantic shape roles mapping to radius scale",
+    "interactive": { "$value": "{radius.md}",   "$type": "dimension", "$description": "Shape for interactive elements (buttons, inputs)" },
+    "container":   { "$value": "{radius.lg}",   "$type": "dimension", "$description": "Shape for containers (cards, panels)" },
+    "overlay":     { "$value": "{radius.xl}",   "$type": "dimension", "$description": "Shape for overlays (modals, dialogs)" },
+    "badge":       { "$value": "{radius.sm}",   "$type": "dimension", "$description": "Shape for badges and tags" },
+    "pill":        { "$value": "{radius.full}", "$type": "dimension", "$description": "Pill shape for chips and full-round elements" }
+  }
+}

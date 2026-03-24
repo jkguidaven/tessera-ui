@@ -1,0 +1,180 @@
+---
+title: Accessibility
+description: Accessibility patterns, focus management, and WCAG compliance guidance for Tessera UI.
+---
+
+Tessera UI is designed to meet **WCAG 2.1 AA** compliance out of the box. Every component ships with semantic HTML, ARIA attributes, keyboard support, and focus management. This page covers the patterns and principles that underpin accessibility across the system.
+
+## Focus Management
+
+### Focus Rings
+
+All interactive elements show a visible focus indicator on `:focus-visible`. The focus ring is a 3px `box-shadow` using `--ts-color-focus-ring` (primary orange at 40% opacity). A danger variant (`--ts-color-focus-ring-danger`) is used for error-state inputs.
+
+```css
+/* Applied automatically by all Tessera UI components */
+:focus-visible {
+  outline: none;
+  box-shadow: var(--ts-focus-ring); /* 0 0 0 3px rgba(228,92,14, 0.4) */
+}
+```
+
+### Focus Trapping in Modals
+
+When a `ts-modal` opens, focus is trapped within the modal dialog:
+
+1. Focus moves to the first focusable element inside the modal
+2. Tab and Shift+Tab cycle through focusable elements within the modal
+3. Focus does not escape to elements behind the overlay
+4. When the modal closes, focus returns to the element that triggered it
+
+This pattern applies to any overlay component (modals, drawers, dialogs).
+
+### Focus Restoration
+
+When a popover, dropdown, or modal closes, focus must return to the triggering element. Tessera UI components handle this automatically, but if you build custom overlay patterns, ensure you store and restore focus:
+
+```js
+const trigger = document.activeElement;
+openOverlay();
+// ... on close:
+trigger.focus();
+```
+
+### Skip Navigation
+
+For applications using Tessera UI, add a skip navigation link as the first focusable element on the page:
+
+```html
+<a href="#main-content" class="ts-skip-link">Skip to main content</a>
+```
+
+## Touch Target Sizing
+
+Interactive elements must meet minimum size requirements:
+
+| Context | Minimum Size | Token |
+|---|---|---|
+| Default | 44 x 44 px | `--ts-touch-target-min` |
+| Compact density | 32 x 32 px | `--ts-touch-target-compact` |
+
+Even when the visual element is smaller (e.g., a 24px icon button), the tap/click area must meet the minimum. Tessera UI achieves this with padding or pseudo-element hit areas.
+
+**WCAG references:**
+- **2.5.5 Target Size (AAA):** 44px minimum
+- **2.5.8 Target Size Minimum (AA):** 24px minimum with sufficient spacing
+
+Tessera UI exceeds the AA requirement even in compact mode (32px).
+
+## Screen Reader Live Regions
+
+Components that update content dynamically must announce changes to screen readers:
+
+### Alerts and Toasts
+
+`ts-alert` uses `role="alert"` which implicitly sets `aria-live="assertive"`. This means screen readers interrupt the current announcement to read the alert.
+
+For less urgent notifications (toasts, status updates), use `aria-live="polite"`:
+
+```html
+<div aria-live="polite" aria-atomic="true">
+  <!-- Dynamic status messages appear here -->
+  Your changes have been saved.
+</div>
+```
+
+### Loading States
+
+When content is loading, announce the state change:
+
+```html
+<div aria-busy="true" aria-live="polite">
+  Loading results...
+</div>
+```
+
+Remove `aria-busy` when content has loaded so the new content is announced.
+
+## High-Contrast Mode
+
+Tessera UI provides a `data-theme="high-contrast"` theme that maximizes contrast ratios:
+
+- All text meets **7:1** contrast ratio (WCAG AAA)
+- Borders use pure black for maximum visibility
+- Shadows are replaced with solid outlines
+- Interactive colors are darkened for stronger contrast
+
+```html
+<body data-theme="high-contrast">
+  <!-- Maximum contrast for all components -->
+</body>
+```
+
+## Forced Colors (Windows High Contrast)
+
+Tessera UI components respond to the `forced-colors` media query, which activates on Windows High Contrast Mode and similar OS-level settings:
+
+```css
+@media (forced-colors: active) {
+  /* Borders become visible in forced-colors mode */
+  .component {
+    border: 1px solid ButtonText;
+  }
+
+  /* Focus indicators use system highlight color */
+  :focus-visible {
+    outline: 2px solid Highlight;
+    outline-offset: 2px;
+  }
+}
+```
+
+**Key considerations:**
+- Box shadows are invisible in forced-colors mode — always pair shadows with borders for critical boundaries
+- Background colors are overridden by the system — do not rely on background color alone to convey state
+- Use `forced-color-adjust: none` sparingly and only for decorative elements
+
+## Keyboard Navigation Patterns
+
+### Common Patterns
+
+| Component | Key | Action |
+|---|---|---|
+| **Button** | `Enter`, `Space` | Activate |
+| **Input** | `Tab` | Focus the field |
+| **Toggle** | `Space` | Toggle on/off |
+| **Modal** | `Escape` | Close |
+| **Dropdown** | `Arrow Down/Up` | Navigate options |
+| **Dropdown** | `Enter` | Select option |
+| **Dropdown** | `Escape` | Close menu |
+| **Tabs** | `Arrow Left/Right` | Switch tabs |
+| **Tabs** | `Enter`, `Space` | Activate tab |
+
+### Roving Tabindex
+
+For composite widgets (tab lists, radio groups, toolbars), Tessera UI uses the roving tabindex pattern:
+
+- Only one item in the group is in the tab order (`tabindex="0"`)
+- Arrow keys move focus between items within the group
+- The focused item receives `tabindex="0"` while others get `tabindex="-1"`
+
+This ensures the user can Tab past the entire group with a single press, then use arrow keys for internal navigation.
+
+## WCAG 2.1 AA Compliance Checklist
+
+Use this checklist to verify accessibility when building with Tessera UI:
+
+- [ ] **1.1.1 Non-text Content:** All images and icons have text alternatives (`alt`, `aria-label`)
+- [ ] **1.3.1 Info and Relationships:** Semantic HTML is used (headings, lists, tables, landmarks)
+- [ ] **1.4.1 Use of Color:** Color is not the only means of conveying information
+- [ ] **1.4.3 Contrast (Minimum):** Text meets 4.5:1 (normal) or 3:1 (large)
+- [ ] **1.4.4 Resize Text:** Content remains usable at 200% zoom
+- [ ] **1.4.11 Non-text Contrast:** UI components and graphical objects meet 3:1 contrast
+- [ ] **2.1.1 Keyboard:** All functionality is operable via keyboard
+- [ ] **2.1.2 No Keyboard Trap:** Focus can be moved away from every component
+- [ ] **2.4.3 Focus Order:** Focus order is logical and meaningful
+- [ ] **2.4.7 Focus Visible:** Focus indicator is always visible on interactive elements
+- [ ] **2.5.5 Target Size:** Touch targets are at least 44px (default) or 32px (compact)
+- [ ] **3.3.1 Error Identification:** Errors are identified in text, not just color
+- [ ] **3.3.2 Labels or Instructions:** Form inputs have visible labels
+- [ ] **4.1.2 Name, Role, Value:** Custom components expose correct ARIA roles and states

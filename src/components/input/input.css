@@ -16,7 +16,7 @@
   --ts-input-bg: var(--ts-color-bg-surface);
   --ts-input-color: var(--ts-color-text-primary);
   --ts-input-border-color: var(--ts-color-border-default);
-  --ts-input-radius: var(--ts-radius-md);
+  --ts-input-radius: var(--ts-shape-interactive);
   --ts-input-focus-ring: var(--ts-focus-ring);
 }
 
@@ -123,11 +123,11 @@
 }
 
 .input__prefix {
-  padding-left: var(--ts-spacing-3);
+  padding-inline-start: var(--ts-spacing-3);
 }
 
 .input__suffix {
-  padding-right: var(--ts-spacing-3);
+  padding-inline-end: var(--ts-spacing-3);
 }
 
 .input__prefix:empty,

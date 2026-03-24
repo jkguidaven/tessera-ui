@@ -1,0 +1,42 @@
+/* ==========================================================================
+   ts-icon — Shadow DOM Scoped Styles
+
+   Component tokens (Tier 3):
+     --ts-icon-size    Width & height of the icon
+     --ts-icon-color   Fill / stroke color
+   ========================================================================== */
+
+:host {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+
+  --ts-icon-size: 1em;
+  --ts-icon-color: currentColor;
+
+  width: var(--ts-icon-size);
+  height: var(--ts-icon-size);
+  color: var(--ts-icon-color);
+  line-height: 0;
+}
+
+/* ---- Sizes ---- */
+:host([size="xs"]) { --ts-icon-size: 12px; }
+:host([size="sm"]) { --ts-icon-size: 14px; }
+:host([size="md"]) { --ts-icon-size: 16px; }
+:host([size="lg"]) { --ts-icon-size: 18px; }
+:host([size="xl"]) { --ts-icon-size: 20px; }
+
+/* ---- Slotted SVG ---- */
+::slotted(svg) {
+  width: 100%;
+  height: 100%;
+  fill: currentColor;
+}
+
+/* ---- External image ---- */
+img {
+  width: 100%;
+  height: 100%;
+}
