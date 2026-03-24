@@ -38,7 +38,8 @@
   justify-content: center;
   width: var(--ts-checkbox-size);
   height: var(--ts-checkbox-size);
-  border: 1.5px solid var(--ts-checkbox-border-color);
+  box-sizing: border-box;
+  border: 2px solid var(--ts-checkbox-border-color);
   border-radius: var(--ts-checkbox-radius);
   background-color: var(--ts-color-bg-elevated);
   transition:

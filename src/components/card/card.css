@@ -73,7 +73,7 @@
 }
 
 .card__header {
-  border-bottom: 1px solid var(--ts-color-border-subtle);
+  border-bottom: 1px solid var(--ts-card-border-color);
 }
 
 .card__header:empty {
@@ -82,7 +82,7 @@
 }
 
 .card__footer {
-  border-top: 1px solid var(--ts-color-border-subtle);
+  border-top: 1px solid var(--ts-card-border-color);
 }
 
 .card__footer:empty {

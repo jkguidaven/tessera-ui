@@ -529,6 +529,10 @@
    immutable — they never change between themes.
    ======================================================================= */
 [data-theme="dark"] {
+  color-scheme: dark;
+  color: var(--ts-color-text-primary);
+  background-color: var(--ts-color-bg-surface);
+
   /* ----- Neutral scale (M3 dark, blue undertone) ----- */
   --ts-color-neutral-0:   #0e1016;
   --ts-color-neutral-50:  #14161c;
