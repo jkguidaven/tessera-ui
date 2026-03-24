@@ -5,40 +5,42 @@ description: The Tessera UI color system — palettes, semantic roles, accessibi
 
 Color in Tessera UI is organized into three layers: **reference palettes** (raw values), **semantic roles** (purpose-driven), and **component tokens** (per-component overrides). This architecture ensures consistent theming and painless dark mode support.
 
+The palette uses a **warm orange primary** with **warm-tinted neutrals**, creating a vibrant, approachable aesthetic with strong readability.
+
 ## Primary Palette
 
-The primary palette is used for interactive elements, emphasis, and brand identity.
+The primary palette is a warm orange hue used for interactive elements, emphasis, and brand identity.
 
 | Token | Value | Usage |
 |---|---|---|
-| `--ts-ref-primary-50` | `#eef2ff` | Subtle backgrounds, hover states |
-| `--ts-ref-primary-100` | `#dbe4ff` | Light accents |
-| `--ts-ref-primary-200` | `#bac8ff` | Borders, dividers |
-| `--ts-ref-primary-300` | `#91a7ff` | Secondary accents |
-| `--ts-ref-primary-400` | `#748ffc` | — |
-| `--ts-ref-primary-500` | `#5c7cfa` | Default primary |
-| `--ts-ref-primary-600` | `#4c6ef5` | Interactive elements (buttons, links) |
-| `--ts-ref-primary-700` | `#4263eb` | Hover states |
-| `--ts-ref-primary-800` | `#3b5bdb` | Active/pressed states |
-| `--ts-ref-primary-900` | `#364fc7` | High contrast text on light backgrounds |
+| `--ts-ref-primary-50` | `#fef3eb` | Subtle backgrounds, hover states |
+| `--ts-ref-primary-100` | `#fce0c8` | Light accents |
+| `--ts-ref-primary-200` | `#f9c49e` | Borders, dividers |
+| `--ts-ref-primary-300` | `#f5a674` | Secondary accents |
+| `--ts-ref-primary-400` | `#f18c4e` | — |
+| `--ts-ref-primary-500` | `#ee7a11` | Default primary |
+| `--ts-ref-primary-600` | `#e45c0e` | Interactive elements (buttons, links) |
+| `--ts-ref-primary-700` | `#c44e0a` | Hover states |
+| `--ts-ref-primary-800` | `#a34108` | Active/pressed states |
+| `--ts-ref-primary-900` | `#7a3106` | High contrast text on light backgrounds |
 
 ## Neutral Palette
 
-Neutrals form the backbone of the UI — text, backgrounds, borders, and surfaces.
+Neutrals form the backbone of the UI — text, backgrounds, borders, and surfaces. The palette carries a subtle **warm undertone** for a natural, approachable feel rather than cold gray.
 
 | Token | Value (Light) | Value (Dark) |
 |---|---|---|
-| `--ts-color-neutral-0` | `#ffffff` | `#1a1b1e` |
-| `--ts-color-neutral-50` | `#f8f9fa` | `#25262b` |
-| `--ts-color-neutral-100` | `#f1f3f5` | `#2c2e33` |
-| `--ts-color-neutral-200` | `#e9ecef` | `#373a40` |
-| `--ts-color-neutral-300` | `#dee2e6` | `#495057` |
-| `--ts-color-neutral-400` | `#ced4da` | `#868e96` |
-| `--ts-color-neutral-500` | `#adb5bd` | `#adb5bd` |
-| `--ts-color-neutral-600` | `#868e96` | `#ced4da` |
-| `--ts-color-neutral-700` | `#495057` | `#dee2e6` |
-| `--ts-color-neutral-800` | `#343a40` | `#e9ecef` |
-| `--ts-color-neutral-900` | `#212529` | `#f1f3f5` |
+| `--ts-color-neutral-0` | `#ffffff` | `#1a1917` |
+| `--ts-color-neutral-50` | `#f7f6f4` | `#23221f` |
+| `--ts-color-neutral-100` | `#f0eeeb` | `#2c2a27` |
+| `--ts-color-neutral-200` | `#e2dfdb` | `#3a3733` |
+| `--ts-color-neutral-300` | `#d2cec9` | `#4d4a44` |
+| `--ts-color-neutral-400` | `#b5b0a9` | `#7a7570` |
+| `--ts-color-neutral-500` | `#9a9590` | `#9a9590` |
+| `--ts-color-neutral-600` | `#706b65` | `#b5b0a9` |
+| `--ts-color-neutral-700` | `#55514b` | `#d2cec9` |
+| `--ts-color-neutral-800` | `#38352f` | `#e2dfdb` |
+| `--ts-color-neutral-900` | `#1f1d1a` | `#f0eeeb` |
 
 ## Semantic Colors
 
@@ -46,10 +48,10 @@ Semantic colors communicate meaning independent of the specific hue.
 
 | Category | Token (500) | Token (600) | Usage |
 |---|---|---|---|
-| **Success** | `#40c057` | `#2f9e44` | Positive outcomes, confirmations |
-| **Warning** | `#fab005` | `#f08c00` | Caution, non-blocking issues |
-| **Danger** | `#fa5252` | `#e03131` | Errors, destructive actions |
-| **Info** | `#339af0` | `#1c7ed6` | Informational, neutral highlights |
+| **Success** | `#48c78e` | `#3bae7a` | Positive outcomes, confirmations |
+| **Warning** | `#ffb70f` | `#e09d00` | Caution, non-blocking issues |
+| **Danger** | `#ff6685` | `#f14668` | Errors, destructive actions |
+| **Info** | `#66d1ff` | `#3db8e8` | Informational, neutral highlights |
 
 ## Color Roles
 
@@ -59,31 +61,31 @@ Rather than using palette tokens directly, components use **role-based tokens** 
 
 | Token | Light | Dark | Usage |
 |---|---|---|---|
-| `--ts-color-text-primary` | `neutral-900` | `#f1f3f5` | Primary body text |
-| `--ts-color-text-secondary` | `neutral-700` | `#dee2e6` | Supporting text, descriptions |
-| `--ts-color-text-tertiary` | `neutral-500` | `#adb5bd` | Placeholder text, hints |
-| `--ts-color-text-disabled` | `neutral-400` | `#868e96` | Disabled labels |
-| `--ts-color-text-inverse` | `neutral-0` | `#1a1b1e` | Text on dark/light backgrounds |
+| `--ts-color-text-primary` | `neutral-900` | `#f0eeeb` | Primary body text |
+| `--ts-color-text-secondary` | `neutral-700` | `#d2cec9` | Supporting text, descriptions |
+| `--ts-color-text-tertiary` | `neutral-500` | `#9a9590` | Placeholder text, hints |
+| `--ts-color-text-disabled` | `neutral-400` | `#7a7570` | Disabled labels |
+| `--ts-color-text-inverse` | `neutral-0` | `#1a1917` | Text on dark/light backgrounds |
 | `--ts-color-text-on-primary` | `white` | `white` | Text on primary color backgrounds |
 
 ### Background Colors
 
 | Token | Light | Dark | Usage |
 |---|---|---|---|
-| `--ts-color-bg-surface` | `neutral-0` | `#1a1b1e` | Default page/component background |
-| `--ts-color-bg-elevated` | `neutral-0` | `#25262b` | Elevated surfaces (cards, modals) |
-| `--ts-color-bg-subtle` | `neutral-50` | `#25262b` | Subtle tinted backgrounds |
+| `--ts-color-bg-surface` | `neutral-0` | `#1a1917` | Default page/component background |
+| `--ts-color-bg-elevated` | `neutral-0` | `#23221f` | Elevated surfaces (cards, modals) |
+| `--ts-color-bg-subtle` | `neutral-50` | `#23221f` | Subtle tinted backgrounds |
 | `--ts-color-bg-overlay` | `rgba(0,0,0,0.45)` | `rgba(0,0,0,0.65)` | Modal/drawer overlays |
-| `--ts-color-bg-disabled` | `neutral-100` | `#2c2e33` | Disabled input backgrounds |
-| `--ts-color-bg-hover` | `neutral-50` | `#25262b` | Generic hover background |
+| `--ts-color-bg-disabled` | `neutral-100` | `#2c2a27` | Disabled input backgrounds |
+| `--ts-color-bg-hover` | `neutral-50` | `#23221f` | Generic hover background |
 
 ### Border Colors
 
 | Token | Light | Dark | Usage |
 |---|---|---|---|
-| `--ts-color-border-default` | `neutral-300` | `#495057` | Standard borders |
-| `--ts-color-border-subtle` | `neutral-200` | `#373a40` | Dividers, section separators |
-| `--ts-color-border-strong` | `neutral-400` | `#868e96` | High contrast borders |
+| `--ts-color-border-default` | `neutral-300` | `#4d4a44` | Standard borders |
+| `--ts-color-border-subtle` | `neutral-200` | `#3a3733` | Dividers, section separators |
+| `--ts-color-border-strong` | `neutral-400` | `#7a7570` | High contrast borders |
 
 ### Feedback Backgrounds
 
@@ -91,10 +93,10 @@ Used by `ts-alert` and similar status components. These use low-opacity tints of
 
 | Token | Light | Dark |
 |---|---|---|
-| `--ts-color-info-bg` | `rgba(51,154,240, 0.08)` | `rgba(51,154,240, 0.12)` |
-| `--ts-color-success-bg` | `rgba(64,192,87, 0.08)` | `rgba(64,192,87, 0.12)` |
-| `--ts-color-warning-bg` | `rgba(250,176,5, 0.08)` | `rgba(250,176,5, 0.12)` |
-| `--ts-color-danger-bg` | `rgba(250,82,82, 0.08)` | `rgba(250,82,82, 0.12)` |
+| `--ts-color-info-bg` | `rgba(102,209,255, 0.08)` | `rgba(102,209,255, 0.12)` |
+| `--ts-color-success-bg` | `rgba(72,199,142, 0.08)` | `rgba(72,199,142, 0.12)` |
+| `--ts-color-warning-bg` | `rgba(255,183,15, 0.08)` | `rgba(255,183,15, 0.12)` |
+| `--ts-color-danger-bg` | `rgba(255,102,133, 0.08)` | `rgba(255,102,133, 0.12)` |
 
 ## Accessibility
 
@@ -109,7 +111,7 @@ All color combinations used for text and interactive elements must meet WCAG 2.1
 **Guidelines:**
 - Never rely on color alone to convey meaning — pair with icons, labels, or patterns
 - Semantic colors (success, warning, danger) always include the status in text, not just the color
-- Focus indicators use a 3px ring with sufficient contrast against all backgrounds
+- Focus indicators use a 3px orange ring with sufficient contrast against all backgrounds
 
 ## Dark Mode
 
@@ -125,5 +127,6 @@ Dark mode is activated by adding `data-theme="dark"` to any ancestor element:
 - **Reference tokens** (Tier 1) are immutable — they never change
 - **Semantic tokens** (Tier 2) are remapped to different values in `[data-theme="dark"]`
 - **Component tokens** (Tier 3) inherit the changes automatically through the `var()` chain
+- Dark mode neutrals maintain the **warm undertone** for visual consistency with the light theme
 
 This means zero component code changes are needed to support dark mode — it's handled entirely at the token layer.
