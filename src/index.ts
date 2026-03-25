@@ -60,6 +60,7 @@ export { TsBanner } from './components/banner/banner';
 export { TsDrawer } from './components/drawer/drawer';
 export { TsNav } from './components/nav/nav';
 export { TsNavItem } from './components/nav/nav-item';
+export { TsNavDivider } from './components/nav/nav-divider';
 export { TsDatePicker } from './components/date-picker/date-picker';
 export { TsFileUpload } from './components/file-upload/file-upload';
 export { TsStepper } from './components/stepper/stepper';

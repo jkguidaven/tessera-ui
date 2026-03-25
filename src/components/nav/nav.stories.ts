@@ -89,6 +89,41 @@ export const States = (): string => `
   </div>
 `;
 
+export const NestedItems = (): string => `
+  <div style="width: 240px;">
+    <ts-nav variant="sidebar">
+      <ts-nav-item icon="layout-dashboard" active>Dashboard</ts-nav-item>
+      <ts-nav-item icon="settings" expandable expanded>
+        Settings
+        <ts-nav-item slot="children">Account</ts-nav-item>
+        <ts-nav-item slot="children">Security</ts-nav-item>
+        <ts-nav-item slot="children">Notifications</ts-nav-item>
+      </ts-nav-item>
+      <ts-nav-item icon="file-text" expandable>
+        Documents
+        <ts-nav-item slot="children">Recent</ts-nav-item>
+        <ts-nav-item slot="children">Shared</ts-nav-item>
+        <ts-nav-item slot="children">Archived</ts-nav-item>
+      </ts-nav-item>
+      <ts-nav-item icon="bar-chart-2">Reports</ts-nav-item>
+    </ts-nav>
+  </div>
+`;
+
+export const WithBadges = (): string => `
+  <div style="width: 240px;">
+    <ts-nav variant="sidebar">
+      <ts-nav-item icon="layout-dashboard" active>Dashboard</ts-nav-item>
+      <ts-nav-item icon="inbox" badge="12">Inbox</ts-nav-item>
+      <ts-nav-item icon="bell" badge="3">Notifications</ts-nav-item>
+      <ts-nav-item icon="users" badge="99+">Users</ts-nav-item>
+      <ts-nav-divider></ts-nav-divider>
+      <ts-nav-item icon="settings">Settings</ts-nav-item>
+      <ts-nav-item icon="log-out">Sign Out</ts-nav-item>
+    </ts-nav>
+  </div>
+`;
+
 export const Composition = (): string => `
   <div style="display: flex; border: 1px solid #e2e8f0; border-radius: 8px; height: 400px; overflow: hidden;">
     <div style="width: 240px; border-right: 1px solid #e2e8f0; padding: 16px 0; background: #f8fafc;">
@@ -98,6 +133,7 @@ export const Composition = (): string => `
         <ts-nav-item icon="users" href="#">Users</ts-nav-item>
         <ts-nav-item icon="file-text" href="#">Documents</ts-nav-item>
         <ts-nav-item icon="bar-chart-2" href="#">Analytics</ts-nav-item>
+        <ts-nav-divider></ts-nav-divider>
         <ts-nav-item icon="settings" href="#">Settings</ts-nav-item>
       </ts-nav>
     </div>

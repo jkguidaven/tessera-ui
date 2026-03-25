@@ -71,3 +71,39 @@
   align-items: center;
   white-space: nowrap;
 }
+
+/* ---- Expandable ---- */
+.nav-item__chevron {
+  display: inline-flex;
+  margin-inline-start: auto;
+  transition: transform var(--ts-transition-fast);
+}
+
+:host([expanded]) .nav-item__chevron {
+  transform: rotate(90deg);
+}
+
+.nav-item__children {
+  display: none;
+  padding-inline-start: var(--ts-spacing-4);
+}
+
+:host([expanded]) .nav-item__children {
+  display: block;
+}
+
+/* ---- Badge ---- */
+.nav-item__badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-inline-start: auto;
+  min-inline-size: 1.25rem;
+  padding-inline: var(--ts-spacing-1);
+  font-size: var(--ts-font-size-xs);
+  font-weight: var(--ts-font-weight-semi);
+  line-height: 1.25rem;
+  border-radius: var(--ts-radius-full);
+  background-color: var(--ts-color-danger-500);
+  color: var(--ts-color-text-on-primary);
+}

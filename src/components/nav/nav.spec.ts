@@ -1,6 +1,7 @@
 import { newSpecPage } from '@stencil/core/testing';
 import { TsNav } from './nav';
 import { TsNavItem } from './nav-item';
+import { TsNavDivider } from './nav-divider';
 
 describe('ts-nav', () => {
   it('renders with default props', async () => {
@@ -133,5 +134,68 @@ describe('ts-nav-item', () => {
     button?.click();
 
     expect(spy).not.toHaveBeenCalled();
+  });
+
+  it('renders chevron when expandable', async () => {
+    const page = await newSpecPage({
+      components: [TsNavItem],
+      html: '<ts-nav-item expandable>Settings</ts-nav-item>',
+    });
+
+    const chevron = page.root?.shadowRoot?.querySelector('.nav-item__chevron');
+    expect(chevron).not.toBeNull();
+  });
+
+  it('toggles expanded state on click', async () => {
+    const page = await newSpecPage({
+      components: [TsNavItem],
+      html: '<ts-nav-item expandable>Settings</ts-nav-item>',
+    });
+
+    expect(page.root?.expanded).toBe(false);
+
+    const button = page.root?.shadowRoot?.querySelector('button');
+    button?.click();
+    await page.waitForChanges();
+
+    expect(page.root?.expanded).toBe(true);
+
+    button?.click();
+    await page.waitForChanges();
+
+    expect(page.root?.expanded).toBe(false);
+  });
+
+  it('renders badge when prop is set', async () => {
+    const page = await newSpecPage({
+      components: [TsNavItem],
+      html: '<ts-nav-item badge="5">Inbox</ts-nav-item>',
+    });
+
+    const badge = page.root?.shadowRoot?.querySelector('.nav-item__badge');
+    expect(badge).not.toBeNull();
+    expect(badge?.textContent).toBe('5');
+  });
+
+  it('does not render badge when prop is not set', async () => {
+    const page = await newSpecPage({
+      components: [TsNavItem],
+      html: '<ts-nav-item>Home</ts-nav-item>',
+    });
+
+    const badge = page.root?.shadowRoot?.querySelector('.nav-item__badge');
+    expect(badge).toBeNull();
+  });
+});
+
+describe('ts-nav-divider', () => {
+  it('renders a separator', async () => {
+    const page = await newSpecPage({
+      components: [TsNavDivider],
+      html: '<ts-nav-divider></ts-nav-divider>',
+    });
+
+    const separator = page.root?.shadowRoot?.querySelector('[role="separator"]');
+    expect(separator).not.toBeNull();
   });
 });
