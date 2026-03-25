@@ -66,7 +66,14 @@ export const config: Config = {
 
   testing: {
     browserHeadless: 'new',
-    browserArgs: ['--no-sandbox', '--disable-setuid-sandbox'],
+    browserArgs: [
+      '--no-sandbox',
+      '--disable-setuid-sandbox',
+      '--disable-gpu',
+      '--disable-dev-shm-usage',
+    ],
+    browserWaitUntil: 'load',
+    testTimeout: 60000,
     setupFilesAfterFramework: ['./tests/setup.ts'],
   },
 };
