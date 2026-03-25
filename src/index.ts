@@ -82,3 +82,4 @@ export { TsSidebar } from './components/sidebar/sidebar';
 export { TsAppLayout } from './components/app-layout/app-layout';
 export { TsTimeline } from './components/timeline/timeline';
 export { TsTimelineItem } from './components/timeline/timeline-item';
+export { TsCombobox } from './components/combobox/combobox';
