@@ -5,7 +5,7 @@ Angular wrappers for [Tessera UI](https://github.com/jkguidaven/tessera-ui) web 
 ## Installation
 
 ```bash
-npm install @tessera-ui/angular @tessera-ui/core
+npm install @tessera-ui/angular
 ```
 
 ## Usage

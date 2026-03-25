@@ -5,7 +5,7 @@ React wrappers for [Tessera UI](https://github.com/jkguidaven/tessera-ui) web co
 ## Installation
 
 ```bash
-npm install @tessera-ui/react @tessera-ui/core
+npm install @tessera-ui/react
 ```
 
 ## Usage

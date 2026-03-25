@@ -5,7 +5,7 @@ Vue wrappers for [Tessera UI](https://github.com/jkguidaven/tessera-ui) web comp
 ## Installation
 
 ```bash
-npm install @tessera-ui/vue @tessera-ui/core
+npm install @tessera-ui/vue
 ```
 
 ## Usage
