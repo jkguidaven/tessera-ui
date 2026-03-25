@@ -9,6 +9,23 @@
   display: none;
 }
 
+[data-page-template="splash"] .hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+[data-page-template="splash"] .hero > img,
+[data-page-template="splash"] .hero > picture {
+  order: -1;
+  margin-bottom: 1rem;
+}
+
+[data-page-template="splash"] .hero .sl-flex {
+  justify-content: center;
+}
+
 .version-badge {
   display: inline-block;
   padding: 0.15em 0.5em;
