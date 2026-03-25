@@ -27,11 +27,23 @@ export { emitEvent } from './utils/events';
 export { registerIcons, registerIcon, getIcon, getRegisteredIconNames } from './components/icon/icon-registry';
 
 // Components
+export { TsAlert } from './components/alert/alert';
+export { TsAvatar } from './components/avatar/avatar';
+export { TsBadge } from './components/badge/badge';
+export { TsButton } from './components/button/button';
+export { TsCard } from './components/card/card';
+export { TsCheckbox } from './components/checkbox/checkbox';
 export { TsIcon } from './components/icon/icon';
+export { TsInput } from './components/input/input';
+export { TsModal } from './components/modal/modal';
+export { TsRadio } from './components/radio/radio';
+export { TsSelect } from './components/select/select';
+export { TsSpinner } from './components/spinner/spinner';
 export { TsTabs } from './components/tabs/tabs';
 export { TsTabPanel } from './components/tabs/tab-panel';
-export { TsSpinner } from './components/spinner/spinner';
-export { TsAvatar } from './components/avatar/avatar';
+export { TsTextarea } from './components/textarea/textarea';
+export { TsToggle } from './components/toggle/toggle';
+export { TsTooltip } from './components/tooltip/tooltip';
 export { TsAvatarGroup } from './components/avatar-group/avatar-group';
 export { TsDialog } from './components/dialog/dialog';
 export { TsMenu } from './components/menu/menu';
