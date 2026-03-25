@@ -73,3 +73,18 @@
   font-size: var(--ts-font-size-md);
   color: var(--ts-color-text-secondary);
 }
+
+/* ---- Reduced motion ---- */
+@media (prefers-reduced-motion: reduce) {
+  .accordion-item__header {
+    transition-duration: 0.01ms !important;
+  }
+
+  .accordion-item__icon {
+    transition-duration: 0.01ms !important;
+  }
+
+  .accordion-item__panel {
+    transition-duration: 0.01ms !important;
+  }
+}

@@ -164,3 +164,14 @@
   box-shadow: var(--ts-focus-ring);
   opacity: 1;
 }
+
+/* ---- Reduced motion ---- */
+@media (prefers-reduced-motion: reduce) {
+  .toast__base {
+    animation-duration: 0.01ms !important;
+  }
+
+  .toast__close {
+    transition-duration: 0.01ms !important;
+  }
+}

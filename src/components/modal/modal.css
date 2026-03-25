@@ -129,3 +129,18 @@
     transform: scale(1) translateY(0);
   }
 }
+
+/* ---- Reduced motion ---- */
+@media (prefers-reduced-motion: reduce) {
+  .modal__overlay {
+    animation-duration: 0.01ms !important;
+  }
+
+  .modal__dialog {
+    animation-duration: 0.01ms !important;
+  }
+
+  .modal__close {
+    transition-duration: 0.01ms !important;
+  }
+}
