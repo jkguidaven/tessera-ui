@@ -1,0 +1,126 @@
+/* ==========================================================================
+   ts-sidebar — Shadow DOM Scoped Styles
+
+   Component tokens (Tier 3):
+     --ts-sidebar-bg            Background color
+     --ts-sidebar-border        Border color
+     --ts-sidebar-toggle-size   Toggle button size
+   ========================================================================== */
+
+:host {
+  display: flex;
+  flex-direction: column;
+  border-inline-end: 1px solid var(--ts-color-border-default);
+  background: var(--ts-color-bg-surface);
+  font-family: var(--ts-font-family-base);
+  block-size: 100%;
+  transition: width var(--ts-transition-normal);
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+/* ---- Container ---- */
+.sidebar__container {
+  display: flex;
+  flex-direction: column;
+  block-size: 100%;
+  min-block-size: 0;
+}
+
+/* ---- Header (sticky top) ---- */
+.sidebar__header {
+  position: sticky;
+  inset-block-start: 0;
+  z-index: 1;
+  flex-shrink: 0;
+  padding: var(--ts-spacing-4);
+}
+
+.sidebar__header:empty {
+  display: none;
+}
+
+/* ---- Scrollable content ---- */
+.sidebar__content {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: var(--ts-spacing-2) var(--ts-spacing-4);
+  min-block-size: 0;
+}
+
+/* ---- Footer (sticky bottom) ---- */
+.sidebar__footer {
+  position: sticky;
+  inset-block-end: 0;
+  z-index: 1;
+  flex-shrink: 0;
+  padding: var(--ts-spacing-4);
+}
+
+.sidebar__footer:empty {
+  display: none;
+}
+
+/* ---- Toggle button ---- */
+.sidebar__toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: 32px;
+  block-size: 32px;
+  padding: 0;
+  margin-block-start: var(--ts-spacing-2);
+  border: 1px solid var(--ts-color-border-default);
+  border-radius: var(--ts-shape-interactive);
+  background: var(--ts-color-bg-surface);
+  color: var(--ts-color-text-secondary);
+  cursor: pointer;
+  transition:
+    background-color var(--ts-transition-fast),
+    color var(--ts-transition-fast);
+}
+
+.sidebar__toggle:hover {
+  background-color: var(--ts-color-bg-subtle);
+  color: var(--ts-color-text-primary);
+}
+
+.sidebar__toggle:focus-visible {
+  box-shadow: var(--ts-focus-ring);
+  outline: none;
+}
+
+.sidebar__toggle-icon {
+  inline-size: 16px;
+  block-size: 16px;
+  transition: transform var(--ts-transition-fast);
+}
+
+.sidebar__toggle-icon--collapsed {
+  transform: rotate(180deg);
+}
+
+/* ---- Collapsed state ---- */
+:host([collapsed]) .sidebar__header,
+:host([collapsed]) .sidebar__content {
+  padding-inline: var(--ts-spacing-2);
+}
+
+:host([collapsed]) .sidebar__footer {
+  padding-inline: var(--ts-spacing-2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ---- Reduced motion ---- */
+@media (prefers-reduced-motion: reduce) {
+  :host {
+    transition-duration: 0.01ms !important;
+  }
+
+  .sidebar__toggle-icon {
+    transition-duration: 0.01ms !important;
+  }
+}
