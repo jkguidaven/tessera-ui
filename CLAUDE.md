@@ -88,9 +88,15 @@ When assigned a GitHub issue to fix:
 
 1. Create a release branch: `git checkout -b chore/release-X.Y.Z`
 2. Bump versions: `pnpm exec lerna version X.Y.Z --no-push --yes`
-3. Push and create a PR
-4. After merge, push the tag: `git push origin vX.Y.Z`
-5. Create a **GitHub Release** from the tag — CI publishes to npm and deploys docs
+3. **Update README.md** — ensure the description/tagline matches the current project state
+4. Push and create a PR
+5. After merge, push the tag: `git push origin vX.Y.Z`
+6. Create a **GitHub Release** from the tag — CI publishes to npm and deploys docs
+
+**Checklist before creating the release PR:**
+- [ ] All package versions bumped consistently (Lerna handles this)
+- [ ] README.md description and tagline are up to date
+- [ ] `docs/src/content/docs/index.mdx` landing page tagline matches README
 
 ### Docs site
 
