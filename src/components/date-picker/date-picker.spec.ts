@@ -92,4 +92,60 @@ describe('ts-date-picker', () => {
     const input = page.root?.shadowRoot?.querySelector('input');
     expect(input?.getAttribute('name')).toBe('dob');
   });
+
+  it('renders year navigation buttons in calendar header', async () => {
+    const page = await newSpecPage({
+      components: [TsDatePicker],
+      html: '<ts-date-picker></ts-date-picker>',
+    });
+
+    // Open calendar by setting internal state
+    const component = page.rootInstance as TsDatePicker;
+    component.isOpen = true;
+    await page.waitForChanges();
+
+    const buttons = page.root?.shadowRoot?.querySelectorAll('.date-picker__nav-btn');
+    expect(buttons?.length).toBe(4);
+
+    const labels = Array.from(buttons || []).map((b) => b.getAttribute('aria-label'));
+    expect(labels).toContain('Previous year');
+    expect(labels).toContain('Next year');
+  });
+
+  it('shifts weekday headers when firstDayOfWeek is set', async () => {
+    const page = await newSpecPage({
+      components: [TsDatePicker],
+      html: '<ts-date-picker first-day-of-week="1"></ts-date-picker>',
+    });
+
+    // Open calendar by setting internal state
+    const component = page.rootInstance as TsDatePicker;
+    component.isOpen = true;
+    await page.waitForChanges();
+
+    const weekdays = page.root?.shadowRoot?.querySelectorAll('.date-picker__weekday');
+    const headers = Array.from(weekdays || []).map((el) => el.textContent);
+    expect(headers[0]).toBe('Mo');
+    expect(headers[6]).toBe('Su');
+  });
+
+  it('highlights selected range in range mode', async () => {
+    const page = await newSpecPage({
+      components: [TsDatePicker],
+      html: '<ts-date-picker range value="2024-06-05" value-end="2024-06-10"></ts-date-picker>',
+    });
+
+    // Open calendar by setting internal state
+    const component = page.rootInstance as TsDatePicker;
+    component.isOpen = true;
+    await page.waitForChanges();
+
+    const rangeStart = page.root?.shadowRoot?.querySelector('.date-picker__day--range-start');
+    const rangeEnd = page.root?.shadowRoot?.querySelector('.date-picker__day--range-end');
+    const inRange = page.root?.shadowRoot?.querySelectorAll('.date-picker__day--in-range');
+
+    expect(rangeStart).not.toBeNull();
+    expect(rangeEnd).not.toBeNull();
+    expect(inRange?.length).toBeGreaterThan(0);
+  });
 });

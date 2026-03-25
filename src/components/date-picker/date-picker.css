@@ -226,6 +226,37 @@
   box-shadow: var(--ts-date-picker-focus-ring);
 }
 
+/* ---- Range selection ---- */
+.date-picker__day--in-range {
+  background-color: var(--ts-color-interactive-primary-subtle, rgba(59, 130, 246, 0.12));
+  border-radius: 0;
+}
+
+.date-picker__day--range-start {
+  background-color: var(--ts-color-interactive-primary);
+  color: var(--ts-color-text-on-primary);
+  font-weight: var(--ts-font-weight-semi);
+  border-radius: var(--ts-radius-full) 0 0 var(--ts-radius-full);
+}
+
+.date-picker__day--range-end {
+  background-color: var(--ts-color-interactive-primary);
+  color: var(--ts-color-text-on-primary);
+  font-weight: var(--ts-font-weight-semi);
+  border-radius: 0 var(--ts-radius-full) var(--ts-radius-full) 0;
+}
+
+.date-picker__day--range-start.date-picker__day--range-end {
+  border-radius: var(--ts-radius-full);
+}
+
+/* ---- Nav group ---- */
+.date-picker__nav-group {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
 /* ---- Animation ---- */
 @keyframes ts-dp-fade-in {
   from { opacity: 0; transform: translateY(-4px); }

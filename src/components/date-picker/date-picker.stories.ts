@@ -45,6 +45,22 @@ export default {
       control: 'text',
       description: 'Form field name.',
     },
+    locale: {
+      control: 'text',
+      description: 'Locale string for date formatting (BCP 47).',
+    },
+    firstDayOfWeek: {
+      control: { type: 'number', min: 0, max: 6 },
+      description: 'First day of the week (0 = Sunday, 6 = Saturday).',
+    },
+    range: {
+      control: 'boolean',
+      description: 'Enable date range selection mode.',
+    },
+    valueEnd: {
+      control: 'text',
+      description: 'End date for range selection in ISO format.',
+    },
   },
 };
 
@@ -60,6 +76,10 @@ const Template = (args: Record<string, unknown>): string => {
   if (args.errorMessage !== undefined && args.errorMessage !== '') attrs.push(`error-message="${args.errorMessage}"`);
   if (args.size !== undefined) attrs.push(`size="${args.size}"`);
   if (args.name !== undefined && args.name !== '') attrs.push(`name="${args.name}"`);
+  if (args.locale !== undefined && args.locale !== '') attrs.push(`locale="${args.locale}"`);
+  if (args.firstDayOfWeek !== undefined) attrs.push(`first-day-of-week="${args.firstDayOfWeek}"`);
+  if (args.range) attrs.push('range');
+  if (args.valueEnd !== undefined && args.valueEnd !== '') attrs.push(`value-end="${args.valueEnd}"`);
   return `<ts-date-picker ${attrs.join(' ')}></ts-date-picker>`;
 };
 
@@ -87,6 +107,51 @@ export const States = (): string => `
     <ts-date-picker label="With value" value="2026-03-15" placeholder="Select date"></ts-date-picker>
     <ts-date-picker label="Disabled" placeholder="Select date" disabled></ts-date-picker>
     <ts-date-picker label="Error state" placeholder="Select date" error error-message="Please select a valid date"></ts-date-picker>
+  </div>
+`;
+
+export const WithYearNav = (): string => `
+  <div style="display: flex; gap: 24px; flex-wrap: wrap; align-items: flex-start;">
+    <ts-date-picker
+      label="Event date"
+      placeholder="Pick a date"
+      value="2024-06-15"
+    ></ts-date-picker>
+  </div>
+  <p style="margin-top: 12px; font-size: 14px; color: #6b7280;">
+    Use the double chevron buttons (&laquo; &raquo;) to navigate between years.
+  </p>
+`;
+
+export const RangeSelection = (): string => `
+  <div style="display: flex; gap: 24px; flex-wrap: wrap; align-items: flex-start;">
+    <ts-date-picker
+      label="Booking dates"
+      placeholder="Select date range"
+      range
+      value="2026-03-10"
+      value-end="2026-03-18"
+    ></ts-date-picker>
+    <ts-date-picker
+      label="Select new range"
+      placeholder="Click two dates"
+      range
+    ></ts-date-picker>
+  </div>
+`;
+
+export const CustomLocale = (): string => `
+  <div style="display: flex; gap: 24px; flex-wrap: wrap; align-items: flex-start;">
+    <ts-date-picker
+      label="Week starts Monday"
+      placeholder="Select date"
+      first-day-of-week="1"
+    ></ts-date-picker>
+    <ts-date-picker
+      label="Week starts Saturday"
+      placeholder="Select date"
+      first-day-of-week="6"
+    ></ts-date-picker>
   </div>
 `;
 
