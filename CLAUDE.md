@@ -73,6 +73,16 @@ Do NOT commit if any of these fail. Fix the issue first.
 | `pnpm version:bump` | Bump all package versions via Lerna (fixed versioning) |
 | `pnpm publish:packages` | Build all packages and publish to npm via Lerna |
 
+### Working on GitHub Issues
+
+When assigned a GitHub issue to fix:
+
+1. **Create a branch** from `main` named `fix/<short-description>` (or `feat/` for features)
+2. **Implement the fix** — follow all verification steps below before committing
+3. **Push and create a PR** using `gh pr create`, referencing the issue (e.g., `Closes #<number>`)
+4. **Assign the person who filed the issue as a reviewer** using `gh pr edit <pr-number> --add-reviewer <username>`
+   - Extract the issue author from `gh issue view <number>` and use their username
+
 ### Docs site
 
 - Lives in `docs/` (Astro Starlight)
