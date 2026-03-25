@@ -74,6 +74,13 @@ export class TsButton {
     this.tsBlur.emit();
   };
 
+  private handleKeyDown = (event: KeyboardEvent): void => {
+    if (event.key === ' ' && this.href) {
+      event.preventDefault();
+      (event.currentTarget as HTMLElement).click();
+    }
+  };
+
   // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   private renderSpinner() {
     return (
@@ -123,6 +130,7 @@ export class TsButton {
           onClick={this.handleClick}
           onFocus={this.handleFocus}
           onBlur={this.handleBlur}
+          onKeyDown={this.handleKeyDown}
         >
           {this.loading && this.renderSpinner()}
 
