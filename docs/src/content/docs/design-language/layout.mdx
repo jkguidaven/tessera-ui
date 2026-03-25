@@ -3,106 +3,405 @@ title: Layout
 description: Spacing system, grid guidance, and container patterns in Tessera UI.
 ---
 
+<style>{`
+  .spacing-scale {
+    margin-block: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .spacing-row {
+    display: grid;
+    grid-template-columns: 140px 1fr 80px;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.625rem 0;
+    border-block-end: 1px solid var(--sl-color-gray-6);
+  }
+  .spacing-row:last-child { border-block-end: none; }
+  .spacing-token {
+    font-size: 0.75rem;
+    font-family: 'JetBrains Mono', monospace;
+    white-space: nowrap;
+  }
+  .spacing-bar-container {
+    height: 28px;
+    display: flex;
+    align-items: center;
+  }
+  .spacing-bar {
+    height: 100%;
+    border-radius: 6px;
+    background: linear-gradient(135deg, #1a73e8, #4285f4);
+    min-width: 4px;
+    transition: width 0.3s ease;
+  }
+  .spacing-value {
+    font-size: 0.75rem;
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--sl-color-gray-3);
+    text-align: right;
+  }
+
+  .density-comparison {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-block: 2rem;
+  }
+  @media (max-width: 768px) {
+    .density-comparison { grid-template-columns: 1fr; }
+  }
+  .density-panel {
+    border: 1px solid var(--sl-color-gray-5);
+    border-radius: 16px;
+    overflow: hidden;
+  }
+  .density-panel-header {
+    padding: 0.75rem 1rem;
+    background: var(--sl-color-gray-7);
+    border-block-end: 1px solid var(--sl-color-gray-6);
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  .density-panel-body {
+    padding: 1rem;
+  }
+  .density-item {
+    border: 1px solid var(--sl-color-gray-5);
+    border-radius: 8px;
+    margin-block-end: 0.5rem;
+    display: flex;
+    align-items: center;
+    font-size: 0.8125rem;
+  }
+  .density-item:last-child { margin-block-end: 0; }
+  .density-item-icon {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #1a73e8;
+    flex-shrink: 0;
+  }
+  .density-badge {
+    display: inline-block;
+    font-size: 0.6875rem;
+    font-family: 'JetBrains Mono', monospace;
+    padding: 0.125rem 0.375rem;
+    border-radius: 4px;
+    background: var(--sl-color-gray-6);
+    color: var(--sl-color-gray-2);
+    margin-inline-start: auto;
+    white-space: nowrap;
+  }
+
+  .grid-demo {
+    margin-block: 2rem;
+    border: 1px solid var(--sl-color-gray-5);
+    border-radius: 16px;
+    padding: 1.5rem;
+    overflow: hidden;
+  }
+  .grid-columns {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 8px;
+    margin-block-end: 1rem;
+  }
+  .grid-col {
+    background: linear-gradient(135deg, rgba(26, 115, 232, 0.12), rgba(26, 115, 232, 0.06));
+    border: 1px solid rgba(26, 115, 232, 0.2);
+    border-radius: 6px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    color: #1a73e8;
+  }
+  .grid-meta {
+    display: flex;
+    gap: 2rem;
+    font-size: 0.75rem;
+    flex-wrap: wrap;
+  }
+  .grid-meta-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.125rem;
+  }
+  .grid-meta-label {
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 0.625rem;
+    opacity: 0.6;
+  }
+  .grid-meta-value {
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .breakpoint-timeline {
+    margin-block: 2rem;
+    position: relative;
+  }
+  .bp-track {
+    height: 4px;
+    background: var(--sl-color-gray-6);
+    border-radius: 2px;
+    position: relative;
+    margin-block-end: 0.5rem;
+  }
+  .bp-fill {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background: linear-gradient(90deg, #1a73e8, #4285f4, #669df6, #8ab4f8, #aecbfa);
+    border-radius: 2px;
+  }
+  .bp-markers {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    padding-block-start: 0.5rem;
+  }
+  .bp-marker {
+    text-align: center;
+    font-size: 0.6875rem;
+    position: relative;
+  }
+  .bp-marker::before {
+    content: '';
+    display: block;
+    width: 2px;
+    height: 10px;
+    background: var(--sl-color-gray-4);
+    margin: 0 auto 0.25rem;
+    border-radius: 1px;
+  }
+  .bp-marker-name {
+    font-weight: 600;
+    display: block;
+  }
+  .bp-marker-value {
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--sl-color-gray-3);
+    display: block;
+    font-size: 0.625rem;
+  }
+
+  .rhythm-demo {
+    margin-block: 1.5rem;
+    border: 1px solid var(--sl-color-gray-5);
+    border-radius: 16px;
+    padding: 1.5rem;
+  }
+  .rhythm-card {
+    border: 1px solid var(--sl-color-gray-5);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .rhythm-card-header {
+    background: var(--sl-color-gray-7);
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .rhythm-card-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #1a73e8, #4285f4);
+    flex-shrink: 0;
+  }
+  .rhythm-card-title {
+    font-weight: 600;
+    font-size: 0.875rem;
+  }
+  .rhythm-card-subtitle {
+    font-size: 0.75rem;
+    opacity: 0.6;
+  }
+  .rhythm-card-body {
+    font-size: 0.875rem;
+    line-height: 1.5;
+  }
+  .rhythm-annotation {
+    font-size: 0.625rem;
+    font-family: 'JetBrains Mono', monospace;
+    color: #1a73e8;
+    font-weight: 600;
+  }
+`}</style>
+
 Tessera UI uses a systematic spacing scale with a **comfortable default** density. This ensures visual rhythm, consistent alignment, and predictable component composition.
+
+---
 
 ## Spacing Scale
 
-All spacing — padding, margins, gaps — uses tokens from this scale. Never use arbitrary pixel values.
+All spacing uses tokens from this scale. Never use arbitrary pixel values.
 
-| Token | Value | Pixels | Common Usage |
-|---|---|---|---|
-| `--ts-spacing-0` | `0` | 0 | Reset, no spacing |
-| `--ts-spacing-1` | `0.375rem` | 6px | Tight gaps (label-to-field, badge padding) |
-| `--ts-spacing-2` | `0.625rem` | 10px | Default inline gap, button padding (sm) |
-| `--ts-spacing-3` | `1rem` | 16px | Component internal padding (alert, modal sections) |
-| `--ts-spacing-4` | `1.25rem` | 20px | Standard padding (md), section gaps |
-| `--ts-spacing-5` | `1.5rem` | 24px | Modal header/footer padding |
-| `--ts-spacing-6` | `2rem` | 32px | Card padding (lg), modal body |
-| `--ts-spacing-8` | `2.5rem` | 40px | Large section spacing, button padding (xl) |
-| `--ts-spacing-10` | `3rem` | 48px | Section separators |
-| `--ts-spacing-12` | `4rem` | 64px | Page section spacing |
-| `--ts-spacing-16` | `5rem` | 80px | Large layout gaps, modal max-height offset |
+<div class="spacing-scale">
+  <div class="spacing-row">
+    <span class="spacing-token">--ts-spacing-0</span>
+    <div class="spacing-bar-container"><div class="spacing-bar" style="width: 0;"></div></div>
+    <span class="spacing-value">0</span>
+  </div>
+  <div class="spacing-row">
+    <span class="spacing-token">--ts-spacing-1</span>
+    <div class="spacing-bar-container"><div class="spacing-bar" style="width: 7.5%;"></div></div>
+    <span class="spacing-value">6px</span>
+  </div>
+  <div class="spacing-row">
+    <span class="spacing-token">--ts-spacing-2</span>
+    <div class="spacing-bar-container"><div class="spacing-bar" style="width: 12.5%;"></div></div>
+    <span class="spacing-value">10px</span>
+  </div>
+  <div class="spacing-row">
+    <span class="spacing-token">--ts-spacing-3</span>
+    <div class="spacing-bar-container"><div class="spacing-bar" style="width: 20%;"></div></div>
+    <span class="spacing-value">16px</span>
+  </div>
+  <div class="spacing-row">
+    <span class="spacing-token">--ts-spacing-4</span>
+    <div class="spacing-bar-container"><div class="spacing-bar" style="width: 25%;"></div></div>
+    <span class="spacing-value">20px</span>
+  </div>
+  <div class="spacing-row">
+    <span class="spacing-token">--ts-spacing-5</span>
+    <div class="spacing-bar-container"><div class="spacing-bar" style="width: 30%;"></div></div>
+    <span class="spacing-value">24px</span>
+  </div>
+  <div class="spacing-row">
+    <span class="spacing-token">--ts-spacing-6</span>
+    <div class="spacing-bar-container"><div class="spacing-bar" style="width: 40%;"></div></div>
+    <span class="spacing-value">32px</span>
+  </div>
+  <div class="spacing-row">
+    <span class="spacing-token">--ts-spacing-8</span>
+    <div class="spacing-bar-container"><div class="spacing-bar" style="width: 50%;"></div></div>
+    <span class="spacing-value">40px</span>
+  </div>
+  <div class="spacing-row">
+    <span class="spacing-token">--ts-spacing-10</span>
+    <div class="spacing-bar-container"><div class="spacing-bar" style="width: 60%;"></div></div>
+    <span class="spacing-value">48px</span>
+  </div>
+  <div class="spacing-row">
+    <span class="spacing-token">--ts-spacing-12</span>
+    <div class="spacing-bar-container"><div class="spacing-bar" style="width: 80%;"></div></div>
+    <span class="spacing-value">64px</span>
+  </div>
+  <div class="spacing-row">
+    <span class="spacing-token">--ts-spacing-16</span>
+    <div class="spacing-bar-container"><div class="spacing-bar" style="width: 100%;"></div></div>
+    <span class="spacing-value">80px</span>
+  </div>
+</div>
 
-## Spacing Rhythm
+The progression (6/10/16/20/24/32/40/48/64/80px) provides natural visual rhythm:
 
-The spacing scale uses a comfortable progression (6/10/16/20/24/32px) that provides natural visual rhythm:
+- **6px** — minimum gap between closely related elements (label to field, icon to text)
+- **10px** — default inline gap, small button padding
+- **16px** — standard internal padding for components
+- **20-24px** — section gaps and medium component padding
+- **32-40px** — large container padding, section separation
+- **48-80px** — page-level layout spacing
 
-- `6px` — minimum spacing between closely related elements
-- `10px` — default inline spacing (between icon and label, form field gap)
-- `16px` — standard padding for medium-density components
-- `24px` — comfortable padding for spacious components
-- `32px+` — layout-level spacing between sections
-
-## Spacing Patterns in Components
-
-### Component internal padding
-| Component | Padding | Token |
-|---|---|---|
-| Button (md) | `10px 20px` | `spacing-2 spacing-4` |
-| Input (md) | `10px 16px` | `spacing-2 spacing-3` |
-| Card (md) | `20px` | `spacing-4` |
-| Card (lg) | `32px` | `spacing-6` |
-| Alert | `16px 20px` | `spacing-3 spacing-4` |
-| Modal body | `16px 32px` | `spacing-3 spacing-6` |
-
-### Gaps between elements
-| Context | Gap | Token |
-|---|---|---|
-| Button icon ↔ label | `10px` | `spacing-2` |
-| Toggle track ↔ label | `10px` | `spacing-2` |
-| Alert icon ↔ message | `16px` | `spacing-3` |
-| Modal footer buttons | `10px` | `spacing-2` |
-| Label ↔ input field | `6px` | `spacing-1` |
-| Input ↔ help text | `6px` | `spacing-1` |
-
-## Grid Tokens
-
-Tessera UI provides grid tokens for building consistent page layouts:
-
-| Token | Value | Usage |
-|---|---|---|
-| `--ts-grid-columns` | `12` | Number of columns in the grid |
-| `--ts-grid-gutter` | `var(--ts-spacing-6)` (32px) | Gap between columns |
-| `--ts-grid-margin` | `var(--ts-spacing-4)` (20px) | Outer margin of the grid container |
-
-These tokens are designed for use with CSS Grid:
-
-```css
-.page-grid {
-  display: grid;
-  grid-template-columns: repeat(var(--ts-grid-columns), 1fr);
-  gap: var(--ts-grid-gutter);
-  padding-inline: var(--ts-grid-margin);
-}
-```
-
-Grid values adapt automatically in density modes — compact density reduces the gutter to `spacing-4` (16px), and spacious density increases it to `spacing-8` (40px).
-
-## Breakpoint Tokens
-
-Breakpoint values are available as CSS custom properties for reference and JavaScript access. Because CSS custom properties cannot be used in `@media` queries, use the raw values in your media queries but reference these tokens as the source of truth.
-
-| Token | Value | Usage |
-|---|---|---|
-| `--ts-breakpoint-sm` | `640px` | Mobile |
-| `--ts-breakpoint-md` | `768px` | Tablet |
-| `--ts-breakpoint-lg` | `1024px` | Desktop |
-| `--ts-breakpoint-xl` | `1280px` | Wide desktop |
-| `--ts-breakpoint-2xl` | `1536px` | Ultra-wide |
+---
 
 ## Density Modes
 
-Tessera UI supports three density modes that remap spacing and font-size tokens globally. Apply a density by adding `data-density` to any ancestor element:
+Density modes remap spacing tokens globally via the `data-density` attribute. Components automatically adjust without any code changes.
 
-```html
-<body data-density="compact">
-  <!-- All components use tighter spacing -->
-</body>
-```
+<div class="density-comparison">
+  <div class="density-panel">
+    <div class="density-panel-header">Compact</div>
+    <div class="density-panel-body">
+      <div class="density-item" style="padding: 4px 8px; gap: 6px;">
+        <div class="density-item-icon"></div>
+        <span>Dashboard</span>
+        <span class="density-badge">4/8px</span>
+      </div>
+      <div class="density-item" style="padding: 4px 8px; gap: 6px;">
+        <div class="density-item-icon"></div>
+        <span>Analytics</span>
+        <span class="density-badge">4/8px</span>
+      </div>
+      <div class="density-item" style="padding: 4px 8px; gap: 6px;">
+        <div class="density-item-icon"></div>
+        <span>Settings</span>
+        <span class="density-badge">4/8px</span>
+      </div>
+      <div class="density-item" style="padding: 4px 8px; gap: 6px;">
+        <div class="density-item-icon"></div>
+        <span>Reports</span>
+        <span class="density-badge">4/8px</span>
+      </div>
+    </div>
+  </div>
 
-### Spacing comparison across densities
+  <div class="density-panel">
+    <div class="density-panel-header">Default (Comfortable)</div>
+    <div class="density-panel-body">
+      <div class="density-item" style="padding: 6px 10px; gap: 8px;">
+        <div class="density-item-icon"></div>
+        <span>Dashboard</span>
+        <span class="density-badge">6/10px</span>
+      </div>
+      <div class="density-item" style="padding: 6px 10px; gap: 8px;">
+        <div class="density-item-icon"></div>
+        <span>Analytics</span>
+        <span class="density-badge">6/10px</span>
+      </div>
+      <div class="density-item" style="padding: 6px 10px; gap: 8px;">
+        <div class="density-item-icon"></div>
+        <span>Settings</span>
+        <span class="density-badge">6/10px</span>
+      </div>
+      <div class="density-item" style="padding: 6px 10px; gap: 8px;">
+        <div class="density-item-icon"></div>
+        <span>Reports</span>
+        <span class="density-badge">6/10px</span>
+      </div>
+    </div>
+  </div>
 
-| Token | Compact | Comfortable (default) | Spacious |
+  <div class="density-panel">
+    <div class="density-panel-header">Spacious</div>
+    <div class="density-panel-body">
+      <div class="density-item" style="padding: 8px 12px; gap: 10px;">
+        <div class="density-item-icon"></div>
+        <span>Dashboard</span>
+        <span class="density-badge">8/12px</span>
+      </div>
+      <div class="density-item" style="padding: 8px 12px; gap: 10px;">
+        <div class="density-item-icon"></div>
+        <span>Analytics</span>
+        <span class="density-badge">8/12px</span>
+      </div>
+      <div class="density-item" style="padding: 8px 12px; gap: 10px;">
+        <div class="density-item-icon"></div>
+        <span>Settings</span>
+        <span class="density-badge">8/12px</span>
+      </div>
+      <div class="density-item" style="padding: 8px 12px; gap: 10px;">
+        <div class="density-item-icon"></div>
+        <span>Reports</span>
+        <span class="density-badge">8/12px</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+### Density Token Remapping
+
+| Token | Compact | Default | Spacious |
 |---|---|---|---|
 | `--ts-spacing-1` | 4px | 6px | 8px |
 | `--ts-spacing-2` | 8px | 10px | 12px |
@@ -110,171 +409,144 @@ Tessera UI supports three density modes that remap spacing and font-size tokens 
 | `--ts-spacing-4` | 16px | 20px | 24px |
 | `--ts-spacing-5` | 20px | 24px | 32px |
 | `--ts-spacing-6` | 24px | 32px | 40px |
-| `--ts-font-size-xs` | 11px | 12px | 12px |
-| `--ts-font-size-sm` | 12px | 14px | 16px |
-| `--ts-font-size-md` | 14px | 16px | 18px |
-| `--ts-grid-gutter` | `spacing-4` | `spacing-6` | `spacing-8` |
 
-**When to use each density:**
-- **Compact** — Data-dense UIs (tables, dashboards, admin panels) where screen real estate is at a premium
-- **Comfortable** (default) — General-purpose applications with balanced readability and density
-- **Spacious** — Content-focused pages (marketing, documentation, onboarding) where breathing room aids comprehension
+Apply density on any ancestor element:
 
-Density can be applied at any level of the DOM tree, so you can mix densities within a single page (e.g., a compact data table inside a comfortable page layout).
+```html
+<!-- Compact data table -->
+<div data-density="compact">
+  <ts-table>...</ts-table>
+</div>
 
-## Touch Target Minimum Sizes
+<!-- Spacious marketing layout -->
+<section data-density="spacious">
+  <ts-card>...</ts-card>
+</section>
+```
 
-Interactive elements must meet minimum size requirements for accessible touch input:
+---
+
+## Grid System
+
+A 12-column grid provides the foundation for page layout.
+
+<div class="grid-demo">
+  <div class="grid-columns">
+    <div class="grid-col">1</div>
+    <div class="grid-col">2</div>
+    <div class="grid-col">3</div>
+    <div class="grid-col">4</div>
+    <div class="grid-col">5</div>
+    <div class="grid-col">6</div>
+    <div class="grid-col">7</div>
+    <div class="grid-col">8</div>
+    <div class="grid-col">9</div>
+    <div class="grid-col">10</div>
+    <div class="grid-col">11</div>
+    <div class="grid-col">12</div>
+  </div>
+  <div class="grid-meta">
+    <div class="grid-meta-item">
+      <span class="grid-meta-label">Columns</span>
+      <span class="grid-meta-value">12</span>
+    </div>
+    <div class="grid-meta-item">
+      <span class="grid-meta-label">Gutter</span>
+      <span class="grid-meta-value">32px (default)</span>
+    </div>
+    <div class="grid-meta-item">
+      <span class="grid-meta-label">Margin</span>
+      <span class="grid-meta-value">20px</span>
+    </div>
+    <div class="grid-meta-item">
+      <span class="grid-meta-label">Compact Gutter</span>
+      <span class="grid-meta-value">16px</span>
+    </div>
+    <div class="grid-meta-item">
+      <span class="grid-meta-label">Spacious Gutter</span>
+      <span class="grid-meta-value">40px</span>
+    </div>
+  </div>
+</div>
+
+---
+
+## Breakpoints
+
+Breakpoints define responsive layout transitions. Stored as CSS custom properties for JS access (CSS media queries require static values).
+
+<div class="breakpoint-timeline">
+  <div class="bp-track">
+    <div class="bp-fill" style="width: 100%;"></div>
+  </div>
+  <div class="bp-markers">
+    <div class="bp-marker">
+      <span class="bp-marker-name">sm</span>
+      <span class="bp-marker-value">640px</span>
+    </div>
+    <div class="bp-marker">
+      <span class="bp-marker-name">md</span>
+      <span class="bp-marker-value">768px</span>
+    </div>
+    <div class="bp-marker">
+      <span class="bp-marker-name">lg</span>
+      <span class="bp-marker-value">1024px</span>
+    </div>
+    <div class="bp-marker">
+      <span class="bp-marker-name">xl</span>
+      <span class="bp-marker-value">1280px</span>
+    </div>
+    <div class="bp-marker">
+      <span class="bp-marker-name">2xl</span>
+      <span class="bp-marker-value">1536px</span>
+    </div>
+  </div>
+</div>
+
+```css
+/* Use in media queries with static values */
+@media (min-width: 640px)  { /* sm  */ }
+@media (min-width: 768px)  { /* md  */ }
+@media (min-width: 1024px) { /* lg  */ }
+@media (min-width: 1280px) { /* xl  */ }
+@media (min-width: 1536px) { /* 2xl */ }
+```
+
+---
+
+## Spacing Rhythm in Practice
+
+Consistent spacing creates visual grouping. Related elements use smaller gaps; distinct sections use larger gaps.
+
+<div class="rhythm-demo">
+  <div class="rhythm-card">
+    <div class="rhythm-card-header" style="padding: 16px;">
+      <div class="rhythm-card-avatar"></div>
+      <div>
+        <div class="rhythm-card-title">Project Update</div>
+        <div class="rhythm-card-subtitle">2 minutes ago</div>
+      </div>
+      <span class="rhythm-annotation" style="margin-inline-start: auto;">16px padding</span>
+    </div>
+    <div class="rhythm-card-body" style="padding: 20px 16px;">
+      <p style="margin: 0 0 10px;">The new dashboard components have been reviewed and are ready for integration testing.</p>
+      <span class="rhythm-annotation">10px gap between paragraphs / 20px block padding / 16px inline padding</span>
+    </div>
+    <div style="padding: 12px 16px; border-block-start: 1px solid var(--sl-color-gray-6); display: flex; gap: 10px; align-items: center;">
+      <span style="font-size: 0.8125rem; font-weight: 500; color: #1a73e8; cursor: pointer;">Reply</span>
+      <span style="font-size: 0.8125rem; font-weight: 500; opacity: 0.6; cursor: pointer;">Share</span>
+      <span class="rhythm-annotation" style="margin-inline-start: auto;">10px gap / 12px block padding</span>
+    </div>
+  </div>
+</div>
+
+---
+
+## Touch Targets
+
+Minimum interactive area sizes ensure usability across input methods.
 
 | Token | Value | Usage |
 |---|---|---|
-| `--ts-touch-target-min` | `44px` | Default minimum (WCAG 2.5.5 AAA) |
-| `--ts-touch-target-compact` | `32px` | Compact mode minimum (WCAG 2.5.8 AA) |
-
-In compact density mode, `--ts-touch-target-min` is automatically remapped to the compact value. Even in compact mode, ensure touch targets are never smaller than 32px.
-
-## Container Patterns
-
-### Modal widths
-Modals provide five size options for different content needs:
-
-| Size | Max Width | Usage |
-|---|---|---|
-| `xs` | 320px | Confirmations, simple prompts |
-| `sm` | 440px | Forms, notifications |
-| `md` | 560px | Standard dialogs |
-| `lg` | 720px | Complex forms, data entry |
-| `xl` | 960px | Tables, rich content |
-
-## Layout Components
-
-Tessera UI provides five layout primitives that eliminate the need for manual `display: flex` / `display: grid` styling. Default to these components for all structural layout.
-
-### Stack-first approach
-
-Start with `<ts-stack>` for vertical flow and `<ts-row>` for horizontal flow. These cover the majority of layout needs with built-in gap support using the spacing scale.
-
-### Component reference
-
-#### `<ts-stack>` — Vertical flex layout
-
-| Prop | Type | Default | Description |
-|---|---|---|---|
-| `gap` | `0–16` | `4` | Spacing between children (maps to `--ts-spacing-{n}`) |
-| `align` | `start \| center \| end \| stretch` | `stretch` | Cross-axis alignment |
-
-#### `<ts-row>` — Horizontal flex row
-
-| Prop | Type | Default | Description |
-|---|---|---|---|
-| `gap` | `0–16` | `2` | Spacing between children |
-| `align` | `start \| center \| end \| stretch \| baseline` | `center` | Cross-axis alignment |
-| `justify` | `start \| center \| end \| between \| around \| evenly` | `start` | Main-axis distribution |
-| `wrap` | `boolean` | `true` | Whether items wrap to the next line |
-| `stack-at` | `sm \| md \| lg \| xl \| 2xl` | — | Breakpoint at which the row stacks vertically |
-
-#### `<ts-grid>` — CSS Grid layout
-
-| Prop | Type | Default | Description |
-|---|---|---|---|
-| `columns` | `1–12 \| auto` | `3` | Number of columns, or `auto` for auto-fill |
-| `gap` | `0–16` | `4` | Spacing between grid items |
-| `min-column-width` | CSS length | `200px` | Minimum column width when `columns="auto"` |
-
-#### `<ts-container>` — Centered max-width wrapper
-
-| Prop | Type | Default | Description |
-|---|---|---|---|
-| `size` | `sm \| md \| lg \| xl \| full` | `lg` | Max-width preset (`sm`=640px, `md`=768px, `lg`=1024px, `xl`=1280px) |
-| `padding` | `boolean` | `true` | Whether to add horizontal padding |
-
-#### `<ts-spacer>` — Explicit spacing element
-
-| Prop | Type | Default | Description |
-|---|---|---|---|
-| `size` | `0–16` | `4` | Vertical space (maps to `--ts-spacing-{n}`) |
-
-### Responsive stacking
-
-Use the `stack-at` prop on `<ts-row>` to collapse a horizontal row into a vertical stack at a given breakpoint:
-
-```html
-<ts-row gap="4" stack-at="md">
-  <ts-card>Sidebar</ts-card>
-  <ts-card>Main content</ts-card>
-</ts-row>
-```
-
-Below the `md` breakpoint (768px), the row becomes a stack automatically.
-
-### Auto-grid
-
-Set `columns="auto"` with a `min-column-width` to create a responsive grid that fills columns based on available space — no media queries needed:
-
-```html
-<ts-grid columns="auto" min-column-width="280px" gap="4">
-  <ts-card>Item 1</ts-card>
-  <ts-card>Item 2</ts-card>
-  <ts-card>Item 3</ts-card>
-  <ts-card>Item 4</ts-card>
-</ts-grid>
-```
-
-### Container widths
-
-Use `<ts-container>` to center page content with a maximum width:
-
-```html
-<ts-container size="lg">
-  <p>This content is constrained to 1024px and centered on the page.</p>
-</ts-container>
-```
-
-### Nesting layout components
-
-Combine all layout primitives to build complete page structures:
-
-```html
-<ts-container size="lg">
-  <ts-stack gap="6">
-    <h1>Dashboard</h1>
-    <ts-grid columns="auto" min-column-width="280px" gap="4">
-      <ts-card>...</ts-card>
-      <ts-card>...</ts-card>
-      <ts-card>...</ts-card>
-    </ts-grid>
-    <ts-row gap="2" justify="end">
-      <ts-button>Cancel</ts-button>
-      <ts-button variant="primary">Save</ts-button>
-    </ts-row>
-  </ts-stack>
-</ts-container>
-```
-
-## Responsive Considerations
-
-Tessera UI components are Web Components — they adapt to their container rather than the viewport. Components do not ship with built-in responsive breakpoints. Instead:
-
-- **Use `block` prop on buttons** to make them full-width on small screens
-- **Use CSS container queries** in your layout to adjust component sizing
-- **Modal widths use `max-width`** — they naturally shrink on narrow viewports
-- **Spacing tokens are `rem`-based** — they scale if the user changes their browser font size
-
-### Container Queries
-
-Because Tessera UI components are Web Components with Shadow DOM, container queries are a natural fit for responsive component behavior. Wrap components in a container-type element to adapt layout based on available space rather than viewport width:
-
-```css
-.component-wrapper {
-  container-type: inline-size;
-}
-
-@container (max-width: 400px) {
-  /* Stack buttons vertically in narrow containers */
-  .button-group {
-    flex-direction: column;
-  }
-}
-```
-
-Container queries are preferred over media queries for component-level responsiveness because they respond to the component's actual space, not the page viewport.
+| `--ts-touch-target-min` | `44px` | Default minimum (WCAG compliant) |
+| `--ts-touch-target-compact` | `32px` | Compact mode (data-dense UIs only) |

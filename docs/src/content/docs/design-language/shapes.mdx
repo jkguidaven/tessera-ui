@@ -1,89 +1,449 @@
 ---
 title: Shapes
-description: The border radius system and shape language in Tessera UI.
+description: The border radius system, shape families, shadow elevation, and surface effects in Tessera UI.
 ---
 
-Shape is a subtle but powerful tool for communicating interactivity, hierarchy, and grouping. Tessera UI uses a constrained border radius scale that maps to specific component contexts.
+<style>{`
+  .shape-showcase {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 1.5rem;
+    margin-block: 2rem;
+  }
+  .shape-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .shape-preview {
+    width: 100%;
+    aspect-ratio: 1;
+    background: linear-gradient(135deg, rgba(26, 115, 232, 0.1), rgba(26, 115, 232, 0.04));
+    border: 2px solid rgba(26, 115, 232, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-family: 'JetBrains Mono', monospace;
+    color: #1a73e8;
+    font-weight: 600;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .shape-preview:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(26, 115, 232, 0.15);
+  }
+  .shape-label {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    text-align: center;
+  }
+  .shape-meta {
+    font-size: 0.6875rem;
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--sl-color-gray-3);
+    text-align: center;
+  }
+
+  .family-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1.5rem;
+    margin-block: 2rem;
+  }
+  .family-card {
+    border: 1px solid var(--sl-color-gray-5);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  .family-card-preview {
+    padding: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--sl-color-gray-7);
+  }
+  .family-card-shape {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, #1a73e8, #4285f4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 0.75rem;
+    font-weight: 600;
+  }
+  .family-card-info {
+    padding: 1rem;
+    flex: 1;
+  }
+  .family-card-name {
+    font-weight: 700;
+    font-size: 0.875rem;
+    margin-block-end: 0.25rem;
+  }
+  .family-card-token {
+    font-size: 0.6875rem;
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--sl-color-gray-3);
+    margin-block-end: 0.5rem;
+    word-break: break-all;
+  }
+  .family-card-desc {
+    font-size: 0.8125rem;
+    line-height: 1.4;
+    opacity: 0.8;
+  }
+
+  .elevation-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 2rem;
+    margin-block: 2rem;
+    padding: 2rem;
+    background: var(--sl-color-gray-7);
+    border-radius: 16px;
+  }
+  .elevation-card {
+    background: var(--sl-color-bg);
+    border-radius: 16px;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    min-height: 120px;
+    transition: transform 0.3s ease;
+  }
+  .elevation-card:hover { transform: translateY(-4px); }
+  .elevation-name {
+    font-size: 0.875rem;
+    font-weight: 700;
+    margin-block-end: 0.25rem;
+  }
+  .elevation-token {
+    font-size: 0.6875rem;
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--sl-color-gray-3);
+  }
+
+  .inset-demo {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-block: 2rem;
+  }
+  @media (max-width: 640px) {
+    .inset-demo { grid-template-columns: 1fr; }
+  }
+  .inset-card {
+    border-radius: 12px;
+    padding: 1.25rem;
+    text-align: center;
+    border: 1px solid var(--sl-color-gray-5);
+  }
+  .inset-card-label {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    margin-block-end: 0.25rem;
+  }
+  .inset-card-token {
+    font-size: 0.6875rem;
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--sl-color-gray-3);
+  }
+
+  .frosted-demo {
+    margin-block: 2rem;
+    border-radius: 16px;
+    overflow: hidden;
+    position: relative;
+    height: 280px;
+    background: linear-gradient(135deg, #1a73e8, #0d9488, #4285f4, #14b8a6);
+    background-size: 200% 200%;
+    animation: frosted-gradient 8s ease infinite;
+  }
+  @keyframes frosted-gradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+  .frosted-panel {
+    position: absolute;
+    bottom: 1.5rem;
+    left: 1.5rem;
+    right: 1.5rem;
+    padding: 1.5rem;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    color: #1a1c23;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+  }
+  .frosted-panel-title {
+    font-weight: 700;
+    font-size: 1rem;
+    margin-block-end: 0.375rem;
+  }
+  .frosted-panel-text {
+    font-size: 0.8125rem;
+    line-height: 1.5;
+    opacity: 0.8;
+    margin-block-end: 0.75rem;
+  }
+  .frosted-panel-token {
+    font-size: 0.6875rem;
+    font-family: 'JetBrains Mono', monospace;
+    padding: 0.25rem 0.5rem;
+    background: rgba(0, 0, 0, 0.06);
+    border-radius: 6px;
+    display: inline-block;
+  }
+
+  .z-scale {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin-block: 2rem;
+  }
+  .z-row {
+    display: grid;
+    grid-template-columns: 120px 80px 1fr;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.625rem 0;
+    border-block-end: 1px solid var(--sl-color-gray-6);
+  }
+  .z-row:last-child { border-block-end: none; }
+  .z-name {
+    font-size: 0.8125rem;
+    font-weight: 600;
+  }
+  .z-value {
+    font-size: 0.75rem;
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--sl-color-gray-3);
+  }
+  .z-bar {
+    height: 8px;
+    border-radius: 4px;
+    background: linear-gradient(90deg, rgba(26, 115, 232, 0.3), rgba(26, 115, 232, 0.1));
+  }
+`}</style>
+
+Shape is a subtle but powerful tool for communicating interactivity, hierarchy, and grouping. Tessera UI uses a constrained radius scale mapped to semantic shape families.
+
+---
 
 ## Radius Scale
 
-| Token | Value | Pixels | Shape Language |
-|---|---|---|---|
-| `--ts-radius-none` | `0` | 0px | Sharp edges — data-dense UI, tables |
-| `--ts-radius-sm` | `0.375rem` | 6px | Subtle rounding — badges, small elements, tooltips |
-| `--ts-radius-md` | `0.75rem` | 12px | Default rounding — inputs, alerts |
-| `--ts-radius-lg` | `1rem` | 16px | Spacious rounding — cards, panels |
-| `--ts-radius-xl` | `1.75rem` | 28px | Prominent rounding — modals, large containers |
-| `--ts-radius-full` | `9999px` | Pill / circle | Pill shapes — buttons, toggle tracks, pill badges |
+Six radius steps from sharp to fully rounded, each serving a distinct design purpose.
+
+<div class="shape-showcase">
+  <div class="shape-card">
+    <div class="shape-preview" style="border-radius: 0;">0px</div>
+    <div class="shape-label">None</div>
+    <div class="shape-meta">--ts-radius-none</div>
+  </div>
+  <div class="shape-card">
+    <div class="shape-preview" style="border-radius: 6px;">6px</div>
+    <div class="shape-label">Small</div>
+    <div class="shape-meta">--ts-radius-sm</div>
+  </div>
+  <div class="shape-card">
+    <div class="shape-preview" style="border-radius: 12px;">12px</div>
+    <div class="shape-label">Medium</div>
+    <div class="shape-meta">--ts-radius-md</div>
+  </div>
+  <div class="shape-card">
+    <div class="shape-preview" style="border-radius: 16px;">16px</div>
+    <div class="shape-label">Large</div>
+    <div class="shape-meta">--ts-radius-lg</div>
+  </div>
+  <div class="shape-card">
+    <div class="shape-preview" style="border-radius: 28px;">28px</div>
+    <div class="shape-label">Extra Large</div>
+    <div class="shape-meta">--ts-radius-xl</div>
+  </div>
+  <div class="shape-card">
+    <div class="shape-preview" style="border-radius: 9999px;">Pill</div>
+    <div class="shape-label">Full</div>
+    <div class="shape-meta">--ts-radius-full</div>
+  </div>
+</div>
+
+---
 
 ## Shape Families
 
-Shape families are semantic shape roles that group components by their visual purpose. Rather than assigning radii per-component, families ensure that related components share the same shape language.
+Shape families are semantic roles that group components by their visual purpose. Instead of assigning radii per-component, families ensure related components share the same shape language.
 
-| Family Token | Default Value | Components |
-|---|---|---|
-| `--ts-shape-interactive` | `radius-full` (pill) | Buttons, toggles — pill-shaped by default |
-| `--ts-shape-container` | `radius-lg` (16px) | Cards, panels, form containers |
-| `--ts-shape-overlay` | `radius-xl` (28px) | Modals, drawers, dialogs |
-| `--ts-shape-badge` | `radius-sm` (6px) | Badges, tooltips, tags |
-| `--ts-shape-pill` | `radius-full` (9999px) | Toggle tracks, pill badges, progress bars |
+<div class="family-grid">
+  <div class="family-card" style="border-radius: 16px;">
+    <div class="family-card-preview">
+      <div class="family-card-shape" style="border-radius: 9999px;">Pill</div>
+    </div>
+    <div class="family-card-info">
+      <div class="family-card-name">Interactive</div>
+      <div class="family-card-token">--ts-shape-interactive</div>
+      <div class="family-card-desc">Buttons, toggles, switches. Pill shape signals clickability.</div>
+    </div>
+  </div>
 
-Override a shape family to globally change all components in that group:
+  <div class="family-card" style="border-radius: 16px;">
+    <div class="family-card-preview">
+      <div class="family-card-shape" style="border-radius: 16px;">Card</div>
+    </div>
+    <div class="family-card-info">
+      <div class="family-card-name">Container</div>
+      <div class="family-card-token">--ts-shape-container</div>
+      <div class="family-card-desc">Cards, panels, form groups. Generous rounding for spacious feel.</div>
+    </div>
+  </div>
 
-```css
-:root {
-  /* Make all interactive elements rectangular instead of pill */
-  --ts-shape-interactive: var(--ts-radius-md);
+  <div class="family-card" style="border-radius: 16px;">
+    <div class="family-card-preview">
+      <div class="family-card-shape" style="border-radius: 28px;">Modal</div>
+    </div>
+    <div class="family-card-info">
+      <div class="family-card-name">Overlay</div>
+      <div class="family-card-token">--ts-shape-overlay</div>
+      <div class="family-card-desc">Modals, drawers, dialogs. Extra-large radius for prominent surfaces.</div>
+    </div>
+  </div>
 
-  /* Make all containers sharp */
-  --ts-shape-container: var(--ts-radius-sm);
-}
-```
+  <div class="family-card" style="border-radius: 16px;">
+    <div class="family-card-preview">
+      <div class="family-card-shape" style="border-radius: 6px;">Tag</div>
+    </div>
+    <div class="family-card-info">
+      <div class="family-card-name">Badge</div>
+      <div class="family-card-token">--ts-shape-badge</div>
+      <div class="family-card-desc">Badges, tooltips, tags. Subtle rounding for compact elements.</div>
+    </div>
+  </div>
 
-## Component Shape Defaults
+  <div class="family-card" style="border-radius: 16px;">
+    <div class="family-card-preview">
+      <div class="family-card-shape" style="border-radius: 9999px; width: 120px; height: 36px;">Track</div>
+    </div>
+    <div class="family-card-info">
+      <div class="family-card-name">Pill</div>
+      <div class="family-card-token">--ts-shape-pill</div>
+      <div class="family-card-desc">Toggle tracks, pill badges, progress bars. Always fully rounded.</div>
+    </div>
+  </div>
+</div>
 
-Each component uses a radius appropriate to its size and purpose:
+---
 
-| Component | Default Radius | Token |
-|---|---|---|
-| **Button** (base) | `full` (pill) | `--ts-button-radius` |
-| **Input** (base) | `md` (12px) | `--ts-input-radius` |
-| **Card** | `lg` (16px) | `--ts-card-radius` |
-| **Modal** | `xl` (28px) | `--ts-modal-radius` |
-| **Alert** | `md` (12px) | `--ts-alert-radius` |
-| **Badge** | `sm` (6px) | `--ts-badge-radius` |
-| **Badge** (pill) | `full` | Pill override |
-| **Tooltip** | `sm` (6px) | `--ts-tooltip-radius` |
-| **Toggle** track | `full` | Pill shape |
+## Elevation (Shadow Scale)
 
-## Size-Responsive Radius
+Five elevation levels create visual hierarchy from flat to floating. Shadows use M3-style dual-shadow for soft, natural depth.
 
-Some components adjust their border radius based on size to maintain visual proportion:
+<div class="elevation-grid">
+  <div class="elevation-card" style="box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.04);">
+    <div class="elevation-name">XS</div>
+    <div class="elevation-token">--ts-shadow-xs</div>
+  </div>
+  <div class="elevation-card" style="box-shadow: 0 1px 3px 1px rgba(0, 0, 0, 0.08), 0 1px 2px 0 rgba(0, 0, 0, 0.06);">
+    <div class="elevation-name">Small</div>
+    <div class="elevation-token">--ts-shadow-sm</div>
+  </div>
+  <div class="elevation-card" style="box-shadow: 0 2px 6px 2px rgba(0, 0, 0, 0.08), 0 1px 2px 0 rgba(0, 0, 0, 0.06);">
+    <div class="elevation-name">Medium</div>
+    <div class="elevation-token">--ts-shadow-md</div>
+  </div>
+  <div class="elevation-card" style="box-shadow: 0 4px 8px 3px rgba(0, 0, 0, 0.08), 0 1px 3px 0 rgba(0, 0, 0, 0.1);">
+    <div class="elevation-name">Large</div>
+    <div class="elevation-token">--ts-shadow-lg</div>
+  </div>
+  <div class="elevation-card" style="box-shadow: 0 6px 10px 4px rgba(0, 0, 0, 0.08), 0 2px 3px 0 rgba(0, 0, 0, 0.1);">
+    <div class="elevation-name">XL</div>
+    <div class="elevation-token">--ts-shadow-xl</div>
+  </div>
+</div>
 
-- **Small elements** (`xs`, `sm`) use `radius-sm` — tight rounding keeps them compact
-- **Default elements** (`md`) use `radius-md` — balanced rounding for standard UI
-- **Large elements** (`lg`, `xl`) use `radius-lg` — more generous rounding scales with the element
+### Inset Shadows
 
-This prevents small elements from looking overly round and large elements from looking overly sharp.
+Inset shadows create depth for pressed or recessed elements.
 
-## Shape Consistency Rules
+<div class="inset-demo">
+  <div class="inset-card" style="box-shadow: inset 0 1px 1px 0 rgba(0, 0, 0, 0.03);">
+    <div class="inset-card-label">Inset Small</div>
+    <div class="inset-card-token">--ts-shadow-inset-sm</div>
+  </div>
+  <div class="inset-card" style="box-shadow: inset 0 1px 3px 0 rgba(0, 0, 0, 0.05);">
+    <div class="inset-card-label">Inset Medium</div>
+    <div class="inset-card-token">--ts-shadow-inset-md</div>
+  </div>
+</div>
 
-1. **Buttons are pill-shaped by default.** The M3-inspired design uses `radius-full` for all interactive elements like buttons and toggles.
-2. **Inputs use rectangular rounding.** Inputs and selects use `radius-md` (12px) for a clean, contained feel.
-3. **Container elements use generous rounding.** Cards use `radius-lg` (16px), modals use `radius-xl` (28px) for a soft, pillowy aesthetic.
-4. **Pill shapes for buttons and status indicators.** Buttons, toggle tracks, pill badges, and progress indicators use `radius-full`.
+---
 
-## Customizing Shape
+## Frosted Glass
 
-Override component tokens to change the shape language for your application:
+An opt-in glassmorphism effect using `backdrop-filter`. Use sparingly for premium overlay surfaces.
 
-```css
-/* Sharp, modern aesthetic */
-ts-button { --ts-button-radius: var(--ts-radius-sm); }
-ts-card   { --ts-card-radius: var(--ts-radius-sm); }
-ts-modal  { --ts-modal-radius: var(--ts-radius-md); }
+<div class="frosted-demo">
+  <div style="position: absolute; top: 1.5rem; left: 1.5rem; color: white; font-size: 0.6875rem; font-family: 'JetBrains Mono', monospace; opacity: 0.8;">
+    Animated gradient background
+  </div>
+  <div class="frosted-panel">
+    <div class="frosted-panel-title">Frosted Glass Panel</div>
+    <div class="frosted-panel-text">
+      Combines translucent background with backdrop blur for a layered, premium feel. Works in both light and dark themes.
+    </div>
+    <span class="frosted-panel-token">--ts-bg-frosted: rgba(255, 255, 255, 0.8)</span>
+    <span class="frosted-panel-token" style="margin-inline-start: 0.5rem;">--ts-bg-frosted-blur: 12px</span>
+  </div>
+</div>
 
-/* Rectangular buttons (override pill default) */
-ts-button { --ts-button-radius: var(--ts-radius-md); }
-ts-input  { --ts-input-radius: var(--ts-radius-sm); }
-```
+---
+
+## Z-Index Scale
+
+A fixed z-index scale prevents stacking conflicts across components.
+
+<div class="z-scale">
+  <div class="z-row">
+    <span class="z-name">Dropdown</span>
+    <span class="z-value">1000</span>
+    <div class="z-bar" style="width: 14%;"></div>
+  </div>
+  <div class="z-row">
+    <span class="z-name">Sticky</span>
+    <span class="z-value">1020</span>
+    <div class="z-bar" style="width: 28%;"></div>
+  </div>
+  <div class="z-row">
+    <span class="z-name">Fixed</span>
+    <span class="z-value">1030</span>
+    <div class="z-bar" style="width: 42%;"></div>
+  </div>
+  <div class="z-row">
+    <span class="z-name">Overlay</span>
+    <span class="z-value">1040</span>
+    <div class="z-bar" style="width: 56%;"></div>
+  </div>
+  <div class="z-row">
+    <span class="z-name">Modal</span>
+    <span class="z-value">1050</span>
+    <div class="z-bar" style="width: 70%;"></div>
+  </div>
+  <div class="z-row">
+    <span class="z-name">Popover</span>
+    <span class="z-value">1060</span>
+    <div class="z-bar" style="width: 84%;"></div>
+  </div>
+  <div class="z-row">
+    <span class="z-name">Tooltip</span>
+    <span class="z-value">1070</span>
+    <div class="z-bar" style="width: 100%;"></div>
+  </div>
+</div>

@@ -32,6 +32,7 @@ export default defineConfig({
         {
           label: 'Design Language',
           items: [
+            { label: 'Overview', slug: 'design-language' },
             { label: 'Design Principles', slug: 'design-language/principles' },
             { label: 'Color', slug: 'design-language/color' },
             { label: 'Typography', slug: 'design-language/typography' },

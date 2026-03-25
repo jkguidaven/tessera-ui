@@ -1,0 +1,404 @@
+---
+title: Design Language
+description: An overview of the Tessera UI design system — token architecture, visual foundations, and guiding principles.
+---
+
+<style>{`
+  .hero-visual {
+    margin-block: 2rem;
+    border-radius: 20px;
+    overflow: hidden;
+    background: linear-gradient(135deg, #1a73e8 0%, #0d9488 50%, #4285f4 100%);
+    padding: 3rem 2rem;
+    color: white;
+    position: relative;
+  }
+  .hero-visual::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 30% 40%, rgba(255,255,255,0.15) 0%, transparent 50%),
+                radial-gradient(circle at 70% 60%, rgba(255,255,255,0.1) 0%, transparent 40%);
+    pointer-events: none;
+  }
+  .hero-title {
+    font-size: clamp(1.5rem, 3vw + 0.5rem, 2.5rem);
+    font-weight: 700;
+    line-height: 1.15;
+    margin-block-end: 0.75rem;
+    position: relative;
+  }
+  .hero-subtitle {
+    font-size: 1rem;
+    opacity: 0.85;
+    line-height: 1.5;
+    max-width: 600px;
+    position: relative;
+  }
+
+  .tier-diagram {
+    margin-block: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .tier-card {
+    border: 1px solid var(--sl-color-gray-5);
+    padding: 1.25rem 1.5rem;
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 1rem;
+    align-items: start;
+  }
+  .tier-card:first-child {
+    border-radius: 16px 16px 0 0;
+  }
+  .tier-card:last-child {
+    border-radius: 0 0 16px 16px;
+  }
+  .tier-card:not(:last-child) {
+    border-block-end: none;
+  }
+  .tier-badge {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+  }
+  .tier-number {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: white;
+  }
+  .tier-label {
+    font-size: 0.625rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    opacity: 0.6;
+  }
+  .tier-content-title {
+    font-weight: 700;
+    font-size: 1rem;
+    margin-block-end: 0.25rem;
+  }
+  .tier-content-desc {
+    font-size: 0.8125rem;
+    line-height: 1.5;
+    opacity: 0.8;
+    margin-block-end: 0.5rem;
+  }
+  .tier-content-example {
+    font-size: 0.75rem;
+    font-family: 'JetBrains Mono', monospace;
+    padding: 0.375rem 0.625rem;
+    background: var(--sl-color-gray-7);
+    border-radius: 6px;
+    display: inline-block;
+  }
+
+  .tier-arrow {
+    display: flex;
+    justify-content: center;
+    padding: 0.375rem 0;
+    color: var(--sl-color-gray-4);
+    font-size: 1.25rem;
+  }
+
+  .page-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1rem;
+    margin-block: 2rem;
+  }
+  .page-card {
+    border: 1px solid var(--sl-color-gray-5);
+    border-radius: 16px;
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    transition: box-shadow 0.24s ease, transform 0.24s ease;
+  }
+  .page-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transform: translateY(-2px);
+  }
+  .page-card-preview {
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+  .page-card-info {
+    padding: 1rem;
+    border-block-start: 1px solid var(--sl-color-gray-6);
+  }
+  .page-card-title {
+    font-weight: 700;
+    font-size: 0.9375rem;
+    margin-block-end: 0.25rem;
+  }
+  .page-card-desc {
+    font-size: 0.8125rem;
+    opacity: 0.7;
+    line-height: 1.4;
+  }
+
+  .color-bars {
+    display: flex;
+    width: 100%;
+    height: 100%;
+  }
+  .color-bars > div { flex: 1; }
+
+  .type-preview {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+  }
+
+  .spacing-bars {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    width: 70%;
+  }
+  .spacing-bars > div {
+    height: 6px;
+    border-radius: 3px;
+    background: linear-gradient(90deg, #1a73e8, #4285f4);
+  }
+
+  .shape-demos {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+  }
+  .shape-demos > div {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, rgba(26, 115, 232, 0.15), rgba(26, 115, 232, 0.05));
+    border: 2px solid rgba(26, 115, 232, 0.3);
+  }
+
+  .shadow-cards {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+  }
+  .shadow-cards > div {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: var(--sl-color-bg);
+  }
+
+  .motion-dots {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+  }
+  .motion-dot {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #1a73e8, #4285f4);
+    animation: motion-bounce 1.2s ease-in-out infinite;
+  }
+  .motion-dot:nth-child(2) { animation-delay: 0.1s; }
+  .motion-dot:nth-child(3) { animation-delay: 0.2s; }
+  .motion-dot:nth-child(4) { animation-delay: 0.3s; }
+  .motion-dot:nth-child(5) { animation-delay: 0.4s; }
+  @keyframes motion-bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+`}</style>
+
+<div class="hero-visual">
+  <div class="hero-title">Design Language</div>
+  <div class="hero-subtitle">
+    A systematic approach to visual design, built on a three-tier token architecture that enables consistent theming, dark mode, and density scaling across every component.
+  </div>
+</div>
+
+## Three-Tier Token Architecture
+
+Tessera UI's design system is built on a strict token hierarchy. Each tier serves a specific purpose, creating a clear path from raw values to themed component styles.
+
+<div class="tier-diagram">
+  <div class="tier-card">
+    <div class="tier-badge">
+      <div class="tier-number" style="background: #1a73e8;">1</div>
+      <span class="tier-label">Tier 1</span>
+    </div>
+    <div>
+      <div class="tier-content-title">Reference Tokens</div>
+      <div class="tier-content-desc">Raw palette values. Immutable across themes. Never used directly by components.</div>
+      <span class="tier-content-example">--ts-ref-primary-600: #1a73e8</span>
+    </div>
+  </div>
+  <div class="tier-card">
+    <div class="tier-badge">
+      <div class="tier-number" style="background: #0d9488;">2</div>
+      <span class="tier-label">Tier 2</span>
+    </div>
+    <div>
+      <div class="tier-content-title">Semantic Tokens</div>
+      <div class="tier-content-desc">Purpose-driven aliases to reference tokens. These are what components consume. Remapped in dark mode.</div>
+      <span class="tier-content-example">--ts-color-interactive-primary: var(--ts-ref-primary-600)</span>
+    </div>
+  </div>
+  <div class="tier-card">
+    <div class="tier-badge">
+      <div class="tier-number" style="background: #434751;">3</div>
+      <span class="tier-label">Tier 3</span>
+    </div>
+    <div>
+      <div class="tier-content-title">Component Tokens</div>
+      <div class="tier-content-desc">Per-component overrides defined on :host. Consumers can customize individual component styles.</div>
+      <span class="tier-content-example">--ts-button-bg: var(--ts-color-interactive-primary)</span>
+    </div>
+  </div>
+</div>
+
+This separation means:
+- **Themes** only need to remap semantic tokens (Tier 2). Reference tokens stay fixed.
+- **Customization** can happen at any level — override a reference token to change the entire palette, a semantic token to adjust one role, or a component token for surgical precision.
+- **Dark mode** remaps semantic tokens via `[data-theme="dark"]`. No component CSS changes are needed.
+
+---
+
+## Foundations
+
+Explore each foundation of the design system in depth.
+
+<div class="page-grid">
+  <a class="page-card" href="/tessera-ui/design-language/color/">
+    <div class="page-card-preview">
+      <div class="color-bars">
+        <div style="background: #e8f0fe;"></div>
+        <div style="background: #aecbfa;"></div>
+        <div style="background: #669df6;"></div>
+        <div style="background: #4285f4;"></div>
+        <div style="background: #1a73e8;"></div>
+        <div style="background: #1967d2;"></div>
+        <div style="background: #185abc;"></div>
+        <div style="background: #174ea6;"></div>
+      </div>
+    </div>
+    <div class="page-card-info">
+      <div class="page-card-title">Color</div>
+      <div class="page-card-desc">Reference palettes, semantic roles, containers, state layers, and theme previews.</div>
+    </div>
+  </a>
+
+  <a class="page-card" href="/tessera-ui/design-language/typography/">
+    <div class="page-card-preview" style="background: var(--sl-color-gray-7);">
+      <div class="type-preview">
+        <span style="font-size: 2rem; font-weight: 600;">Ag</span>
+        <span style="font-size: 0.75rem; opacity: 0.5;">Plus Jakarta Sans</span>
+      </div>
+    </div>
+    <div class="page-card-info">
+      <div class="page-card-title">Typography</div>
+      <div class="page-card-desc">Type scale, font families, weights, and M3-aligned role specimens.</div>
+    </div>
+  </a>
+
+  <a class="page-card" href="/tessera-ui/design-language/layout/">
+    <div class="page-card-preview" style="background: var(--sl-color-gray-7); padding: 1.5rem;">
+      <div class="spacing-bars">
+        <div style="width: 15%;"></div>
+        <div style="width: 25%;"></div>
+        <div style="width: 40%;"></div>
+        <div style="width: 55%;"></div>
+        <div style="width: 70%;"></div>
+        <div style="width: 85%;"></div>
+        <div style="width: 100%;"></div>
+      </div>
+    </div>
+    <div class="page-card-info">
+      <div class="page-card-title">Layout</div>
+      <div class="page-card-desc">Spacing scale, density modes, grid system, and breakpoints.</div>
+    </div>
+  </a>
+
+  <a class="page-card" href="/tessera-ui/design-language/shapes/">
+    <div class="page-card-preview" style="background: var(--sl-color-gray-7);">
+      <div class="shape-demos">
+        <div style="border-radius: 0;"></div>
+        <div style="border-radius: 6px;"></div>
+        <div style="border-radius: 12px;"></div>
+        <div style="border-radius: 16px;"></div>
+        <div style="border-radius: 9999px;"></div>
+      </div>
+    </div>
+    <div class="page-card-info">
+      <div class="page-card-title">Shapes</div>
+      <div class="page-card-desc">Radius scale, shape families, frosted glass, and z-index scale.</div>
+    </div>
+  </a>
+
+  <a class="page-card" href="/tessera-ui/design-language/elevation/">
+    <div class="page-card-preview" style="background: var(--sl-color-gray-7);">
+      <div class="shadow-cards">
+        <div style="box-shadow: 0 1px 2px 0 rgba(0,0,0,0.04);"></div>
+        <div style="box-shadow: 0 1px 3px 1px rgba(0,0,0,0.08);"></div>
+        <div style="box-shadow: 0 2px 6px 2px rgba(0,0,0,0.08);"></div>
+        <div style="box-shadow: 0 4px 8px 3px rgba(0,0,0,0.08);"></div>
+      </div>
+    </div>
+    <div class="page-card-info">
+      <div class="page-card-title">Elevation</div>
+      <div class="page-card-desc">Shadow scale, dark mode tint levels, layering model, and transition patterns.</div>
+    </div>
+  </a>
+
+  <a class="page-card" href="/tessera-ui/design-language/motion/">
+    <div class="page-card-preview" style="background: var(--sl-color-gray-7);">
+      <div class="motion-dots">
+        <div class="motion-dot"></div>
+        <div class="motion-dot"></div>
+        <div class="motion-dot"></div>
+        <div class="motion-dot"></div>
+        <div class="motion-dot"></div>
+      </div>
+    </div>
+    <div class="page-card-info">
+      <div class="page-card-title">Motion</div>
+      <div class="page-card-desc">Duration tokens, easing curves, loading animations, and staggered entrances.</div>
+    </div>
+  </a>
+</div>
+
+---
+
+## Global Configuration
+
+Tessera UI uses `data-*` HTML attributes for global configuration — no JavaScript config objects required.
+
+| Attribute | Values | Purpose |
+|---|---|---|
+| `data-theme` | `light` (default), `dark`, `high-contrast` | Theme selection |
+| `data-density` | `comfortable` (default), `compact`, `spacious` | Spacing density |
+| `data-icons` | `lucide` (default) | Icon set selection |
+| `dir` | `ltr` (default), `rtl` | Text direction |
+
+```html
+<!-- Example: dark theme with compact density -->
+<html data-theme="dark" data-density="compact">
+  <body>
+    <ts-button variant="filled">Save Changes</ts-button>
+  </body>
+</html>
+```
