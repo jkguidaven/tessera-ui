@@ -14,6 +14,10 @@ export default defineConfig({
     starlight({
       title: `Tessera UI`,
       description: 'Framework-agnostic web component library built with Stencil.js',
+      logo: {
+        light: './src/assets/logo-light.svg',
+        dark: './src/assets/logo-dark.svg',
+      },
       customCss: ['./src/styles/custom.css'],
       social: [
         { icon: 'github', label: 'GitHub', href: 'https://github.com/jkguidaven/tessera-ui' },
@@ -32,6 +36,7 @@ export default defineConfig({
         {
           label: 'Design Language',
           items: [
+            { label: 'Overview', slug: 'design-language' },
             { label: 'Design Principles', slug: 'design-language/principles' },
             { label: 'Color', slug: 'design-language/color' },
             { label: 'Typography', slug: 'design-language/typography' },

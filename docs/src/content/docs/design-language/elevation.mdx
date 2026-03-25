@@ -3,64 +3,297 @@ title: Elevation
 description: The shadow and depth system in Tessera UI — layering model, z-index scale, and dark mode.
 ---
 
-Elevation communicates the spatial relationship between elements. Tessera UI uses **box-shadows** to create depth and a **z-index scale** to manage stacking order.
+<style>{`
+  .elevation-showcase {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 2rem;
+    margin-block: 2rem;
+    padding: 2.5rem;
+    background: var(--sl-color-gray-7);
+    border-radius: 20px;
+  }
+  .elev-card {
+    background: var(--sl-color-bg);
+    border-radius: 16px;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    min-height: 130px;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    cursor: default;
+  }
+  .elev-card:hover { transform: translateY(-4px); }
+  .elev-name {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-block-end: 0.375rem;
+  }
+  .elev-token {
+    font-size: 0.6875rem;
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--sl-color-gray-3);
+    margin-block-end: 0.5rem;
+  }
+  .elev-usage {
+    font-size: 0.75rem;
+    opacity: 0.65;
+    line-height: 1.4;
+  }
+
+  .inset-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-block: 2rem;
+  }
+  @media (max-width: 640px) {
+    .inset-grid { grid-template-columns: 1fr; }
+  }
+  .inset-item {
+    border-radius: 12px;
+    padding: 1.5rem;
+    text-align: center;
+    border: 1px solid var(--sl-color-gray-5);
+  }
+  .inset-item-label {
+    font-size: 0.875rem;
+    font-weight: 600;
+    margin-block-end: 0.375rem;
+  }
+  .inset-item-token {
+    font-size: 0.6875rem;
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--sl-color-gray-3);
+  }
+
+  .tint-demo {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    margin-block: 2rem;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid var(--sl-color-gray-5);
+  }
+  @media (max-width: 640px) {
+    .tint-demo { grid-template-columns: 1fr; }
+  }
+  .tint-level {
+    padding: 2rem;
+    text-align: center;
+    border-inline-end: 1px solid rgba(255,255,255,0.05);
+  }
+  .tint-level:last-child { border-inline-end: none; }
+  .tint-level-name {
+    font-weight: 700;
+    font-size: 0.875rem;
+    margin-block-end: 0.25rem;
+  }
+  .tint-level-value {
+    font-size: 0.6875rem;
+    font-family: 'JetBrains Mono', monospace;
+    opacity: 0.7;
+    margin-block-end: 0.5rem;
+  }
+  .tint-level-usage {
+    font-size: 0.75rem;
+    opacity: 0.6;
+  }
+
+  .layer-model {
+    margin-block: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    align-items: center;
+  }
+  .layer-bar {
+    width: 100%;
+    max-width: 500px;
+    border-radius: 12px;
+    padding: 1rem 1.25rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.8125rem;
+    font-weight: 600;
+  }
+  .layer-bar-level {
+    font-size: 0.6875rem;
+    font-family: 'JetBrains Mono', monospace;
+    opacity: 0.7;
+  }
+
+  .z-visual {
+    margin-block: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .z-row {
+    display: grid;
+    grid-template-columns: 120px 70px 1fr;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.625rem 0;
+    border-block-end: 1px solid var(--sl-color-gray-6);
+  }
+  .z-row:last-child { border-block-end: none; }
+  .z-name {
+    font-size: 0.8125rem;
+    font-weight: 600;
+  }
+  .z-value {
+    font-size: 0.75rem;
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--sl-color-gray-3);
+  }
+  .z-bar {
+    height: 8px;
+    border-radius: 4px;
+    background: linear-gradient(90deg, rgba(26, 115, 232, 0.35), rgba(26, 115, 232, 0.1));
+  }
+
+  .transition-demo {
+    margin-block: 2rem;
+    border: 1px solid var(--sl-color-gray-5);
+    border-radius: 16px;
+    padding: 2rem;
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .transition-card {
+    width: 120px;
+    height: 120px;
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: var(--sl-color-bg);
+    cursor: pointer;
+    transition: box-shadow 0.24s cubic-bezier(0.25, 0.1, 0.25, 1), transform 0.24s cubic-bezier(0.25, 0.1, 0.25, 1);
+    box-shadow: 0 1px 3px 1px rgba(0, 0, 0, 0.08), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    border: 1px solid var(--sl-color-gray-6);
+  }
+  .transition-card:hover {
+    box-shadow: 0 4px 8px 3px rgba(0, 0, 0, 0.08), 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+  }
+  .transition-card-text {
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin-block-end: 0.125rem;
+  }
+  .transition-card-sub {
+    font-size: 0.625rem;
+    opacity: 0.5;
+  }
+`}</style>
+
+Elevation communicates spatial relationships between UI elements. Tessera UI uses box-shadows for depth and a z-index scale for stacking order.
+
+---
 
 ## Shadow Scale
 
-Five elevation levels provide a clear visual hierarchy from flat to floating:
+Five elevation levels provide a clear visual hierarchy from flat to floating. Hover to see each card lift.
 
-| Token | Level | Usage |
-|---|---|---|
-| `--ts-shadow-xs` | Level 1 | Subtle depth — pressed states, inset elements |
-| `--ts-shadow-sm` | Level 2 | Slight lift — cards at rest, toggle thumbs |
-| `--ts-shadow-md` | Level 3 | Moderate lift — hovered cards, elevated panels |
-| `--ts-shadow-lg` | Level 4 | Strong lift — hovered interactive cards, dropdowns |
-| `--ts-shadow-xl` | Level 5 | Maximum lift — modals, full-screen overlays |
+<div class="elevation-showcase">
+  <div class="elev-card" style="box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.04);">
+    <div class="elev-name">XS</div>
+    <div class="elev-token">--ts-shadow-xs</div>
+    <div class="elev-usage">Pressed states, inset elements</div>
+  </div>
+  <div class="elev-card" style="box-shadow: 0 1px 3px 1px rgba(0, 0, 0, 0.08), 0 1px 2px 0 rgba(0, 0, 0, 0.06);">
+    <div class="elev-name">Small</div>
+    <div class="elev-token">--ts-shadow-sm</div>
+    <div class="elev-usage">Cards at rest, toggle thumbs</div>
+  </div>
+  <div class="elev-card" style="box-shadow: 0 2px 6px 2px rgba(0, 0, 0, 0.08), 0 1px 2px 0 rgba(0, 0, 0, 0.06);">
+    <div class="elev-name">Medium</div>
+    <div class="elev-token">--ts-shadow-md</div>
+    <div class="elev-usage">Hovered cards, elevated panels</div>
+  </div>
+  <div class="elev-card" style="box-shadow: 0 4px 8px 3px rgba(0, 0, 0, 0.08), 0 1px 3px 0 rgba(0, 0, 0, 0.1);">
+    <div class="elev-name">Large</div>
+    <div class="elev-token">--ts-shadow-lg</div>
+    <div class="elev-usage">Dropdowns, hovered interactive cards</div>
+  </div>
+  <div class="elev-card" style="box-shadow: 0 6px 10px 4px rgba(0, 0, 0, 0.08), 0 2px 3px 0 rgba(0, 0, 0, 0.1);">
+    <div class="elev-name">XL</div>
+    <div class="elev-token">--ts-shadow-xl</div>
+    <div class="elev-usage">Modals, full-screen overlays</div>
+  </div>
+</div>
 
-### Shadow Values
+### Elevation Transitions
 
-**Light mode (M3 — soft, diffused dual-shadow):**
+Cards move up one elevation level on hover. Try hovering these cards.
 
-```css
---ts-shadow-xs:  0 1px 2px 0 rgba(0, 0, 0, 0.04);
---ts-shadow-sm:  0 1px 3px 1px rgba(0, 0, 0, 0.08), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
---ts-shadow-md:  0 2px 6px 2px rgba(0, 0, 0, 0.08), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
---ts-shadow-lg:  0 4px 8px 3px rgba(0, 0, 0, 0.08), 0 1px 3px 0 rgba(0, 0, 0, 0.1);
---ts-shadow-xl:  0 6px 10px 4px rgba(0, 0, 0, 0.08), 0 2px 3px 0 rgba(0, 0, 0, 0.1);
-```
-
-**Dark mode** — Shadow opacity increases to remain visible against dark backgrounds:
-
-```css
---ts-shadow-xs:  0 1px 2px 0 rgba(0, 0, 0, 0.2);
---ts-shadow-sm:  0 1px 2px 0 rgba(0, 0, 0, 0.3);
---ts-shadow-md:  0 2px 4px -1px rgba(0, 0, 0, 0.25), 0 1px 2px -1px rgba(0, 0, 0, 0.2);
---ts-shadow-lg:  0 4px 8px -2px rgba(0, 0, 0, 0.3), 0 2px 4px -2px rgba(0, 0, 0, 0.2);
---ts-shadow-xl:  0 8px 16px -4px rgba(0, 0, 0, 0.35), 0 4px 6px -4px rgba(0, 0, 0, 0.2);
-```
+<div class="transition-demo">
+  <div class="transition-card">
+    <span class="transition-card-text">Card</span>
+    <span class="transition-card-sub">sm → lg</span>
+  </div>
+  <div class="transition-card">
+    <span class="transition-card-text">Panel</span>
+    <span class="transition-card-sub">sm → lg</span>
+  </div>
+  <div class="transition-card">
+    <span class="transition-card-text">Action</span>
+    <span class="transition-card-sub">sm → lg</span>
+  </div>
+</div>
 
 ### Inset Shadows
 
-Inset shadows create the visual impression of recessed or pressed-in surfaces. Use them for input fields, toggle tracks, and pressed states:
+Inset shadows create the impression of recessed surfaces — input fields, toggle tracks, and pressed states.
 
-| Token | Value (Light) | Value (Dark) |
-|---|---|---|
-| `--ts-shadow-inset-sm` | `inset 0 1px 1px 0 rgba(0,0,0,0.03)` | `inset 0 1px 1px 0 rgba(0,0,0,0.15)` |
-| `--ts-shadow-inset-md` | `inset 0 1px 3px 0 rgba(0,0,0,0.05)` | `inset 0 1px 3px 0 rgba(0,0,0,0.25)` |
+<div class="inset-grid">
+  <div class="inset-item" style="box-shadow: inset 0 1px 1px 0 rgba(0, 0, 0, 0.03);">
+    <div class="inset-item-label">Inset Small</div>
+    <div class="inset-item-token">--ts-shadow-inset-sm</div>
+  </div>
+  <div class="inset-item" style="box-shadow: inset 0 1px 3px 0 rgba(0, 0, 0, 0.05);">
+    <div class="inset-item-label">Inset Medium</div>
+    <div class="inset-item-token">--ts-shadow-inset-md</div>
+  </div>
+</div>
 
-### Elevation Tint in Dark Mode
+---
 
-In dark mode, box-shadows become less effective for communicating depth because the base surface is already dark. To compensate, Tessera UI provides **elevation tint tokens** — progressively lighter surface colors that make higher-elevation elements visually distinct:
+## Dark Mode Elevation
 
-| Token | Light | Dark | Usage |
-|---|---|---|---|
-| `--ts-color-bg-elevated-1` | `neutral-0` | `#181a21` | Lowest elevated surface (cards at rest) |
-| `--ts-color-bg-elevated-2` | `neutral-0` | `#1e2029` | Mid-level elevated surface (hovered cards, popovers) |
-| `--ts-color-bg-elevated-3` | `neutral-0` | `#252730` | Highest elevated surface (modals, floating panels) |
+In dark mode, box-shadows become less effective because the base surface is already dark. Tessera UI compensates with **elevation tint tokens** — progressively lighter surface colors that differentiate layers.
 
-In light mode, all three levels map to `neutral-0` (white) because shadows alone provide sufficient visual separation. In dark mode, each step adds a subtle cool blue tint, creating a natural "closer to the light source" effect aligned with the M3 surface elevation model.
+<div class="tint-demo">
+  <div class="tint-level" style="background: #181a21; color: #cdd0d8;">
+    <div class="tint-level-name">Level 1</div>
+    <div class="tint-level-value">#181a21</div>
+    <div class="tint-level-usage">Cards at rest</div>
+  </div>
+  <div class="tint-level" style="background: #1e2029; color: #cdd0d8;">
+    <div class="tint-level-name">Level 2</div>
+    <div class="tint-level-value">#1e2029</div>
+    <div class="tint-level-usage">Hovered cards, popovers</div>
+  </div>
+  <div class="tint-level" style="background: #252730; color: #cdd0d8;">
+    <div class="tint-level-name">Level 3</div>
+    <div class="tint-level-value">#252730</div>
+    <div class="tint-level-usage">Modals, floating panels</div>
+  </div>
+</div>
 
-**Usage example:**
+In light mode all three levels map to white (`neutral-0`) because shadows alone provide sufficient separation. In dark mode each step adds a subtle cool blue tint aligned with the M3 surface elevation model.
+
 ```css
 /* Card at rest */
 background-color: var(--ts-color-bg-elevated-1);
@@ -71,47 +304,80 @@ background-color: var(--ts-color-bg-elevated-2);
 box-shadow: var(--ts-shadow-md);
 ```
 
+---
+
 ## Layering Model
 
-Elements at rest occupy different conceptual layers:
+Elements at rest occupy different conceptual layers. Each layer uses a specific elevation range.
 
-| Layer | Elevation | Components |
-|---|---|---|
-| **Surface** | None | Page background, inline content |
-| **Raised** | `sm` – `md` | Cards, panels, form containers |
-| **Floating** | `lg` | Dropdown menus, popovers |
-| **Overlay** | `xl` + overlay bg | Modals, drawers, dialogs |
+<div class="layer-model">
+  <div class="layer-bar" style="background: rgba(26, 115, 232, 0.06); border: 1px solid var(--sl-color-gray-5);">
+    <span>Surface</span>
+    <span class="layer-bar-level">No shadow</span>
+  </div>
+  <div class="layer-bar" style="background: rgba(26, 115, 232, 0.1); border: 1px solid var(--sl-color-gray-5); box-shadow: 0 1px 3px 1px rgba(0,0,0,0.06);">
+    <span>Raised</span>
+    <span class="layer-bar-level">sm - md</span>
+  </div>
+  <div class="layer-bar" style="background: rgba(26, 115, 232, 0.15); border: 1px solid var(--sl-color-gray-5); box-shadow: 0 4px 8px 3px rgba(0,0,0,0.06);">
+    <span>Floating</span>
+    <span class="layer-bar-level">lg</span>
+  </div>
+  <div class="layer-bar" style="background: rgba(26, 115, 232, 0.2); border: 1px solid var(--sl-color-gray-5); box-shadow: 0 6px 10px 4px rgba(0,0,0,0.06);">
+    <span>Overlay</span>
+    <span class="layer-bar-level">xl + overlay bg</span>
+  </div>
+</div>
 
-When a component transitions between states (e.g., a card on hover), it moves up one elevation level:
-
-```
-Card at rest:   --ts-shadow-sm
-Card on hover:  --ts-shadow-lg
-```
+---
 
 ## Z-Index Scale
 
-Z-index values are managed through tokens to prevent stacking conflicts:
+A fixed z-index scale prevents stacking conflicts across components.
 
-| Token | Value | Usage |
-|---|---|---|
-| `--ts-z-dropdown` | `1000` | Dropdown menus, select popups |
-| `--ts-z-sticky` | `1020` | Sticky headers, navigation bars |
-| `--ts-z-fixed` | `1030` | Fixed position elements |
-| `--ts-z-overlay` | `1040` | Background overlays |
-| `--ts-z-modal` | `1050` | Modal dialogs |
-| `--ts-z-popover` | `1060` | Popovers, context menus |
-| `--ts-z-tooltip` | `1070` | Tooltips (always on top) |
+<div class="z-visual">
+  <div class="z-row">
+    <span class="z-name">Dropdown</span>
+    <span class="z-value">1000</span>
+    <div class="z-bar" style="width: 14%;"></div>
+  </div>
+  <div class="z-row">
+    <span class="z-name">Sticky</span>
+    <span class="z-value">1020</span>
+    <div class="z-bar" style="width: 28%;"></div>
+  </div>
+  <div class="z-row">
+    <span class="z-name">Fixed</span>
+    <span class="z-value">1030</span>
+    <div class="z-bar" style="width: 42%;"></div>
+  </div>
+  <div class="z-row">
+    <span class="z-name">Overlay</span>
+    <span class="z-value">1040</span>
+    <div class="z-bar" style="width: 56%;"></div>
+  </div>
+  <div class="z-row">
+    <span class="z-name">Modal</span>
+    <span class="z-value">1050</span>
+    <div class="z-bar" style="width: 70%;"></div>
+  </div>
+  <div class="z-row">
+    <span class="z-name">Popover</span>
+    <span class="z-value">1060</span>
+    <div class="z-bar" style="width: 84%;"></div>
+  </div>
+  <div class="z-row">
+    <span class="z-name">Tooltip</span>
+    <span class="z-value">1070</span>
+    <div class="z-bar" style="width: 100%;"></div>
+  </div>
+</div>
 
-**Rules:**
-- Always use z-index tokens — never hardcode values
-- Tooltips must always appear above all other UI
-- Modals include an overlay (`--ts-z-overlay`) behind the dialog (`--ts-z-modal`)
-- Stacking context is reset inside Shadow DOM — z-index only competes within the same stacking context
+---
 
 ## Guidelines
 
 1. **Use elevation sparingly.** Not every container needs a shadow. Flat layouts with borders are often cleaner for dense UIs.
 2. **One elevation increase per interaction.** Hover effects should move up one level, not jump from none to `xl`.
-3. **Pair elevation with borders in dark mode.** Shadows are less visible on dark backgrounds — consider adding a subtle border (`--ts-color-border-subtle`) for clarity.
+3. **Pair elevation with borders in dark mode.** Shadows are less visible on dark backgrounds — add a subtle `--ts-color-border-subtle` border for clarity.
 4. **Reserve `xl` for modals and critical overlays.** Overuse of high elevation diminishes its impact.

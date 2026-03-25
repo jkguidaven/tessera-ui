@@ -3,192 +3,515 @@ title: Motion
 description: Animation principles, duration tokens, easing curves, and transition patterns in Tessera UI.
 ---
 
-Motion brings interfaces to life — but only when used with purpose. Tessera UI's motion system is minimal and functional, providing feedback for interactions without introducing distraction or delay.
+<style>{`
+  .motion-principles {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1rem;
+    margin-block: 2rem;
+  }
+  .motion-principle {
+    border: 1px solid var(--sl-color-gray-5);
+    border-radius: 16px;
+    padding: 1.25rem;
+  }
+  .motion-principle-number {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #1a73e8, #4285f4);
+    color: white;
+    font-size: 0.75rem;
+    font-weight: 700;
+    margin-block-end: 0.75rem;
+  }
+  .motion-principle-title {
+    font-weight: 700;
+    font-size: 0.9375rem;
+    margin-block-end: 0.375rem;
+  }
+  .motion-principle-desc {
+    font-size: 0.8125rem;
+    line-height: 1.5;
+    opacity: 0.8;
+  }
+
+  .duration-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    margin-block: 2rem;
+  }
+  .duration-row {
+    display: grid;
+    grid-template-columns: 140px 80px 1fr;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.75rem 0;
+    border-block-end: 1px solid var(--sl-color-gray-6);
+  }
+  .duration-row:last-child { border-block-end: none; }
+  .duration-name {
+    font-size: 0.8125rem;
+    font-weight: 600;
+  }
+  .duration-value {
+    font-size: 0.75rem;
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--sl-color-gray-3);
+  }
+  .duration-demo-track {
+    height: 40px;
+    border-radius: 12px;
+    background: var(--sl-color-gray-7);
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+  }
+  .duration-demo-ball {
+    position: absolute;
+    top: 50%;
+    left: 8px;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #1a73e8, #4285f4);
+    transform: translateY(-50%);
+    transition-property: left;
+    transition-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1);
+  }
+  .duration-demo-track:hover .duration-demo-ball {
+    left: calc(100% - 32px);
+  }
+  .duration-demo-hint {
+    position: absolute;
+    top: 50%;
+    right: 12px;
+    transform: translateY(-50%);
+    font-size: 0.625rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    opacity: 0.4;
+    font-weight: 600;
+    pointer-events: none;
+  }
+
+  .easing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 1.5rem;
+    margin-block: 2rem;
+  }
+  .easing-card {
+    border: 1px solid var(--sl-color-gray-5);
+    border-radius: 16px;
+    overflow: hidden;
+  }
+  .easing-card-preview {
+    height: 160px;
+    padding: 1rem;
+    background: var(--sl-color-gray-7);
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+  }
+  .easing-curve-svg {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 80px;
+    opacity: 0.15;
+  }
+  .easing-ball {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #1a73e8, #4285f4);
+    position: absolute;
+    top: 50%;
+    left: 12px;
+    transform: translateY(-50%);
+    transition: left 600ms;
+    box-shadow: 0 2px 8px rgba(26, 115, 232, 0.3);
+  }
+  .easing-card-preview:hover .easing-ball {
+    left: calc(100% - 44px);
+  }
+  .easing-card-info {
+    padding: 1rem;
+  }
+  .easing-card-name {
+    font-weight: 700;
+    font-size: 0.875rem;
+    margin-block-end: 0.25rem;
+  }
+  .easing-card-token {
+    font-size: 0.6875rem;
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--sl-color-gray-3);
+    margin-block-end: 0.5rem;
+    word-break: break-all;
+  }
+  .easing-card-desc {
+    font-size: 0.8125rem;
+    line-height: 1.4;
+    opacity: 0.8;
+  }
+  .easing-card-preview-hint {
+    position: absolute;
+    bottom: 8px;
+    right: 12px;
+    font-size: 0.625rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    opacity: 0.35;
+    font-weight: 600;
+  }
+
+  .loading-demo {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-block: 2rem;
+  }
+  @media (max-width: 640px) {
+    .loading-demo { grid-template-columns: 1fr; }
+  }
+  .loading-card {
+    border: 1px solid var(--sl-color-gray-5);
+    border-radius: 16px;
+    overflow: hidden;
+  }
+  .loading-card-preview {
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--sl-color-gray-7);
+  }
+  .skeleton-bar {
+    height: 16px;
+    width: 60%;
+    border-radius: 8px;
+    background: linear-gradient(90deg, #e1e3e8 25%, #f0f1f5 50%, #e1e3e8 75%);
+    background-size: 200% 100%;
+  }
+  .skeleton-pulse {
+    animation: skeleton-pulse 1.5s ease-in-out infinite;
+  }
+  .skeleton-shimmer {
+    animation: skeleton-shimmer 1.8s linear infinite;
+  }
+  @keyframes skeleton-pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+  }
+  @keyframes skeleton-shimmer {
+    from { background-position: 200% 0; }
+    to { background-position: -200% 0; }
+  }
+  .loading-card-info {
+    padding: 1rem;
+  }
+  .loading-card-name {
+    font-weight: 700;
+    font-size: 0.875rem;
+    margin-block-end: 0.25rem;
+  }
+  .loading-card-token {
+    font-size: 0.6875rem;
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--sl-color-gray-3);
+  }
+
+  .stagger-demo {
+    margin-block: 2rem;
+    border: 1px solid var(--sl-color-gray-5);
+    border-radius: 16px;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .stagger-item {
+    height: 40px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, rgba(26, 115, 232, 0.1), rgba(26, 115, 232, 0.04));
+    border: 1px solid rgba(26, 115, 232, 0.15);
+    display: flex;
+    align-items: center;
+    padding-inline: 1rem;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    opacity: 0;
+    transform: translateY(8px);
+    animation: stagger-enter 300ms cubic-bezier(0, 0, 0.2, 1) forwards;
+  }
+  .stagger-item:nth-child(1) { animation-delay: 0ms; }
+  .stagger-item:nth-child(2) { animation-delay: 50ms; }
+  .stagger-item:nth-child(3) { animation-delay: 100ms; }
+  .stagger-item:nth-child(4) { animation-delay: 150ms; }
+  .stagger-item:nth-child(5) { animation-delay: 200ms; }
+  @keyframes stagger-enter {
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .stagger-meta {
+    margin-block-start: 1rem;
+    font-size: 0.6875rem;
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--sl-color-gray-3);
+  }
+
+  .reduced-motion-card {
+    border: 1px solid var(--sl-color-gray-5);
+    border-radius: 16px;
+    padding: 1.5rem;
+    margin-block: 2rem;
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+  .reduced-motion-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, rgba(26, 115, 232, 0.12), rgba(26, 115, 232, 0.06));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 1.25rem;
+    color: #1a73e8;
+  }
+  .reduced-motion-text {
+    font-size: 0.8125rem;
+    line-height: 1.5;
+  }
+  .reduced-motion-text strong {
+    display: block;
+    font-size: 0.9375rem;
+    margin-block-end: 0.25rem;
+  }
+  .reduced-motion-code {
+    display: block;
+    margin-block-start: 0.75rem;
+    font-size: 0.75rem;
+    font-family: 'JetBrains Mono', monospace;
+    background: var(--sl-color-gray-7);
+    padding: 0.5rem 0.75rem;
+    border-radius: 8px;
+    line-height: 1.6;
+  }
+`}</style>
+
+Motion brings interfaces to life when used with purpose. Tessera UI's motion system is minimal and functional, providing feedback without distraction.
+
+---
 
 ## Principles
 
-1. **Motion communicates, it doesn't decorate.** Every animation should help the user understand what happened — an element appeared, moved, or changed state.
-2. **Fast by default.** Most interactions use `160ms` or less. Users should never wait for an animation to finish.
-3. **Consistent easing.** A single easing curve creates a unified feel across all transitions.
-4. **Respect user preferences.** Animations should be reduced or removed when `prefers-reduced-motion` is active.
+<div class="motion-principles">
+  <div class="motion-principle">
+    <div class="motion-principle-number">1</div>
+    <div class="motion-principle-title">Communicate, don't decorate</div>
+    <div class="motion-principle-desc">Every animation helps the user understand what happened — an element appeared, moved, or changed state.</div>
+  </div>
+  <div class="motion-principle">
+    <div class="motion-principle-number">2</div>
+    <div class="motion-principle-title">Fast by default</div>
+    <div class="motion-principle-desc">Most interactions use 160ms or less. Users should never wait for an animation to finish.</div>
+  </div>
+  <div class="motion-principle">
+    <div class="motion-principle-number">3</div>
+    <div class="motion-principle-title">Consistent easing</div>
+    <div class="motion-principle-desc">A shared set of easing curves creates a unified feel across all transitions.</div>
+  </div>
+  <div class="motion-principle">
+    <div class="motion-principle-number">4</div>
+    <div class="motion-principle-title">Respect preferences</div>
+    <div class="motion-principle-desc">Animations are reduced or removed when prefers-reduced-motion is active.</div>
+  </div>
+</div>
+
+---
 
 ## Duration Tokens
 
-| Token | Value | Usage |
+Hover over each track to see the animation speed in action.
+
+<div class="duration-grid">
+  <div class="duration-row">
+    <span class="duration-name">Micro</span>
+    <span class="duration-value">80ms</span>
+    <div class="duration-demo-track">
+      <div class="duration-demo-ball" style="transition-duration: 80ms;"></div>
+      <span class="duration-demo-hint">Hover me</span>
+    </div>
+  </div>
+  <div class="duration-row">
+    <span class="duration-name">Fast</span>
+    <span class="duration-value">160ms</span>
+    <div class="duration-demo-track">
+      <div class="duration-demo-ball" style="transition-duration: 160ms;"></div>
+      <span class="duration-demo-hint">Hover me</span>
+    </div>
+  </div>
+  <div class="duration-row">
+    <span class="duration-name">Normal</span>
+    <span class="duration-value">240ms</span>
+    <div class="duration-demo-track">
+      <div class="duration-demo-ball" style="transition-duration: 240ms;"></div>
+      <span class="duration-demo-hint">Hover me</span>
+    </div>
+  </div>
+  <div class="duration-row">
+    <span class="duration-name">Slow</span>
+    <span class="duration-value">360ms</span>
+    <div class="duration-demo-track">
+      <div class="duration-demo-ball" style="transition-duration: 360ms;"></div>
+      <span class="duration-demo-hint">Hover me</span>
+    </div>
+  </div>
+  <div class="duration-row">
+    <span class="duration-name">X-Slow</span>
+    <span class="duration-value">500ms</span>
+    <div class="duration-demo-track">
+      <div class="duration-demo-ball" style="transition-duration: 500ms;"></div>
+      <span class="duration-demo-hint">Hover me</span>
+    </div>
+  </div>
+</div>
+
+### When to Use Each Duration
+
+| Duration | Token | Use Cases |
 |---|---|---|
-| `--ts-transition-fast` | `160ms` | Micro-interactions: button hover, toggle switch, focus ring, color changes |
-| `--ts-transition-normal` | `240ms` | State transitions: card hover elevation, component enter/exit |
-| `--ts-transition-slow` | `360ms` | Layout shifts: accordion expand, panel slide, page transitions |
-| `--ts-transition-micro` | `80ms` | Instant-feeling micro-feedback: checkbox tick, ripple start |
-| `--ts-transition-x-slow` | `500ms` | Large-scale transitions: page-level entrances, complex orchestrations |
+| **80ms** | `--ts-transition-micro` | Checkbox tick, ripple start, instant-feel micro-feedback |
+| **160ms** | `--ts-transition-fast` | Button hover, toggle switch, focus ring, color changes |
+| **240ms** | `--ts-transition-normal` | Card hover elevation, component enter/exit |
+| **360ms** | `--ts-transition-slow` | Accordion expand, panel slide, tab transitions |
+| **500ms** | `--ts-transition-x-slow` | Page-level entrances, complex orchestrations |
 
-### Loading Animation Durations
-
-| Token | Value | Usage |
-|---|---|---|
-| `--ts-loading-pulse-duration` | `1.5s` | Skeleton pulse cycle |
-| `--ts-loading-shimmer-duration` | `1.8s` | Shimmer/sweep animation |
-
-### When to use each
-
-- **`fast` (160ms)** — Use for anything that responds to direct user input: hover effects, active states, focus indicators, toggle slides. The user should feel an instant response.
-- **`normal` (240ms)** — Use for visual transitions that involve spatial change: a card lifting on hover, a modal scaling in, a tooltip appearing. Slightly longer to let the eye track the motion.
-- **`slow` (360ms)** — Use sparingly for larger layout changes: accordion sections expanding, panels sliding in from the edge. Reserved for motions that affect page layout.
+---
 
 ## Easing Curves
 
-Tessera UI provides four easing curves as tokens, each suited to a different type of motion:
+Each easing curve communicates a different motion quality. Hover over the cards to preview the curve.
 
-| Token | Value | Usage |
-|---|---|---|
-| `--ts-ease-standard` | `cubic-bezier(0.4, 0, 0.2, 1)` | Default for all transitions — natural deceleration |
-| `--ts-ease-decelerate` | `cubic-bezier(0, 0, 0.2, 1)` | Elements entering the screen — starts fast, slows into place |
-| `--ts-ease-accelerate` | `cubic-bezier(0.4, 0, 1, 1)` | Elements leaving the screen — starts slow, accelerates out |
-| `--ts-ease-spring` | `cubic-bezier(0.16, 1, 0.3, 1)` | Playful, bouncy motion — modal entrance, toast pop-in |
+<div class="easing-grid">
+  <div class="easing-card">
+    <div class="easing-card-preview">
+      <div class="easing-ball" style="transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);"></div>
+      <span class="easing-card-preview-hint">Hover to preview</span>
+    </div>
+    <div class="easing-card-info">
+      <div class="easing-card-name">Standard</div>
+      <div class="easing-card-token">cubic-bezier(0.4, 0, 0.2, 1)</div>
+      <div class="easing-card-desc">The default curve for most UI transitions. Starts fast, decelerates smoothly.</div>
+    </div>
+  </div>
 
-### When to use each
+  <div class="easing-card">
+    <div class="easing-card-preview">
+      <div class="easing-ball" style="transition-timing-function: cubic-bezier(0, 0, 0.2, 1);"></div>
+      <span class="easing-card-preview-hint">Hover to preview</span>
+    </div>
+    <div class="easing-card-info">
+      <div class="easing-card-name">Decelerate</div>
+      <div class="easing-card-token">cubic-bezier(0, 0, 0.2, 1)</div>
+      <div class="easing-card-desc">For elements entering the screen. Starts at full speed and eases to a stop.</div>
+    </div>
+  </div>
 
-- **Standard** — The workhorse. Use for hover effects, color transitions, and most state changes.
-- **Decelerate** — Use when an element enters the viewport (slide-in panels, toasts appearing). The fast start draws the user's eye.
-- **Accelerate** — Use when an element exits. The slow start gives the user a moment to register the departure.
-- **Spring** — Use sparingly for emphasis. Modal entrances and toast notifications benefit from the slight overshoot.
+  <div class="easing-card">
+    <div class="easing-card-preview">
+      <div class="easing-ball" style="transition-timing-function: cubic-bezier(0.4, 0, 1, 1);"></div>
+      <span class="easing-card-preview-hint">Hover to preview</span>
+    </div>
+    <div class="easing-card-info">
+      <div class="easing-card-name">Accelerate</div>
+      <div class="easing-card-token">cubic-bezier(0.4, 0, 1, 1)</div>
+      <div class="easing-card-desc">For elements leaving the screen. Starts slow and accelerates away.</div>
+    </div>
+  </div>
 
-## Animation Patterns
+  <div class="easing-card">
+    <div class="easing-card-preview">
+      <div class="easing-ball" style="transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);"></div>
+      <span class="easing-card-preview-hint">Hover to preview</span>
+    </div>
+    <div class="easing-card-info">
+      <div class="easing-card-name">Spring</div>
+      <div class="easing-card-token">cubic-bezier(0.16, 1, 0.3, 1)</div>
+      <div class="easing-card-desc">Playful overshoot curve for delightful interactions. Use sparingly.</div>
+    </div>
+  </div>
+</div>
 
-### Button press
+---
 
-```css
-/* Active state */
-transform: scale(0.97);
-transition: transform var(--ts-transition-fast);
-```
+## Loading Animations
 
-A subtle scale-down on press provides tactile feedback. The 3% reduction is enough to feel without being distracting.
+Persistent loading states use longer, looping durations.
 
-### Modal entrance
+<div class="loading-demo">
+  <div class="loading-card">
+    <div class="loading-card-preview">
+      <div class="skeleton-bar skeleton-pulse"></div>
+    </div>
+    <div class="loading-card-info">
+      <div class="loading-card-name">Pulse</div>
+      <div class="loading-card-token">--ts-loading-pulse-duration: 1.5s</div>
+    </div>
+  </div>
+  <div class="loading-card">
+    <div class="loading-card-preview">
+      <div class="skeleton-bar skeleton-shimmer"></div>
+    </div>
+    <div class="loading-card-info">
+      <div class="loading-card-name">Shimmer</div>
+      <div class="loading-card-token">--ts-loading-shimmer-duration: 1.8s</div>
+    </div>
+  </div>
+</div>
 
-```css
-/* Overlay */
-@keyframes ts-fade-in {
-  from { opacity: 0; }
-  to   { opacity: 1; }
-}
-/* Duration: 200ms, ease-out */
+---
 
-/* Dialog */
-@keyframes ts-scale-in {
-  from { opacity: 0; transform: scale(0.95) translateY(8px); }
-  to   { opacity: 1; transform: scale(1) translateY(0); }
-}
-/* Duration: 240ms, cubic-bezier(0.16, 1, 0.3, 1) */
-```
+## Staggered Entrances
 
-Modals use a two-part entrance: the overlay fades in first, then the dialog scales up from slightly below center. The dialog uses a more pronounced ease-out (spring-like) for a polished feel.
+Lists and groups use a stagger interval to choreograph sequential entrance animations, creating a cascade effect.
 
-### Tooltip appearance
+<div class="stagger-demo">
+  <div class="stagger-item">Item 1 — enters immediately</div>
+  <div class="stagger-item">Item 2 — 50ms delay</div>
+  <div class="stagger-item">Item 3 — 100ms delay</div>
+  <div class="stagger-item">Item 4 — 150ms delay</div>
+  <div class="stagger-item">Item 5 — 200ms delay</div>
+  <div class="stagger-meta">--ts-stagger-interval: 50ms</div>
+</div>
 
-```css
-opacity: 0 → 1;
-transform: scale(0.95) → scale(1);
-transition: opacity, transform var(--ts-transition-fast);
-```
-
-Tooltips fade and scale up from 95% — a quick, minimal entrance that doesn't draw focus.
-
-### Toggle switch
-
-```css
-transition: left var(--ts-transition-fast);
-/* Track background also transitions */
-transition: background-color var(--ts-transition-fast);
-```
-
-The thumb slides horizontally while the track color transitions simultaneously.
-
-### Card hover elevation
-
-```css
-transition: box-shadow var(--ts-transition-normal), transform var(--ts-transition-normal);
-/* On hover: shadow increases, card lifts 2px */
-```
-
-Interactive cards use `normal` duration because the shadow spread change is spatially larger than a color change.
-
-## Transition Properties
-
-Always list specific properties in transitions — never use `transition: all`:
-
-```css
-/* Good */
-transition:
-  background-color var(--ts-transition-fast),
-  border-color var(--ts-transition-fast),
-  color var(--ts-transition-fast);
-
-/* Bad — triggers layout recalculation for every property */
-transition: all var(--ts-transition-fast);
-```
-
-## Choreography / Stagger System
-
-When multiple elements enter the screen at once (list items, grid cards, dashboard widgets), stagger their entrance to create a choreographed sequence rather than a simultaneous flash.
-
-Tessera UI provides a stagger interval token:
-
-| Token | Value | Usage |
-|---|---|---|
-| `--ts-stagger-interval` | `50ms` | Delay between each item's entrance animation |
-
-**Implementation example:**
-
-```css
-.stagger-list > * {
-  opacity: 0;
-  transform: translateY(8px);
-  animation: ts-stagger-enter var(--ts-transition-normal) var(--ts-ease-decelerate) forwards;
-}
-
-/* Each child delays by its index * interval */
-.stagger-list > *:nth-child(1) { animation-delay: calc(1 * var(--ts-stagger-interval)); }
-.stagger-list > *:nth-child(2) { animation-delay: calc(2 * var(--ts-stagger-interval)); }
-.stagger-list > *:nth-child(3) { animation-delay: calc(3 * var(--ts-stagger-interval)); }
-.stagger-list > *:nth-child(4) { animation-delay: calc(4 * var(--ts-stagger-interval)); }
-/* ... continue as needed, or use a CSS custom property with JavaScript */
-
-@keyframes ts-stagger-enter {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-```
-
-**Guidelines for stagger:**
-- Cap stagger at 8-10 items — beyond that, the total delay becomes noticeable
-- Total stagger sequence should not exceed `500ms` (`--ts-transition-x-slow`)
-- Use `prefers-reduced-motion` to disable stagger entirely, showing all items immediately
+---
 
 ## Reduced Motion
 
-Users who set `prefers-reduced-motion: reduce` in their OS or browser preferences should see minimal or no animation. Components should respect this:
+All animations in Tessera UI respect the `prefers-reduced-motion` media query. When enabled, transitions are either removed or replaced with instant opacity changes.
 
-```css
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
-}
-```
-
-This is recommended at the application level. Essential state changes (like toggle position) should still be instant but skip the animation.
-
-## Guidelines
-
-1. **Never block interaction with animation.** Users should be able to click, type, or navigate without waiting for an animation to complete.
-2. **Don't animate layout properties** (`width`, `height`, `top`, `left`). Use `transform` and `opacity` for performant animations that don't trigger layout recalculation.
-3. **Match duration to distance.** Small movements (hover color) = `fast`. Medium movements (card lift) = `normal`. Large movements (panel slide) = `slow`.
-4. **Entrance animations only.** Components animate when appearing but disappear instantly (or with a very fast fade). Users don't want to wait for something to leave.
+<div class="reduced-motion-card">
+  <div class="reduced-motion-icon">A</div>
+  <div class="reduced-motion-text">
+    <strong>Accessibility first</strong>
+    Some users experience vestibular disorders that make motion uncomfortable or disorienting. Always ensure animations degrade gracefully.
+    <code class="reduced-motion-code">
+      @media (prefers-reduced-motion: reduce) {"{"}<br/>
+      &nbsp;&nbsp;*, *::before, *::after {"{"}<br/>
+      &nbsp;&nbsp;&nbsp;&nbsp;animation-duration: 0.01ms !important;<br/>
+      &nbsp;&nbsp;&nbsp;&nbsp;transition-duration: 0.01ms !important;<br/>
+      &nbsp;&nbsp;{"}"}<br/>
+      {"}"}
+    </code>
+  </div>
+</div>

@@ -1,4 +1,15 @@
-# Tessera UI
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/logo-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="assets/logo-light.svg">
+  <img alt="Tessera UI" src="assets/logo-light.svg" width="320">
+</picture>
+
+[![npm version](https://img.shields.io/npm/v/@tessera-ui/core?label=%40tessera-ui%2Fcore&color=4285f4)](https://www.npmjs.com/package/@tessera-ui/core)
+[![npm version](https://img.shields.io/npm/v/@tessera-ui/react?label=%40tessera-ui%2Freact&color=61dafb)](https://www.npmjs.com/package/@tessera-ui/react)
+[![npm version](https://img.shields.io/npm/v/@tessera-ui/vue?label=%40tessera-ui%2Fvue&color=42b883)](https://www.npmjs.com/package/@tessera-ui/vue)
+[![npm version](https://img.shields.io/npm/v/@tessera-ui/angular?label=%40tessera-ui%2Fangular&color=dd0031)](https://www.npmjs.com/package/@tessera-ui/angular)
+[![CI](https://github.com/jkguidaven/tessera-ui/actions/workflows/ci.yml/badge.svg)](https://github.com/jkguidaven/tessera-ui/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 
 A framework-agnostic web component library built with **Stencil.js** and **TypeScript**. Write components once, use them everywhere — React, Vue, Angular, or vanilla HTML.
 

@@ -5,6 +5,42 @@
   --sl-font: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 
+.site-title span {
+  color: var(--sl-color-white) !important;
+}
+
+/* Landing page hero — logo replaces title, left-aligned vertical stack */
+[data-page-title] {
+  display: none !important;
+}
+
+div.hero {
+  display: grid !important;
+  grid-template-columns: 1fr !important;
+  justify-items: start !important;
+  text-align: start !important;
+  padding-block: clamp(2rem, 8vmin, 6rem) !important;
+}
+
+div.hero > img {
+  order: -1 !important;
+  width: min(80%, 22rem) !important;
+  margin-inline: 0 !important;
+  margin-bottom: 1.5rem;
+}
+
+div.hero div.stack {
+  text-align: start !important;
+}
+
+div.hero div.copy {
+  align-items: flex-start !important;
+}
+
+div.hero div.actions {
+  justify-content: flex-start !important;
+}
+
 .version-badge {
   display: inline-block;
   padding: 0.15em 0.5em;

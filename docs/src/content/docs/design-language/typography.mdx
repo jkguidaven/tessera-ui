@@ -3,43 +3,501 @@ title: Typography
 description: The Tessera UI type system — font families, scale, weights, line heights, and hierarchy.
 ---
 
-Typography establishes visual hierarchy and readability. Tessera UI uses a constrained type system with two font families and a fixed size scale.
+<style>{`
+  .type-specimen {
+    border: 1px solid var(--sl-color-gray-5);
+    border-radius: 16px;
+    overflow: hidden;
+    margin-block: 1.5rem;
+  }
+  .type-specimen-preview {
+    padding: 1.5rem 2rem;
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    border-block-end: 1px solid var(--sl-color-gray-6);
+  }
+  .type-specimen-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    padding: 1rem 2rem;
+    background: var(--sl-color-gray-7);
+    font-size: 0.75rem;
+  }
+  .type-meta-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.125rem;
+  }
+  .type-meta-label {
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 0.625rem;
+    opacity: 0.6;
+  }
+  .type-meta-value {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+  }
+
+  .font-stack-card {
+    border: 1px solid var(--sl-color-gray-5);
+    border-radius: 16px;
+    padding: 2rem;
+    margin-block: 1.5rem;
+  }
+  .font-stack-preview {
+    font-size: 2.5rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    margin-block-end: 1rem;
+  }
+  .font-stack-mono-preview {
+    font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+  }
+  .font-stack-list {
+    font-size: 0.8125rem;
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--sl-color-gray-2);
+    line-height: 1.6;
+  }
+
+  .weight-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 1rem;
+    margin-block: 1.5rem;
+  }
+  .weight-card {
+    border: 1px solid var(--sl-color-gray-5);
+    border-radius: 12px;
+    padding: 1.25rem;
+    text-align: center;
+  }
+  .weight-preview {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 2.5rem;
+    line-height: 1.2;
+    margin-block-end: 0.75rem;
+  }
+  .weight-name {
+    font-size: 0.8125rem;
+    font-weight: 600;
+  }
+  .weight-value {
+    font-size: 0.75rem;
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--sl-color-gray-3);
+    margin-block-start: 0.25rem;
+  }
+
+  .scale-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-block: 1.5rem;
+    font-size: 0.8125rem;
+  }
+  .scale-table th {
+    text-align: left;
+    font-weight: 600;
+    font-size: 0.6875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 0.75rem 1rem;
+    border-block-end: 2px solid var(--sl-color-gray-5);
+  }
+  .scale-table td {
+    padding: 0.75rem 1rem;
+    border-block-end: 1px solid var(--sl-color-gray-6);
+    vertical-align: middle;
+  }
+  .scale-table code {
+    font-size: 0.75rem;
+  }
+  .scale-sample {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+  }
+
+  .type-role-section {
+    margin-block: 2rem;
+  }
+  .type-role-divider {
+    border: none;
+    border-block-start: 1px solid var(--sl-color-gray-6);
+    margin-block: 2.5rem;
+  }
+`}</style>
+
+Typography in Tessera UI establishes visual hierarchy and readability. The type system uses two font families and a constrained scale aligned with Material Design 3 roles.
+
+---
 
 ## Font Families
 
-| Token | Value | Usage |
-|---|---|---|
-| `--ts-font-family-base` | `'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif` | All body text, labels, buttons |
-| `--ts-font-family-mono` | `'JetBrains Mono', 'Fira Code', 'Consolas', monospace` | Code blocks, technical content |
+<div class="font-stack-card">
+  <div class="font-stack-preview" style="font-family: 'Plus Jakarta Sans', sans-serif;">
+    Plus Jakarta Sans
+  </div>
+  <div style="font-size: 1.125rem; font-family: 'Plus Jakarta Sans', sans-serif; margin-block-end: 1rem; opacity: 0.8;">
+    ABCDEFGHIJKLMNOPQRSTUVWXYZ<br/>
+    abcdefghijklmnopqrstuvwxyz<br/>
+    0123456789 !@#$%^&*()
+  </div>
+  <div class="font-stack-list">
+    --ts-font-family-base: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif
+  </div>
+</div>
 
-**Plus Jakarta Sans** is the primary typeface — it's a geometric sans-serif designed for screen readability with open letterforms and a modern, friendly aesthetic.
+<div class="font-stack-card">
+  <div class="font-stack-preview font-stack-mono-preview">
+    JetBrains Mono
+  </div>
+  <div style="font-size: 1.125rem; font-family: 'JetBrains Mono', monospace; margin-block-end: 1rem; opacity: 0.8;">
+    ABCDEFGHIJKLMNOPQRSTUVWXYZ<br/>
+    abcdefghijklmnopqrstuvwxyz<br/>
+    0123456789 {"=> {} [] () <>"}
+  </div>
+  <div class="font-stack-list">
+    --ts-font-family-mono: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace
+  </div>
+</div>
 
-## Type Scale
-
-The type scale uses `rem` units based on a 16px root size. Each step provides a meaningful visual distinction.
-
-| Token | Size | Pixels | Usage |
-|---|---|---|---|
-| `--ts-font-size-2xs` | `0.6875rem` | 11px | M3 label-small |
-| `--ts-font-size-xs` | `0.75rem` | 12px | M3 body-small, label-medium, captions |
-| `--ts-font-size-sm` | `0.875rem` | 14px | M3 body-medium, label-large, title-small |
-| `--ts-font-size-md` | `1rem` | 16px | M3 body-large, title-medium |
-| `--ts-font-size-lg` | `1.375rem` | 22px | M3 title-large |
-| `--ts-font-size-xl` | `1.5rem` | 24px | M3 headline-small |
-| `--ts-font-size-2xl` | `1.75rem` | 28px | M3 headline-medium |
-| `--ts-font-size-3xl` | `2rem` | 32px | M3 headline-large |
-| `--ts-font-size-4xl` | `2.8125rem` | 45px | M3 display-small |
-| `--ts-font-size-5xl` | `3.5625rem` | 57px | M3 display-medium |
-| `--ts-font-size-6xl` | `5.5rem` | 88px | M3 display-large, marketing hero |
+---
 
 ## Font Weights
 
-| Token | Value | Usage |
-|---|---|---|
-| `--ts-font-weight-regular` | `400` | Body text, descriptions |
-| `--ts-font-weight-medium` | `500` | Labels, input labels, emphasized text |
-| `--ts-font-weight-semi` | `600` | Buttons, headings, badge labels |
-| `--ts-font-weight-bold` | `700` | Strong emphasis, display text |
+<div class="weight-grid">
+  <div class="weight-card">
+    <div class="weight-preview" style="font-weight: 400;">Ag</div>
+    <div class="weight-name">Regular</div>
+    <div class="weight-value">400</div>
+  </div>
+  <div class="weight-card">
+    <div class="weight-preview" style="font-weight: 500;">Ag</div>
+    <div class="weight-name">Medium</div>
+    <div class="weight-value">500</div>
+  </div>
+  <div class="weight-card">
+    <div class="weight-preview" style="font-weight: 600;">Ag</div>
+    <div class="weight-name">Semibold</div>
+    <div class="weight-value">600</div>
+  </div>
+  <div class="weight-card">
+    <div class="weight-preview" style="font-weight: 700;">Ag</div>
+    <div class="weight-name">Bold</div>
+    <div class="weight-value">700</div>
+  </div>
+</div>
+
+---
+
+## Type Scale
+
+Each size step provides a meaningful visual distinction. The scale uses `rem` units based on a 16px root.
+
+<table class="scale-table">
+  <thead>
+    <tr>
+      <th>Token</th>
+      <th>Size</th>
+      <th>Pixels</th>
+      <th>Preview</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>--ts-font-size-2xs</code></td>
+      <td>0.6875rem</td>
+      <td>11px</td>
+      <td><span class="scale-sample" style="font-size: 0.6875rem;">The quick brown fox</span></td>
+    </tr>
+    <tr>
+      <td><code>--ts-font-size-xs</code></td>
+      <td>0.75rem</td>
+      <td>12px</td>
+      <td><span class="scale-sample" style="font-size: 0.75rem;">The quick brown fox</span></td>
+    </tr>
+    <tr>
+      <td><code>--ts-font-size-sm</code></td>
+      <td>0.875rem</td>
+      <td>14px</td>
+      <td><span class="scale-sample" style="font-size: 0.875rem;">The quick brown fox</span></td>
+    </tr>
+    <tr>
+      <td><code>--ts-font-size-md</code></td>
+      <td>1rem</td>
+      <td>16px</td>
+      <td><span class="scale-sample" style="font-size: 1rem;">The quick brown fox</span></td>
+    </tr>
+    <tr>
+      <td><code>--ts-font-size-lg</code></td>
+      <td>1.375rem</td>
+      <td>22px</td>
+      <td><span class="scale-sample" style="font-size: 1.375rem;">The quick brown fox</span></td>
+    </tr>
+    <tr>
+      <td><code>--ts-font-size-xl</code></td>
+      <td>1.5rem</td>
+      <td>24px</td>
+      <td><span class="scale-sample" style="font-size: 1.5rem;">The quick brown fox</span></td>
+    </tr>
+    <tr>
+      <td><code>--ts-font-size-2xl</code></td>
+      <td>1.75rem</td>
+      <td>28px</td>
+      <td><span class="scale-sample" style="font-size: 1.75rem;">The quick brown fox</span></td>
+    </tr>
+    <tr>
+      <td><code>--ts-font-size-3xl</code></td>
+      <td>2rem</td>
+      <td>32px</td>
+      <td><span class="scale-sample" style="font-size: 2rem;">The quick brown fox</span></td>
+    </tr>
+    <tr>
+      <td><code>--ts-font-size-4xl</code></td>
+      <td>2.8125rem</td>
+      <td>45px</td>
+      <td><span class="scale-sample" style="font-size: 2.8125rem;">Quick fox</span></td>
+    </tr>
+    <tr>
+      <td><code>--ts-font-size-5xl</code></td>
+      <td>3.5625rem</td>
+      <td>57px</td>
+      <td><span class="scale-sample" style="font-size: 3.5625rem;">Quick</span></td>
+    </tr>
+  </tbody>
+</table>
+
+---
+
+## Type Roles
+
+Composite type roles combine size, weight, line-height, and letter-spacing into semantic groupings aligned with Material Design 3.
+
+### Display
+
+Large hero and marketing text. Uses responsive `clamp()` for fluid sizing.
+
+<div class="type-role-section">
+  <div class="type-specimen">
+    <div class="type-specimen-preview" style="font-size: clamp(2.8125rem, 5vw + 1rem, 5.5rem); font-weight: 600; line-height: 1.09; letter-spacing: 0;">
+      Display Large
+    </div>
+    <div class="type-specimen-meta">
+      <div class="type-meta-item"><span class="type-meta-label">Size</span><span class="type-meta-value">clamp(45px, 5vw + 1rem, 88px)</span></div>
+      <div class="type-meta-item"><span class="type-meta-label">Weight</span><span class="type-meta-value">600 (Semibold)</span></div>
+      <div class="type-meta-item"><span class="type-meta-label">Line Height</span><span class="type-meta-value">1.09</span></div>
+      <div class="type-meta-item"><span class="type-meta-label">Spacing</span><span class="type-meta-value">0</span></div>
+    </div>
+  </div>
+
+  <div class="type-specimen">
+    <div class="type-specimen-preview" style="font-size: clamp(2rem, 4vw + 1rem, 3.5625rem); font-weight: 600; line-height: 1.12; letter-spacing: 0;">
+      Display Medium
+    </div>
+    <div class="type-specimen-meta">
+      <div class="type-meta-item"><span class="type-meta-label">Size</span><span class="type-meta-value">clamp(32px, 4vw + 1rem, 57px)</span></div>
+      <div class="type-meta-item"><span class="type-meta-label">Weight</span><span class="type-meta-value">600 (Semibold)</span></div>
+      <div class="type-meta-item"><span class="type-meta-label">Line Height</span><span class="type-meta-value">1.12</span></div>
+      <div class="type-meta-item"><span class="type-meta-label">Spacing</span><span class="type-meta-value">0</span></div>
+    </div>
+  </div>
+
+  <div class="type-specimen">
+    <div class="type-specimen-preview" style="font-size: clamp(1.75rem, 3vw + 0.75rem, 2.8125rem); font-weight: 600; line-height: 1.16; letter-spacing: 0;">
+      Display Small
+    </div>
+    <div class="type-specimen-meta">
+      <div class="type-meta-item"><span class="type-meta-label">Size</span><span class="type-meta-value">clamp(28px, 3vw + 0.75rem, 45px)</span></div>
+      <div class="type-meta-item"><span class="type-meta-label">Weight</span><span class="type-meta-value">600 (Semibold)</span></div>
+      <div class="type-meta-item"><span class="type-meta-label">Line Height</span><span class="type-meta-value">1.16</span></div>
+      <div class="type-meta-item"><span class="type-meta-label">Spacing</span><span class="type-meta-value">0</span></div>
+    </div>
+  </div>
+</div>
+
+### Heading
+
+Page and section headers with responsive sizing.
+
+<div class="type-role-section">
+  <div class="type-specimen">
+    <div class="type-specimen-preview" style="font-size: clamp(1.5rem, 2vw + 0.5rem, 2rem); font-weight: 600; line-height: 1.25; letter-spacing: 0;">
+      Heading Large
+    </div>
+    <div class="type-specimen-meta">
+      <div class="type-meta-item"><span class="type-meta-label">Size</span><span class="type-meta-value">clamp(24px, 2vw + 0.5rem, 32px)</span></div>
+      <div class="type-meta-item"><span class="type-meta-label">Weight</span><span class="type-meta-value">600 (Semibold)</span></div>
+      <div class="type-meta-item"><span class="type-meta-label">Line Height</span><span class="type-meta-value">1.25</span></div>
+      <div class="type-meta-item"><span class="type-meta-label">Spacing</span><span class="type-meta-value">0</span></div>
+    </div>
+  </div>
+
+  <div class="type-specimen">
+    <div class="type-specimen-preview" style="font-size: clamp(1.25rem, 1.5vw + 0.5rem, 1.75rem); font-weight: 600; line-height: 1.29; letter-spacing: 0;">
+      Heading Medium
+    </div>
+    <div class="type-specimen-meta">
+      <div class="type-meta-item"><span class="type-meta-label">Size</span><span class="type-meta-value">clamp(20px, 1.5vw + 0.5rem, 28px)</span></div>
+      <div class="type-meta-item"><span class="type-meta-label">Weight</span><span class="type-meta-value">600 (Semibold)</span></div>
+      <div class="type-meta-item"><span class="type-meta-label">Line Height</span><span class="type-meta-value">1.29</span></div>
+      <div class="type-meta-item"><span class="type-meta-label">Spacing</span><span class="type-meta-value">0</span></div>
+    </div>
+  </div>
+
+  <div class="type-specimen">
+    <div class="type-specimen-preview" style="font-size: 1.5rem; font-weight: 600; line-height: 1.33; letter-spacing: 0;">
+      Heading Small
+    </div>
+    <div class="type-specimen-meta">
+      <div class="type-meta-item"><span class="type-meta-label">Size</span><span class="type-meta-value">24px</span></div>
+      <div class="type-meta-item"><span class="type-meta-label">Weight</span><span class="type-meta-value">600 (Semibold)</span></div>
+      <div class="type-meta-item"><span class="type-meta-label">Line Height</span><span class="type-meta-value">1.33</span></div>
+      <div class="type-meta-item"><span class="type-meta-label">Spacing</span><span class="type-meta-value">0</span></div>
+    </div>
+  </div>
+</div>
+
+### Title
+
+Card headers, dialog titles, and navigation items.
+
+<div class="type-role-section">
+  <div class="type-specimen">
+    <div class="type-specimen-preview" style="font-size: 1.375rem; font-weight: 400; line-height: 1.36; letter-spacing: 0;">
+      Title Large — card headers and dialog titles
+    </div>
+    <div class="type-specimen-meta">
+      <div class="type-meta-item"><span class="type-meta-label">Size</span><span class="type-meta-value">22px</span></div>
+      <div class="type-meta-item"><span class="type-meta-label">Weight</span><span class="type-meta-value">400 (Regular)</span></div>
+      <div class="type-meta-item"><span class="type-meta-label">Line Height</span><span class="type-meta-value">1.36</span></div>
+    </div>
+  </div>
+
+  <div class="type-specimen">
+    <div class="type-specimen-preview" style="font-size: 1rem; font-weight: 500; line-height: 1.5; letter-spacing: 0;">
+      Title Medium — sub-headings and section titles
+    </div>
+    <div class="type-specimen-meta">
+      <div class="type-meta-item"><span class="type-meta-label">Size</span><span class="type-meta-value">16px</span></div>
+      <div class="type-meta-item"><span class="type-meta-label">Weight</span><span class="type-meta-value">500 (Medium)</span></div>
+      <div class="type-meta-item"><span class="type-meta-label">Line Height</span><span class="type-meta-value">1.5</span></div>
+    </div>
+  </div>
+
+  <div class="type-specimen">
+    <div class="type-specimen-preview" style="font-size: 0.875rem; font-weight: 500; line-height: 1.43; letter-spacing: 0;">
+      Title Small — navigation items and table headers
+    </div>
+    <div class="type-specimen-meta">
+      <div class="type-meta-item"><span class="type-meta-label">Size</span><span class="type-meta-value">14px</span></div>
+      <div class="type-meta-item"><span class="type-meta-label">Weight</span><span class="type-meta-value">500 (Medium)</span></div>
+      <div class="type-meta-item"><span class="type-meta-label">Line Height</span><span class="type-meta-value">1.43</span></div>
+    </div>
+  </div>
+</div>
+
+### Body
+
+Prose, descriptions, and general content.
+
+<div class="type-role-section">
+  <div class="type-specimen">
+    <div class="type-specimen-preview" style="font-size: 1rem; font-weight: 400; line-height: 1.5; letter-spacing: 0;">
+      Body Large — primary reading text for articles, descriptions, and long-form content. Designed for comfortable extended reading with generous line height.
+    </div>
+    <div class="type-specimen-meta">
+      <div class="type-meta-item"><span class="type-meta-label">Size</span><span class="type-meta-value">16px</span></div>
+      <div class="type-meta-item"><span class="type-meta-label">Weight</span><span class="type-meta-value">400 (Regular)</span></div>
+      <div class="type-meta-item"><span class="type-meta-label">Line Height</span><span class="type-meta-value">1.5</span></div>
+    </div>
+  </div>
+
+  <div class="type-specimen">
+    <div class="type-specimen-preview" style="font-size: 0.875rem; font-weight: 400; line-height: 1.43; letter-spacing: 0;">
+      Body Medium — the default text size for most UI content. Used in form descriptions, helper text, and secondary information.
+    </div>
+    <div class="type-specimen-meta">
+      <div class="type-meta-item"><span class="type-meta-label">Size</span><span class="type-meta-value">14px</span></div>
+      <div class="type-meta-item"><span class="type-meta-label">Weight</span><span class="type-meta-value">400 (Regular)</span></div>
+      <div class="type-meta-item"><span class="type-meta-label">Line Height</span><span class="type-meta-value">1.43</span></div>
+    </div>
+  </div>
+
+  <div class="type-specimen">
+    <div class="type-specimen-preview" style="font-size: 0.75rem; font-weight: 400; line-height: 1.33; letter-spacing: 0.006em;">
+      Body Small — compact content for dense interfaces. Used for table cells, metadata, and supplementary text that doesn't need prominent display.
+    </div>
+    <div class="type-specimen-meta">
+      <div class="type-meta-item"><span class="type-meta-label">Size</span><span class="type-meta-value">12px</span></div>
+      <div class="type-meta-item"><span class="type-meta-label">Weight</span><span class="type-meta-value">400 (Regular)</span></div>
+      <div class="type-meta-item"><span class="type-meta-label">Line Height</span><span class="type-meta-value">1.33</span></div>
+      <div class="type-meta-item"><span class="type-meta-label">Spacing</span><span class="type-meta-value">0.006em</span></div>
+    </div>
+  </div>
+</div>
+
+### Label
+
+Buttons, form labels, and badges.
+
+<div class="type-role-section">
+  <div class="type-specimen">
+    <div class="type-specimen-preview" style="font-size: 0.875rem; font-weight: 500; line-height: 1.43; letter-spacing: 0;">
+      Label Large — Primary button text, form labels
+    </div>
+    <div class="type-specimen-meta">
+      <div class="type-meta-item"><span class="type-meta-label">Size</span><span class="type-meta-value">14px</span></div>
+      <div class="type-meta-item"><span class="type-meta-label">Weight</span><span class="type-meta-value">500 (Medium)</span></div>
+      <div class="type-meta-item"><span class="type-meta-label">Line Height</span><span class="type-meta-value">1.43</span></div>
+    </div>
+  </div>
+
+  <div class="type-specimen">
+    <div class="type-specimen-preview" style="font-size: 0.75rem; font-weight: 500; line-height: 1.33; letter-spacing: 0.006em;">
+      Label Medium — Small button text, badge labels
+    </div>
+    <div class="type-specimen-meta">
+      <div class="type-meta-item"><span class="type-meta-label">Size</span><span class="type-meta-value">12px</span></div>
+      <div class="type-meta-item"><span class="type-meta-label">Weight</span><span class="type-meta-value">500 (Medium)</span></div>
+      <div class="type-meta-item"><span class="type-meta-label">Line Height</span><span class="type-meta-value">1.33</span></div>
+      <div class="type-meta-item"><span class="type-meta-label">Spacing</span><span class="type-meta-value">0.006em</span></div>
+    </div>
+  </div>
+
+  <div class="type-specimen">
+    <div class="type-specimen-preview" style="font-size: 0.6875rem; font-weight: 500; line-height: 1.45; letter-spacing: 0.009em;">
+      Label Small — Micro labels, overlines
+    </div>
+    <div class="type-specimen-meta">
+      <div class="type-meta-item"><span class="type-meta-label">Size</span><span class="type-meta-value">11px</span></div>
+      <div class="type-meta-item"><span class="type-meta-label">Weight</span><span class="type-meta-value">500 (Medium)</span></div>
+      <div class="type-meta-item"><span class="type-meta-label">Line Height</span><span class="type-meta-value">1.45</span></div>
+      <div class="type-meta-item"><span class="type-meta-label">Spacing</span><span class="type-meta-value">0.009em</span></div>
+    </div>
+  </div>
+</div>
+
+### Caption
+
+Timestamps, footnotes, and fine print.
+
+<div class="type-role-section">
+  <div class="type-specimen">
+    <div class="type-specimen-preview" style="font-size: 0.75rem; font-weight: 400; line-height: 1.33; letter-spacing: 0.006em;">
+      Caption — timestamps, footnotes, and supplementary fine print that sits below primary content
+    </div>
+    <div class="type-specimen-meta">
+      <div class="type-meta-item"><span class="type-meta-label">Size</span><span class="type-meta-value">12px</span></div>
+      <div class="type-meta-item"><span class="type-meta-label">Weight</span><span class="type-meta-value">400 (Regular)</span></div>
+      <div class="type-meta-item"><span class="type-meta-label">Line Height</span><span class="type-meta-value">1.33</span></div>
+      <div class="type-meta-item"><span class="type-meta-label">Spacing</span><span class="type-meta-value">0.006em</span></div>
+    </div>
+  </div>
+</div>
+
+---
 
 ## Line Heights
 
@@ -47,126 +505,15 @@ The type scale uses `rem` units based on a 16px root size. Each step provides a 
 |---|---|---|
 | `--ts-line-height-tight` | `1.25` | Headings, labels |
 | `--ts-line-height-normal` | `1.43` | Body text (M3: 20/14, 24/16) |
-| `--ts-line-height-loose` | `1.5` | Display text (M3: 64/57, 96/88) |
+| `--ts-line-height-loose` | `1.5` | Display text, long-form content |
 
 ## Letter Spacing
 
-Letter spacing tokens adjust tracking for different typographic contexts. Display sizes use tighter spacing for visual density; labels and captions use wider spacing for legibility at small sizes.
-
 | Token | Value | Usage |
 |---|---|---|
-| `--ts-letter-spacing-tighter` | `-0.02em` | Display text |
+| `--ts-letter-spacing-tighter` | `-0.02em` | Large display text |
 | `--ts-letter-spacing-tight` | `-0.01em` | Headings |
-| `--ts-letter-spacing-normal` | `0em` | Body text, default (M3: 0 for most sizes) |
-| `--ts-letter-spacing-wide` | `0.006em` | ~0.1px at 16px — M3 body-small/label |
-| `--ts-letter-spacing-wider` | `0.009em` | ~0.1px at 11px — small labels |
-| `--ts-letter-spacing-widest` | `0.05em` | All-caps text, legal fine print |
-
-## Composite Type Roles
-
-Type roles combine size, weight, line height, and letter spacing into a single semantic purpose. Use these roles to maintain consistent typography across your application rather than assembling individual tokens.
-
-| Role | Size Token | Weight | Line Height | Letter Spacing | Usage |
-|---|---|---|---|---|---|
-| **display-lg** | `clamp(2.8125rem, 5vw + 1rem, 5.5rem)` (45px-88px) | `semi` (600) | `1.09` | `normal` (0em) | Marketing hero, landing page headlines |
-| **display-md** | `clamp(2rem, 4vw + 1rem, 3.5625rem)` (32px-57px) | `semi` (600) | `1.12` | `normal` (0em) | Section hero, feature highlights |
-| **display-sm** | `clamp(1.75rem, 3vw + 0.75rem, 2.8125rem)` (28px-45px) | `semi` (600) | `1.16` | `normal` (0em) | Page titles, onboarding headers |
-| **heading-lg** | `clamp(1.5rem, 2vw + 0.5rem, 2rem)` (24px-32px) | `semi` (600) | `1.25` | `normal` (0em) | Page section headers |
-| **heading-md** | `clamp(1.25rem, 1.5vw + 0.5rem, 1.75rem)` (20px-28px) | `semi` (600) | `1.29` | `normal` (0em) | Card headers, dialog titles |
-| **heading-sm** | `xl` (24px) | `semi` (600) | `1.33` | `normal` (0em) | Subsection headers |
-| **title-lg** | `lg` (22px) | `regular` (400) | `1.36` | `normal` (0em) | Card headers, dialog titles, nav items |
-| **title-md** | `md` (16px) | `medium` (500) | `1.5` | `normal` (0em) | List item titles, section labels |
-| **title-sm** | `sm` (14px) | `medium` (500) | `1.43` | `normal` (0em) | Compact titles, tab labels |
-| **body-lg** | `md` (16px) | `regular` (400) | `1.5` | `normal` (0em) | Introductory paragraphs, lead text |
-| **body-md** | `sm` (14px) | `regular` (400) | `1.43` | `normal` (0em) | Default body text |
-| **body-sm** | `xs` (12px) | `regular` (400) | `1.33` | `wide` (0.006em) | Secondary body text, descriptions |
-| **label-lg** | `sm` (14px) | `medium` (500) | `1.43` | `normal` (0em) | Form labels (lg), button text, navigation items |
-| **label-md** | `xs` (12px) | `medium` (500) | `1.33` | `wide` (0.006em) | Form labels (md), small button text |
-| **label-sm** | `2xs` (11px) | `medium` (500) | `1.45` | `wider` (0.009em) | Badge labels, helper text, overlines |
-| **caption** | `xs` (12px) | `regular` (400) | `1.33` | `wide` (0.006em) | Timestamps, footnotes, fine print |
-
-Each role is defined as a set of four CSS custom properties (e.g., `--ts-type-display-lg-size`, `--ts-type-display-lg-weight`, `--ts-type-display-lg-line`, `--ts-type-display-lg-spacing`), making them easy to apply and override.
-
-## Responsive Typography
-
-Display and heading type role sizes use CSS `clamp()` by default, providing fluid scaling between mobile and desktop viewports without any extra configuration:
-
-| Role | Min (mobile) | Max (desktop) |
-|---|---|---|
-| **display-lg** | 45px (2.8125rem) | 88px (5.5rem) |
-| **display-md** | 32px (2rem) | 57px (3.5625rem) |
-| **display-sm** | 28px (1.75rem) | 45px (2.8125rem) |
-| **heading-lg** | 24px (1.5rem) | 32px (2rem) |
-| **heading-md** | 20px (1.25rem) | 28px (1.75rem) |
-
-```css
-/* The tokens are already fluid — just use them: */
-h1 {
-  font-size: var(--ts-type-display-lg-size);  /* scales automatically */
-}
-```
-
-To override with a fixed size, reassign the token:
-
-```css
-:root {
-  --ts-type-display-lg-size: 5.5rem;  /* fixed 88px, no scaling */
-}
-```
-
-**Guidelines:**
-- Body text (`body-sm`, `body-md`, `body-lg`) remains fixed — fluid scaling at reading sizes harms readability
-- `heading-sm` also remains fixed since it is small enough that scaling is unnecessary
-- Display and heading sizes scale fluidly by default via `clamp()`
-
-## CJK and Arabic Typography
-
-When supporting CJK (Chinese, Japanese, Korean) or Arabic scripts:
-
-- Append CJK-specific font families to `--ts-font-family-base`:
-  ```css
-  :root {
-    --ts-font-family-base: 'Plus Jakarta Sans', 'Noto Sans SC', 'Noto Sans JP', sans-serif;
-  }
-  ```
-- CJK text typically needs `line-height: 1.7–1.8` instead of the default `1.43`
-- Arabic and Hebrew scripts require RTL layout — see the [Internationalization](/tessera-ui/design-language/internationalization/) page
-- Avoid `letter-spacing` adjustments for CJK — the glyphs are already monospaced by design
-
-## Hierarchy in Components
-
-Components use the type scale consistently to establish hierarchy:
-
-### Button sizes map to font sizes
-| Button Size | Font Size | Weight |
-|---|---|---|
-| `xs` | `--ts-font-size-xs` | `semi` (600) |
-| `sm` | `--ts-font-size-sm` | `semi` (600) |
-| `md` | `--ts-font-size-md` | `semi` (600) |
-| `lg` | `--ts-font-size-lg` | `semi` (600) |
-| `xl` | `--ts-font-size-xl` | `semi` (600) |
-
-### Input typography by size
-| Input Size | Font Size | Label Size |
-|---|---|---|
-| `sm` | `--ts-font-size-sm` | `sm` / `medium` |
-| `md` | `--ts-font-size-md` | `sm` / `medium` |
-| `lg` | `--ts-font-size-lg` | `sm` / `medium` |
-| `xl` | `--ts-font-size-xl` | `sm` / `medium` |
-
-### Other components
-| Component | Font Size | Weight |
-|---|---|---|
-| Modal header | `lg` | `semi` |
-| Modal body | `md` | `regular` |
-| Alert message | `sm` | `regular` |
-| Tooltip | `xs` | `medium` |
-| Badge | `xs` | `semi` |
-| Toggle label | `sm` | `regular` |
-
-## Best Practices
-
-- **Use the type scale, not arbitrary sizes.** The eleven-step scale (2xs through 6xl) covers all needs from label-small to display-large.
-- **Pair size with weight for hierarchy.** Avoid using weight alone to differentiate text — use size steps.
-- **Prefer `medium` (500) over `bold` (700) for emphasis.** Bold should be reserved for strong semantic emphasis.
-- **Use `tight` line height for single-line text** (headings, labels). Use `normal` for multi-line body content.
+| `--ts-letter-spacing-normal` | `0` | Most text roles |
+| `--ts-letter-spacing-wide` | `0.006em` | Body small, label medium |
+| `--ts-letter-spacing-wider` | `0.009em` | Label small (11px) |
+| `--ts-letter-spacing-widest` | `0.05em` | All-caps text, overlines |
