@@ -68,3 +68,4 @@ export { TsContainer } from './components/container/container';
 export { TsStack } from './components/stack/stack';
 export { TsRow } from './components/row/row';
 export { TsSpacer } from './components/spacer/spacer';
+export { TsVisuallyHidden } from './components/visually-hidden/visually-hidden';
