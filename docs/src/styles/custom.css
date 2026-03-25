@@ -5,6 +5,10 @@
   --sl-font: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 
+.site-title span {
+  color: var(--sl-color-white) !important;
+}
+
 /* Landing page hero — logo replaces title, centered vertical stack */
 .hero h1[data-page-title] {
   display: none !important;
