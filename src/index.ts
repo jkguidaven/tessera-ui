@@ -86,3 +86,5 @@ export { TsCombobox } from './components/combobox/combobox';
 export { TsTimePicker } from './components/time-picker/time-picker';
 export { TsCommandPalette } from './components/command-palette/command-palette';
 export { TsCommandPaletteItem } from './components/command-palette/command-palette-item';
+export { TsForm } from './components/form/form';
+export type { TsFormSubmitDetail } from './components/form/form';
