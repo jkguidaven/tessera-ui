@@ -1,0 +1,135 @@
+/* ==========================================================================
+   ts-command-palette — Shadow DOM Scoped Styles
+
+   Component tokens (Tier 3):
+     --ts-command-palette-bg          Panel background
+     --ts-command-palette-radius      Panel border radius
+     --ts-command-palette-shadow      Panel box-shadow
+     --ts-command-palette-overlay-bg  Overlay background
+   ========================================================================== */
+
+:host {
+  font-family: var(--ts-font-family-base);
+
+  --ts-command-palette-bg: var(--ts-color-bg-elevated);
+  --ts-command-palette-radius: var(--ts-shape-overlay);
+  --ts-command-palette-shadow: var(--ts-shadow-xl);
+  --ts-command-palette-overlay-bg: var(--ts-color-bg-overlay);
+}
+
+/* ---- Overlay ---- */
+.command-palette__overlay {
+  position: fixed;
+  inset: 0;
+  z-index: var(--ts-z-modal);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-block-start: 15vh;
+  padding-inline: var(--ts-spacing-4);
+  background-color: var(--ts-command-palette-overlay-bg);
+  animation: ts-cmd-fade-in 150ms ease-out;
+}
+
+/* ---- Panel ---- */
+.command-palette__panel {
+  width: 100%;
+  max-width: 640px;
+  max-height: 400px;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--ts-command-palette-bg);
+  border-radius: var(--ts-command-palette-radius);
+  box-shadow: var(--ts-command-palette-shadow);
+  overflow: hidden;
+  animation: ts-cmd-scale-in 200ms cubic-bezier(0.16, 1, 0.3, 1);
+  outline: none;
+}
+
+/* ---- Search ---- */
+.command-palette__search {
+  display: flex;
+  align-items: center;
+  gap: var(--ts-spacing-3);
+  padding: var(--ts-spacing-3) var(--ts-spacing-4);
+  border-block-end: 1px solid var(--ts-color-border-default);
+}
+
+.command-palette__search-icon {
+  width: 1.25rem;
+  height: 1.25rem;
+  color: var(--ts-color-text-tertiary);
+  flex-shrink: 0;
+}
+
+.command-palette__input {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-family: var(--ts-font-family-base);
+  font-size: var(--ts-font-size-md);
+  color: var(--ts-color-text-primary);
+  line-height: var(--ts-line-height-normal);
+}
+
+.command-palette__input::placeholder {
+  color: var(--ts-color-text-tertiary);
+}
+
+/* ---- Results List ---- */
+.command-palette__list {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--ts-spacing-2);
+}
+
+/* ---- Empty State ---- */
+.command-palette__empty {
+  padding: var(--ts-spacing-8) var(--ts-spacing-4);
+  text-align: center;
+  font-size: var(--ts-font-size-sm);
+  color: var(--ts-color-text-tertiary);
+}
+
+/* ---- Slotted Items ---- */
+::slotted(ts-command-palette-item) {
+  display: block;
+  padding: var(--ts-spacing-2) var(--ts-spacing-3);
+  border-radius: var(--ts-radius-md);
+  cursor: pointer;
+  transition: background-color var(--ts-transition-fast);
+}
+
+::slotted(ts-command-palette-item:hover),
+::slotted(ts-command-palette-item[data-focused="true"]) {
+  background-color: var(--ts-color-bg-hover);
+}
+
+/* ---- Animations ---- */
+@keyframes ts-cmd-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes ts-cmd-scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.96) translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* ---- Reduced motion ---- */
+@media (prefers-reduced-motion: reduce) {
+  .command-palette__overlay {
+    animation-duration: 0.01ms !important;
+  }
+
+  .command-palette__panel {
+    animation-duration: 0.01ms !important;
+  }
+}
