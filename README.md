@@ -11,7 +11,7 @@
 [![CI](https://github.com/jkguidaven/tessera-ui/actions/workflows/ci.yml/badge.svg)](https://github.com/jkguidaven/tessera-ui/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 
-A framework-agnostic web component library built with **Stencil.js** and **TypeScript**. Write components once, use them everywhere — React, Vue, Angular, or vanilla HTML.
+A framework-agnostic web component library built with **Stencil.js** and **TypeScript**. Beautiful, accessible components that work in React, Vue, Angular, or vanilla HTML — no lock-in.
 
 **[Documentation](https://jkguidaven.github.io/tessera-ui/)** | **[Storybook](https://jkguidaven.github.io/tessera-ui/storybook/)** | **[npm](https://www.npmjs.com/package/@tessera-ui/core)**
 
