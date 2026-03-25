@@ -1,0 +1,39 @@
+/* ==========================================================================
+   ts-radio-group — Scoped Styles (no shadow DOM)
+   ========================================================================== */
+
+ts-radio-group {
+  display: block;
+  font-family: var(--ts-font-family-base);
+}
+
+/* ---- Label ---- */
+.radio-group__label {
+  display: block;
+  margin-block-end: var(--ts-spacing-2);
+  font-size: var(--ts-font-size-sm);
+  font-weight: var(--ts-font-weight-medium);
+  color: var(--ts-color-text-secondary);
+  line-height: var(--ts-line-height-normal);
+}
+
+/* ---- Items container ---- */
+.radio-group__items {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ts-spacing-2);
+}
+
+ts-radio-group[orientation="horizontal"] .radio-group__items {
+  flex-direction: row;
+  gap: var(--ts-spacing-4);
+}
+
+/* ---- Error ---- */
+.radio-group__error {
+  margin-block-start: var(--ts-spacing-1);
+  font-size: var(--ts-font-size-xs);
+  line-height: var(--ts-line-height-normal);
+  color: var(--ts-color-danger-600);
+  font-weight: var(--ts-font-weight-medium);
+}

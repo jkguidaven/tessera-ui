@@ -86,3 +86,36 @@ export const WithSlotContent = (): string => `
     </ts-checkbox>
   </ts-stack>
 `;
+
+export const CheckboxGroupDefault = (): string => `
+  <ts-checkbox-group label="Notification Preferences" style="max-width: 400px;">
+    <ts-checkbox value="email">Email notifications</ts-checkbox>
+    <ts-checkbox value="sms">SMS notifications</ts-checkbox>
+    <ts-checkbox value="push">Push notifications</ts-checkbox>
+  </ts-checkbox-group>
+`;
+
+export const CheckboxGroupHorizontal = (): string => `
+  <ts-checkbox-group label="Interests" orientation="horizontal" style="max-width: 500px;">
+    <ts-checkbox value="music">Music</ts-checkbox>
+    <ts-checkbox value="sports">Sports</ts-checkbox>
+    <ts-checkbox value="travel">Travel</ts-checkbox>
+    <ts-checkbox value="food">Food</ts-checkbox>
+  </ts-checkbox-group>
+`;
+
+export const CheckboxGroupDisabled = (): string => `
+  <ts-checkbox-group label="Features" disabled style="max-width: 400px;">
+    <ts-checkbox value="dark-mode">Dark mode</ts-checkbox>
+    <ts-checkbox value="notifications">Notifications</ts-checkbox>
+    <ts-checkbox value="analytics">Analytics</ts-checkbox>
+  </ts-checkbox-group>
+`;
+
+export const CheckboxGroupError = (): string => `
+  <ts-checkbox-group label="Required Skills" error="Please select at least one skill" style="max-width: 400px;">
+    <ts-checkbox value="js">JavaScript</ts-checkbox>
+    <ts-checkbox value="ts">TypeScript</ts-checkbox>
+    <ts-checkbox value="react">React</ts-checkbox>
+  </ts-checkbox-group>
+`;
