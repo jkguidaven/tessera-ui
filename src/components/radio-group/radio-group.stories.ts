@@ -1,1 +1,7 @@
-// Stories for this component are in the radio component's stories file
+// Stories for this component are in the parent's stories file
+
+export default {
+  title: 'Components/RadioGroup',
+  tags: ['!autodocs'],
+  parameters: { chromatic: { disableSnapshot: true } },
+};

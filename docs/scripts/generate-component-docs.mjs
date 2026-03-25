@@ -90,7 +90,7 @@ for (const component of docs.components) {
     lines.push('| Event | Detail | Bubbles | Composed | Description |');
     lines.push('|---|---|---|---|---|');
     for (const event of events) {
-      const detail = event.detail ? `\`${event.detail}\`` : '—';
+      const detail = event.detail ? `\`${event.detail.replace(/\{/g, '\\{').replace(/\}/g, '\\}')}\`` : '—';
       const doc = escapeMarkdown(event.docs || '');
       lines.push(`| \`${event.event}\` | ${detail} | ${event.bubbles ? 'Yes' : 'No'} | ${event.composed ? 'Yes' : 'No'} | ${doc} |`);
     }
@@ -213,5 +213,9 @@ function pascalCase(str) {
 }
 
 function escapeMarkdown(str) {
-  return str.replace(/\|/g, '\\|').replace(/\n/g, ' ');
+  return str
+    .replace(/\|/g, '\\|')
+    .replace(/\n/g, ' ')
+    .replace(/\{/g, '\\{')
+    .replace(/\}/g, '\\}');
 }
