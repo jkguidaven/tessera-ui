@@ -79,6 +79,7 @@
   transition:
     box-shadow var(--ts-transition-fast),
     transform var(--ts-transition-fast);
+  z-index: 1;
 }
 
 .slider__thumb:focus-visible {
@@ -120,4 +121,89 @@
 
 :host(.ts-slider--disabled) .slider__thumb {
   cursor: not-allowed;
+}
+
+/* ---- Marks ---- */
+.slider__marks {
+  position: absolute;
+  inset-inline: 0;
+  inset-block: 0;
+  pointer-events: none;
+}
+
+.slider__mark {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transform: translateX(-50%);
+}
+
+.slider__mark-tick {
+  inline-size: 4px;
+  block-size: 4px;
+  border-radius: var(--ts-radius-full);
+  background-color: var(--ts-slider-track-bg);
+  margin-block-start: calc((var(--ts-slider-thumb-size) - 4px) / 2);
+}
+
+.slider__mark-label {
+  font-family: var(--ts-font-family-base);
+  font-size: var(--ts-font-size-xs);
+  color: var(--ts-color-text-tertiary);
+  margin-block-start: calc(var(--ts-slider-thumb-size) / 2 + var(--ts-spacing-1));
+  white-space: nowrap;
+}
+
+/* ---- Vertical Orientation ---- */
+:host([orientation="vertical"]) {
+  display: inline-flex;
+  block-size: 200px;
+}
+
+:host([orientation="vertical"]) .slider__track {
+  flex-direction: column;
+  inline-size: var(--ts-slider-thumb-size);
+  block-size: 100%;
+}
+
+:host([orientation="vertical"]) .slider__track::before {
+  inset-inline: auto;
+  inset-block: 0;
+  inline-size: 4px;
+  block-size: auto;
+  inset-inline-start: 50%;
+  transform: translateX(-50%);
+}
+
+:host([orientation="vertical"]) .slider__fill {
+  inset-inline-start: 50%;
+  transform: translateX(-50%);
+  inline-size: 4px;
+  block-size: auto;
+  inset-block-start: auto;
+}
+
+:host([orientation="vertical"]) .slider__thumb {
+  transform: translateY(50%);
+  inset-inline-start: 0;
+}
+
+:host([orientation="vertical"]) .slider__thumb:active {
+  transform: translateY(50%) scale(1.1);
+}
+
+:host([orientation="vertical"]) .slider__mark {
+  transform: translateY(50%);
+  flex-direction: row;
+}
+
+:host([orientation="vertical"]) .slider__mark-tick {
+  margin-block-start: 0;
+  margin-inline-start: calc((var(--ts-slider-thumb-size) - 4px) / 2);
+}
+
+:host([orientation="vertical"]) .slider__mark-label {
+  margin-block-start: 0;
+  margin-inline-start: var(--ts-spacing-2);
 }
