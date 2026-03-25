@@ -92,16 +92,16 @@
   --ts-ref-danger-900: #7f1d1d;
 
   /* ----- Reference: Info Palette ----- */
-  --ts-ref-info-50:  #eff6ff;
-  --ts-ref-info-100: #dbeafe;
-  --ts-ref-info-200: #bfdbfe;
-  --ts-ref-info-300: #93c5fd;
-  --ts-ref-info-400: #60a5fa;
-  --ts-ref-info-500: #3b82f6;
-  --ts-ref-info-600: #2563eb;
-  --ts-ref-info-700: #1d4ed8;
-  --ts-ref-info-800: #1e40af;
-  --ts-ref-info-900: #1e3a5f;
+  --ts-ref-info-50:  #f0f9ff;
+  --ts-ref-info-100: #e0f2fe;
+  --ts-ref-info-200: #bae6fd;
+  --ts-ref-info-300: #7dd3fc;
+  --ts-ref-info-400: #38bdf8;
+  --ts-ref-info-500: #0ea5e9;
+  --ts-ref-info-600: #0284c7;
+  --ts-ref-info-700: #0369a1;
+  --ts-ref-info-800: #075985;
+  --ts-ref-info-900: #0c4a6e;
 
   /* ----- Reference: Black & White ----- */
   --ts-ref-black: #000000;
@@ -265,8 +265,8 @@
   --ts-color-border-selected:   var(--ts-ref-primary-500);
 
   /* ----- Color: Feedback Backgrounds ----- */
-  --ts-color-info-bg:        rgba(59, 130, 246, 0.06);
-  --ts-color-info-border:    rgba(59, 130, 246, 0.15);
+  --ts-color-info-bg:        rgba(14, 165, 233, 0.06);
+  --ts-color-info-border:    rgba(14, 165, 233, 0.15);
   --ts-color-success-bg:     rgba(34, 197, 94, 0.06);
   --ts-color-success-border: rgba(34, 197, 94, 0.15);
   --ts-color-warning-bg:     rgba(245, 158, 11, 0.06);
@@ -569,7 +569,7 @@
   --ts-color-on-warning-container: var(--ts-ref-warning-200);
   --ts-color-danger-container:     rgba(220, 38, 38, 0.15);
   --ts-color-on-danger-container:  var(--ts-ref-danger-200);
-  --ts-color-info-container:       rgba(59, 130, 246, 0.15);
+  --ts-color-info-container:       rgba(14, 165, 233, 0.15);
   --ts-color-on-info-container:    var(--ts-ref-info-200);
 
   /* ----- Background roles (M3 — blue-tinted dark surfaces) ----- */
@@ -602,8 +602,8 @@
   --ts-color-border-selected:   var(--ts-ref-primary-400);
 
   /* ----- Feedback backgrounds (stronger in dark) ----- */
-  --ts-color-info-bg:        rgba(59, 130, 246, 0.12);
-  --ts-color-info-border:    rgba(59, 130, 246, 0.25);
+  --ts-color-info-bg:        rgba(14, 165, 233, 0.12);
+  --ts-color-info-border:    rgba(14, 165, 233, 0.25);
   --ts-color-success-bg:     rgba(34, 197, 94, 0.12);
   --ts-color-success-border: rgba(34, 197, 94, 0.25);
   --ts-color-warning-bg:     rgba(245, 158, 11, 0.12);
