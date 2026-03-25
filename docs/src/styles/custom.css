@@ -5,25 +5,34 @@
   --sl-font: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 
-[data-page-template="splash"] .hero h1 {
-  display: none;
+/* Landing page hero — logo replaces title, centered vertical stack */
+.hero h1[data-page-title] {
+  display: none !important;
 }
 
-[data-page-template="splash"] .hero {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
+.hero {
+  grid-template-columns: 1fr !important;
+  justify-items: center;
+  text-align: center !important;
+  padding-block: clamp(2rem, 8vmin, 6rem) !important;
 }
 
-[data-page-template="splash"] .hero > img,
-[data-page-template="splash"] .hero > picture {
-  order: -1;
-  margin-bottom: 1rem;
+.hero > img {
+  order: -1 !important;
+  width: min(80%, 22rem) !important;
+  margin-bottom: 1.5rem;
 }
 
-[data-page-template="splash"] .hero .sl-flex {
-  justify-content: center;
+.hero .stack {
+  text-align: center !important;
+}
+
+.hero .copy {
+  align-items: center !important;
+}
+
+.hero .actions {
+  justify-content: center !important;
 }
 
 .version-badge {
