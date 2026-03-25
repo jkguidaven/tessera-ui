@@ -76,3 +76,4 @@ export { TsRadioGroup } from './components/radio-group/radio-group';
 export { TsCheckboxGroup } from './components/checkbox-group/checkbox-group';
 export { TsNumberInput } from './components/number-input/number-input';
 export { TsTagInput } from './components/tag-input/tag-input';
+export { TsScrollArea } from './components/scroll-area/scroll-area';

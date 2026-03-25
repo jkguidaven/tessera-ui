@@ -1,0 +1,42 @@
+/* ==========================================================================
+   ts-scroll-area — Shadow DOM Scoped Styles
+
+   Provides custom thin scrollbar styling for scrollable content areas.
+   ========================================================================== */
+
+:host {
+  display: block;
+}
+
+/* ---- Viewport ---- */
+.scroll-area__viewport {
+  scrollbar-width: thin;
+  scrollbar-color: var(--ts-color-neutral-300) transparent;
+}
+
+.scroll-area__viewport--vertical {
+  overflow-y: auto;
+}
+
+.scroll-area__viewport--horizontal {
+  overflow-x: auto;
+}
+
+/* ---- WebKit scrollbar ---- */
+.scroll-area__viewport::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.scroll-area__viewport::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.scroll-area__viewport::-webkit-scrollbar-thumb {
+  background-color: var(--ts-color-neutral-300);
+  border-radius: var(--ts-radius-full);
+}
+
+.scroll-area__viewport::-webkit-scrollbar-thumb:hover {
+  background-color: var(--ts-color-neutral-400);
+}
