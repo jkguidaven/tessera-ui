@@ -9,6 +9,7 @@ import { generateId } from '../../utils/aria';
  * @part textarea - The native textarea element.
  * @part help-text - The help text wrapper.
  * @part error-text - The error message wrapper.
+ * @part counter - The character counter element.
  */
 @Component({
   tag: 'ts-textarea',
@@ -63,6 +64,15 @@ export class TsTextarea {
   /** Maximum character length. */
   @Prop() maxlength?: number;
 
+  /** Whether to show the character counter. Requires maxlength to be set. */
+  @Prop({ reflect: true }) showCount = false;
+
+  /** Whether the textarea auto-grows vertically as content is typed. */
+  @Prop({ reflect: true }) autoGrow = false;
+
+  /** Maximum height for auto-grow mode (e.g., "300px"). */
+  @Prop() maxHeight?: string;
+
   /** Whether the textarea is currently focused. */
   @State() hasFocus = false;
 
@@ -82,6 +92,15 @@ export class TsTextarea {
   handleValueChange(newValue: string, oldValue: string): void {
     if (newValue !== oldValue && this.textareaEl) {
       this.textareaEl.value = newValue;
+      if (this.autoGrow) {
+        this.adjustHeight();
+      }
+    }
+  }
+
+  componentDidLoad(): void {
+    if (this.autoGrow) {
+      this.adjustHeight();
     }
   }
 
@@ -97,11 +116,31 @@ export class TsTextarea {
     this.textareaEl?.select();
   }
 
+  private adjustHeight(): void {
+    const el = this.textareaEl;
+    if (!el) return;
+    el.style.height = 'auto';
+    let newHeight = el.scrollHeight;
+    if (this.maxHeight) {
+      const max = parseInt(this.maxHeight, 10);
+      if (!isNaN(max) && newHeight > max) {
+        newHeight = max;
+        el.style.overflowY = 'auto';
+      } else {
+        el.style.overflowY = 'hidden';
+      }
+    }
+    el.style.height = `${newHeight}px`;
+  }
+
   private handleInput = (event: Event): void => {
     const target = event.target as HTMLTextAreaElement;
     const previousValue = this.value;
     this.value = target.value;
     this.tsInput.emit({ value: this.value, previousValue });
+    if (this.autoGrow) {
+      this.adjustHeight();
+    }
   };
 
   private handleChange = (): void => {
@@ -124,6 +163,7 @@ export class TsTextarea {
     const labelId = `${this.inputId}-label`;
     const helpId = `${this.inputId}-help`;
     const errorId = `${this.inputId}-error`;
+    const showCounter = this.showCount && this.maxlength !== undefined && this.maxlength > 0;
 
     return (
       <Host
@@ -133,6 +173,7 @@ export class TsTextarea {
           'ts-textarea--focused': this.hasFocus,
           'ts-textarea--disabled': this.disabled,
           'ts-textarea--error': this.error,
+          'ts-textarea--auto-grow': this.autoGrow,
         }}
       >
         {this.label && (
@@ -184,6 +225,20 @@ export class TsTextarea {
         {!hasError && this.helpText && (
           <div class="textarea__help" part="help-text" id={helpId}>
             {this.helpText}
+          </div>
+        )}
+
+        {showCounter && (
+          <div
+            class={{
+              'textarea__counter': true,
+              'textarea__counter--warning': this.maxlength !== undefined && this.maxlength > 0 && this.value.length / this.maxlength > 0.9 && this.value.length / this.maxlength < 1,
+              'textarea__counter--danger': this.maxlength !== undefined && this.maxlength > 0 && this.value.length / this.maxlength >= 1,
+            }}
+            part="counter"
+            aria-live="polite"
+          >
+            {this.value.length}/{this.maxlength}
           </div>
         )}
       </Host>

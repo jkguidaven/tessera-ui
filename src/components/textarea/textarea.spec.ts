@@ -110,4 +110,54 @@ describe('ts-textarea', () => {
 
     expect(spy).toHaveBeenCalledTimes(1);
   });
+
+  it('renders character counter when showCount and maxlength are set', async () => {
+    const page = await newSpecPage({
+      components: [TsTextarea],
+      html: '<ts-textarea show-count maxlength="500" value="hello"></ts-textarea>',
+    });
+
+    const counter = page.root?.shadowRoot?.querySelector('.textarea__counter');
+    expect(counter).not.toBeNull();
+    expect(counter?.textContent).toBe('5/500');
+  });
+
+  it('hides counter when showCount is false', async () => {
+    const page = await newSpecPage({
+      components: [TsTextarea],
+      html: '<ts-textarea maxlength="500" value="hello"></ts-textarea>',
+    });
+
+    const counter = page.root?.shadowRoot?.querySelector('.textarea__counter');
+    expect(counter).toBeNull();
+  });
+
+  it('applies warning color on counter near limit', async () => {
+    const page = await newSpecPage({
+      components: [TsTextarea],
+      html: '<ts-textarea show-count maxlength="20" value="1234567890123456789"></ts-textarea>',
+    });
+
+    const counter = page.root?.shadowRoot?.querySelector('.textarea__counter');
+    expect(counter?.classList.contains('textarea__counter--warning')).toBe(true);
+  });
+
+  it('applies danger color on counter at limit', async () => {
+    const page = await newSpecPage({
+      components: [TsTextarea],
+      html: '<ts-textarea show-count maxlength="5" value="12345"></ts-textarea>',
+    });
+
+    const counter = page.root?.shadowRoot?.querySelector('.textarea__counter');
+    expect(counter?.classList.contains('textarea__counter--danger')).toBe(true);
+  });
+
+  it('applies auto-grow class when autoGrow is true', async () => {
+    const page = await newSpecPage({
+      components: [TsTextarea],
+      html: '<ts-textarea auto-grow></ts-textarea>',
+    });
+
+    expect(page.root).toHaveClass('ts-textarea--auto-grow');
+  });
 });

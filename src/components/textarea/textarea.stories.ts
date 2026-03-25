@@ -25,6 +25,9 @@ export default {
       description: 'Resize behavior.',
     },
     maxlength: { control: 'number', description: 'Maximum character length.' },
+    showCount: { control: 'boolean', description: 'Shows a character counter when maxlength is set.' },
+    autoGrow: { control: 'boolean', description: 'Whether the textarea auto-grows vertically.' },
+    maxHeight: { control: 'text', description: 'Maximum height for auto-grow mode (e.g., "300px").' },
     name: { control: 'text', description: 'Name attribute for form submission.' },
   },
 };
@@ -44,6 +47,9 @@ const Template = (args: Record<string, unknown>): string => {
   if (args.rows !== undefined && args.rows !== null) attrs.push(`rows="${args.rows}"`);
   if (args.resize !== undefined && args.resize !== null) attrs.push(`resize="${args.resize}"`);
   if (args.maxlength !== undefined && args.maxlength !== null) attrs.push(`maxlength="${args.maxlength}"`);
+  if (args.showCount) attrs.push('show-count');
+  if (args.autoGrow) attrs.push('auto-grow');
+  if (args.maxHeight !== undefined && args.maxHeight !== null && args.maxHeight !== '') attrs.push(`max-height="${args.maxHeight}"`);
   if (args.name !== undefined && args.name !== null) attrs.push(`name="${args.name}"`);
   return `<ts-textarea ${attrs.join(' ')}></ts-textarea>`;
 };
@@ -91,6 +97,22 @@ export const ResizeBehaviors = (): string => `
     <ts-textarea label="Horizontal resize" resize="horizontal" placeholder="Drag horizontally..."></ts-textarea>
     <ts-textarea label="Both directions" resize="both" placeholder="Drag in any direction..."></ts-textarea>
     <ts-textarea label="No resize" resize="none" placeholder="This textarea cannot be resized."></ts-textarea>
+  </div>
+`;
+
+export const CharacterCounter = (): string => `
+  <div style="display: flex; flex-direction: column; gap: 16px; max-width: 480px;">
+    <ts-textarea label="Bio" placeholder="Tell us about yourself..." maxlength="200" show-count value="Software engineer who loves building UI components."></ts-textarea>
+    <ts-textarea label="Near Limit" maxlength="20" show-count value="1234567890123456789"></ts-textarea>
+    <ts-textarea label="At Limit" maxlength="10" show-count value="1234567890"></ts-textarea>
+  </div>
+`;
+
+export const AutoGrow = (): string => `
+  <div style="display: flex; flex-direction: column; gap: 16px; max-width: 480px;">
+    <ts-textarea label="Auto-growing textarea" placeholder="Start typing and watch the textarea grow..." auto-grow></ts-textarea>
+    <ts-textarea label="Auto-grow with max height" placeholder="This textarea will grow up to 150px..." auto-grow max-height="150"></ts-textarea>
+    <ts-textarea label="Auto-grow with counter" placeholder="Type your message..." auto-grow show-count maxlength="500"></ts-textarea>
   </div>
 `;
 

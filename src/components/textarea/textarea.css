@@ -144,3 +144,26 @@
   color: var(--ts-color-danger-600);
   font-weight: var(--ts-font-weight-medium);
 }
+
+/* ---- Auto-grow ---- */
+:host([auto-grow]) .textarea__native {
+  resize: none;
+  overflow-y: hidden;
+}
+
+/* ---- Character Counter ---- */
+.textarea__counter {
+  margin-block-start: var(--ts-spacing-1);
+  font-size: var(--ts-font-size-xs);
+  line-height: var(--ts-line-height-normal);
+  color: var(--ts-color-text-tertiary);
+  text-align: end;
+}
+
+.textarea__counter--warning {
+  color: var(--ts-color-warning-500);
+}
+
+.textarea__counter--danger {
+  color: var(--ts-color-danger-500);
+}
