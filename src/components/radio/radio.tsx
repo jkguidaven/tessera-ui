@@ -1,4 +1,4 @@
-import { Component, Prop, Event, h, Host, Element, Method } from '@stencil/core';
+import { Component, Prop, Event, Watch, h, Host, Element, Method } from '@stencil/core';
 import type { EventEmitter } from '@stencil/core';
 import type { TsCheckboxChangeEventDetail } from '../../types';
 import { generateId } from '../../utils/aria';
@@ -19,6 +19,7 @@ export class TsRadio {
   @Element() hostEl!: HTMLElement;
 
   private inputId = generateId('ts-radio');
+  private hiddenInput?: HTMLInputElement;
 
   /** Whether the radio is checked. */
   @Prop({ mutable: true, reflect: true }) checked = false;
@@ -40,6 +41,27 @@ export class TsRadio {
 
   /** Emitted when the radio is selected. */
   @Event({ eventName: 'tsChange' }) tsChange!: EventEmitter<TsCheckboxChangeEventDetail>;
+
+  connectedCallback(): void {
+    if (this.name) {
+      this.hiddenInput = document.createElement('input');
+      this.hiddenInput.type = 'hidden';
+      this.hiddenInput.name = this.name;
+      this.hiddenInput.value = this.checked ? this.value : '';
+      this.hostEl.appendChild(this.hiddenInput);
+    }
+  }
+
+  disconnectedCallback(): void {
+    this.hiddenInput?.remove();
+  }
+
+  @Watch('checked')
+  handleCheckedChange(): void {
+    if (this.hiddenInput) {
+      this.hiddenInput.value = this.checked ? this.value : '';
+    }
+  }
 
   /** Programmatically select the radio. */
   @Method()

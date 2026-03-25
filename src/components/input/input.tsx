@@ -37,6 +37,7 @@ export class TsInput {
   @Element() hostEl!: HTMLElement;
 
   private inputEl?: HTMLInputElement;
+  private hiddenInput?: HTMLInputElement;
   private inputId = generateId('ts-input');
   private previousValue = '';
 
@@ -116,10 +117,27 @@ export class TsInput {
   /** Emitted on validation. */
   @Event({ eventName: 'tsValidate' }) tsValidate!: EventEmitter<TsValidationEventDetail>;
 
+  connectedCallback(): void {
+    if (this.name) {
+      this.hiddenInput = document.createElement('input');
+      this.hiddenInput.type = 'hidden';
+      this.hiddenInput.name = this.name;
+      this.hiddenInput.value = this.value;
+      this.hostEl.appendChild(this.hiddenInput);
+    }
+  }
+
+  disconnectedCallback(): void {
+    this.hiddenInput?.remove();
+  }
+
   @Watch('value')
   handleValueChange(newValue: string, oldValue: string): void {
     if (newValue !== oldValue && this.inputEl) {
       this.inputEl.value = newValue;
+    }
+    if (this.hiddenInput) {
+      this.hiddenInput.value = newValue;
     }
   }
 

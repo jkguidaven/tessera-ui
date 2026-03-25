@@ -251,4 +251,41 @@ describe('ts-input', () => {
     const counter = page.root?.shadowRoot?.querySelector('.input__counter');
     expect(counter?.classList.contains('input__counter--danger')).toBe(true);
   });
+
+  it('creates a hidden input when name is set', async () => {
+    const page = await newSpecPage({
+      components: [TsInput],
+      html: '<ts-input name="email" value="test@example.com"></ts-input>',
+    });
+
+    const hiddenInput = page.root?.querySelector('input[type="hidden"]');
+    expect(hiddenInput).not.toBeNull();
+    expect(hiddenInput?.getAttribute('name')).toBe('email');
+    expect((hiddenInput as HTMLInputElement)?.value).toBe('test@example.com');
+  });
+
+  it('does not create a hidden input when name is not set', async () => {
+    const page = await newSpecPage({
+      components: [TsInput],
+      html: '<ts-input value="test"></ts-input>',
+    });
+
+    const hiddenInput = page.root?.querySelector('input[type="hidden"]');
+    expect(hiddenInput).toBeNull();
+  });
+
+  it('syncs hidden input value when component value changes', async () => {
+    const page = await newSpecPage({
+      components: [TsInput],
+      html: '<ts-input name="email" value="old@example.com"></ts-input>',
+    });
+
+    const hiddenInput = page.root?.querySelector('input[type="hidden"]') as HTMLInputElement;
+    expect(hiddenInput?.value).toBe('old@example.com');
+
+    page.root?.setAttribute('value', 'new@example.com');
+    await page.waitForChanges();
+
+    expect(hiddenInput?.value).toBe('new@example.com');
+  });
 });
