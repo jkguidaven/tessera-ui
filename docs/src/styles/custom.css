@@ -9,33 +9,35 @@
   color: var(--sl-color-white) !important;
 }
 
-/* Landing page hero — logo replaces title, centered vertical stack */
-.hero h1[data-page-title] {
+/* Landing page hero — logo replaces title, left-aligned vertical stack */
+[data-page-title] {
   display: none !important;
 }
 
-.hero {
+div.hero {
+  display: grid !important;
   grid-template-columns: 1fr !important;
-  justify-items: start;
+  justify-items: start !important;
   text-align: start !important;
   padding-block: clamp(2rem, 8vmin, 6rem) !important;
 }
 
-.hero > img {
+div.hero > img {
   order: -1 !important;
   width: min(80%, 22rem) !important;
+  margin-inline: 0 !important;
   margin-bottom: 1.5rem;
 }
 
-.hero .stack {
+div.hero div.stack {
   text-align: start !important;
 }
 
-.hero .copy {
+div.hero div.copy {
   align-items: flex-start !important;
 }
 
-.hero .actions {
+div.hero div.actions {
   justify-content: flex-start !important;
 }
 
