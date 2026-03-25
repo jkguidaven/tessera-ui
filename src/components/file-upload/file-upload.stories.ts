@@ -28,6 +28,14 @@ export default {
       control: 'text',
       description: 'Form field name.',
     },
+    maxFiles: {
+      control: 'number',
+      description: 'Maximum number of files allowed.',
+    },
+    showFileList: {
+      control: 'boolean',
+      description: 'Whether to show the file list below the dropzone.',
+    },
   },
 };
 
@@ -36,6 +44,8 @@ const Template = (args: Record<string, unknown>): string => {
   if (args.accept !== undefined && args.accept !== '') attrs.push(`accept="${args.accept}"`);
   if (args.multiple) attrs.push('multiple');
   if (args.maxSize !== undefined) attrs.push(`max-size="${args.maxSize}"`);
+  if (args.maxFiles !== undefined) attrs.push(`max-files="${args.maxFiles}"`);
+  if (args.showFileList === false) attrs.push('show-file-list="false"');
   if (args.disabled) attrs.push('disabled');
   if (args.label !== undefined) attrs.push(`label="${args.label}"`);
   if (args.name !== undefined && args.name !== '') attrs.push(`name="${args.name}"`);
@@ -102,5 +112,30 @@ export const Composition = (): string => `
         <ts-button variant="primary">Upload Files</ts-button>
       </div>
     </div>
+  </div>
+`;
+
+export const WithFileList = (): string => `
+  <div style="max-width: 500px; font-family: sans-serif;">
+    <p style="margin: 0 0 8px; font-size: 14px; color: #666;">
+      Select files to see them listed below the dropzone. Each file shows its name, size, and a remove button.
+    </p>
+    <ts-file-upload
+      multiple
+      label="Drop files here to see the file list"
+    ></ts-file-upload>
+  </div>
+`;
+
+export const WithMaxFiles = (): string => `
+  <div style="max-width: 500px; font-family: sans-serif;">
+    <p style="margin: 0 0 8px; font-size: 14px; color: #666;">
+      Limited to 3 files maximum. A capacity message appears when the limit is reached.
+    </p>
+    <ts-file-upload
+      multiple
+      max-files="3"
+      label="Drop files here (max 3 files)"
+    ></ts-file-upload>
   </div>
 `;
