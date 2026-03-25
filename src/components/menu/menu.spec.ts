@@ -162,4 +162,50 @@ describe('ts-menu-item', () => {
     expect(prefix).not.toBeNull();
     expect(suffix).not.toBeNull();
   });
+
+  it('renders checkbox type with menuitemcheckbox role', async () => {
+    const page = await newSpecPage({
+      components: [TsMenuItem],
+      html: '<ts-menu-item type="checkbox" value="option1">Option 1</ts-menu-item>',
+    });
+
+    const base = page.root?.shadowRoot?.querySelector('.menu-item__base');
+    expect(base?.getAttribute('role')).toBe('menuitemcheckbox');
+    expect(base?.getAttribute('aria-checked')).toBe('false');
+  });
+
+  it('toggles checked on checkbox click', async () => {
+    const page = await newSpecPage({
+      components: [TsMenuItem],
+      html: '<ts-menu-item type="checkbox" value="opt">Toggle</ts-menu-item>',
+    });
+
+    const base = page.root?.shadowRoot?.querySelector('.menu-item__base') as HTMLElement;
+    base?.click();
+    await page.waitForChanges();
+
+    expect(page.root?.getAttribute('checked')).not.toBeNull();
+  });
+
+  it('applies danger variant class', async () => {
+    const page = await newSpecPage({
+      components: [TsMenuItem],
+      html: '<ts-menu-item variant="danger" value="delete">Delete</ts-menu-item>',
+    });
+
+    expect(page.root).toHaveClass('ts-menu-item--danger');
+  });
+});
+
+describe('ts-menu-divider', () => {
+  it('renders with role="separator"', async () => {
+    const { TsMenuDivider } = await import('./menu-divider');
+    const page = await newSpecPage({
+      components: [TsMenuDivider],
+      html: '<ts-menu-divider></ts-menu-divider>',
+    });
+
+    const divider = page.root?.shadowRoot?.querySelector('[role="separator"]');
+    expect(divider).not.toBeNull();
+  });
 });

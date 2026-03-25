@@ -129,3 +129,48 @@ export const UserMenu = (): string => `
     <ts-menu-item value="logout">Sign Out</ts-menu-item>
   </ts-menu>
 `;
+
+export const WithDividers = (): string => `
+  <ts-menu>
+    <ts-button slot="trigger" appearance="outline" variant="neutral">File</ts-button>
+    <ts-menu-item value="new">New File</ts-menu-item>
+    <ts-menu-item value="open">Open...</ts-menu-item>
+    <ts-menu-item value="save">Save</ts-menu-item>
+    <ts-menu-divider></ts-menu-divider>
+    <ts-menu-item value="export">Export As...</ts-menu-item>
+    <ts-menu-item value="print">Print</ts-menu-item>
+    <ts-menu-divider></ts-menu-divider>
+    <ts-menu-item value="close" variant="danger">Close Project</ts-menu-item>
+  </ts-menu>
+`;
+
+export const CheckboxItems = (): string => `
+  <ts-menu>
+    <ts-button slot="trigger" appearance="outline" variant="neutral">View Options</ts-button>
+    <ts-menu-item type="checkbox" value="sidebar" checked>Show Sidebar</ts-menu-item>
+    <ts-menu-item type="checkbox" value="statusbar" checked>Show Status Bar</ts-menu-item>
+    <ts-menu-item type="checkbox" value="minimap">Show Minimap</ts-menu-item>
+    <ts-menu-divider></ts-menu-divider>
+    <ts-menu-item type="checkbox" value="wordwrap">Word Wrap</ts-menu-item>
+  </ts-menu>
+`;
+
+export const DangerItem = (): string => `
+  <ts-menu>
+    <ts-button slot="trigger" appearance="outline" variant="neutral">Actions</ts-button>
+    <ts-menu-item value="edit">
+      <ts-icon slot="prefix" name="pencil" size="sm"></ts-icon>
+      Edit
+    </ts-menu-item>
+    <ts-menu-item value="duplicate">
+      <ts-icon slot="prefix" name="copy" size="sm"></ts-icon>
+      Duplicate
+    </ts-menu-item>
+    <ts-menu-divider></ts-menu-divider>
+    <ts-menu-item value="delete" variant="danger">
+      <ts-icon slot="prefix" name="trash-2" size="sm"></ts-icon>
+      Delete
+      <span slot="suffix">⌘⌫</span>
+    </ts-menu-item>
+  </ts-menu>
+`;

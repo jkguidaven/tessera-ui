@@ -37,6 +37,7 @@ export { TsDialog } from './components/dialog/dialog';
 export { TsMenu } from './components/menu/menu';
 export type { TsMenuPlacement, TsMenuTrigger } from './components/menu/menu';
 export { TsMenuItem } from './components/menu/menu-item';
+export { TsMenuDivider } from './components/menu/menu-divider';
 export { TsTable } from './components/table/table';
 export { TsAccordion } from './components/accordion/accordion';
 export { TsAccordionItem } from './components/accordion/accordion-item';
