@@ -1,31 +1,27 @@
 # GitHub Copilot Instructions — Tessera UI
 
-<!-- GitHub Copilot reads this file for repository-level context. -->
-<!-- All project conventions and agent instructions live in `.ai-instructions.md` at the repo root. -->
-<!-- Read that file FIRST for full architecture, conventions, and task reference. -->
+# All project conventions and agent instructions live in `.ai-instructions.md`.
+# Read that file FIRST before making any changes to this codebase.
 
-## Project Summary
+You are working on **Tessera UI**, a framework-agnostic web component library built with Stencil.js and TypeScript.
 
-**Tessera UI** is a framework-agnostic web component library built with **Stencil.js** and **TypeScript**. Components are authored once as Web Components and automatically compiled to first-class React, Vue, and Angular wrappers.
+## Critical Rules
 
-## Key Conventions for Code Completion
+1. Read `.ai-instructions.md` for complete project context, conventions, and architecture.
+2. Use `pnpm` exclusively — never `npm` or `yarn`.
+3. All components live under `src/components/<name>/` with five mandatory files: `.tsx`, `.css`, `.spec.ts`, `.e2e.ts`, `.stories.ts`.
+4. All component tags use the `ts-` prefix (e.g., `<ts-button>`).
+5. All CSS values must reference design tokens (`--ts-*`) from `src/theme/tokens.css`. Never use raw hex, px, or rem values.
+6. TypeScript strict mode is enabled. No `any` types. Use `import type` for type-only imports.
+7. All interactive components must be keyboard navigable and WCAG 2.1 AA accessible.
+8. Shadow DOM is used for style encapsulation. Use CSS custom properties for consumer-facing theming.
+9. Custom events must set `{ bubbles: true, composed: true }` to cross Shadow DOM boundaries.
+10. The reference implementation is `src/components/button/` — follow that pattern for new components.
 
-- **Package manager**: `pnpm` only. Never suggest `npm` or `yarn`.
-- **Component prefix**: All custom element tags start with `ts-` (e.g., `<ts-button>`, `<ts-modal>`).
-- **Component structure**: Every component has five files in `src/components/<name>/`: `.tsx`, `.css`, `.spec.ts`, `.e2e.ts`, `.stories.ts`.
-- **CSS tokens only**: Never use raw color/size values. Always use `--ts-*` custom properties from `src/theme/tokens.css`.
-- **TypeScript strict**: `"strict": true`. No `any`. Use `import type` for type imports.
-- **Stencil decorators**: `@Prop()`, `@Event()`, `@State()`, `@Method()`, `@Element()`. Always add JSDoc.
-- **Event naming**: Custom events use `q` prefix: `tsClick`, `tsChange`, `tsInput`, `tsClose`, etc.
-- **Event config**: All custom events must use `{ bubbles: true, composed: true }` to cross Shadow DOM.
-- **Accessibility**: All interactive elements need keyboard support, ARIA attributes, and focus management.
-- **Shadow DOM**: All components use Shadow DOM. Consumer theming is via CSS custom properties only.
+## When generating code
 
-## Reference Files
-
-- `src/components/button/button.tsx` — canonical component example
-- `src/theme/tokens.css` — all design tokens
-- `src/types/index.ts` — shared type definitions
-- `src/utils/aria.ts` — accessibility helpers
-- `stencil.config.ts` — build configuration with output targets
-- `.ai-instructions.md` — full agent instructions (read this for complete context)
+- Follow existing patterns in the codebase — check similar components before writing new ones.
+- Always include JSDoc comments on `@Prop()` and `@Event()` decorators.
+- Always include `@part` and `@slot` annotations in the component class JSDoc.
+- Test disabled, loading, and error states — not just the happy path.
+- Run `pnpm test` after changes.
