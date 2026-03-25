@@ -94,4 +94,72 @@ describe('ts-progress', () => {
     const track = page.root?.shadowRoot?.querySelector('[role="progressbar"]');
     expect(track?.hasAttribute('aria-valuenow')).toBe(false);
   });
+
+  it('renders circular type with SVG', async () => {
+    const page = await newSpecPage({
+      components: [TsProgress],
+      html: '<ts-progress type="circular" value="50"></ts-progress>',
+    });
+
+    const svg = page.root?.shadowRoot?.querySelector('svg');
+    expect(svg).not.toBeNull();
+    expect(svg?.getAttribute('viewBox')).toBe('0 0 36 36');
+
+    const trackCircle = page.root?.shadowRoot?.querySelector('.progress__circle-track');
+    expect(trackCircle).not.toBeNull();
+
+    const fillCircle = page.root?.shadowRoot?.querySelector('.progress__circle-fill');
+    expect(fillCircle).not.toBeNull();
+  });
+
+  it('shows percentage text in circular when showValue is true', async () => {
+    const page = await newSpecPage({
+      components: [TsProgress],
+      html: '<ts-progress type="circular" value="75" show-value></ts-progress>',
+    });
+
+    const text = page.root?.shadowRoot?.querySelector('.progress__circle-text');
+    expect(text).not.toBeNull();
+    expect(text?.textContent).toBe('75%');
+  });
+
+  it('applies striped class when striped prop is set', async () => {
+    const page = await newSpecPage({
+      components: [TsProgress],
+      html: '<ts-progress value="50" striped></ts-progress>',
+    });
+
+    expect(page.root).toHaveClass('ts-progress--striped');
+  });
+
+  it('applies animated class when striped and animated', async () => {
+    const page = await newSpecPage({
+      components: [TsProgress],
+      html: '<ts-progress value="50" striped animated></ts-progress>',
+    });
+
+    expect(page.root).toHaveClass('ts-progress--striped');
+    expect(page.root).toHaveClass('ts-progress--animated');
+  });
+
+  it('renders buffer fill when bufferValue is set', async () => {
+    const page = await newSpecPage({
+      components: [TsProgress],
+      html: '<ts-progress value="30" buffer-value="70"></ts-progress>',
+    });
+
+    const buffer = page.root?.shadowRoot?.querySelector('.progress__buffer') as HTMLElement;
+    expect(buffer).not.toBeNull();
+    expect(buffer?.style.width).toBe('70%');
+  });
+
+  it('does not render buffer fill when bufferValue is not set', async () => {
+    const page = await newSpecPage({
+      components: [TsProgress],
+      html: '<ts-progress value="30"></ts-progress>',
+    });
+
+    const buffer = page.root?.shadowRoot?.querySelector('.progress__buffer');
+    expect(buffer).toBeNull();
+  });
 });

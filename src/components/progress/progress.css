@@ -29,12 +29,25 @@
   position: relative;
 }
 
+/* ---- Buffer fill ---- */
+.progress__buffer {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  block-size: 100%;
+  background-color: var(--ts-progress-fill-bg);
+  opacity: 0.3;
+  border-radius: var(--ts-progress-radius);
+  transition: width var(--ts-transition-normal);
+}
+
 /* ---- Fill ---- */
 .progress__fill {
   block-size: 100%;
   background-color: var(--ts-progress-fill-bg);
   border-radius: var(--ts-progress-radius);
   transition: width var(--ts-transition-normal);
+  position: relative;
 }
 
 /* ---- Label ---- */
@@ -88,6 +101,89 @@
   }
 }
 
+/* ---- Striped ---- */
+.ts-progress--striped .progress__fill {
+  background-image: linear-gradient(
+    45deg,
+    rgba(255, 255, 255, 0.2) 25%,
+    transparent 25%,
+    transparent 50%,
+    rgba(255, 255, 255, 0.2) 50%,
+    rgba(255, 255, 255, 0.2) 75%,
+    transparent 75%,
+    transparent
+  );
+  background-size: 1rem 1rem;
+}
+
+.ts-progress--striped.ts-progress--animated .progress__fill {
+  animation: ts-progress-stripes 1s linear infinite;
+}
+
+@keyframes ts-progress-stripes {
+  0% {
+    background-position: 1rem 0;
+  }
+  100% {
+    background-position: 0 0;
+  }
+}
+
+/* ---- Circular variant ---- */
+:host([type="circular"]) {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.progress__svg {
+  inline-size: 64px;
+  block-size: 64px;
+  transform: rotate(-90deg);
+}
+
+:host([type="circular"][size="sm"]) .progress__svg {
+  inline-size: 48px;
+  block-size: 48px;
+}
+
+:host([type="circular"][size="lg"]) .progress__svg {
+  inline-size: 80px;
+  block-size: 80px;
+}
+
+.progress__circle-track {
+  stroke: var(--ts-progress-track-bg);
+}
+
+.progress__circle-fill {
+  stroke: var(--ts-progress-fill-bg);
+  transition: stroke-dashoffset var(--ts-transition-normal);
+}
+
+.progress__circle-text {
+  fill: var(--ts-color-text-secondary);
+  font-family: var(--ts-font-family-base);
+  font-size: 9px;
+  font-weight: 600;
+  transform: rotate(90deg);
+  transform-origin: center;
+}
+
+/* ---- Circular indeterminate ---- */
+:host([type="circular"][indeterminate]) .progress__svg {
+  animation: ts-progress-spin 1.5s linear infinite;
+}
+
+@keyframes ts-progress-spin {
+  0% {
+    transform: rotate(-90deg);
+  }
+  100% {
+    transform: rotate(270deg);
+  }
+}
+
 /* ---- Reduced motion ---- */
 @media (prefers-reduced-motion: reduce) {
   .progress__fill {
@@ -96,5 +192,17 @@
 
   :host([indeterminate]) .progress__fill {
     animation-duration: 0.01ms !important;
+  }
+
+  .ts-progress--striped.ts-progress--animated .progress__fill {
+    animation-duration: 0.01ms !important;
+  }
+
+  :host([type="circular"][indeterminate]) .progress__svg {
+    animation-duration: 0.01ms !important;
+  }
+
+  .progress__circle-fill {
+    transition-duration: 0.01ms !important;
   }
 }
