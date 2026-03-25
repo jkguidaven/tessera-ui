@@ -20,7 +20,6 @@
   border-radius: var(--ts-card-radius);
   background-color: var(--ts-card-bg);
   border: 1px solid transparent;
-  overflow: hidden;
   transition:
     box-shadow var(--ts-transition-normal),
     transform var(--ts-transition-normal),

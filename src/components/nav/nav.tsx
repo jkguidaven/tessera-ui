@@ -18,6 +18,9 @@ export class TsNav {
   /** Whether the sidebar nav is collapsed (icons only). */
   @Prop({ reflect: true }) collapsed = false;
 
+  /** Accessible label for the nav element. */
+  @Prop() label = 'Navigation';
+
   // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   render() {
     return (
@@ -28,7 +31,7 @@ export class TsNav {
           'ts-nav--collapsed': this.collapsed,
         }}
       >
-        <nav class="nav__native" part="nav" aria-label="Navigation">
+        <nav class="nav__native" part="nav" aria-label={this.label}>
           <ul class="nav__list" part="list" role="list">
             <slot />
           </ul>

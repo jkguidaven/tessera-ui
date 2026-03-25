@@ -43,6 +43,16 @@ describe('ts-nav', () => {
     expect(list?.getAttribute('role')).toBe('list');
   });
 
+  it('uses custom label prop for aria-label', async () => {
+    const page = await newSpecPage({
+      components: [TsNav],
+      html: '<ts-nav label="Main menu"></ts-nav>',
+    });
+
+    const nav = page.root?.shadowRoot?.querySelector('nav');
+    expect(nav?.getAttribute('aria-label')).toBe('Main menu');
+  });
+
   it('applies sidebar variant class', async () => {
     const page = await newSpecPage({
       components: [TsNav],

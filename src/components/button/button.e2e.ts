@@ -49,6 +49,20 @@ describe('ts-button e2e', () => {
     expect(tsClick).toHaveReceivedEvent();
   });
 
+  it('fires tsClick on Space key when href is set', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<ts-button href="https://example.com">Link</ts-button>');
+
+    const tsClick = await page.spyOnEvent('tsClick');
+
+    await page.keyboard.press('Tab');
+    await page.waitForChanges();
+    await page.keyboard.press('Space');
+    await page.waitForChanges();
+
+    expect(tsClick).toHaveReceivedEvent();
+  });
+
   it('does not fire tsClick when disabled', async () => {
     const page = await newE2EPage();
     await page.setContent('<ts-button disabled>Disabled</ts-button>');
