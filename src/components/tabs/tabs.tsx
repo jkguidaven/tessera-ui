@@ -8,6 +8,7 @@ import type { EventEmitter } from '@stencil/core';
  * @part tab - Each individual tab button.
  * @part tab-active - The currently active tab button.
  * @part panels - The panel container.
+ * @part close - The close button inside closable tabs.
  */
 @Component({
   tag: 'ts-tabs',
@@ -26,8 +27,20 @@ export class TsTabs {
   /** The size of the tab buttons. */
   @Prop({ reflect: true }) size: 'sm' | 'md' | 'lg' = 'md';
 
+  /** The orientation of the tab bar. */
+  @Prop({ reflect: true }) orientation: 'horizontal' | 'vertical' = 'horizontal';
+
+  /** Whether tabs display a close button. */
+  @Prop({ reflect: true }) closable = false;
+
+  /** Whether the tab list is scrollable on overflow. */
+  @Prop({ reflect: true }) scrollable = false;
+
   /** Emitted when the active tab changes. */
   @Event({ eventName: 'tsChange' }) tsChange!: EventEmitter<{ value: string }>;
+
+  /** Emitted when a tab's close button is clicked. */
+  @Event({ eventName: 'tsClose' }) tsClose!: EventEmitter<{ value: string }>;
 
   @Watch('value')
   handleValueChange(): void {
@@ -73,6 +86,11 @@ export class TsTabs {
     this.updatePanelVisibility();
   }
 
+  private handleCloseClick(event: MouseEvent, tabValue: string): void {
+    event.stopPropagation();
+    this.tsClose.emit({ value: tabValue });
+  }
+
   private handleKeydown = (event: KeyboardEvent): void => {
     const tabs = this.getTabData();
     const enabledTabs = tabs.filter((t) => !t.disabled);
@@ -80,14 +98,15 @@ export class TsTabs {
 
     let newIndex = currentIndex;
 
+    const nextKeys = this.orientation === 'vertical' ? ['ArrowDown'] : ['ArrowRight'];
+    const prevKeys = this.orientation === 'vertical' ? ['ArrowUp'] : ['ArrowLeft'];
+
     switch (event.key) {
-      case 'ArrowRight':
-      case 'ArrowDown':
+      case nextKeys[0]:
         event.preventDefault();
         newIndex = (currentIndex + 1) % enabledTabs.length;
         break;
-      case 'ArrowLeft':
-      case 'ArrowUp':
+      case prevKeys[0]:
         event.preventDefault();
         newIndex = (currentIndex - 1 + enabledTabs.length) % enabledTabs.length;
         break;
@@ -126,6 +145,8 @@ export class TsTabs {
           'ts-tabs': true,
           [`ts-tabs--${this.variant}`]: true,
           [`ts-tabs--${this.size}`]: true,
+          'ts-tabs--vertical': this.orientation === 'vertical',
+          'ts-tabs--scrollable': this.scrollable,
         }}
       >
         <div class="tabs__tablist" part="tablist" role="tablist" onKeyDown={this.handleKeydown}>
@@ -151,6 +172,17 @@ export class TsTabs {
               >
                 {t.icon && <ts-icon name={t.icon} class="tabs__tab-icon" />}
                 {t.tab}
+                {this.closable && !t.disabled && (
+                  <button
+                    class="tabs__close"
+                    part="close"
+                    type="button"
+                    aria-label={`Close ${t.tab}`}
+                    onClick={(e: MouseEvent) => this.handleCloseClick(e, t.value)}
+                  >
+                    &times;
+                  </button>
+                )}
               </button>
             );
           })}

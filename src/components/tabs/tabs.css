@@ -8,7 +8,8 @@
    ========================================================================== */
 
 :host {
-  display: block;
+  display: flex;
+  flex-direction: column;
   font-family: var(--ts-font-family-base);
 
   --ts-tabs-border-color: var(--ts-color-border-default);
@@ -131,4 +132,71 @@
 /* ---- Tab icon ---- */
 .tabs__tab-icon {
   font-size: 1em;
+}
+
+/* ---- Vertical ---- */
+:host([orientation="vertical"]) {
+  flex-direction: row;
+}
+
+:host([orientation="vertical"]) .tabs__tablist {
+  flex-direction: column;
+  border-block-end: none;
+  border-inline-end: 2px solid var(--ts-tabs-border-color);
+  min-inline-size: 160px;
+}
+
+:host([orientation="vertical"]) .tabs__tab {
+  margin-block-end: 0;
+  border-block-end: none;
+  border-inline-end: 2px solid transparent;
+  margin-inline-end: -2px;
+}
+
+:host([orientation="vertical"]) .tabs__tab--active {
+  border-block-end-color: transparent;
+  border-inline-end: 2px solid var(--ts-tabs-active-color);
+}
+
+:host([orientation="vertical"]) .tabs__panels {
+  flex: 1;
+  padding-block-start: 0;
+  padding-inline-start: var(--ts-spacing-4);
+}
+
+/* ---- Close button ---- */
+.tabs__close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: none;
+  cursor: pointer;
+  padding: 2px;
+  margin-inline-start: var(--ts-spacing-1);
+  color: var(--ts-color-text-tertiary);
+  border-radius: var(--ts-radius-sm);
+  font-size: 0.75em;
+  line-height: 1;
+}
+
+.tabs__close:hover {
+  color: var(--ts-color-text-primary);
+  background-color: var(--ts-color-neutral-100);
+}
+
+/* ---- Scrollable ---- */
+:host([scrollable]) .tabs__tablist {
+  overflow-x: auto;
+  scrollbar-width: none;
+  flex-wrap: nowrap;
+}
+
+:host([scrollable]) .tabs__tablist::-webkit-scrollbar {
+  display: none;
+}
+
+:host([orientation="vertical"][scrollable]) .tabs__tablist {
+  overflow-x: hidden;
+  overflow-y: auto;
 }
