@@ -2,7 +2,18 @@ import { newSpecPage } from '@stencil/core/testing';
 import { TsToast } from './toast';
 
 describe('ts-toast', () => {
-  it('renders nothing when not open', async () => {
+  it('always renders the live region container in the DOM', async () => {
+    const page = await newSpecPage({
+      components: [TsToast],
+      html: '<ts-toast>Message</ts-toast>',
+    });
+
+    // The Host element should always have role="status" and aria-live
+    expect(page.root?.getAttribute('role')).toBe('status');
+    expect(page.root?.getAttribute('aria-live')).toBe('polite');
+  });
+
+  it('renders empty container when not open (no visible content)', async () => {
     const page = await newSpecPage({
       components: [TsToast],
       html: '<ts-toast>Message</ts-toast>',
@@ -12,7 +23,7 @@ describe('ts-toast', () => {
     expect(base).toBeNull();
   });
 
-  it('renders when open is set', async () => {
+  it('renders content when open is set', async () => {
     const page = await newSpecPage({
       components: [TsToast],
       html: '<ts-toast open>Message</ts-toast>',
@@ -74,6 +85,16 @@ describe('ts-toast', () => {
     expect(page.root?.getAttribute('aria-live')).toBe('polite');
   });
 
+  it('sets aria-live on the container even when not open', async () => {
+    const page = await newSpecPage({
+      components: [TsToast],
+      html: '<ts-toast variant="danger">Error!</ts-toast>',
+    });
+
+    expect(page.root?.getAttribute('role')).toBe('status');
+    expect(page.root?.getAttribute('aria-live')).toBe('assertive');
+  });
+
   it('emits tsClose when close button is clicked', async () => {
     const page = await newSpecPage({
       components: [TsToast],
@@ -96,5 +117,25 @@ describe('ts-toast', () => {
     });
 
     expect(page.root?.getAttribute('position')).toBe('bottom-left');
+  });
+
+  it('populates content into existing live region when opened', async () => {
+    const page = await newSpecPage({
+      components: [TsToast],
+      html: '<ts-toast>Message</ts-toast>',
+    });
+
+    // Initially no content
+    let base = page.root?.shadowRoot?.querySelector('.toast__base');
+    expect(base).toBeNull();
+    // But live region exists
+    expect(page.root?.getAttribute('role')).toBe('status');
+
+    // Open the toast — content populates into existing live region
+    page.root!.open = true;
+    await page.waitForChanges();
+
+    base = page.root?.shadowRoot?.querySelector('.toast__base');
+    expect(base).not.toBeNull();
   });
 });
