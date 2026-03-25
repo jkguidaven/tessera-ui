@@ -82,6 +82,16 @@ When assigned a GitHub issue to fix:
 3. **Push and create a PR** using `gh pr create`, referencing the issue (e.g., `Closes #<number>`)
 4. **Request a review from Copilot** using `gh pr edit <pr-number> --add-reviewer Copilot`
 
+### Releasing
+
+`main` is a **protected branch** — all changes must go through PRs. To release:
+
+1. Create a release branch: `git checkout -b chore/release-X.Y.Z`
+2. Bump versions: `pnpm exec lerna version X.Y.Z --no-push --yes`
+3. Push and create a PR
+4. After merge, push the tag: `git push origin vX.Y.Z`
+5. Create a **GitHub Release** from the tag — CI publishes to npm and deploys docs
+
 ### Docs site
 
 - Lives in `docs/` (Astro Starlight)

@@ -180,19 +180,17 @@ pnpm build && pnpm -C docs build
 
 Tessera UI uses [Lerna](https://lerna.js.org/) with fixed versioning — all packages share the same version.
 
-### 1. Bump versions
+`main` is a protected branch — all changes must go through PRs.
 
 ```bash
-pnpm version:bump          # Lerna bumps all package versions and creates a commit + tag
+git checkout -b chore/release-X.Y.Z main
+pnpm exec lerna version X.Y.Z --no-push --yes   # Bumps all packages, creates commit + tag
+git push -u origin chore/release-X.Y.Z
+gh pr create --title "chore(release): publish vX.Y.Z"
+# After PR is merged, push the tag and create a GitHub Release
 ```
 
-### 2. Push and create a GitHub Release
-
-```bash
-git push && git push --tags
-```
-
-Then create a [GitHub Release](https://docs.github.com/en/repositories/releasing-projects-on-github/managing-releases-in-a-repository) from the new tag. This triggers the release workflow which:
+Creating a [GitHub Release](https://docs.github.com/en/repositories/releasing-projects-on-github/managing-releases-in-a-repository) from the tag triggers the release workflow which:
 
 1. **Publishes to npm** — all `@tessera-ui/*` packages (`core`, `react`, `vue`, `angular`)
 2. Builds the component library
