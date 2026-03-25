@@ -11,9 +11,11 @@
   "scripts": {
     "build": "tsc -p tsconfig.json"
   },
-  "peerDependencies": {
-    "@angular/core": ">=17.0.0",
+  "dependencies": {
     "@tessera-ui/core": "workspace:*"
+  },
+  "peerDependencies": {
+    "@angular/core": ">=17.0.0"
   },
   "devDependencies": {
     "@angular/core": "^18.0.0",
