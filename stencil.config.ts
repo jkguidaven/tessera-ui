@@ -73,6 +73,7 @@ export const config: Config = {
       '--disable-dev-shm-usage',
       '--disable-extensions',
       '--disable-background-networking',
+      '--js-flags=--max-old-space-size=4096',
     ],
     browserWaitUntil: 'load',
     testTimeout: 60000,
