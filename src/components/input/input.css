@@ -197,3 +197,15 @@
 .input__counter--danger {
   color: var(--ts-color-danger-500);
 }
+
+@media (forced-colors: active) {
+  .input__wrapper {
+    border: 1px solid ButtonText;
+  }
+  .input__wrapper--disabled {
+    border-color: GrayText;
+  }
+  .input__wrapper--focused {
+    outline: 2px solid Highlight;
+  }
+}
