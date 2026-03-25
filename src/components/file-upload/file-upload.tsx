@@ -7,6 +7,9 @@ import type { EventEmitter } from '@stencil/core';
  * @part dropzone - The dropzone area.
  * @part label - The label text.
  * @part input - The hidden file input.
+ * @part file-list - The file list container.
+ * @part file-item - An individual file item.
+ * @part file-remove - The remove button for a file item.
  */
 @Component({
   tag: 'ts-file-upload',
@@ -27,6 +30,12 @@ export class TsFileUpload {
   /** Maximum file size in bytes. */
   @Prop() maxSize?: number;
 
+  /** Maximum number of files allowed. */
+  @Prop() maxFiles?: number;
+
+  /** Whether to show the file list below the dropzone. */
+  @Prop() showFileList = true;
+
   /** Whether the file upload is disabled. */
   @Prop({ reflect: true }) disabled = false;
 
@@ -39,8 +48,14 @@ export class TsFileUpload {
   /** Emitted when files are selected or dropped. */
   @Event({ eventName: 'tsChange' }) tsChange!: EventEmitter<{ files: File[] }>;
 
+  /** Emitted when a file is removed from the list. */
+  @Event({ eventName: 'tsRemove' }) tsRemove!: EventEmitter<{ file: File; files: File[] }>;
+
   /** Whether a drag operation is over the dropzone. */
   @State() isDragOver = false;
+
+  /** The currently selected files. */
+  @State() selectedFiles: File[] = [];
 
   private handleClick = (): void => {
     if (this.disabled) return;
@@ -60,7 +75,7 @@ export class TsFileUpload {
     if (input.files) {
       const files = this.validateFiles(Array.from(input.files));
       if (files.length > 0) {
-        this.tsChange.emit({ files });
+        this.storeFiles(files);
       }
     }
     // Reset input so the same file can be selected again
@@ -94,7 +109,7 @@ export class TsFileUpload {
     if (droppedFiles) {
       const files = this.validateFiles(Array.from(droppedFiles));
       if (files.length > 0) {
-        this.tsChange.emit({ files });
+        this.storeFiles(files);
       }
     }
   };
@@ -127,7 +142,43 @@ export class TsFileUpload {
       validFiles = [validFiles[0]];
     }
 
+    // Limit by maxFiles
+    if (this.maxFiles !== undefined && this.maxFiles > 0) {
+      const remaining = this.maxFiles - this.selectedFiles.length;
+      if (remaining <= 0) return [];
+      validFiles = validFiles.slice(0, remaining);
+    }
+
     return validFiles;
+  }
+
+  private storeFiles(files: File[]): void {
+    if (this.multiple) {
+      this.selectedFiles = [...this.selectedFiles, ...files];
+    } else {
+      this.selectedFiles = [...files];
+    }
+    this.tsChange.emit({ files: this.selectedFiles });
+  }
+
+  private handleRemoveFile = (index: number): void => {
+    const removed = this.selectedFiles[index];
+    this.selectedFiles = this.selectedFiles.filter((_, i) => i !== index);
+    this.tsRemove.emit({ file: removed, files: this.selectedFiles });
+    this.tsChange.emit({ files: this.selectedFiles });
+  };
+
+  private formatFileSize(bytes: number): string {
+    if (bytes >= 1073741824) {
+      return `${(bytes / 1073741824).toFixed(1)} GB`;
+    }
+    if (bytes >= 1048576) {
+      return `${(bytes / 1048576).toFixed(1)} MB`;
+    }
+    if (bytes >= 1024) {
+      return `${(bytes / 1024).toFixed(1)} KB`;
+    }
+    return `${bytes} B`;
   }
 
   // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
@@ -174,6 +225,30 @@ export class TsFileUpload {
             onChange={this.handleFileChange}
           />
         </div>
+
+        {this.maxFiles !== undefined && this.selectedFiles.length >= this.maxFiles && (
+          <div class="file-upload__capacity">Maximum {this.maxFiles} files reached</div>
+        )}
+
+        {this.showFileList && this.selectedFiles.length > 0 && (
+          <div class="file-upload__list" part="file-list">
+            {this.selectedFiles.map((file, index) => (
+              <div class="file-upload__file" part="file-item" key={file.name + index}>
+                <span class="file-upload__file-name">{file.name}</span>
+                <span class="file-upload__file-size">{this.formatFileSize(file.size)}</span>
+                <button
+                  class="file-upload__file-remove"
+                  part="file-remove"
+                  type="button"
+                  aria-label={`Remove ${file.name}`}
+                  onClick={() => this.handleRemoveFile(index)}
+                >
+                  &times;
+                </button>
+              </div>
+            ))}
+          </div>
+        )}
       </Host>
     );
   }
