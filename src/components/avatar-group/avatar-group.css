@@ -1,0 +1,69 @@
+/* ==========================================================================
+   ts-avatar-group — Light DOM Scoped Styles
+
+   Component tokens (Tier 3):
+     --ts-avatar-group-spacing   Negative overlap margin
+   ========================================================================== */
+
+.ts-avatar-group {
+  display: inline-flex;
+  vertical-align: middle;
+}
+
+.avatar-group__inner {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.avatar-group__inner > ts-avatar:not(:first-child),
+.avatar-group__inner > .avatar-group__overflow {
+  margin-inline-start: -0.5rem;
+}
+
+/* ---- Overflow indicator ---- */
+.avatar-group__overflow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--ts-shape-full);
+  background-color: var(--ts-color-neutral-200);
+  color: var(--ts-color-text-primary);
+  font-family: var(--ts-font-family-base);
+  font-weight: var(--ts-font-weight-semi);
+  user-select: none;
+  flex-shrink: 0;
+  border: 2px solid #fff;
+  box-sizing: content-box;
+}
+
+/* ---- Overflow sizes ---- */
+.avatar-group__overflow--xs {
+  width: 1.5rem;
+  height: 1.5rem;
+  font-size: var(--ts-font-size-xs);
+}
+
+.avatar-group__overflow--sm {
+  width: 2rem;
+  height: 2rem;
+  font-size: var(--ts-font-size-sm);
+}
+
+.avatar-group__overflow--md {
+  width: 2.5rem;
+  height: 2.5rem;
+  font-size: var(--ts-font-size-md);
+}
+
+.avatar-group__overflow--lg {
+  width: 3rem;
+  height: 3rem;
+  font-size: var(--ts-font-size-lg);
+}
+
+.avatar-group__overflow--xl {
+  width: 4rem;
+  height: 4rem;
+  font-size: var(--ts-font-size-xl);
+}

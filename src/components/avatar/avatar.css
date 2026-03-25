@@ -32,6 +32,7 @@
 
 /* ---- Base container ---- */
 .avatar__base {
+  position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -40,7 +41,7 @@
   border-radius: var(--ts-avatar-radius);
   background-color: var(--ts-avatar-bg);
   color: var(--ts-avatar-color);
-  overflow: hidden;
+  overflow: visible;
   user-select: none;
   flex-shrink: 0;
 }
@@ -51,6 +52,7 @@
   height: 100%;
   object-fit: cover;
   border-radius: inherit;
+  overflow: hidden;
 }
 
 /* ---- Initials ---- */
@@ -60,4 +62,32 @@
   font-size: inherit;
   line-height: 1;
   text-transform: uppercase;
+}
+
+/* ---- Status indicator ---- */
+.avatar__status {
+  position: absolute;
+  inset-block-end: 0;
+  inset-inline-end: 0;
+  width: 25%;
+  height: 25%;
+  border-radius: var(--ts-shape-full);
+  border: 2px solid #fff;
+  box-sizing: content-box;
+}
+
+.avatar__status--online {
+  background-color: var(--ts-color-success-500);
+}
+
+.avatar__status--offline {
+  background-color: var(--ts-color-neutral-400);
+}
+
+.avatar__status--busy {
+  background-color: var(--ts-color-danger-500);
+}
+
+.avatar__status--away {
+  background-color: var(--ts-color-warning-500);
 }

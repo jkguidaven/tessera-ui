@@ -64,6 +64,39 @@ describe('ts-avatar', () => {
     expect(page.root?.getAttribute('variant')).toBe('square');
   });
 
+  it('renders status dot when status prop is set', async () => {
+    const page = await newSpecPage({
+      components: [TsAvatar],
+      html: '<ts-avatar name="Alice" status="online"></ts-avatar>',
+    });
+
+    const status = page.root?.shadowRoot?.querySelector('.avatar__status');
+    expect(status).not.toBeNull();
+  });
+
+  it('applies correct class for each status value', async () => {
+    for (const statusValue of ['online', 'offline', 'busy', 'away']) {
+      const page = await newSpecPage({
+        components: [TsAvatar],
+        html: `<ts-avatar name="Alice" status="${statusValue}"></ts-avatar>`,
+      });
+
+      const status = page.root?.shadowRoot?.querySelector('.avatar__status');
+      expect(status).not.toBeNull();
+      expect(status?.classList.contains(`avatar__status--${statusValue}`)).toBe(true);
+    }
+  });
+
+  it('does not render status dot when status is not set', async () => {
+    const page = await newSpecPage({
+      components: [TsAvatar],
+      html: '<ts-avatar name="Alice"></ts-avatar>',
+    });
+
+    const status = page.root?.shadowRoot?.querySelector('.avatar__status');
+    expect(status).toBeNull();
+  });
+
   it('applies custom color as background', async () => {
     const page = await newSpecPage({
       components: [TsAvatar],
