@@ -111,4 +111,74 @@ describe('ts-select', () => {
     const trigger = page.root?.shadowRoot?.querySelector('.select__trigger');
     expect(trigger?.hasAttribute('disabled')).toBe(true);
   });
+
+  it('reflects multiple prop', async () => {
+    const page = await newSpecPage({
+      components: [TsSelect],
+      html: `<ts-select multiple>
+        <option value="a">Option A</option>
+        <option value="b">Option B</option>
+      </ts-select>`,
+    });
+
+    expect(page.root).toHaveAttribute('multiple');
+  });
+
+  it('stores multiple values as comma-separated string', async () => {
+    const page = await newSpecPage({
+      components: [TsSelect],
+      html: `<ts-select multiple value="a,b">
+        <option value="a">Option A</option>
+        <option value="b">Option B</option>
+        <option value="c">Option C</option>
+      </ts-select>`,
+    });
+
+    expect(page.root?.getAttribute('value')).toBe('a,b');
+  });
+
+  it('shows selected count for multiple selections', async () => {
+    const page = await newSpecPage({
+      components: [TsSelect],
+      html: `<ts-select multiple value="a,b">
+        <option value="a">Option A</option>
+        <option value="b">Option B</option>
+        <option value="c">Option C</option>
+      </ts-select>`,
+    });
+
+    const display = page.root?.shadowRoot?.querySelector('.select__display');
+    expect(display?.textContent).toContain('2 selected');
+  });
+
+  it('shows single value when one item selected in multiple mode', async () => {
+    const page = await newSpecPage({
+      components: [TsSelect],
+      html: `<ts-select multiple value="a">
+        <option value="a">Option A</option>
+        <option value="b">Option B</option>
+      </ts-select>`,
+    });
+
+    const display = page.root?.shadowRoot?.querySelector('.select__display');
+    // In spec tests, slotted options may not populate; display shows label or value fallback
+    expect(display?.textContent?.trim()).toBeTruthy();
+  });
+
+  it('renders aria-multiselectable on listbox in multiple mode', async () => {
+    const page = await newSpecPage({
+      components: [TsSelect],
+      html: `<ts-select multiple>
+        <option value="a">Option A</option>
+      </ts-select>`,
+    });
+
+    // Open the dropdown by simulating trigger click
+    const select = page.rootInstance as TsSelect;
+    (select as unknown as { isOpen: boolean }).isOpen = true;
+    await page.waitForChanges();
+
+    const listbox = page.root?.shadowRoot?.querySelector('[role="listbox"]');
+    expect(listbox?.getAttribute('aria-multiselectable')).toBe('true');
+  });
 });

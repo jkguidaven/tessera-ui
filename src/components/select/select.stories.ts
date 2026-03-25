@@ -131,3 +131,22 @@ export const CategoryFilter = (): string => `
     </ts-select>
   </div>
 `;
+
+export const Multiple = (): string => `
+  <div style="display: flex; flex-direction: column; gap: 24px; max-width: 320px;">
+    <ts-select multiple label="Departments" placeholder="Select departments" help-text="Choose one or more departments.">
+      <option value="engineering">Engineering</option>
+      <option value="design">Design</option>
+      <option value="marketing">Marketing</option>
+      <option value="sales">Sales</option>
+      <option value="support">Support</option>
+    </ts-select>
+    <ts-select multiple label="Tags" placeholder="Add tags" value="frontend,react">
+      <option value="frontend">Frontend</option>
+      <option value="backend">Backend</option>
+      <option value="react">React</option>
+      <option value="typescript">TypeScript</option>
+      <option value="css">CSS</option>
+    </ts-select>
+  </div>
+`;

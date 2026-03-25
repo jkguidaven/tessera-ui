@@ -154,6 +154,23 @@
   cursor: not-allowed;
 }
 
+/* ---- Checkmark (multiple mode) ---- */
+.select__check {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1em;
+  height: 1em;
+  flex-shrink: 0;
+  margin-inline-end: var(--ts-spacing-2);
+  color: var(--ts-color-interactive-primary);
+}
+
+.select__check svg {
+  width: 100%;
+  height: 100%;
+}
+
 /* ---- Sizes ---- */
 :host([size="sm"]) .select__trigger {
   padding: var(--ts-spacing-1) var(--ts-spacing-2);

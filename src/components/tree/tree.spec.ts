@@ -111,4 +111,50 @@ describe('ts-tree-item', () => {
 
     expect(page.root?.getAttribute('tabindex')).toBe('0');
   });
+
+  it('sets aria-level to 1 for root items', async () => {
+    const page = await newSpecPage({
+      components: [TsTree, TsTreeItem],
+      html: `<ts-tree>
+        <ts-tree-item label="Root"></ts-tree-item>
+      </ts-tree>`,
+    });
+    await page.waitForChanges();
+
+    const item = page.root?.querySelector('ts-tree-item');
+    expect(item?.getAttribute('aria-level')).toBe('1');
+  });
+
+  it('sets aria-setsize and aria-posinset for siblings', async () => {
+    const page = await newSpecPage({
+      components: [TsTree, TsTreeItem],
+      html: `<ts-tree>
+        <ts-tree-item label="First"></ts-tree-item>
+        <ts-tree-item label="Second"></ts-tree-item>
+        <ts-tree-item label="Third"></ts-tree-item>
+      </ts-tree>`,
+    });
+    await page.waitForChanges();
+
+    const items = page.root?.querySelectorAll('ts-tree-item');
+    expect(items?.[0]?.getAttribute('aria-setsize')).toBe('3');
+    expect(items?.[0]?.getAttribute('aria-posinset')).toBe('1');
+    expect(items?.[1]?.getAttribute('aria-posinset')).toBe('2');
+    expect(items?.[2]?.getAttribute('aria-posinset')).toBe('3');
+  });
+
+  it('sets aria-level to 2 for nested items', async () => {
+    const page = await newSpecPage({
+      components: [TsTree, TsTreeItem],
+      html: `<ts-tree>
+        <ts-tree-item label="Parent" expanded>
+          <ts-tree-item label="Child"></ts-tree-item>
+        </ts-tree-item>
+      </ts-tree>`,
+    });
+    await page.waitForChanges();
+
+    const child = page.root?.querySelector('ts-tree-item ts-tree-item');
+    expect(child?.getAttribute('aria-level')).toBe('2');
+  });
 });
