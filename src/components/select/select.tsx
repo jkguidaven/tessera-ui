@@ -31,6 +31,7 @@ export class TsSelect {
   private inputId = generateId('ts-select');
   private triggerEl?: HTMLElement;
   private searchInputEl?: HTMLInputElement;
+  private hiddenInput?: HTMLInputElement;
 
   /** The current value. */
   @Prop({ mutable: true, reflect: true }) value = '';
@@ -95,6 +96,9 @@ export class TsSelect {
   @Watch('value')
   handleValueChange(): void {
     // Value was changed externally; ensure UI is in sync
+    if (this.hiddenInput) {
+      this.hiddenInput.value = this.value;
+    }
   }
 
   @Listen('click', { target: 'document' })
@@ -102,6 +106,20 @@ export class TsSelect {
     if (this.isOpen && !this.hostEl.contains(event.target as Node)) {
       this.close();
     }
+  }
+
+  connectedCallback(): void {
+    if (this.name) {
+      this.hiddenInput = document.createElement('input');
+      this.hiddenInput.type = 'hidden';
+      this.hiddenInput.name = this.name;
+      this.hiddenInput.value = this.value;
+      this.hostEl.appendChild(this.hiddenInput);
+    }
+  }
+
+  disconnectedCallback(): void {
+    this.hiddenInput?.remove();
   }
 
   componentWillLoad(): void {

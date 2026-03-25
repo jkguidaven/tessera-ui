@@ -20,6 +20,7 @@ export class TsTextarea {
   @Element() hostEl!: HTMLElement;
 
   private textareaEl?: HTMLTextAreaElement;
+  private hiddenInput?: HTMLInputElement;
   private inputId = generateId('ts-textarea');
 
   /** The textarea's value. */
@@ -88,6 +89,20 @@ export class TsTextarea {
   /** Emitted when the textarea loses focus. */
   @Event({ eventName: 'tsBlur' }) tsBlur!: EventEmitter<void>;
 
+  connectedCallback(): void {
+    if (this.name) {
+      this.hiddenInput = document.createElement('input');
+      this.hiddenInput.type = 'hidden';
+      this.hiddenInput.name = this.name;
+      this.hiddenInput.value = this.value;
+      this.hostEl.appendChild(this.hiddenInput);
+    }
+  }
+
+  disconnectedCallback(): void {
+    this.hiddenInput?.remove();
+  }
+
   @Watch('value')
   handleValueChange(newValue: string, oldValue: string): void {
     if (newValue !== oldValue && this.textareaEl) {
@@ -95,6 +110,9 @@ export class TsTextarea {
       if (this.autoGrow) {
         this.adjustHeight();
       }
+    }
+    if (this.hiddenInput) {
+      this.hiddenInput.value = newValue;
     }
   }
 
