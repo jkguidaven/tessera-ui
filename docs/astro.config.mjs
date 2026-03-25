@@ -14,6 +14,11 @@ export default defineConfig({
     starlight({
       title: `Tessera UI`,
       description: 'Framework-agnostic web component library built with Stencil.js',
+      logo: {
+        light: '/logo-light.svg',
+        dark: '/logo-dark.svg',
+        replacesTitle: true,
+      },
       customCss: ['./src/styles/custom.css'],
       social: [
         { icon: 'github', label: 'GitHub', href: 'https://github.com/jkguidaven/tessera-ui' },
