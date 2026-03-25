@@ -2,6 +2,7 @@
  * Tessera UI — Library Entry Point
  *
  * Re-exports all public components, types, and utilities.
+ * Importing this module auto-registers all web components and injects design tokens.
  */
 
 // Types

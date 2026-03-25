@@ -1,4 +1,4 @@
-// Auto-import Tessera UI design tokens (global CSS custom properties)
-import '@tessera-ui/core/dist/tessera-ui/tessera-ui.css';
+// Importing @tessera-ui/core auto-registers all web components and injects styles.
+import '@tessera-ui/core';
 
 export * from './components';
