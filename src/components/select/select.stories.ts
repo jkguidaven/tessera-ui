@@ -150,3 +150,38 @@ export const Multiple = (): string => `
     </ts-select>
   </div>
 `;
+
+export const Searchable = (): string => `
+  <div style="max-width: 320px;">
+    <ts-select searchable label="Country" placeholder="Search for a country" help-text="Type to filter the list.">
+      <option value="us">United States</option>
+      <option value="uk">United Kingdom</option>
+      <option value="ca">Canada</option>
+      <option value="au">Australia</option>
+      <option value="de">Germany</option>
+      <option value="fr">France</option>
+      <option value="jp">Japan</option>
+      <option value="br">Brazil</option>
+      <option value="in">India</option>
+      <option value="mx">Mexico</option>
+    </ts-select>
+  </div>
+`;
+
+export const Clearable = (): string => `
+  <div style="display: flex; flex-direction: column; gap: 16px; max-width: 320px;">
+    <ts-select clearable label="Timezone" placeholder="Select a timezone" value="utc" help-text="Click the x to clear.">
+      <option value="utc">UTC</option>
+      <option value="est">Eastern Time</option>
+      <option value="cst">Central Time</option>
+      <option value="pst">Pacific Time</option>
+    </ts-select>
+    <ts-select clearable searchable label="Language" placeholder="Search and select a language" value="en">
+      <option value="en">English</option>
+      <option value="es">Spanish</option>
+      <option value="fr">French</option>
+      <option value="de">German</option>
+      <option value="ja">Japanese</option>
+    </ts-select>
+  </div>
+`;
