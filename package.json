@@ -8,9 +8,36 @@
   "collection": "dist/collection/collection-manifest.json",
   "collection:main": "dist/collection/index.js",
   "unpkg": "dist/tessera-ui/tessera-ui.esm.js",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/types/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/types/index.d.ts",
+        "default": "./dist/index.cjs.js"
+      }
+    },
+    "./dist/*": "./dist/*",
+    "./loader": {
+      "import": "./loader/index.js",
+      "require": "./loader/index.cjs.js",
+      "types": "./loader/index.d.ts"
+    }
+  },
+  "sideEffects": [
+    "*.css",
+    "./dist/tessera-ui/tessera-ui.js",
+    "./dist/tessera-ui/tessera-ui.esm.js"
+  ],
   "files": [
     "dist/",
-    "loader/"
+    "loader/",
+    "!dist/**/*.map",
+    "!dist/**/*.stories.js",
+    "!dist/**/*.stories.d.ts",
+    "!dist/components.json"
   ],
   "scripts": {
     "build": "stencil build && node -e \"const fs=require('fs');const p='dist/types/index.d.ts';fs.appendFileSync(p,'\\nexport * from \\\"./components\\\";\\n')\"",
