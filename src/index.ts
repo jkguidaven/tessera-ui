@@ -79,3 +79,4 @@ export { TsTagInput } from './components/tag-input/tag-input';
 export { TsScrollArea } from './components/scroll-area/scroll-area';
 export { TsPageHeader } from './components/page-header/page-header';
 export { TsSidebar } from './components/sidebar/sidebar';
+export { TsAppLayout } from './components/app-layout/app-layout';

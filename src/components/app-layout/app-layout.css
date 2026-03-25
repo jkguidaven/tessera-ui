@@ -1,0 +1,37 @@
+:host {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: 1fr;
+  min-block-size: 100vh;
+  font-family: var(--ts-font-family-base);
+}
+
+:host(.ts-app-layout--sidebar-end) {
+  grid-template-columns: 1fr auto;
+}
+
+:host(.ts-app-layout--sidebar-end) .app-layout__sidebar {
+  order: 1;
+}
+
+.app-layout__sidebar {
+  grid-row: 1 / -1;
+}
+
+.app-layout__main {
+  display: flex;
+  flex-direction: column;
+  min-inline-size: 0;
+}
+
+.app-layout__header {
+  position: sticky;
+  inset-block-start: 0;
+  z-index: 10;
+  background: var(--ts-color-bg-surface);
+  border-block-end: 1px solid var(--ts-color-border-default);
+}
+
+.app-layout__content {
+  flex: 1;
+}
