@@ -1,0 +1,227 @@
+/* ==========================================================================
+   ts-time-picker — Shadow DOM Scoped Styles
+
+   Component tokens (Tier 3):
+     --ts-time-picker-bg             Background color
+     --ts-time-picker-color          Text color
+     --ts-time-picker-border-color   Default border color
+     --ts-time-picker-radius         Border radius
+     --ts-time-picker-focus-ring     Focus ring box-shadow
+   ========================================================================== */
+
+:host {
+  display: block;
+  font-family: var(--ts-font-family-base);
+
+  --ts-time-picker-bg: var(--ts-color-neutral-50);
+  --ts-time-picker-color: var(--ts-color-text-primary);
+  --ts-time-picker-border-color: var(--ts-color-border-default);
+  --ts-time-picker-radius: var(--ts-shape-interactive);
+  --ts-time-picker-focus-ring: var(--ts-focus-ring);
+}
+
+/* ---- Label ---- */
+.time-picker__label {
+  display: block;
+  margin-block-end: var(--ts-spacing-1);
+  font-size: var(--ts-font-size-sm);
+  font-weight: var(--ts-font-weight-medium);
+  color: var(--ts-color-text-secondary);
+  line-height: var(--ts-line-height-normal);
+}
+
+.time-picker__required {
+  color: var(--ts-color-danger-500);
+}
+
+/* ---- Wrapper ---- */
+.time-picker__wrapper {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ts-spacing-1);
+  border: 1px solid var(--ts-time-picker-border-color);
+  border-radius: var(--ts-time-picker-radius);
+  background-color: var(--ts-time-picker-bg);
+  box-shadow: none;
+  transition:
+    border-color var(--ts-transition-fast),
+    box-shadow var(--ts-transition-fast),
+    background-color var(--ts-transition-fast);
+}
+
+.time-picker__wrapper--focused {
+  border-color: var(--ts-color-primary-500);
+  box-shadow: var(--ts-time-picker-focus-ring);
+}
+
+.time-picker__wrapper--error {
+  border-color: var(--ts-color-danger-500);
+}
+
+.time-picker__wrapper--error.time-picker__wrapper--focused {
+  box-shadow: 0 0 0 3px var(--ts-color-focus-ring-danger);
+}
+
+.time-picker__wrapper--disabled {
+  background-color: var(--ts-color-bg-disabled);
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* ---- Segment Inputs ---- */
+.time-picker__segment {
+  width: 2ch;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-family: inherit;
+  color: var(--ts-time-picker-color);
+  text-align: center;
+  padding: 0;
+  min-width: 0;
+  -moz-appearance: textfield;
+}
+
+.time-picker__segment::-webkit-outer-spin-button,
+.time-picker__segment::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.time-picker__segment:disabled {
+  cursor: not-allowed;
+}
+
+.time-picker__segment:focus {
+  outline: none;
+  background-color: var(--ts-color-primary-100);
+  border-radius: var(--ts-radius-sm);
+}
+
+/* ---- Separator ---- */
+.time-picker__separator {
+  color: var(--ts-color-text-tertiary);
+  font-weight: var(--ts-font-weight-medium);
+  user-select: none;
+  line-height: 1;
+}
+
+/* ---- AM/PM Toggle ---- */
+.time-picker__period {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--ts-color-border-default);
+  border-radius: var(--ts-radius-sm);
+  background-color: var(--ts-color-neutral-100);
+  color: var(--ts-color-text-secondary);
+  font-family: inherit;
+  font-weight: var(--ts-font-weight-medium);
+  cursor: pointer;
+  padding: var(--ts-spacing-1) var(--ts-spacing-2);
+  margin-inline-start: var(--ts-spacing-1);
+  transition:
+    background-color var(--ts-transition-fast),
+    border-color var(--ts-transition-fast),
+    color var(--ts-transition-fast);
+  user-select: none;
+  line-height: 1;
+}
+
+.time-picker__period:hover:not(:disabled) {
+  background-color: var(--ts-color-neutral-200);
+  color: var(--ts-color-text-primary);
+}
+
+.time-picker__period:focus-visible {
+  box-shadow: var(--ts-time-picker-focus-ring);
+}
+
+.time-picker__period:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* ---- Sizes ---- */
+:host([size="sm"]) .time-picker__wrapper {
+  padding: var(--ts-spacing-1) var(--ts-spacing-2);
+}
+:host([size="sm"]) .time-picker__segment,
+:host([size="sm"]) .time-picker__separator {
+  font-size: var(--ts-font-size-sm);
+}
+:host([size="sm"]) .time-picker__period {
+  font-size: var(--ts-font-size-xs);
+  padding: calc(var(--ts-spacing-1) / 2) var(--ts-spacing-1);
+}
+
+:host([size="md"]) .time-picker__wrapper {
+  padding: var(--ts-spacing-2) var(--ts-spacing-3);
+}
+:host([size="md"]) .time-picker__segment,
+:host([size="md"]) .time-picker__separator {
+  font-size: var(--ts-font-size-md);
+}
+:host([size="md"]) .time-picker__period {
+  font-size: var(--ts-font-size-sm);
+}
+
+:host([size="lg"]) .time-picker__wrapper {
+  padding: var(--ts-spacing-3) var(--ts-spacing-4);
+}
+:host([size="lg"]) .time-picker__segment,
+:host([size="lg"]) .time-picker__separator {
+  font-size: var(--ts-font-size-lg);
+}
+:host([size="lg"]) .time-picker__period {
+  font-size: var(--ts-font-size-md);
+}
+
+:host([size="xl"]) .time-picker__wrapper {
+  padding: var(--ts-spacing-4) var(--ts-spacing-5);
+}
+:host([size="xl"]) .time-picker__segment,
+:host([size="xl"]) .time-picker__separator {
+  font-size: var(--ts-font-size-xl);
+}
+:host([size="xl"]) .time-picker__period {
+  font-size: var(--ts-font-size-lg);
+}
+
+/* ---- Help & Error Text ---- */
+.time-picker__help,
+.time-picker__error {
+  margin-block-start: var(--ts-spacing-1);
+  font-size: var(--ts-font-size-xs);
+  line-height: var(--ts-line-height-normal);
+}
+
+.time-picker__help {
+  color: var(--ts-color-text-tertiary);
+}
+
+.time-picker__error {
+  color: var(--ts-color-danger-600);
+  font-weight: var(--ts-font-weight-medium);
+}
+
+/* ---- Forced colors ---- */
+@media (forced-colors: active) {
+  .time-picker__wrapper {
+    border: 1px solid ButtonText;
+  }
+  .time-picker__wrapper--disabled {
+    border-color: GrayText;
+  }
+  .time-picker__wrapper--focused {
+    outline: 2px solid Highlight;
+  }
+}
+
+/* ---- Reduced motion ---- */
+@media (prefers-reduced-motion: reduce) {
+  .time-picker__wrapper,
+  .time-picker__period {
+    transition-duration: 0.01ms !important;
+  }
+}
