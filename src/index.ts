@@ -32,6 +32,7 @@ export { TsTabs } from './components/tabs/tabs';
 export { TsTabPanel } from './components/tabs/tab-panel';
 export { TsSpinner } from './components/spinner/spinner';
 export { TsAvatar } from './components/avatar/avatar';
+export { TsAvatarGroup } from './components/avatar-group/avatar-group';
 export { TsDialog } from './components/dialog/dialog';
 export { TsMenu } from './components/menu/menu';
 export type { TsMenuPlacement, TsMenuTrigger } from './components/menu/menu';

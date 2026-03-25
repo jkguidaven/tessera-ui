@@ -18,6 +18,11 @@ export default {
       description: 'Shape variant of the avatar.',
     },
     color: { control: 'color', description: 'Background color for the initials fallback.' },
+    status: {
+      control: 'select',
+      options: [undefined, 'online', 'offline', 'busy', 'away'],
+      description: 'Status indicator displayed on the avatar.',
+    },
   },
 };
 
@@ -29,6 +34,7 @@ const Template = (args: Record<string, unknown>): string => {
   if (args.size !== undefined && args.size !== null) attrs.push(`size="${args.size}"`);
   if (args.variant !== undefined && args.variant !== null) attrs.push(`variant="${args.variant}"`);
   if (args.color !== undefined && args.color !== null) attrs.push(`color="${args.color}"`);
+  if (args.status !== undefined && args.status !== null) attrs.push(`status="${args.status}"`);
   return `<ts-avatar ${attrs.join(' ')}></ts-avatar>`;
 };
 
@@ -111,6 +117,50 @@ export const ImageErrorFallback = (): string => `
       <div style="font-size: 12px; margin-top: 4px; color: #666;">Falls back to initials</div>
     </div>
   </div>
+`;
+
+export const WithStatus = (): string => `
+  <div style="display: flex; gap: 16px; align-items: center; font-family: sans-serif;">
+    <div style="text-align: center;">
+      <ts-avatar name="Alice Smith" color="#6366f1" size="lg" status="online"></ts-avatar>
+      <div style="font-size: 12px; margin-top: 4px; color: #666;">Online</div>
+    </div>
+    <div style="text-align: center;">
+      <ts-avatar name="Bob Jones" color="#2563eb" size="lg" status="offline"></ts-avatar>
+      <div style="font-size: 12px; margin-top: 4px; color: #666;">Offline</div>
+    </div>
+    <div style="text-align: center;">
+      <ts-avatar name="Charlie Brown" color="#ec4899" size="lg" status="busy"></ts-avatar>
+      <div style="font-size: 12px; margin-top: 4px; color: #666;">Busy</div>
+    </div>
+    <div style="text-align: center;">
+      <ts-avatar name="Diana Prince" color="#f59e0b" size="lg" status="away"></ts-avatar>
+      <div style="font-size: 12px; margin-top: 4px; color: #666;">Away</div>
+    </div>
+  </div>
+`;
+
+export const AvatarGroupDefault = (): string => `
+  <ts-avatar-group size="md">
+    <ts-avatar name="Alice Smith" color="#6366f1"></ts-avatar>
+    <ts-avatar name="Bob Jones" color="#2563eb"></ts-avatar>
+    <ts-avatar name="Charlie Brown" color="#ec4899"></ts-avatar>
+    <ts-avatar name="Diana Prince" color="#14b8a6"></ts-avatar>
+    <ts-avatar name="Edward Kim" color="#f59e0b"></ts-avatar>
+  </ts-avatar-group>
+`;
+
+export const AvatarGroupWithMax = (): string => `
+  <ts-avatar-group size="md" max="4">
+    <ts-avatar name="Alice Smith" color="#6366f1"></ts-avatar>
+    <ts-avatar name="Bob Jones" color="#2563eb"></ts-avatar>
+    <ts-avatar name="Charlie Brown" color="#ec4899"></ts-avatar>
+    <ts-avatar name="Diana Prince" color="#14b8a6"></ts-avatar>
+    <ts-avatar name="Edward Kim" color="#f59e0b"></ts-avatar>
+    <ts-avatar name="Fiona Green" color="#8b5cf6"></ts-avatar>
+    <ts-avatar name="George Hill" color="#ef4444"></ts-avatar>
+    <ts-avatar name="Hannah Lee" color="#06b6d4"></ts-avatar>
+  </ts-avatar-group>
 `;
 
 export const UserList = (): string => `

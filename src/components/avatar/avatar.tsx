@@ -6,6 +6,7 @@ import { Component, Prop, State, h, Host } from '@stencil/core';
  * @part base - The avatar container.
  * @part image - The avatar image element.
  * @part initials - The initials text element.
+ * @part status - The status indicator dot.
  */
 @Component({
   tag: 'ts-avatar',
@@ -27,6 +28,9 @@ export class TsAvatar {
 
   /** Shape variant of the avatar. */
   @Prop({ reflect: true }) variant: 'circle' | 'square' = 'circle';
+
+  /** Status indicator displayed on the avatar. */
+  @Prop({ reflect: true }) status?: 'online' | 'offline' | 'busy' | 'away';
 
   /** Background color for the initials fallback. */
   @Prop() color?: string;
@@ -83,6 +87,16 @@ export class TsAvatar {
             </span>
           )}
           {!showImage && !showInitials && <slot />}
+          {this.status && (
+            <span
+              class={{
+                'avatar__status': true,
+                [`avatar__status--${this.status}`]: true,
+              }}
+              part="status"
+              aria-label={this.status}
+            />
+          )}
         </div>
       </Host>
     );
