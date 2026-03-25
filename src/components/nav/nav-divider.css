@@ -1,0 +1,15 @@
+/* ==========================================================================
+   ts-nav-divider — Shadow DOM Scoped Styles
+   ========================================================================== */
+
+:host {
+  display: block;
+}
+
+.nav-divider {
+  list-style: none;
+  margin: var(--ts-spacing-2) 0;
+  padding: 0;
+  border: none;
+  border-block-start: 1px solid var(--ts-color-border-secondary);
+}
