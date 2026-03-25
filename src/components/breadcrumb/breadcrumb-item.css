@@ -37,6 +37,13 @@
   font-weight: var(--ts-font-weight-semi);
 }
 
+/* ---- Icon ---- */
+::slotted([slot="icon"]) {
+  display: inline-flex;
+  margin-inline-end: var(--ts-spacing-1);
+  vertical-align: middle;
+}
+
 .breadcrumb-item__separator {
   color: var(--ts-breadcrumb-separator-color, var(--ts-color-text-tertiary));
   margin-inline: var(--ts-spacing-1);

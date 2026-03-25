@@ -89,3 +89,31 @@ export const Composition = (): string => `
     </div>
   </div>
 `;
+
+export const WithIcons = (): string => `
+  <ts-breadcrumb>
+    <ts-breadcrumb-item href="/">
+      <ts-icon slot="icon" name="home" size="sm"></ts-icon>
+      Home
+    </ts-breadcrumb-item>
+    <ts-breadcrumb-item href="/products">
+      <ts-icon slot="icon" name="folder" size="sm"></ts-icon>
+      Products
+    </ts-breadcrumb-item>
+    <ts-breadcrumb-item current>
+      <ts-icon slot="icon" name="file" size="sm"></ts-icon>
+      Widget Pro
+    </ts-breadcrumb-item>
+  </ts-breadcrumb>
+`;
+
+export const Collapsible = (): string => `
+  <ts-breadcrumb max-items="3">
+    <ts-breadcrumb-item href="/">Home</ts-breadcrumb-item>
+    <ts-breadcrumb-item href="/docs">Documentation</ts-breadcrumb-item>
+    <ts-breadcrumb-item href="/docs/components">Components</ts-breadcrumb-item>
+    <ts-breadcrumb-item href="/docs/components/forms">Forms</ts-breadcrumb-item>
+    <ts-breadcrumb-item href="/docs/components/forms/input">Input</ts-breadcrumb-item>
+    <ts-breadcrumb-item current>Validation</ts-breadcrumb-item>
+  </ts-breadcrumb>
+`;
