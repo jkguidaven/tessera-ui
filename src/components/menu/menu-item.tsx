@@ -28,6 +28,15 @@ export class TsMenuItem {
   /** If provided, renders the item as a link. */
   @Prop() href?: string;
 
+  /** The type of menu item. */
+  @Prop({ reflect: true }) type: 'default' | 'checkbox' | 'radio' = 'default';
+
+  /** Whether the checkbox/radio item is checked. */
+  @Prop({ mutable: true, reflect: true }) checked = false;
+
+  /** Visual variant of the menu item. */
+  @Prop({ reflect: true }) variant: 'default' | 'danger' = 'default';
+
   /** Emitted when the menu item is selected. */
   @Event({ eventName: 'tsSelect' }) tsSelect!: EventEmitter<{ value: string }>;
 
@@ -48,6 +57,9 @@ export class TsMenuItem {
 
   private handleClick = (): void => {
     if (this.disabled) return;
+    if (this.type === 'checkbox') {
+      this.checked = !this.checked;
+    }
     this.tsSelect.emit({ value: this.value });
   };
 
@@ -55,6 +67,9 @@ export class TsMenuItem {
     if (this.disabled) return;
     if (event.key === 'Enter' || event.key === ' ') {
       event.preventDefault();
+      if (this.type === 'checkbox') {
+        this.checked = !this.checked;
+      }
       this.tsSelect.emit({ value: this.value });
     }
   };
@@ -70,11 +85,16 @@ export class TsMenuItem {
         }
       : {};
 
+    const role = this.type === 'checkbox' ? 'menuitemcheckbox' : this.type === 'radio' ? 'menuitemradio' : 'menuitem';
+    const ariaChecked = this.type !== 'default' ? (this.checked ? 'true' : 'false') : undefined;
+
     return (
       <Host
         class={{
           'ts-menu-item': true,
           'ts-menu-item--disabled': this.disabled,
+          'ts-menu-item--danger': this.variant === 'danger',
+          'ts-menu-item--checked': this.checked && this.type !== 'default',
         }}
       >
         <Tag
@@ -82,12 +102,19 @@ export class TsMenuItem {
           ref={(el) => (this.baseEl = el as HTMLElement)}
           class="menu-item__base"
           part="base"
-          role="menuitem"
+          role={role}
           tabindex={this.disabled ? -1 : 0}
           aria-disabled={this.disabled ? 'true' : undefined}
+          aria-checked={ariaChecked}
           onClick={this.handleClick}
           onKeyDown={this.handleKeydown}
         >
+          {this.type !== 'default' && (
+            <span class="menu-item__check" aria-hidden="true">
+              {this.checked ? '\u2713' : ''}
+            </span>
+          )}
+
           <span class="menu-item__prefix" part="prefix">
             <slot name="prefix" />
           </span>

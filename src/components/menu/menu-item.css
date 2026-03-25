@@ -75,3 +75,23 @@
   color: var(--ts-color-text-tertiary);
   font-size: var(--ts-font-size-xs);
 }
+
+/* ---- Check indicator ---- */
+.menu-item__check {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: 1rem;
+  flex-shrink: 0;
+  font-size: var(--ts-font-size-xs);
+  color: var(--ts-color-interactive-primary);
+}
+
+/* ---- Danger variant ---- */
+:host([variant="danger"]) .menu-item__base {
+  color: var(--ts-color-danger-500);
+}
+
+:host([variant="danger"]) .menu-item__base:hover:not([aria-disabled="true"]) {
+  background-color: var(--ts-color-danger-50, rgba(239, 68, 68, 0.05));
+}

@@ -1,0 +1,9 @@
+:host {
+  display: block;
+}
+
+.menu-divider {
+  block-size: 1px;
+  background-color: var(--ts-color-border-default);
+  margin-block: var(--ts-spacing-1);
+}
