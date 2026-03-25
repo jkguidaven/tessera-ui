@@ -200,3 +200,9 @@
   overflow-x: hidden;
   overflow-y: auto;
 }
+
+@media (forced-colors: active) {
+  .tabs__tab--active {
+    border-color: Highlight;
+  }
+}

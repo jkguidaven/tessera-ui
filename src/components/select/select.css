@@ -215,3 +215,15 @@
   color: var(--ts-color-danger-600);
   font-weight: var(--ts-font-weight-medium);
 }
+
+@media (forced-colors: active) {
+  .select__trigger {
+    border: 1px solid ButtonText;
+  }
+  .select__trigger--disabled {
+    border-color: GrayText;
+  }
+  .select__trigger:focus-visible {
+    outline: 2px solid Highlight;
+  }
+}

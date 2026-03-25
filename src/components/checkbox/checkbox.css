@@ -113,3 +113,12 @@
   line-height: var(--ts-line-height-normal);
   user-select: none;
 }
+
+@media (forced-colors: active) {
+  .checkbox__control {
+    border: 2px solid ButtonText;
+  }
+  :host([disabled]) .checkbox__control {
+    border-color: GrayText;
+  }
+}

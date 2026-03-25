@@ -97,3 +97,12 @@
 :host([size="lg"]) .toggle__label {
   font-size: var(--ts-font-size-md);
 }
+
+@media (forced-colors: active) {
+  .toggle__track {
+    border: 2px solid ButtonText;
+  }
+  :host(.ts-toggle--disabled) .toggle__track {
+    border-color: GrayText;
+  }
+}

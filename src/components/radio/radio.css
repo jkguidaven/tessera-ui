@@ -108,3 +108,12 @@
   line-height: var(--ts-line-height-normal);
   user-select: none;
 }
+
+@media (forced-colors: active) {
+  .radio__control {
+    border: 2px solid ButtonText;
+  }
+  :host([disabled]) .radio__control {
+    border-color: GrayText;
+  }
+}

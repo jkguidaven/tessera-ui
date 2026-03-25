@@ -208,3 +208,9 @@
   cursor: not-allowed;
   pointer-events: none;
 }
+
+@media (forced-colors: active) {
+  .chip__base {
+    border: 1px solid ButtonText;
+  }
+}

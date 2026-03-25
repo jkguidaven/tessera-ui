@@ -260,6 +260,20 @@
 }
 
 /* ---- Reduced motion ---- */
+@media (forced-colors: active) {
+  .button__native {
+    border: 1px solid ButtonText;
+  }
+  .button__native:disabled,
+  .button__native[aria-disabled="true"] {
+    border-color: GrayText;
+    color: GrayText;
+  }
+  .button__native:focus-visible {
+    outline: 2px solid Highlight;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .button__native {
     transition-duration: 0.01ms !important;
