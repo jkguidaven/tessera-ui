@@ -67,6 +67,7 @@
 
 /* ---- Base ---- */
 .toast__base {
+  position: relative;
   display: flex;
   align-items: flex-start;
   gap: var(--ts-spacing-3);
@@ -79,6 +80,7 @@
   font-size: var(--ts-font-size-sm);
   line-height: var(--ts-line-height-normal);
   animation: ts-toast-slide-in 0.3s ease-out;
+  overflow: hidden;
 }
 
 @keyframes ts-toast-slide-in {
@@ -178,6 +180,27 @@
   opacity: 1;
 }
 
+/* ---- Progress bar ---- */
+.toast__progress {
+  position: absolute;
+  inset-block-end: 0;
+  inset-inline-start: 0;
+  block-size: 3px;
+  background-color: currentColor;
+  opacity: 0.3;
+  border-radius: 0 0 var(--ts-radius-md) var(--ts-radius-md);
+  animation: ts-toast-progress linear forwards;
+}
+
+.toast__progress--paused {
+  animation-play-state: paused;
+}
+
+@keyframes ts-toast-progress {
+  from { inline-size: 100%; }
+  to { inline-size: 0%; }
+}
+
 /* ---- Reduced motion ---- */
 @media (prefers-reduced-motion: reduce) {
   .toast__base {
@@ -186,5 +209,9 @@
 
   .toast__close {
     transition-duration: 0.01ms !important;
+  }
+
+  .toast__progress {
+    animation-duration: 0.01ms !important;
   }
 }

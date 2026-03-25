@@ -26,6 +26,14 @@ export default {
       options: ['top-right', 'top-left', 'bottom-right', 'bottom-left', 'top-center', 'bottom-center'],
       description: 'Position of the toast on screen.',
     },
+    pauseOnHover: {
+      control: 'boolean',
+      description: 'Whether auto-dismiss pauses on hover/focus.',
+    },
+    showProgress: {
+      control: 'boolean',
+      description: 'Whether to show a countdown progress bar.',
+    },
     slotContent: {
       control: 'text',
       description: 'Default slot content',
@@ -40,6 +48,8 @@ const Template = (args: Record<string, unknown>): string => {
   if (args.dismissible !== undefined && args.dismissible) attrs.push('dismissible');
   if (args.open) attrs.push('open');
   if (args.position !== undefined) attrs.push(`position="${args.position}"`);
+  if (args.pauseOnHover !== undefined && args.pauseOnHover) attrs.push('pause-on-hover');
+  if (args.showProgress !== undefined && args.showProgress) attrs.push('show-progress');
   return `<ts-toast ${attrs.join(' ')}>${args.slotContent || ''}</ts-toast>`;
 };
 
@@ -74,6 +84,27 @@ export const States = (): string => `
       <p style="margin: 0 0 8px; font-family: sans-serif; font-size: 14px; color: #666;">Not dismissible</p>
       <ts-toast variant="warning" open duration="0" style="position: relative;">This toast cannot be manually dismissed</ts-toast>
     </div>
+  </div>
+`;
+
+export const PauseOnHover = (): string => `
+  <div style="display: flex; flex-direction: column; gap: 12px; position: relative;">
+    <div>
+      <p style="margin: 0 0 8px; font-family: sans-serif; font-size: 14px; color: #666;">Hover over the toast to pause auto-dismiss (default behavior)</p>
+      <ts-toast variant="info" open duration="8000" pause-on-hover dismissible style="position: relative;">Hover me to pause the countdown — I auto-dismiss in 8 seconds</ts-toast>
+    </div>
+    <div>
+      <p style="margin: 0 0 8px; font-family: sans-serif; font-size: 14px; color: #666;">Pause disabled — auto-dismiss continues on hover</p>
+      <ts-toast variant="warning" open duration="8000" pause-on-hover="false" dismissible style="position: relative;">I will auto-dismiss even if you hover me</ts-toast>
+    </div>
+  </div>
+`;
+
+export const WithProgressBar = (): string => `
+  <div style="display: flex; flex-direction: column; gap: 12px; position: relative;">
+    <ts-toast variant="success" open duration="8000" show-progress dismissible style="position: relative;">File uploaded successfully — auto-dismiss with progress bar</ts-toast>
+    <ts-toast variant="info" open duration="10000" show-progress pause-on-hover dismissible style="position: relative;">Hover to pause the progress bar countdown</ts-toast>
+    <ts-toast variant="danger" open duration="6000" show-progress dismissible style="position: relative;">Error detected — dismissing in 6 seconds</ts-toast>
   </div>
 `;
 
