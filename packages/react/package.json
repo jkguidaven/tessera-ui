@@ -2,19 +2,23 @@
   "name": "@tessera-ui/react",
   "version": "0.4.1",
   "description": "React wrappers for Tessera UI web components",
-  "main": "dist/index.cjs.js",
+  "main": "dist/cjs/index.js",
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
-  "files": [
-    "dist/"
-  ],
-  "scripts": {
-    "build": "tsc -p tsconfig.json"
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/cjs/index.js",
+      "types": "./dist/index.d.ts"
+    }
   },
-  "dependencies": {
-    "@tessera-ui/core": "workspace:*"
+  "sideEffects": ["*.css", "./dist/index.js", "./dist/cjs/index.js"],
+  "files": ["dist/", "README.md"],
+  "scripts": {
+    "build": "tsc -p tsconfig.json && tsc -p tsconfig.cjs.json"
   },
   "peerDependencies": {
+    "@tessera-ui/core": "workspace:^",
     "react": ">=17.0.0",
     "react-dom": ">=17.0.0"
   },

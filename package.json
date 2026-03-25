@@ -10,8 +10,29 @@
   "unpkg": "dist/tessera-ui/tessera-ui.esm.js",
   "files": [
     "dist/",
-    "loader/"
+    "loader/",
+    "!dist/**/*.map",
+    "!dist/**/*.stories.js",
+    "!dist/**/*.stories.d.ts",
+    "!dist/components.json"
   ],
+  "sideEffects": [
+    "*.css",
+    "dist/tessera-ui/tessera-ui.esm.js"
+  ],
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs.js",
+      "types": "./dist/types/index.d.ts"
+    },
+    "./dist/*": "./dist/*",
+    "./loader": {
+      "import": "./loader/index.js",
+      "require": "./loader/index.cjs.js",
+      "types": "./loader/index.d.ts"
+    }
+  },
   "scripts": {
     "build": "stencil build && node -e \"const fs=require('fs');const p='dist/types/index.d.ts';fs.appendFileSync(p,'\\nexport * from \\\"./components\\\";\\n')\"",
     "build.watch": "stencil build --watch",

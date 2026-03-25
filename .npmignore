@@ -1,0 +1,9 @@
+# Source maps
+**/*.map
+
+# Storybook stories
+**/*.stories.js
+**/*.stories.d.ts
+
+# Docs metadata
+dist/components.json
