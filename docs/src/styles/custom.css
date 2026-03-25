@@ -16,8 +16,8 @@
 
 .hero {
   grid-template-columns: 1fr !important;
-  justify-items: center;
-  text-align: center !important;
+  justify-items: start;
+  text-align: start !important;
   padding-block: clamp(2rem, 8vmin, 6rem) !important;
 }
 
@@ -28,15 +28,15 @@
 }
 
 .hero .stack {
-  text-align: center !important;
+  text-align: start !important;
 }
 
 .hero .copy {
-  align-items: center !important;
+  align-items: flex-start !important;
 }
 
 .hero .actions {
-  justify-content: center !important;
+  justify-content: flex-start !important;
 }
 
 .version-badge {
