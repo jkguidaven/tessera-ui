@@ -31,6 +31,7 @@
   font-size: var(--ts-font-size-sm);
   line-height: var(--ts-line-height-normal);
   inline-size: 100%;
+  box-sizing: border-box;
 }
 
 /* ---- Variants ---- */

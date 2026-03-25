@@ -10,6 +10,7 @@
 :host {
   display: block;
   font-family: var(--ts-font-family-base);
+  color: var(--ts-color-text-primary);
 
   --ts-card-bg: var(--ts-color-bg-elevated);
   --ts-card-radius: var(--ts-shape-container);
@@ -75,7 +76,8 @@
   border-bottom: 1px solid var(--ts-card-border-color);
 }
 
-.card__header:empty {
+.card__header:empty,
+.card__header:not(:has(::slotted(*))) {
   display: none;
   border-bottom: none;
 }

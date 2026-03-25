@@ -34,4 +34,5 @@
 
 .app-layout__content {
   flex: 1;
+  padding: var(--ts-spacing-6);
 }
