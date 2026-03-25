@@ -84,3 +84,5 @@ export { TsTimeline } from './components/timeline/timeline';
 export { TsTimelineItem } from './components/timeline/timeline-item';
 export { TsCombobox } from './components/combobox/combobox';
 export { TsTimePicker } from './components/time-picker/time-picker';
+export { TsCommandPalette } from './components/command-palette/command-palette';
+export { TsCommandPaletteItem } from './components/command-palette/command-palette-item';
