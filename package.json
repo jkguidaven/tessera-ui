@@ -20,13 +20,13 @@
     "**/*.css",
     "dist/tessera-ui/tessera-ui.esm.js"
   ],
+  "_exportsComment": "The ./dist/* glob passthrough is required by framework wrapper packages (react/vue/angular) which deep-import from @tessera-ui/core/dist/. Do not remove it.",
   "exports": {
     ".": {
       "import": "./dist/index.js",
       "require": "./dist/index.cjs.js",
       "types": "./dist/types/index.d.ts"
     },
-    "_comment_dist_glob": "Required: framework wrappers (react/vue/angular) import from @tessera-ui/core/dist/. Removing this breaks all wrapper packages.",
     "./dist/*": "./dist/*",
     "./loader": {
       "import": "./loader/index.js",
