@@ -16,6 +16,22 @@ export class TsTree {
   /** Enable item selection mode. */
   @Prop({ reflect: true }) selectable = false;
 
+  /** Allow multiple items to be selected simultaneously. */
+  @Prop({ reflect: true }) multiSelect = false;
+
+  @Listen('tsSelect')
+  handleItemSelect(event: CustomEvent<{ selected: boolean; value: string }>): void {
+    if (!this.multiSelect && event.detail.selected) {
+      const target = event.target as HTMLElement;
+      const allItems = Array.from(this.hostEl.querySelectorAll('ts-tree-item')) as HTMLTsTreeItemElement[];
+      allItems.forEach(item => {
+        if (item !== target && item.selected) {
+          item.selected = false;
+        }
+      });
+    }
+  }
+
   @Listen('keydown')
   handleKeyDown(event: KeyboardEvent): void {
     const items = this.getVisibleItems();
@@ -94,4 +110,5 @@ export class TsTree {
 
 interface HTMLTsTreeItemElement extends HTMLElement {
   expanded: boolean;
+  selected: boolean;
 }
