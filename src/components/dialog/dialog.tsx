@@ -22,6 +22,7 @@ export class TsDialog {
   @Element() hostEl!: HTMLElement;
 
   private dialogEl?: HTMLElement;
+  private overlayEl?: HTMLElement;
   private removeFocusTrap?: () => void;
   private previouslyFocused?: HTMLElement;
   private dialogId = generateId('ts-dialog');
@@ -38,11 +39,23 @@ export class TsDialog {
   /** Whether the dialog can be dismissed via close button, Escape, or overlay click. */
   @Prop() dismissible = true;
 
+  /** When true, close actions emit tsRequestClose instead of closing directly. */
+  @Prop() preventClose = false;
+
   /** Emitted when the dialog is closed. */
   @Event({ eventName: 'tsClose' }) tsClose!: EventEmitter<void>;
 
+  /** Emitted when the dialog is opened. */
+  @Event({ eventName: 'tsOpen' }) tsOpen!: EventEmitter<void>;
+
+  /** Emitted when a close is requested while preventClose is true. */
+  @Event({ eventName: 'tsRequestClose' }) tsRequestClose!: EventEmitter<{ source: 'overlay' | 'escape' | 'close-button' }>;
+
   /** Internal animation state. */
   @State() isAnimating = false;
+
+  /** Whether the dialog is playing the closing animation. */
+  @State() isClosing = false;
 
   @Watch('open')
   handleOpenChange(isOpen: boolean): void {
@@ -68,8 +81,11 @@ export class TsDialog {
   private openDialog(): void {
     this.previouslyFocused = document.activeElement as HTMLElement;
     this.isAnimating = true;
+    this.isClosing = false;
 
     document.body.style.overflow = 'hidden';
+
+    this.tsOpen.emit();
 
     requestAnimationFrame(() => {
       if (this.dialogEl) {
@@ -80,6 +96,33 @@ export class TsDialog {
   }
 
   private closeDialog(): void {
+    this.isClosing = true;
+
+    let finished = false;
+    const finish = (): void => {
+      if (finished) return;
+      finished = true;
+      clearTimeout(fallbackTimer);
+      this.overlayEl?.removeEventListener('animationend', onAnimationEnd);
+      this.finishClose();
+    };
+
+    const onAnimationEnd = (): void => {
+      finish();
+    };
+
+    // Fallback timer in case animationend never fires (e.g., reduced motion, test env)
+    const fallbackTimer = setTimeout(finish, 250);
+
+    if (this.overlayEl) {
+      this.overlayEl.addEventListener('animationend', onAnimationEnd);
+    } else {
+      finish();
+    }
+  }
+
+  private finishClose(): void {
+    this.isClosing = false;
     this.isAnimating = false;
     this.tsClose.emit();
 
@@ -89,6 +132,14 @@ export class TsDialog {
     this.previouslyFocused?.focus();
   }
 
+  private requestCloseOrClose(source: 'overlay' | 'escape' | 'close-button'): void {
+    if (this.preventClose) {
+      this.tsRequestClose.emit({ source });
+    } else {
+      this.close();
+    }
+  }
+
   disconnectedCallback(): void {
     this.removeFocusTrap?.();
     document.body.style.overflow = '';
@@ -96,7 +147,7 @@ export class TsDialog {
 
   private handleOverlayClick = (): void => {
     if (this.dismissible) {
-      this.close();
+      this.requestCloseOrClose('overlay');
     }
   };
 
@@ -107,17 +158,17 @@ export class TsDialog {
   private handleKeydown = (event: KeyboardEvent): void => {
     if (event.key === 'Escape' && this.dismissible) {
       event.stopPropagation();
-      this.close();
+      this.requestCloseOrClose('escape');
     }
   };
 
   private handleCloseClick = (): void => {
-    this.close();
+    this.requestCloseOrClose('close-button');
   };
 
   // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   render() {
-    if (!this.open) return null;
+    if (!this.open && !this.isClosing) return null;
 
     const headingId = `${this.dialogId}-heading`;
 
@@ -129,12 +180,21 @@ export class TsDialog {
         }}
         onKeyDown={this.handleKeydown}
       >
-        <div class="dialog__overlay" part="overlay" onClick={this.handleOverlayClick}>
+        <div
+          ref={(el) => (this.overlayEl = el)}
+          class={{
+            'dialog__overlay': true,
+            'dialog--closing': this.isClosing,
+          }}
+          part="overlay"
+          onClick={this.handleOverlayClick}
+        >
           <div
             ref={(el) => (this.dialogEl = el)}
             class={{
               'dialog__panel': true,
               [`dialog__panel--${this.size}`]: true,
+              'dialog--closing': this.isClosing,
             }}
             part="dialog"
             role="dialog"
