@@ -15,6 +15,19 @@ export default {
       options: ['sm', 'md', 'lg'],
       description: 'The size of the tab buttons.',
     },
+    orientation: {
+      control: 'select',
+      options: ['horizontal', 'vertical'],
+      description: 'The orientation of the tab bar.',
+    },
+    closable: {
+      control: 'boolean',
+      description: 'Whether tabs display a close button.',
+    },
+    scrollable: {
+      control: 'boolean',
+      description: 'Whether the tab list is scrollable on overflow.',
+    },
   },
 };
 
@@ -23,6 +36,9 @@ const Template = (args: Record<string, unknown>): string => {
   if (args.value !== undefined && args.value !== null && args.value !== '') attrs.push(`value="${args.value}"`);
   if (args.variant !== undefined && args.variant !== null) attrs.push(`variant="${args.variant}"`);
   if (args.size !== undefined && args.size !== null) attrs.push(`size="${args.size}"`);
+  if (args.orientation !== undefined && args.orientation !== null) attrs.push(`orientation="${args.orientation}"`);
+  if (args.closable) attrs.push('closable');
+  if (args.scrollable) attrs.push('scrollable');
   return `
     <ts-tabs ${attrs.join(' ')}>
       <ts-tab-panel tab="Profile" value="profile">
@@ -151,6 +167,68 @@ export const WithDisabledTab = (): string => `
       </div>
     </ts-tab-panel>
   </ts-tabs>
+`;
+
+export const Vertical = (): string => `
+  <ts-tabs orientation="vertical" value="general">
+    <ts-tab-panel tab="General" value="general">
+      <div style="padding: 16px; font-family: sans-serif;">
+        <h4 style="margin: 0 0 8px;">General Settings</h4>
+        <p style="margin: 0; color: #555;">Configure your application name, language, and timezone preferences.</p>
+      </div>
+    </ts-tab-panel>
+    <ts-tab-panel tab="Notifications" value="notifications">
+      <div style="padding: 16px; font-family: sans-serif;">
+        <h4 style="margin: 0 0 8px;">Notification Preferences</h4>
+        <p style="margin: 0; color: #555;">Choose which notifications you receive and how they are delivered.</p>
+      </div>
+    </ts-tab-panel>
+    <ts-tab-panel tab="Security" value="security">
+      <div style="padding: 16px; font-family: sans-serif;">
+        <h4 style="margin: 0 0 8px;">Security Settings</h4>
+        <p style="margin: 0; color: #555;">Manage two-factor authentication, active sessions, and API keys.</p>
+      </div>
+    </ts-tab-panel>
+  </ts-tabs>
+`;
+
+export const Closable = (): string => `
+  <ts-tabs closable value="dashboard">
+    <ts-tab-panel tab="Dashboard" value="dashboard">
+      <div style="padding: 16px; font-family: sans-serif;">
+        <p style="margin: 0;">Main dashboard overview with key metrics and activity feed.</p>
+      </div>
+    </ts-tab-panel>
+    <ts-tab-panel tab="Reports" value="reports">
+      <div style="padding: 16px; font-family: sans-serif;">
+        <p style="margin: 0;">Generate and view detailed analytics reports.</p>
+      </div>
+    </ts-tab-panel>
+    <ts-tab-panel tab="Logs" value="logs">
+      <div style="padding: 16px; font-family: sans-serif;">
+        <p style="margin: 0;">System event logs and audit trail.</p>
+      </div>
+    </ts-tab-panel>
+  </ts-tabs>
+`;
+
+export const Scrollable = (): string => `
+  <div style="max-width: 400px;">
+    <ts-tabs scrollable value="jan">
+      <ts-tab-panel tab="January" value="jan"><div style="padding: 16px; font-family: sans-serif;">January data and metrics.</div></ts-tab-panel>
+      <ts-tab-panel tab="February" value="feb"><div style="padding: 16px;">February data and metrics.</div></ts-tab-panel>
+      <ts-tab-panel tab="March" value="mar"><div style="padding: 16px;">March data and metrics.</div></ts-tab-panel>
+      <ts-tab-panel tab="April" value="apr"><div style="padding: 16px;">April data and metrics.</div></ts-tab-panel>
+      <ts-tab-panel tab="May" value="may"><div style="padding: 16px;">May data and metrics.</div></ts-tab-panel>
+      <ts-tab-panel tab="June" value="jun"><div style="padding: 16px;">June data and metrics.</div></ts-tab-panel>
+      <ts-tab-panel tab="July" value="jul"><div style="padding: 16px;">July data and metrics.</div></ts-tab-panel>
+      <ts-tab-panel tab="August" value="aug"><div style="padding: 16px;">August data and metrics.</div></ts-tab-panel>
+      <ts-tab-panel tab="September" value="sep"><div style="padding: 16px;">September data and metrics.</div></ts-tab-panel>
+      <ts-tab-panel tab="October" value="oct"><div style="padding: 16px;">October data and metrics.</div></ts-tab-panel>
+      <ts-tab-panel tab="November" value="nov"><div style="padding: 16px;">November data and metrics.</div></ts-tab-panel>
+      <ts-tab-panel tab="December" value="dec"><div style="padding: 16px;">December data and metrics.</div></ts-tab-panel>
+    </ts-tabs>
+  </div>
 `;
 
 export const DashboardExample = (): string => `

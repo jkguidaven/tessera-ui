@@ -152,4 +152,83 @@ describe('ts-tabs', () => {
 
     expect(spy).toHaveBeenCalledTimes(1);
   });
+
+  it('applies vertical class when orientation is vertical', async () => {
+    const page = await newSpecPage({
+      components: [TsTabs, TsTabPanel],
+      html: `
+        <ts-tabs orientation="vertical" value="one">
+          <ts-tab-panel tab="Tab 1" value="one">Content 1</ts-tab-panel>
+          <ts-tab-panel tab="Tab 2" value="two">Content 2</ts-tab-panel>
+        </ts-tabs>
+      `,
+    });
+
+    expect(page.root).toHaveClass('ts-tabs--vertical');
+    expect(page.root?.getAttribute('orientation')).toBe('vertical');
+  });
+
+  it('renders close buttons when closable is true', async () => {
+    const page = await newSpecPage({
+      components: [TsTabs, TsTabPanel],
+      html: `
+        <ts-tabs closable value="one">
+          <ts-tab-panel tab="Tab 1" value="one">Content 1</ts-tab-panel>
+          <ts-tab-panel tab="Tab 2" value="two">Content 2</ts-tab-panel>
+        </ts-tabs>
+      `,
+    });
+
+    const closeButtons = page.root?.shadowRoot?.querySelectorAll('.tabs__close');
+    expect(closeButtons?.length).toBe(2);
+  });
+
+  it('does not render close button on disabled tabs', async () => {
+    const page = await newSpecPage({
+      components: [TsTabs, TsTabPanel],
+      html: `
+        <ts-tabs closable value="one">
+          <ts-tab-panel tab="Tab 1" value="one">Content 1</ts-tab-panel>
+          <ts-tab-panel tab="Tab 2" value="two" disabled>Content 2</ts-tab-panel>
+        </ts-tabs>
+      `,
+    });
+
+    const closeButtons = page.root?.shadowRoot?.querySelectorAll('.tabs__close');
+    expect(closeButtons?.length).toBe(1);
+  });
+
+  it('emits tsClose when close button is clicked', async () => {
+    const page = await newSpecPage({
+      components: [TsTabs, TsTabPanel],
+      html: `
+        <ts-tabs closable value="one">
+          <ts-tab-panel tab="Tab 1" value="one">Content 1</ts-tab-panel>
+          <ts-tab-panel tab="Tab 2" value="two">Content 2</ts-tab-panel>
+        </ts-tabs>
+      `,
+    });
+
+    const spy = jest.fn();
+    page.root?.addEventListener('tsClose', spy);
+
+    const closeButtons = page.root?.shadowRoot?.querySelectorAll<HTMLButtonElement>('.tabs__close');
+    closeButtons?.[0]?.click();
+
+    expect(spy).toHaveBeenCalledTimes(1);
+  });
+
+  it('applies scrollable class when scrollable is true', async () => {
+    const page = await newSpecPage({
+      components: [TsTabs, TsTabPanel],
+      html: `
+        <ts-tabs scrollable value="one">
+          <ts-tab-panel tab="Tab 1" value="one">Content 1</ts-tab-panel>
+          <ts-tab-panel tab="Tab 2" value="two">Content 2</ts-tab-panel>
+        </ts-tabs>
+      `,
+    });
+
+    expect(page.root).toHaveClass('ts-tabs--scrollable');
+  });
 });
