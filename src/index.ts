@@ -69,3 +69,5 @@ export { TsStack } from './components/stack/stack';
 export { TsRow } from './components/row/row';
 export { TsSpacer } from './components/spacer/spacer';
 export { TsVisuallyHidden } from './components/visually-hidden/visually-hidden';
+export { TsRadioGroup } from './components/radio-group/radio-group';
+export { TsCheckboxGroup } from './components/checkbox-group/checkbox-group';

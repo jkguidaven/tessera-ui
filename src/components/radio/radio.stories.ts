@@ -75,3 +75,35 @@ export const PaymentMethod = (): string => `
     <ts-radio name="payment" value="bank" label="Bank transfer"></ts-radio>
   </ts-stack>
 `;
+
+export const RadioGroupDefault = (): string => `
+  <ts-radio-group label="Shipping Method" name="shipping-group" value="standard" style="max-width: 400px;">
+    <ts-radio value="standard">Standard shipping (5-7 business days)</ts-radio>
+    <ts-radio value="express">Express shipping (2-3 business days)</ts-radio>
+    <ts-radio value="overnight">Overnight shipping (next business day)</ts-radio>
+  </ts-radio-group>
+`;
+
+export const RadioGroupHorizontal = (): string => `
+  <ts-radio-group label="Size" name="size-group" value="md" orientation="horizontal" style="max-width: 400px;">
+    <ts-radio value="sm">Small</ts-radio>
+    <ts-radio value="md">Medium</ts-radio>
+    <ts-radio value="lg">Large</ts-radio>
+  </ts-radio-group>
+`;
+
+export const RadioGroupDisabled = (): string => `
+  <ts-radio-group label="Plan" name="plan-group" value="free" disabled style="max-width: 400px;">
+    <ts-radio value="free">Free plan</ts-radio>
+    <ts-radio value="pro">Pro plan</ts-radio>
+    <ts-radio value="enterprise">Enterprise plan</ts-radio>
+  </ts-radio-group>
+`;
+
+export const RadioGroupError = (): string => `
+  <ts-radio-group label="Priority" name="priority-group" error="Please select a priority level" style="max-width: 400px;">
+    <ts-radio value="low">Low</ts-radio>
+    <ts-radio value="medium">Medium</ts-radio>
+    <ts-radio value="high">High</ts-radio>
+  </ts-radio-group>
+`;
