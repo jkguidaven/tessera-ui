@@ -8,7 +8,9 @@
    ========================================================================== */
 
 :host {
-  display: block;
+  display: flex;
+  align-items: center;
+  gap: var(--ts-spacing-3);
 
   --ts-pagination-button-size: 2.25rem;
   --ts-pagination-active-bg: var(--ts-color-interactive-primary);
@@ -19,6 +21,14 @@
   display: flex;
   align-items: center;
   gap: var(--ts-spacing-1);
+}
+
+/* ---- Info text ---- */
+.pagination__info {
+  font-family: var(--ts-font-family-base);
+  font-size: var(--ts-font-size-sm);
+  color: var(--ts-color-text-secondary);
+  white-space: nowrap;
 }
 
 /* ---- Buttons ---- */
@@ -65,9 +75,11 @@
   font-weight: var(--ts-font-weight-semi);
 }
 
-/* ---- Prev/Next arrows ---- */
+/* ---- Prev/Next/First/Last arrows ---- */
 .pagination__prev svg,
-.pagination__next svg {
+.pagination__next svg,
+.pagination__first svg,
+.pagination__last svg {
   inline-size: 1em;
   block-size: 1em;
 }

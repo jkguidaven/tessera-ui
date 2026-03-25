@@ -90,4 +90,47 @@ describe('ts-pagination', () => {
 
     expect(page.root?.getAttribute('size')).toBe('sm');
   });
+
+  it('renders first/last buttons when showFirstLast is true', async () => {
+    const page = await newSpecPage({
+      components: [TsPagination],
+      html: '<ts-pagination total="100" page-size="10" current-page="5" show-first-last="true"></ts-pagination>',
+    });
+
+    const firstBtn = page.root?.shadowRoot?.querySelector('.pagination__first');
+    const lastBtn = page.root?.shadowRoot?.querySelector('.pagination__last');
+    expect(firstBtn).not.toBeNull();
+    expect(lastBtn).not.toBeNull();
+  });
+
+  it('disables first button on page 1', async () => {
+    const page = await newSpecPage({
+      components: [TsPagination],
+      html: '<ts-pagination total="100" page-size="10" current-page="1" show-first-last="true"></ts-pagination>',
+    });
+
+    const firstBtn = page.root?.shadowRoot?.querySelector('.pagination__first');
+    expect(firstBtn?.hasAttribute('disabled')).toBe(true);
+  });
+
+  it('disables last button on last page', async () => {
+    const page = await newSpecPage({
+      components: [TsPagination],
+      html: '<ts-pagination total="50" page-size="10" current-page="5" show-first-last="true"></ts-pagination>',
+    });
+
+    const lastBtn = page.root?.shadowRoot?.querySelector('.pagination__last');
+    expect(lastBtn?.hasAttribute('disabled')).toBe(true);
+  });
+
+  it('renders info text when showInfo is true', async () => {
+    const page = await newSpecPage({
+      components: [TsPagination],
+      html: '<ts-pagination total="100" page-size="10" current-page="3" show-info="true"></ts-pagination>',
+    });
+
+    const info = page.root?.shadowRoot?.querySelector('.pagination__info');
+    expect(info).not.toBeNull();
+    expect(info?.textContent).toBe('Showing 21-30 of 100');
+  });
 });

@@ -25,6 +25,14 @@ export default {
       options: ['sm', 'md', 'lg'],
       description: 'The size of the pagination buttons.',
     },
+    showFirstLast: {
+      control: 'boolean',
+      description: 'Show first/last page buttons.',
+    },
+    showInfo: {
+      control: 'boolean',
+      description: 'Show "Showing X-Y of Z" info text.',
+    },
   },
 };
 
@@ -35,6 +43,8 @@ const Template = (args: Record<string, unknown>): string => {
   if (args.currentPage !== undefined) attrs.push(`current-page="${args.currentPage}"`);
   if (args.siblingCount !== undefined) attrs.push(`sibling-count="${args.siblingCount}"`);
   if (args.size !== undefined) attrs.push(`size="${args.size}"`);
+  if (args.showFirstLast) attrs.push(`show-first-last="true"`);
+  if (args.showInfo) attrs.push(`show-info="true"`);
   return `<ts-pagination ${attrs.join(' ')}></ts-pagination>`;
 };
 
@@ -88,5 +98,48 @@ export const Composition = (): string => `
       <span style="font-size: 14px; color: #666;">Showing 41-50 of 237 results</span>
     </div>
     <ts-pagination total="237" page-size="10" current-page="5" sibling-count="2"></ts-pagination>
+  </div>
+`;
+
+export const WithFirstLast = (): string => `
+  <div style="display: flex; flex-direction: column; gap: 16px;">
+    <div>
+      <p style="margin: 0 0 8px; font-family: sans-serif; font-size: 14px; color: #666;">First page (first button disabled)</p>
+      <ts-pagination total="200" page-size="10" current-page="1" show-first-last="true"></ts-pagination>
+    </div>
+    <div>
+      <p style="margin: 0 0 8px; font-family: sans-serif; font-size: 14px; color: #666;">Middle page</p>
+      <ts-pagination total="200" page-size="10" current-page="10" show-first-last="true"></ts-pagination>
+    </div>
+    <div>
+      <p style="margin: 0 0 8px; font-family: sans-serif; font-size: 14px; color: #666;">Last page (last button disabled)</p>
+      <ts-pagination total="200" page-size="10" current-page="20" show-first-last="true"></ts-pagination>
+    </div>
+  </div>
+`;
+
+export const WithInfo = (): string => `
+  <div style="display: flex; flex-direction: column; gap: 16px;">
+    <div>
+      <p style="margin: 0 0 8px; font-family: sans-serif; font-size: 14px; color: #666;">Page 1 of 10</p>
+      <ts-pagination total="100" page-size="10" current-page="1" show-info="true"></ts-pagination>
+    </div>
+    <div>
+      <p style="margin: 0 0 8px; font-family: sans-serif; font-size: 14px; color: #666;">Page 5 of 10</p>
+      <ts-pagination total="100" page-size="10" current-page="5" show-info="true"></ts-pagination>
+    </div>
+    <div>
+      <p style="margin: 0 0 8px; font-family: sans-serif; font-size: 14px; color: #666;">Last page with partial results</p>
+      <ts-pagination total="93" page-size="10" current-page="10" show-info="true"></ts-pagination>
+    </div>
+  </div>
+`;
+
+export const FullFeatured = (): string => `
+  <div style="display: flex; flex-direction: column; gap: 16px;">
+    <div>
+      <p style="margin: 0 0 8px; font-family: sans-serif; font-size: 14px; color: #666;">All features enabled</p>
+      <ts-pagination total="237" page-size="10" current-page="5" sibling-count="2" show-first-last="true" show-info="true"></ts-pagination>
+    </div>
   </div>
 `;

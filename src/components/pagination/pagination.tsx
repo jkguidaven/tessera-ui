@@ -7,6 +7,9 @@ import type { TsSize } from '../../types';
  * @part button - Each page button.
  * @part prev - The previous button.
  * @part next - The next button.
+ * @part first - The first page button.
+ * @part last - The last page button.
+ * @part info - The info text element.
  */
 @Component({
   tag: 'ts-pagination',
@@ -28,6 +31,12 @@ export class TsPagination {
 
   /** The size of the pagination buttons. */
   @Prop({ reflect: true }) size: TsSize = 'md';
+
+  /** Show first/last page buttons. */
+  @Prop() showFirstLast = false;
+
+  /** Show "Showing X-Y of Z" info text. */
+  @Prop() showInfo = false;
 
   /** Emitted when the page changes. */
   @Event({ eventName: 'tsChange' }) tsChange!: EventEmitter<{ page: number }>;
@@ -92,6 +101,9 @@ export class TsPagination {
     const isFirstPage = this.currentPage <= 1;
     const isLastPage = this.currentPage >= this.totalPages;
 
+    const rangeStart = (this.currentPage - 1) * this.pageSize + 1;
+    const rangeEnd = Math.min(this.currentPage * this.pageSize, this.total);
+
     return (
       <Host
         class={{
@@ -99,7 +111,27 @@ export class TsPagination {
           [`ts-pagination--${this.size}`]: true,
         }}
       >
+        {this.showInfo && (
+          <span part="info" class="pagination__info">
+            Showing {rangeStart}-{rangeEnd} of {this.total}
+          </span>
+        )}
         <nav part="nav" aria-label="Pagination" class="pagination__nav">
+          {this.showFirstLast && (
+            <button
+              class="pagination__button pagination__first"
+              part="first"
+              disabled={isFirstPage}
+              aria-label="First page"
+              onClick={() => this.handlePageClick(1)}
+            >
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="11 18 5 12 11 6" />
+                <polyline points="19 18 13 12 19 6" />
+              </svg>
+            </button>
+          )}
+
           <button
             class="pagination__button pagination__prev"
             part="prev"
@@ -145,6 +177,21 @@ export class TsPagination {
               <polyline points="9 18 15 12 9 6" />
             </svg>
           </button>
+
+          {this.showFirstLast && (
+            <button
+              class="pagination__button pagination__last"
+              part="last"
+              disabled={isLastPage}
+              aria-label="Last page"
+              onClick={() => this.handlePageClick(this.totalPages)}
+            >
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="13 18 19 12 13 6" />
+                <polyline points="5 18 11 12 5 6" />
+              </svg>
+            </button>
+          )}
         </nav>
       </Host>
     );
