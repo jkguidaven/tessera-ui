@@ -119,6 +119,81 @@ describe('ts-toast', () => {
     expect(page.root?.getAttribute('position')).toBe('bottom-left');
   });
 
+  it('renders progress bar when showProgress is true and open', async () => {
+    const page = await newSpecPage({
+      components: [TsToast],
+      html: '<ts-toast open show-progress duration="5000">Message</ts-toast>',
+    });
+
+    const progress = page.root?.shadowRoot?.querySelector('.toast__progress');
+    expect(progress).not.toBeNull();
+  });
+
+  it('does not render progress bar when showProgress is false', async () => {
+    const page = await newSpecPage({
+      components: [TsToast],
+      html: '<ts-toast open duration="5000">Message</ts-toast>',
+    });
+
+    const progress = page.root?.shadowRoot?.querySelector('.toast__progress');
+    expect(progress).toBeNull();
+  });
+
+  it('does not render progress bar when duration is 0', async () => {
+    const page = await newSpecPage({
+      components: [TsToast],
+      html: '<ts-toast open show-progress duration="0">Message</ts-toast>',
+    });
+
+    const progress = page.root?.shadowRoot?.querySelector('.toast__progress');
+    expect(progress).toBeNull();
+  });
+
+  it('sets isPaused state on mouseenter and clears on mouseleave', async () => {
+    const page = await newSpecPage({
+      components: [TsToast],
+      html: '<ts-toast open pause-on-hover duration="5000">Message</ts-toast>',
+    });
+
+    const toast = page.rootInstance as TsToast;
+    expect(toast.isPaused).toBe(false);
+
+    const base = page.root?.shadowRoot?.querySelector('.toast__base') as HTMLElement;
+    base?.dispatchEvent(new Event('mouseenter'));
+    await page.waitForChanges();
+
+    expect(toast.isPaused).toBe(true);
+
+    base?.dispatchEvent(new Event('mouseleave'));
+    await page.waitForChanges();
+
+    expect(toast.isPaused).toBe(false);
+  });
+
+  it('adds paused class to progress bar when hovered', async () => {
+    const page = await newSpecPage({
+      components: [TsToast],
+      html: '<ts-toast open show-progress pause-on-hover duration="5000">Message</ts-toast>',
+    });
+
+    const base = page.root?.shadowRoot?.querySelector('.toast__base') as HTMLElement;
+    base?.dispatchEvent(new Event('mouseenter'));
+    await page.waitForChanges();
+
+    const progress = page.root?.shadowRoot?.querySelector('.toast__progress');
+    expect(progress?.classList.contains('toast__progress--paused')).toBe(true);
+  });
+
+  it('has pauseOnHover defaulting to true', async () => {
+    const page = await newSpecPage({
+      components: [TsToast],
+      html: '<ts-toast open>Message</ts-toast>',
+    });
+
+    const toast = page.rootInstance as TsToast;
+    expect(toast.pauseOnHover).toBe(true);
+  });
+
   it('populates content into existing live region when opened', async () => {
     const page = await newSpecPage({
       components: [TsToast],

@@ -13,6 +13,7 @@ type TsToastPosition = 'top-right' | 'top-left' | 'bottom-right' | 'bottom-left'
  * @part message - The message wrapper.
  * @part action - The action slot wrapper.
  * @part close - The close button.
+ * @part progress - The countdown progress bar.
  */
 @Component({
   tag: 'ts-toast',
@@ -21,6 +22,7 @@ type TsToastPosition = 'top-right' | 'top-left' | 'bottom-right' | 'bottom-left'
 })
 export class TsToast {
   private autoCloseTimer?: ReturnType<typeof setTimeout>;
+  private startTime = 0;
 
   /** The toast's visual variant. */
   @Prop({ reflect: true }) variant: TsToastVariant = 'info';
@@ -37,18 +39,29 @@ export class TsToast {
   /** Position of the toast on screen. */
   @Prop({ reflect: true }) position: TsToastPosition = 'top-right';
 
+  /** Whether auto-dismiss pauses when the toast is hovered or focused. */
+  @Prop() pauseOnHover = true;
+
+  /** Whether to show a countdown progress bar at the bottom. */
+  @Prop() showProgress = false;
+
   /** Emitted when the toast is dismissed. */
   @Event({ eventName: 'tsClose' }) tsClose!: EventEmitter<void>;
 
   @State() isVisible = false;
+  @State() remainingTime = 0;
+  @State() isPaused = false;
 
   @Watch('open')
   handleOpenChange(newValue: boolean): void {
     if (newValue) {
       this.isVisible = true;
+      this.remainingTime = this.duration;
+      this.isPaused = false;
       this.startAutoClose();
     } else {
       this.isVisible = false;
+      this.isPaused = false;
       this.clearAutoClose();
     }
   }
@@ -56,6 +69,7 @@ export class TsToast {
   connectedCallback(): void {
     if (this.open) {
       this.isVisible = true;
+      this.remainingTime = this.duration;
       this.startAutoClose();
     }
   }
@@ -81,10 +95,11 @@ export class TsToast {
 
   private startAutoClose(): void {
     this.clearAutoClose();
-    if (this.duration > 0) {
+    if (this.remainingTime > 0) {
+      this.startTime = Date.now();
       this.autoCloseTimer = setTimeout(() => {
         this.close();
-      }, this.duration);
+      }, this.remainingTime);
     }
   }
 
@@ -94,6 +109,30 @@ export class TsToast {
       this.autoCloseTimer = undefined;
     }
   }
+
+  private handleMouseEnter = (): void => {
+    if (this.pauseOnHover && this.duration > 0) {
+      this.isPaused = true;
+      this.clearAutoClose();
+      const elapsed = Date.now() - this.startTime;
+      this.remainingTime = Math.max(0, this.remainingTime - elapsed);
+    }
+  };
+
+  private handleMouseLeave = (): void => {
+    if (this.pauseOnHover && this.duration > 0) {
+      this.isPaused = false;
+      this.startAutoClose();
+    }
+  };
+
+  private handleFocus = (): void => {
+    this.handleMouseEnter();
+  };
+
+  private handleBlur = (): void => {
+    this.handleMouseLeave();
+  };
 
   private handleClose = (): void => {
     this.close();
@@ -127,7 +166,14 @@ export class TsToast {
         aria-live={ariaLive}
       >
         {this.isVisible && (
-          <div class="toast__base" part="base">
+          <div
+            class="toast__base"
+            part="base"
+            onMouseEnter={this.handleMouseEnter}
+            onMouseLeave={this.handleMouseLeave}
+            onFocus={this.handleFocus}
+            onBlur={this.handleBlur}
+          >
             <div class="toast__icon" part="icon">
               {this.renderIcon()}
             </div>
@@ -150,6 +196,17 @@ export class TsToast {
               >
                 \u2715
               </button>
+            )}
+
+            {this.showProgress && this.duration > 0 && (
+              <div
+                class={{
+                  'toast__progress': true,
+                  'toast__progress--paused': this.isPaused,
+                }}
+                part="progress"
+                style={{ animationDuration: `${this.duration}ms` }}
+              />
             )}
           </div>
         )}
