@@ -19,6 +19,19 @@
   --ts-toast-max-width: 420px;
 }
 
+/* Keep the live region in the DOM but visually hidden when not open */
+:host(:not(.ts-toast--open)) {
+  position: fixed;
+  inline-size: 1px;
+  block-size: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 /* ---- Positions ---- */
 :host([position="top-right"]) {
   inset-block-start: var(--ts-spacing-4);

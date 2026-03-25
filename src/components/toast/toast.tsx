@@ -113,8 +113,6 @@ export class TsToast {
 
   // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   render() {
-    if (!this.isVisible) return null;
-
     const ariaLive = this.variant === 'danger' ? 'assertive' : 'polite';
 
     return (
@@ -128,31 +126,33 @@ export class TsToast {
         role="status"
         aria-live={ariaLive}
       >
-        <div class="toast__base" part="base">
-          <div class="toast__icon" part="icon">
-            {this.renderIcon()}
-          </div>
+        {this.isVisible && (
+          <div class="toast__base" part="base">
+            <div class="toast__icon" part="icon">
+              {this.renderIcon()}
+            </div>
 
-          <div class="toast__message" part="message">
-            <slot />
-          </div>
+            <div class="toast__message" part="message">
+              <slot />
+            </div>
 
-          <div class="toast__action" part="action">
-            <slot name="action" />
-          </div>
+            <div class="toast__action" part="action">
+              <slot name="action" />
+            </div>
 
-          {this.dismissible && (
-            <button
-              class="toast__close"
-              part="close"
-              type="button"
-              aria-label="Dismiss notification"
-              onClick={this.handleClose}
-            >
-              \u2715
-            </button>
-          )}
-        </div>
+            {this.dismissible && (
+              <button
+                class="toast__close"
+                part="close"
+                type="button"
+                aria-label="Dismiss notification"
+                onClick={this.handleClose}
+              >
+                \u2715
+              </button>
+            )}
+          </div>
+        )}
       </Host>
     );
   }
