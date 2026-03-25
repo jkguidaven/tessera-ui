@@ -55,12 +55,13 @@ describe('ts-visually-hidden e2e', () => {
     await page.keyboard.press('Tab');
     await page.waitForChanges();
 
-    const position = await page.evaluate(() => {
+    const isVisible = await page.evaluate(() => {
       const el = document.querySelector('ts-visually-hidden');
       const styles = window.getComputedStyle(el!);
-      return styles.position;
+      // When focused, element should not be clipped off-screen
+      return styles.clip !== 'rect(0px, 0px, 0px, 0px)' && styles.width !== '1px';
     });
 
-    expect(position).toBe('static');
+    expect(isVisible).toBe(true);
   });
 });

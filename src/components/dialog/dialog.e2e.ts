@@ -16,13 +16,13 @@ describe('ts-dialog e2e', () => {
     const tsClose = await page.spyOnEvent('tsClose');
 
     await page.waitForChanges();
-    await page.waitForTimeout(100);
 
     const dialog = await page.find('ts-dialog >>> [role="dialog"]');
     await dialog.focus();
     await page.keyboard.press('Escape');
-    await page.waitForChanges();
 
+    // Wait for exit animation to complete and tsClose to fire
+    await page.waitForEvent('tsClose');
     expect(tsClose).toHaveReceivedEvent();
   });
 
@@ -35,6 +35,8 @@ describe('ts-dialog e2e', () => {
     const overlay = await page.find('ts-dialog >>> .dialog__overlay');
     await overlay.click({ offset: { x: 10, y: 10 } });
 
+    // Wait for exit animation to complete and tsClose to fire
+    await page.waitForEvent('tsClose');
     expect(tsClose).toHaveReceivedEvent();
   });
 });
