@@ -43,8 +43,8 @@ Run all three checks after any component change:
 
 ```bash
 pnpm build                    # Must pass — verifies all output targets compile
-pnpm test                     # Must pass — unit tests (373 tests across 44 suites)
-pnpm test.e2e                 # Must pass — e2e tests (154 tests across 44 suites)
+pnpm test                     # Must pass — unit tests (581 tests across 59 suites)
+pnpm test.e2e                 # Must pass — e2e tests
 npx eslint src --ext .ts,.tsx # Must have 0 errors (warnings are acceptable)
 ```
 
@@ -52,7 +52,7 @@ Do NOT commit if any of these fail. Fix the issue first.
 
 ### Storybook stories
 
-- All stories are **hand-written** — the auto-generator is disabled for all 39 components
+- All stories are **hand-written** — the auto-generator is disabled for all 59 components
 - Stories must NOT contain `@auto-generated` in the file (this marker triggers overwrite on build)
 - When creating or updating a component, **always update its stories** to reflect new props/variants/states
 - Stories should showcase: Default (with controls), Variants, Sizes, States (disabled/error/loading), Composition (realistic multi-component usage)
