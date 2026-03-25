@@ -73,3 +73,4 @@ export { TsSpacer } from './components/spacer/spacer';
 export { TsVisuallyHidden } from './components/visually-hidden/visually-hidden';
 export { TsRadioGroup } from './components/radio-group/radio-group';
 export { TsCheckboxGroup } from './components/checkbox-group/checkbox-group';
+export { TsNumberInput } from './components/number-input/number-input';

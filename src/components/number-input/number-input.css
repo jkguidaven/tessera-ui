@@ -1,0 +1,210 @@
+/* ==========================================================================
+   ts-number-input — Shadow DOM Scoped Styles
+
+   Component tokens (Tier 3):
+     --ts-number-input-bg             Input background
+     --ts-number-input-color          Input text color
+     --ts-number-input-border-color   Default border color
+     --ts-number-input-radius         Border radius
+     --ts-number-input-focus-ring     Focus ring box-shadow
+   ========================================================================== */
+
+:host {
+  display: block;
+  font-family: var(--ts-font-family-base);
+
+  --ts-number-input-bg: var(--ts-color-neutral-50);
+  --ts-number-input-color: var(--ts-color-text-primary);
+  --ts-number-input-border-color: var(--ts-color-border-default);
+  --ts-number-input-radius: var(--ts-radius-md);
+  --ts-number-input-focus-ring: var(--ts-focus-ring);
+}
+
+/* ---- Label ---- */
+.number-input__label {
+  display: block;
+  margin-block-end: var(--ts-spacing-1);
+  font-size: var(--ts-font-size-sm);
+  font-weight: var(--ts-font-weight-medium);
+  color: var(--ts-color-text-secondary);
+  line-height: var(--ts-line-height-normal);
+}
+
+.number-input__required {
+  color: var(--ts-color-danger-500);
+}
+
+/* ---- Wrapper ---- */
+.number-input__wrapper {
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--ts-number-input-border-color);
+  border-radius: var(--ts-number-input-radius);
+  background-color: var(--ts-number-input-bg);
+  box-shadow: none;
+  overflow: hidden;
+  transition:
+    border-color var(--ts-transition-fast),
+    box-shadow var(--ts-transition-fast),
+    background-color var(--ts-transition-fast);
+}
+
+.number-input__wrapper--focused {
+  border-color: var(--ts-color-primary-500);
+  box-shadow: var(--ts-number-input-focus-ring);
+}
+
+.number-input__wrapper--error {
+  border-color: var(--ts-color-danger-500);
+}
+
+.number-input__wrapper--error.number-input__wrapper--focused {
+  box-shadow: 0 0 0 3px var(--ts-color-focus-ring-danger);
+}
+
+.number-input__wrapper--disabled {
+  background-color: var(--ts-color-bg-disabled);
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* ---- Stepper Buttons ---- */
+.number-input__button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: transparent;
+  color: var(--ts-color-text-secondary);
+  cursor: pointer;
+  flex-shrink: 0;
+  font-family: inherit;
+  font-weight: var(--ts-font-weight-medium);
+  line-height: 1;
+  user-select: none;
+  transition:
+    background-color var(--ts-transition-fast),
+    color var(--ts-transition-fast);
+}
+
+.number-input__button:hover:not(:disabled) {
+  background-color: var(--ts-color-neutral-100);
+  color: var(--ts-color-text-primary);
+}
+
+.number-input__button:active:not(:disabled) {
+  background-color: var(--ts-color-neutral-200);
+}
+
+.number-input__button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.number-input__button--decrement {
+  border-inline-end: 1px solid var(--ts-number-input-border-color);
+}
+
+.number-input__button--increment {
+  border-inline-start: 1px solid var(--ts-number-input-border-color);
+}
+
+/* ---- Native Input ---- */
+.number-input__native {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-family: inherit;
+  color: var(--ts-number-input-color);
+  text-align: center;
+  width: 100%;
+  min-width: 0;
+}
+
+.number-input__native::placeholder {
+  color: var(--ts-color-text-tertiary);
+}
+
+.number-input__native:disabled {
+  cursor: not-allowed;
+}
+
+/* Hide native number input spinners */
+.number-input__native::-webkit-inner-spin-button,
+.number-input__native::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.number-input__native[type="number"] {
+  -moz-appearance: textfield;
+}
+
+/* ---- Sizes ---- */
+:host([size="sm"]) .number-input__wrapper {
+  border-radius: var(--ts-radius-sm);
+}
+:host([size="sm"]) .number-input__native {
+  padding: var(--ts-spacing-1) var(--ts-spacing-2);
+  font-size: var(--ts-font-size-sm);
+}
+:host([size="sm"]) .number-input__button {
+  padding-inline: var(--ts-spacing-2);
+  font-size: var(--ts-font-size-sm);
+}
+
+:host([size="md"]) .number-input__native {
+  padding: var(--ts-spacing-2) var(--ts-spacing-3);
+  font-size: var(--ts-font-size-md);
+}
+:host([size="md"]) .number-input__button {
+  padding-inline: var(--ts-spacing-3);
+  font-size: var(--ts-font-size-md);
+}
+
+:host([size="lg"]) .number-input__native {
+  padding: var(--ts-spacing-3) var(--ts-spacing-4);
+  font-size: var(--ts-font-size-lg);
+}
+:host([size="lg"]) .number-input__button {
+  padding-inline: var(--ts-spacing-4);
+  font-size: var(--ts-font-size-lg);
+}
+
+:host([size="xl"]) .number-input__wrapper {
+  border-radius: var(--ts-radius-lg);
+}
+:host([size="xl"]) .number-input__native {
+  padding: var(--ts-spacing-4) var(--ts-spacing-5);
+  font-size: var(--ts-font-size-xl);
+}
+:host([size="xl"]) .number-input__button {
+  padding-inline: var(--ts-spacing-5);
+  font-size: var(--ts-font-size-xl);
+}
+
+/* ---- Help & Error Text ---- */
+.number-input__help,
+.number-input__error {
+  margin-block-start: var(--ts-spacing-1);
+  font-size: var(--ts-font-size-xs);
+  line-height: var(--ts-line-height-normal);
+}
+
+.number-input__help {
+  color: var(--ts-color-text-tertiary);
+}
+
+.number-input__error {
+  color: var(--ts-color-danger-600);
+  font-weight: var(--ts-font-weight-medium);
+}
+
+/* ---- Reduced motion ---- */
+@media (prefers-reduced-motion: reduce) {
+  .number-input__wrapper,
+  .number-input__button {
+    transition-duration: 0.01ms !important;
+  }
+}
