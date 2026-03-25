@@ -31,9 +31,11 @@ describe('ts-tooltip e2e', () => {
     await button.focus();
     await page.waitForTimeout(300);
 
-    // Press Escape
+    // Press Escape and wait for state update
     await page.keyboard.press('Escape');
-    await page.waitForTimeout(200);
+    await page.waitForChanges();
+    await page.waitForTimeout(500);
+    await page.waitForChanges();
 
     const popup = await page.find('ts-tooltip >>> .tooltip__popup');
     const classes = await popup.getProperty('className');
