@@ -30,6 +30,9 @@ export class TsTreeItem {
   /** Whether the item is disabled. */
   @Prop({ reflect: true }) disabled = false;
 
+  /** Whether to show a checkbox before the label. */
+  @Prop({ reflect: true }) checkbox = false;
+
   /** Optional Lucide icon name. */
   @Prop() icon?: string;
 
@@ -102,10 +105,16 @@ export class TsTreeItem {
   private handleSelect = (): void => {
     if (this.disabled) return;
     const tree = this.hostEl.closest('ts-tree');
-    if (tree && (tree as unknown as { selectable: boolean }).selectable) {
+    const isSelectable = tree && (tree as unknown as { selectable: boolean }).selectable;
+    if (isSelectable || this.checkbox) {
       this.selected = !this.selected;
       this.tsSelect.emit({ selected: this.selected, value: this.label || '' });
     }
+  };
+
+  private handleCheckboxClick = (event: MouseEvent): void => {
+    event.stopPropagation();
+    this.handleSelect();
   };
 
   private handleKeyDown = (event: KeyboardEvent): void => {
@@ -154,6 +163,38 @@ export class TsTreeItem {
               <polyline points="9 18 15 12 9 6" />
             </svg>
           </span>
+
+          {this.checkbox && (
+            <span
+              class="tree-item__checkbox"
+              part="checkbox"
+              role="checkbox"
+              aria-checked={String(this.selected)}
+              onClick={this.handleCheckboxClick}
+            >
+              <svg viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <rect
+                  x="1"
+                  y="1"
+                  width="14"
+                  height="14"
+                  rx="2"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  fill={this.selected ? 'currentColor' : 'none'}
+                />
+                {this.selected && (
+                  <path
+                    d="M3.5 8L6.5 11L12.5 5"
+                    stroke={this.selected ? 'var(--ts-color-text-on-primary, #fff)' : 'currentColor'}
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                )}
+              </svg>
+            </span>
+          )}
 
           {this.icon && (
             <span class="tree-item__icon" part="icon" aria-hidden="true">

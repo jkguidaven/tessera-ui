@@ -50,6 +50,30 @@ describe('ts-tree', () => {
 
     expect(page.root?.classList.contains('ts-tree')).toBe(true);
   });
+
+  it('reflects multiSelect prop', async () => {
+    const page = await newSpecPage({
+      components: [TsTree],
+      html: '<ts-tree multi-select></ts-tree>',
+    });
+
+    expect(page.root).toHaveAttribute('multi-select');
+  });
+
+  it('allows multiple selected items when multiSelect is true', async () => {
+    const page = await newSpecPage({
+      components: [TsTree, TsTreeItem],
+      html: `<ts-tree selectable multi-select>
+        <ts-tree-item label="Item A" selected></ts-tree-item>
+        <ts-tree-item label="Item B" selected></ts-tree-item>
+      </ts-tree>`,
+    });
+    await page.waitForChanges();
+
+    const items = page.root?.querySelectorAll('ts-tree-item');
+    expect(items?.[0]?.getAttribute('aria-selected')).toBe('true');
+    expect(items?.[1]?.getAttribute('aria-selected')).toBe('true');
+  });
 });
 
 describe('ts-tree-item', () => {
@@ -141,6 +165,27 @@ describe('ts-tree-item', () => {
     expect(items?.[0]?.getAttribute('aria-posinset')).toBe('1');
     expect(items?.[1]?.getAttribute('aria-posinset')).toBe('2');
     expect(items?.[2]?.getAttribute('aria-posinset')).toBe('3');
+  });
+
+  it('renders checkbox when checkbox prop is true', async () => {
+    const page = await newSpecPage({
+      components: [TsTreeItem],
+      html: '<ts-tree-item label="Item" checkbox></ts-tree-item>',
+    });
+
+    const checkbox = page.root?.shadowRoot?.querySelector('.tree-item__checkbox');
+    expect(checkbox).not.toBeNull();
+    expect(checkbox?.getAttribute('role')).toBe('checkbox');
+  });
+
+  it('does not render checkbox when checkbox prop is false', async () => {
+    const page = await newSpecPage({
+      components: [TsTreeItem],
+      html: '<ts-tree-item label="Item"></ts-tree-item>',
+    });
+
+    const checkbox = page.root?.shadowRoot?.querySelector('.tree-item__checkbox');
+    expect(checkbox).toBeNull();
   });
 
   it('sets aria-level to 2 for nested items', async () => {

@@ -71,6 +71,28 @@
   visibility: hidden;
 }
 
+/* ---- Checkbox ---- */
+.tree-item__checkbox {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  inline-size: 1rem;
+  block-size: 1rem;
+  cursor: pointer;
+  color: var(--ts-color-text-secondary);
+  transition: color var(--ts-transition-fast);
+}
+
+.tree-item__checkbox svg {
+  inline-size: 1rem;
+  block-size: 1rem;
+}
+
+:host([selected]) .tree-item__checkbox {
+  color: var(--ts-color-interactive-primary);
+}
+
 /* ---- Icon ---- */
 .tree-item__icon {
   display: inline-flex;

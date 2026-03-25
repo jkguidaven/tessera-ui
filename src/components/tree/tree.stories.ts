@@ -92,6 +92,41 @@ export const Variants = (): string => `
   </div>
 `;
 
+export const WithCheckboxes = (): string => `
+  <div>
+    <p style="margin: 0 0 12px; font-family: sans-serif; font-size: 14px; color: #666;">Checkbox selection</p>
+    <ts-tree selectable>
+      <ts-tree-item label="Permissions" icon="shield" expanded checkbox>
+        <ts-tree-item label="Read" icon="eye" checkbox selected></ts-tree-item>
+        <ts-tree-item label="Write" icon="pencil" checkbox></ts-tree-item>
+        <ts-tree-item label="Execute" icon="play" checkbox selected></ts-tree-item>
+      </ts-tree-item>
+      <ts-tree-item label="Notifications" icon="bell" expanded checkbox>
+        <ts-tree-item label="Email alerts" icon="mail" checkbox selected></ts-tree-item>
+        <ts-tree-item label="Push notifications" icon="smartphone" checkbox></ts-tree-item>
+        <ts-tree-item label="SMS alerts" icon="message-square" checkbox disabled></ts-tree-item>
+      </ts-tree-item>
+    </ts-tree>
+  </div>
+`;
+
+export const MultiSelect = (): string => `
+  <div>
+    <p style="margin: 0 0 12px; font-family: sans-serif; font-size: 14px; color: #666;">Multi-select enabled (click items to select multiple)</p>
+    <ts-tree selectable multi-select>
+      <ts-tree-item label="Fruits" icon="folder" expanded>
+        <ts-tree-item label="Apples" icon="file-text" selected></ts-tree-item>
+        <ts-tree-item label="Bananas" icon="file-text"></ts-tree-item>
+        <ts-tree-item label="Oranges" icon="file-text" selected></ts-tree-item>
+      </ts-tree-item>
+      <ts-tree-item label="Vegetables" icon="folder" expanded>
+        <ts-tree-item label="Carrots" icon="file-text"></ts-tree-item>
+        <ts-tree-item label="Broccoli" icon="file-text" selected></ts-tree-item>
+      </ts-tree-item>
+    </ts-tree>
+  </div>
+`;
+
 export const Composition = (): string => `
   <div style="max-width: 320px; font-family: sans-serif;">
     <div style="border: 1px solid #e2e8f0; border-radius: 8px; overflow: hidden;">
