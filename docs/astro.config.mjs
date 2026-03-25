@@ -40,6 +40,7 @@ export default defineConfig({
             { label: 'Design Principles', slug: 'design-language/principles' },
             { label: 'Color', slug: 'design-language/color' },
             { label: 'Typography', slug: 'design-language/typography' },
+            { label: 'Spacing', slug: 'design-language/spacing' },
             { label: 'Layout', slug: 'design-language/layout' },
             { label: 'Elevation', slug: 'design-language/elevation' },
             { label: 'Shapes', slug: 'design-language/shapes' },
