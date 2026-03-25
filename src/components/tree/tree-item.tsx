@@ -36,6 +36,7 @@ export class TsTreeItem {
   /** Whether this item has slotted children (expandable). */
   @State() hasChildren = false;
 
+
   /** Emitted when expand/collapse is toggled. */
   @Event({ eventName: 'tsToggle' }) tsToggle!: EventEmitter<{ expanded: boolean }>;
 
@@ -49,6 +50,39 @@ export class TsTreeItem {
 
   componentDidLoad(): void {
     this.checkForChildren();
+  }
+
+  private getAriaLevel(): number {
+    let level = 1;
+    let parent = this.hostEl.parentElement;
+    while (parent) {
+      if (parent.tagName === 'TS-TREE-ITEM') {
+        level++;
+      }
+      parent = parent.parentElement;
+    }
+    return level;
+  }
+
+  private getAriaSetSize(): number {
+    const container = this.hostEl.parentElement;
+    if (container) {
+      return Array.from(container.children).filter(
+        (el) => el.tagName === 'TS-TREE-ITEM'
+      ).length;
+    }
+    return 1;
+  }
+
+  private getAriaPosInSet(): number {
+    const container = this.hostEl.parentElement;
+    if (container) {
+      const siblings = Array.from(container.children).filter(
+        (el) => el.tagName === 'TS-TREE-ITEM'
+      );
+      return siblings.indexOf(this.hostEl) + 1;
+    }
+    return 1;
   }
 
   private checkForChildren(): void {
@@ -101,6 +135,9 @@ export class TsTreeItem {
         aria-expanded={this.hasChildren ? String(this.expanded) : undefined}
         aria-selected={String(this.selected)}
         aria-disabled={this.disabled ? 'true' : undefined}
+        aria-level={String(this.getAriaLevel())}
+        aria-setsize={String(this.getAriaSetSize())}
+        aria-posinset={String(this.getAriaPosInSet())}
         onKeyDown={this.handleKeyDown}
       >
         <div class="tree-item__base" part="base" onClick={this.handleSelect}>

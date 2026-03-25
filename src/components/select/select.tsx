@@ -113,10 +113,29 @@ export class TsSelect {
     }));
   }
 
+  private getSelectedValues(): string[] {
+    if (!this.value) return [];
+    return this.value.split(',').filter(Boolean);
+  }
+
+  private isOptionSelected(option: SelectOption): boolean {
+    if (this.multiple) {
+      return this.getSelectedValues().includes(option.value);
+    }
+    return option.value === this.value;
+  }
+
   private open(): void {
     if (this.disabled) return;
     this.isOpen = true;
-    this.focusedIndex = this.options.findIndex((o) => o.value === this.value);
+    if (this.multiple) {
+      const selectedValues = this.getSelectedValues();
+      this.focusedIndex = selectedValues.length > 0
+        ? this.options.findIndex((o) => o.value === selectedValues[0])
+        : 0;
+    } else {
+      this.focusedIndex = this.options.findIndex((o) => o.value === this.value);
+    }
     if (this.focusedIndex < 0) this.focusedIndex = 0;
   }
 
@@ -128,9 +147,23 @@ export class TsSelect {
 
   private selectOption(option: SelectOption): void {
     if (option.disabled) return;
-    this.value = option.value;
-    this.tsChange.emit({ value: this.value });
-    this.close();
+
+    if (this.multiple) {
+      const selected = this.getSelectedValues();
+      const index = selected.indexOf(option.value);
+      if (index >= 0) {
+        selected.splice(index, 1);
+      } else {
+        selected.push(option.value);
+      }
+      this.value = selected.join(',');
+      this.tsChange.emit({ value: this.value });
+      // Don't close dropdown in multiple mode
+    } else {
+      this.value = option.value;
+      this.tsChange.emit({ value: this.value });
+      this.close();
+    }
   }
 
   private handleTriggerClick = (): void => {
@@ -222,6 +255,15 @@ export class TsSelect {
   };
 
   private getDisplayText(): string {
+    if (this.multiple) {
+      const selectedValues = this.getSelectedValues();
+      if (selectedValues.length === 0) return '';
+      if (selectedValues.length === 1) {
+        const match = this.options.find((o) => o.value === selectedValues[0]);
+        return match?.label ?? selectedValues[0];
+      }
+      return `${selectedValues.length} selected`;
+    }
     const selected = this.options.find((o) => o.value === this.value);
     return selected?.label ?? '';
   }
@@ -291,25 +333,38 @@ export class TsSelect {
               role="listbox"
               id={listboxId}
               aria-labelledby={this.label ? labelId : undefined}
+              aria-multiselectable={this.multiple ? 'true' : undefined}
               onKeyDown={this.handleDropdownKeydown}
             >
-              {this.options.map((option, index) => (
-                <div
-                  class={{
-                    'select__option': true,
-                    'select__option--selected': option.value === this.value,
-                    'select__option--focused': index === this.focusedIndex,
-                    'select__option--disabled': option.disabled,
-                  }}
-                  part="option"
-                  role="option"
-                  aria-selected={option.value === this.value ? 'true' : 'false'}
-                  aria-disabled={option.disabled ? 'true' : undefined}
-                  onClick={() => this.selectOption(option)}
-                >
-                  {option.label}
-                </div>
-              ))}
+              {this.options.map((option, index) => {
+                const selected = this.isOptionSelected(option);
+                return (
+                  <div
+                    class={{
+                      'select__option': true,
+                      'select__option--selected': selected,
+                      'select__option--focused': index === this.focusedIndex,
+                      'select__option--disabled': option.disabled,
+                    }}
+                    part="option"
+                    role="option"
+                    aria-selected={selected ? 'true' : 'false'}
+                    aria-disabled={option.disabled ? 'true' : undefined}
+                    onClick={() => this.selectOption(option)}
+                  >
+                    {this.multiple && (
+                      <span class="select__check" aria-hidden="true">
+                        {selected ? (
+                          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="3.5 8.5 6.5 11.5 12.5 4.5" />
+                          </svg>
+                        ) : null}
+                      </span>
+                    )}
+                    {option.label}
+                  </div>
+                );
+              })}
             </div>
           )}
         </div>
