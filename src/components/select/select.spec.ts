@@ -181,4 +181,111 @@ describe('ts-select', () => {
     const listbox = page.root?.shadowRoot?.querySelector('[role="listbox"]');
     expect(listbox?.getAttribute('aria-multiselectable')).toBe('true');
   });
+
+  it('renders search input when searchable and open', async () => {
+    const page = await newSpecPage({
+      components: [TsSelect],
+      html: `<ts-select searchable>
+        <option value="a">Option A</option>
+        <option value="b">Option B</option>
+      </ts-select>`,
+    });
+
+    const select = page.rootInstance as TsSelect;
+    (select as unknown as { isOpen: boolean }).isOpen = true;
+    await page.waitForChanges();
+
+    const searchInput = page.root?.shadowRoot?.querySelector('.select__search');
+    expect(searchInput).not.toBeNull();
+  });
+
+  it('filters options by search query', async () => {
+    const page = await newSpecPage({
+      components: [TsSelect],
+      html: `<ts-select searchable>
+        <option value="a">Apple</option>
+        <option value="b">Banana</option>
+        <option value="c">Cherry</option>
+      </ts-select>`,
+    });
+
+    const select = page.rootInstance as TsSelect;
+    (select as unknown as { isOpen: boolean }).isOpen = true;
+    (select as unknown as { searchQuery: string }).searchQuery = 'ban';
+    await page.waitForChanges();
+
+    const options = page.root?.shadowRoot?.querySelectorAll('.select__option');
+    expect(options?.length).toBe(1);
+    expect(options?.[0].textContent).toContain('Banana');
+  });
+
+  it('renders clear button when clearable and has value', async () => {
+    const page = await newSpecPage({
+      components: [TsSelect],
+      html: `<ts-select clearable value="a">
+        <option value="a">Option A</option>
+        <option value="b">Option B</option>
+      </ts-select>`,
+    });
+
+    const clearBtn = page.root?.shadowRoot?.querySelector('.select__clear');
+    expect(clearBtn).not.toBeNull();
+  });
+
+  it('does not render clear button when clearable but no value', async () => {
+    const page = await newSpecPage({
+      components: [TsSelect],
+      html: `<ts-select clearable>
+        <option value="a">Option A</option>
+      </ts-select>`,
+    });
+
+    const clearBtn = page.root?.shadowRoot?.querySelector('.select__clear');
+    expect(clearBtn).toBeNull();
+  });
+
+  it('sets aria-activedescendant on trigger when open', async () => {
+    const page = await newSpecPage({
+      components: [TsSelect],
+      html: `<ts-select>
+        <option value="a">Option A</option>
+        <option value="b">Option B</option>
+      </ts-select>`,
+    });
+
+    const select = page.rootInstance as TsSelect;
+    (select as unknown as { isOpen: boolean }).isOpen = true;
+    (select as unknown as { focusedIndex: number }).focusedIndex = 0;
+    await page.waitForChanges();
+
+    const trigger = page.root?.shadowRoot?.querySelector('.select__trigger');
+    const activedescendant = trigger?.getAttribute('aria-activedescendant');
+    expect(activedescendant).toContain('-option-0');
+  });
+
+  it('sets aria-describedby linking to help text', async () => {
+    const page = await newSpecPage({
+      components: [TsSelect],
+      html: `<ts-select help-text="Pick one">
+        <option value="a">Option A</option>
+      </ts-select>`,
+    });
+
+    const trigger = page.root?.shadowRoot?.querySelector('.select__trigger');
+    const describedBy = trigger?.getAttribute('aria-describedby');
+    expect(describedBy).toContain('-help');
+  });
+
+  it('sets aria-describedby linking to error text', async () => {
+    const page = await newSpecPage({
+      components: [TsSelect],
+      html: `<ts-select error error-message="Required">
+        <option value="a">Option A</option>
+      </ts-select>`,
+    });
+
+    const trigger = page.root?.shadowRoot?.querySelector('.select__trigger');
+    const describedBy = trigger?.getAttribute('aria-describedby');
+    expect(describedBy).toContain('-error');
+  });
 });

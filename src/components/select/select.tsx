@@ -30,6 +30,7 @@ export class TsSelect {
 
   private inputId = generateId('ts-select');
   private triggerEl?: HTMLElement;
+  private searchInputEl?: HTMLInputElement;
 
   /** The current value. */
   @Prop({ mutable: true, reflect: true }) value = '';
@@ -64,6 +65,12 @@ export class TsSelect {
   /** Allow multiple selections. */
   @Prop({ reflect: true }) multiple = false;
 
+  /** Enable search/filter input in the dropdown. */
+  @Prop({ reflect: true }) searchable = false;
+
+  /** Show a clear button when a value is selected. */
+  @Prop({ reflect: true }) clearable = false;
+
   /** Whether the dropdown is open. */
   @State() isOpen = false;
 
@@ -72,6 +79,9 @@ export class TsSelect {
 
   /** Parsed options from slotted <option> elements. */
   @State() options: SelectOption[] = [];
+
+  /** Current search query for filtering options. */
+  @State() searchQuery = '';
 
   /** Emitted when the value changes. */
   @Event({ eventName: 'tsChange' }) tsChange!: EventEmitter<TsSelectChangeEventDetail>;
@@ -125,25 +135,74 @@ export class TsSelect {
     return option.value === this.value;
   }
 
+  private getFilteredOptions(): SelectOption[] {
+    if (!this.searchable || !this.searchQuery) return this.options;
+    const query = this.searchQuery.toLowerCase();
+    return this.options.filter((o) => o.label.toLowerCase().includes(query));
+  }
+
   private open(): void {
     if (this.disabled) return;
     this.isOpen = true;
+    this.searchQuery = '';
+    const filtered = this.getFilteredOptions();
     if (this.multiple) {
       const selectedValues = this.getSelectedValues();
       this.focusedIndex = selectedValues.length > 0
-        ? this.options.findIndex((o) => o.value === selectedValues[0])
+        ? filtered.findIndex((o) => o.value === selectedValues[0])
         : 0;
     } else {
-      this.focusedIndex = this.options.findIndex((o) => o.value === this.value);
+      this.focusedIndex = filtered.findIndex((o) => o.value === this.value);
     }
     if (this.focusedIndex < 0) this.focusedIndex = 0;
+
+    if (this.searchable) {
+      requestAnimationFrame(() => this.searchInputEl?.focus());
+    }
   }
 
   private close(): void {
     this.isOpen = false;
     this.focusedIndex = -1;
+    this.searchQuery = '';
     this.triggerEl?.focus();
   }
+
+  private handleClear = (event: MouseEvent): void => {
+    event.stopPropagation();
+    this.value = '';
+    this.tsChange.emit({ value: this.value });
+  };
+
+  private handleSearchInput = (event: Event): void => {
+    this.searchQuery = (event.target as HTMLInputElement).value;
+    this.focusedIndex = 0;
+  };
+
+  private handleSearchKeydown = (event: KeyboardEvent): void => {
+    switch (event.key) {
+      case 'ArrowDown':
+        event.preventDefault();
+        this.moveFocusFiltered(1);
+        break;
+      case 'ArrowUp':
+        event.preventDefault();
+        this.moveFocusFiltered(-1);
+        break;
+      case 'Enter': {
+        event.preventDefault();
+        const filtered = this.getFilteredOptions();
+        if (this.focusedIndex >= 0 && filtered[this.focusedIndex] && !filtered[this.focusedIndex].disabled) {
+          this.selectOption(filtered[this.focusedIndex]);
+        }
+        break;
+      }
+      case 'Escape':
+        event.preventDefault();
+        this.close();
+        break;
+    }
+  };
 
   private selectOption(option: SelectOption): void {
     if (option.disabled) return;
@@ -175,6 +234,7 @@ export class TsSelect {
   };
 
   private handleTriggerKeydown = (event: KeyboardEvent): void => {
+    const filtered = this.getFilteredOptions();
     switch (event.key) {
       case 'Enter':
       case ' ':
@@ -183,8 +243,8 @@ export class TsSelect {
         if (!this.isOpen) {
           this.open();
         } else if (event.key === 'Enter' || event.key === ' ') {
-          if (this.focusedIndex >= 0 && this.options[this.focusedIndex]) {
-            this.selectOption(this.options[this.focusedIndex]);
+          if (this.focusedIndex >= 0 && filtered[this.focusedIndex]) {
+            this.selectOption(filtered[this.focusedIndex]);
           }
         }
         break;
@@ -204,21 +264,22 @@ export class TsSelect {
   };
 
   private handleDropdownKeydown = (event: KeyboardEvent): void => {
-    const enabledOptions = this.options.filter((o) => !o.disabled);
+    const filtered = this.getFilteredOptions();
+    const enabledOptions = filtered.filter((o) => !o.disabled);
     switch (event.key) {
       case 'ArrowDown':
         event.preventDefault();
-        this.moveFocus(1);
+        this.moveFocusFiltered(1);
         break;
       case 'ArrowUp':
         event.preventDefault();
-        this.moveFocus(-1);
+        this.moveFocusFiltered(-1);
         break;
       case 'Enter':
       case ' ':
         event.preventDefault();
-        if (this.focusedIndex >= 0 && this.options[this.focusedIndex] && !this.options[this.focusedIndex].disabled) {
-          this.selectOption(this.options[this.focusedIndex]);
+        if (this.focusedIndex >= 0 && filtered[this.focusedIndex] && !filtered[this.focusedIndex].disabled) {
+          this.selectOption(filtered[this.focusedIndex]);
         }
         break;
       case 'Escape':
@@ -227,21 +288,22 @@ export class TsSelect {
         break;
       case 'Home':
         event.preventDefault();
-        this.focusedIndex = enabledOptions.length > 0 ? this.options.indexOf(enabledOptions[0]) : 0;
+        this.focusedIndex = enabledOptions.length > 0 ? filtered.indexOf(enabledOptions[0]) : 0;
         break;
       case 'End':
         event.preventDefault();
-        this.focusedIndex = enabledOptions.length > 0 ? this.options.indexOf(enabledOptions[enabledOptions.length - 1]) : this.options.length - 1;
+        this.focusedIndex = enabledOptions.length > 0 ? filtered.indexOf(enabledOptions[enabledOptions.length - 1]) : filtered.length - 1;
         break;
     }
   };
 
-  private moveFocus(direction: number): void {
+  private moveFocusFiltered(direction: number): void {
+    const filtered = this.getFilteredOptions();
     let next = this.focusedIndex + direction;
-    while (next >= 0 && next < this.options.length && this.options[next].disabled) {
+    while (next >= 0 && next < filtered.length && filtered[next].disabled) {
       next += direction;
     }
-    if (next >= 0 && next < this.options.length) {
+    if (next >= 0 && next < filtered.length) {
       this.focusedIndex = next;
     }
   }
@@ -276,6 +338,15 @@ export class TsSelect {
     const errorId = `${this.inputId}-error`;
     const listboxId = `${this.inputId}-listbox`;
     const displayText = this.getDisplayText();
+    const filteredOptions = this.getFilteredOptions();
+    const focusedOptionId = this.isOpen && this.focusedIndex >= 0 && filteredOptions[this.focusedIndex]
+      ? `${this.inputId}-option-${this.focusedIndex}`
+      : undefined;
+
+    const describedByParts: string[] = [];
+    if (hasError) describedByParts.push(errorId);
+    if (!hasError && this.helpText) describedByParts.push(helpId);
+    const ariaDescribedBy = describedByParts.length > 0 ? describedByParts.join(' ') : undefined;
 
     return (
       <Host
@@ -310,6 +381,8 @@ export class TsSelect {
             aria-haspopup="listbox"
             aria-controls={listboxId}
             aria-labelledby={this.label ? labelId : undefined}
+            aria-activedescendant={focusedOptionId}
+            aria-describedby={ariaDescribedBy}
             aria-invalid={this.error ? 'true' : undefined}
             aria-required={this.required ? 'true' : undefined}
             disabled={this.disabled}
@@ -321,6 +394,19 @@ export class TsSelect {
             <span class={{ 'select__display': true, 'select__display--placeholder': !displayText }}>
               {displayText || this.placeholder || '\u00A0'}
             </span>
+            {this.clearable && this.value && (
+              <button
+                class="select__clear"
+                type="button"
+                aria-label="Clear selection"
+                onClick={this.handleClear}
+                tabindex={-1}
+              >
+                <svg viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                  <path d="M4 4L12 12M12 4L4 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                </svg>
+              </button>
+            )}
             <svg class="select__chevron" viewBox="0 0 16 16" fill="none" aria-hidden="true">
               <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
             </svg>
@@ -336,35 +422,54 @@ export class TsSelect {
               aria-multiselectable={this.multiple ? 'true' : undefined}
               onKeyDown={this.handleDropdownKeydown}
             >
-              {this.options.map((option, index) => {
-                const selected = this.isOptionSelected(option);
-                return (
-                  <div
-                    class={{
-                      'select__option': true,
-                      'select__option--selected': selected,
-                      'select__option--focused': index === this.focusedIndex,
-                      'select__option--disabled': option.disabled,
-                    }}
-                    part="option"
-                    role="option"
-                    aria-selected={selected ? 'true' : 'false'}
-                    aria-disabled={option.disabled ? 'true' : undefined}
-                    onClick={() => this.selectOption(option)}
-                  >
-                    {this.multiple && (
-                      <span class="select__check" aria-hidden="true">
-                        {selected ? (
-                          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <polyline points="3.5 8.5 6.5 11.5 12.5 4.5" />
-                          </svg>
-                        ) : null}
-                      </span>
-                    )}
-                    {option.label}
-                  </div>
-                );
-              })}
+              {this.searchable && (
+                <input
+                  ref={(el) => (this.searchInputEl = el)}
+                  class="select__search"
+                  type="text"
+                  placeholder="Search..."
+                  value={this.searchQuery}
+                  onInput={this.handleSearchInput}
+                  onKeyDown={this.handleSearchKeydown}
+                  aria-label="Search options"
+                  autocomplete="off"
+                />
+              )}
+              {filteredOptions.length > 0
+                ? filteredOptions.map((option, index) => {
+                    const selected = this.isOptionSelected(option);
+                    return (
+                      <div
+                        class={{
+                          'select__option': true,
+                          'select__option--selected': selected,
+                          'select__option--focused': index === this.focusedIndex,
+                          'select__option--disabled': option.disabled,
+                        }}
+                        part="option"
+                        role="option"
+                        id={`${this.inputId}-option-${index}`}
+                        aria-selected={selected ? 'true' : 'false'}
+                        aria-disabled={option.disabled ? 'true' : undefined}
+                        onClick={() => this.selectOption(option)}
+                      >
+                        {this.multiple && (
+                          <span class="select__check" aria-hidden="true">
+                            {selected ? (
+                              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="3.5 8.5 6.5 11.5 12.5 4.5" />
+                              </svg>
+                            ) : null}
+                          </span>
+                        )}
+                        {option.label}
+                      </div>
+                    );
+                  })
+                : (
+                  <div class="select__no-results">No results found</div>
+                )
+              }
             </div>
           )}
         </div>
