@@ -23,8 +23,10 @@ import { generateId } from '../../utils/aria';
  * @part input - The native input element.
  * @part prefix - The prefix slot wrapper.
  * @part suffix - The suffix slot wrapper.
+ * @part clear-button - The clear button element.
  * @part help-text - The help text wrapper.
  * @part error-text - The error message wrapper.
+ * @part counter - The character counter element.
  */
 @Component({
   tag: 'ts-input',
@@ -83,6 +85,12 @@ export class TsInput {
 
   /** Pattern for validation (regex string). */
   @Prop() pattern?: string;
+
+  /** Shows a clear button when the input has a value. */
+  @Prop({ reflect: true }) clearable = false;
+
+  /** Shows a character counter when maxlength is set. */
+  @Prop({ reflect: true }) showCount = false;
 
   /** Autocomplete attribute. */
   @Prop() autocomplete?: string;
@@ -157,12 +165,24 @@ export class TsInput {
     this.tsBlur.emit();
   };
 
+  private handleClear = (event: Event): void => {
+    event.preventDefault();
+    event.stopPropagation();
+    const previousValue = this.value;
+    this.value = '';
+    this.tsInput.emit({ value: '', previousValue });
+    this.tsChange.emit({ value: '', previousValue });
+    this.inputEl?.focus();
+  };
+
   // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   render() {
     const hasError = !!this.error;
     const labelId = `${this.inputId}-label`;
     const helpId = `${this.inputId}-help`;
     const errorId = `${this.inputId}-error`;
+    const showClear = this.clearable && this.value.length > 0 && !this.disabled && !this.readonly;
+    const showCounter = this.showCount && this.maxlength !== undefined && this.maxlength > 0;
 
     return (
       <Host
@@ -220,6 +240,21 @@ export class TsInput {
             onBlur={this.handleBlur}
           />
 
+          {showClear && (
+            <button
+              class="input__clear-button"
+              part="clear-button"
+              type="button"
+              aria-label="Clear input"
+              tabindex={-1}
+              onClick={this.handleClear}
+            >
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                <path d="M3.5 3.5L10.5 10.5M10.5 3.5L3.5 10.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+              </svg>
+            </button>
+          )}
+
           <span class="input__suffix" part="suffix">
             <slot name="suffix" />
           </span>
@@ -234,6 +269,20 @@ export class TsInput {
         {!hasError && this.helpText && (
           <div class="input__help" part="help-text" id={helpId}>
             {this.helpText}
+          </div>
+        )}
+
+        {showCounter && (
+          <div
+            class={{
+              'input__counter': true,
+              'input__counter--warning': this.maxlength !== undefined && this.maxlength > 0 && this.value.length / this.maxlength > 0.9 && this.value.length / this.maxlength < 1,
+              'input__counter--danger': this.maxlength !== undefined && this.maxlength > 0 && this.value.length / this.maxlength >= 1,
+            }}
+            part="counter"
+            aria-live="polite"
+          >
+            {this.value.length}/{this.maxlength}
           </div>
         )}
       </Host>
