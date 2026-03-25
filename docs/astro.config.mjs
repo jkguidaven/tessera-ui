@@ -15,8 +15,8 @@ export default defineConfig({
       title: `Tessera UI`,
       description: 'Framework-agnostic web component library built with Stencil.js',
       logo: {
-        light: '/logo-light.svg',
-        dark: '/logo-dark.svg',
+        light: './src/assets/logo-light.svg',
+        dark: './src/assets/logo-dark.svg',
         replacesTitle: true,
       },
       customCss: ['./src/styles/custom.css'],
