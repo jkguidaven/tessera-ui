@@ -72,6 +72,8 @@ jobs:
           cache: pnpm
       - run: pnpm install --frozen-lockfile
       - run: pnpm build
+      - name: Build wrapper packages
+        run: pnpm -r --filter='!@tessera-ui/docs' run build
       - uses: actions/upload-artifact@v4
         with:
           name: dist
