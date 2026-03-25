@@ -168,4 +168,87 @@ describe('ts-input', () => {
     const input = page.root?.shadowRoot?.querySelector('input');
     expect(input?.type).toBe('email');
   });
+
+  it('renders clear button when clearable and has value', async () => {
+    const page = await newSpecPage({
+      components: [TsInput],
+      html: '<ts-input clearable value="hello"></ts-input>',
+    });
+
+    const clearBtn = page.root?.shadowRoot?.querySelector('.input__clear-button');
+    expect(clearBtn).not.toBeNull();
+  });
+
+  it('hides clear button when value is empty', async () => {
+    const page = await newSpecPage({
+      components: [TsInput],
+      html: '<ts-input clearable value=""></ts-input>',
+    });
+
+    const clearBtn = page.root?.shadowRoot?.querySelector('.input__clear-button');
+    expect(clearBtn).toBeNull();
+  });
+
+  it('hides clear button when disabled', async () => {
+    const page = await newSpecPage({
+      components: [TsInput],
+      html: '<ts-input clearable value="hello" disabled></ts-input>',
+    });
+
+    const clearBtn = page.root?.shadowRoot?.querySelector('.input__clear-button');
+    expect(clearBtn).toBeNull();
+  });
+
+  it('clears value and emits events on clear button click', async () => {
+    const page = await newSpecPage({
+      components: [TsInput],
+      html: '<ts-input clearable value="hello"></ts-input>',
+    });
+
+    const inputSpy = jest.fn();
+    const changeSpy = jest.fn();
+    page.root?.addEventListener('tsInput', inputSpy);
+    page.root?.addEventListener('tsChange', changeSpy);
+
+    const clearBtn = page.root?.shadowRoot?.querySelector('.input__clear-button') as HTMLButtonElement;
+    clearBtn?.click();
+    await page.waitForChanges();
+
+    expect(page.rootInstance.value).toBe('');
+    expect(inputSpy).toHaveBeenCalledTimes(1);
+    expect(changeSpy).toHaveBeenCalledTimes(1);
+    expect(inputSpy.mock.calls[0][0].detail.previousValue).toBe('hello');
+  });
+
+  it('renders character counter when showCount and maxlength are set', async () => {
+    const page = await newSpecPage({
+      components: [TsInput],
+      html: '<ts-input show-count maxlength="100" value="hello"></ts-input>',
+    });
+
+    const counter = page.root?.shadowRoot?.querySelector('.input__counter');
+    expect(counter).not.toBeNull();
+    expect(counter?.textContent).toBe('5/100');
+  });
+
+  it('applies warning color near limit', async () => {
+    // 19/20 = 0.95, which is > 0.9 and < 1
+    const page = await newSpecPage({
+      components: [TsInput],
+      html: '<ts-input show-count maxlength="20" value="1234567890123456789"></ts-input>',
+    });
+
+    const counter = page.root?.shadowRoot?.querySelector('.input__counter');
+    expect(counter?.classList.contains('input__counter--warning')).toBe(true);
+  });
+
+  it('applies danger color at limit', async () => {
+    const page = await newSpecPage({
+      components: [TsInput],
+      html: '<ts-input show-count maxlength="5" value="12345"></ts-input>',
+    });
+
+    const counter = page.root?.shadowRoot?.querySelector('.input__counter');
+    expect(counter?.classList.contains('input__counter--danger')).toBe(true);
+  });
 });

@@ -23,6 +23,8 @@ export default {
     disabled: { control: 'boolean', description: 'Renders the input as disabled.' },
     readonly: { control: 'boolean', description: 'Renders the input as readonly.' },
     maxlength: { control: 'number', description: 'Maximum character length.' },
+    clearable: { control: 'boolean', description: 'Shows a clear button when the input has a value.' },
+    showCount: { control: 'boolean', description: 'Shows a character counter when maxlength is set.' },
     name: { control: 'text', description: 'Name attribute for form submission.' },
   },
 };
@@ -40,6 +42,8 @@ const Template = (args: Record<string, unknown>): string => {
   if (args.disabled) attrs.push('disabled');
   if (args.readonly) attrs.push('readonly');
   if (args.maxlength !== undefined && args.maxlength !== null) attrs.push(`maxlength="${args.maxlength}"`);
+  if (args.clearable) attrs.push('clearable');
+  if (args.showCount) attrs.push('show-count');
   if (args.name !== undefined && args.name !== null && args.name !== '') attrs.push(`name="${args.name}"`);
   return `<div style="max-width: 400px;"><ts-input ${attrs.join(' ')}></ts-input></div>`;
 };
@@ -111,6 +115,24 @@ export const WithIcons = (): string => `
       <ts-icon slot="prefix" name="lock" size="sm"></ts-icon>
       <ts-icon slot="suffix" name="eye" size="sm"></ts-icon>
     </ts-input>
+  </ts-stack>
+`;
+
+export const Clearable = (): string => `
+  <ts-stack gap="3" style="max-width: 400px;">
+    <ts-input label="Search" type="search" placeholder="Search files..." value="quarterly-report.pdf" clearable>
+      <ts-icon slot="prefix" name="search" size="sm"></ts-icon>
+    </ts-input>
+    <ts-input label="Username" placeholder="Enter username" value="johndoe" clearable></ts-input>
+    <ts-input label="Disabled (not clearable)" value="locked value" clearable disabled></ts-input>
+  </ts-stack>
+`;
+
+export const CharacterCounter = (): string => `
+  <ts-stack gap="3" style="max-width: 400px;">
+    <ts-input label="Username" placeholder="Choose a username" maxlength="20" value="john" show-count help-text="Must be unique."></ts-input>
+    <ts-input label="Near Limit" maxlength="10" value="123456789" show-count></ts-input>
+    <ts-input label="At Limit" maxlength="5" value="12345" show-count></ts-input>
   </ts-stack>
 `;
 

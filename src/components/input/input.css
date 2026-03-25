@@ -153,3 +153,47 @@
   color: var(--ts-color-danger-600);
   font-weight: var(--ts-font-weight-medium);
 }
+
+/* ---- Clear Button ---- */
+.input__clear-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: none;
+  cursor: pointer;
+  padding: var(--ts-spacing-1);
+  color: var(--ts-color-text-tertiary);
+  border-radius: var(--ts-radius-sm);
+  transition:
+    color var(--ts-transition-fast),
+    background-color var(--ts-transition-fast);
+  flex-shrink: 0;
+}
+
+.input__clear-button:hover {
+  color: var(--ts-color-text-primary);
+  background-color: var(--ts-color-neutral-100);
+}
+
+.input__clear-button:focus-visible {
+  outline: 2px solid var(--ts-color-primary-500);
+  outline-offset: -2px;
+}
+
+/* ---- Character Counter ---- */
+.input__counter {
+  margin-block-start: var(--ts-spacing-1);
+  font-size: var(--ts-font-size-xs);
+  line-height: var(--ts-line-height-normal);
+  color: var(--ts-color-text-tertiary);
+  text-align: end;
+}
+
+.input__counter--warning {
+  color: var(--ts-color-warning-500);
+}
+
+.input__counter--danger {
+  color: var(--ts-color-danger-500);
+}

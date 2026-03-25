@@ -45,4 +45,18 @@ describe('ts-input e2e', () => {
     const disabled = await input.getProperty('disabled');
     expect(disabled).toBe(true);
   });
+
+  it('clears input value when clear button is clicked', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<ts-input clearable value="hello"></ts-input>');
+
+    const clearBtn = await page.find('ts-input >>> .input__clear-button');
+    expect(clearBtn).not.toBeNull();
+    await clearBtn.click();
+    await page.waitForChanges();
+
+    const el = await page.find('ts-input');
+    const value = await el.getProperty('value');
+    expect(value).toBe('');
+  });
 });
