@@ -11,8 +11,10 @@
   "scripts": {
     "build": "tsc -p tsconfig.json"
   },
+  "dependencies": {
+    "@tessera-ui/core": "workspace:*"
+  },
   "peerDependencies": {
-    "@tessera-ui/core": "workspace:*",
     "vue": ">=3.3.0"
   },
   "devDependencies": {

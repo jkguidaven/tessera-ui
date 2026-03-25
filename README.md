@@ -19,10 +19,10 @@ A framework-agnostic web component library built with **Stencil.js** and **TypeS
 ### Install
 
 ```bash
-# Core Web Components
+# Core Web Components (vanilla HTML)
 npm install @tessera-ui/core
 
-# Framework-specific wrappers (pick one)
+# Framework-specific wrappers (pick one — includes @tessera-ui/core automatically)
 npm install @tessera-ui/react
 npm install @tessera-ui/vue
 npm install @tessera-ui/angular
