@@ -41,7 +41,7 @@ jobs:
   test-e2e:
     name: E2E Tests
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
 
@@ -73,7 +73,11 @@ jobs:
         if: steps.cache-playwright.outputs.cache-hit == 'true'
         run: npx playwright install-deps chromium
 
-      - run: pnpm test.e2e
+      - name: Run E2E tests
+        run: pnpm test.e2e -- --max-workers=2
+        timeout-minutes: 8
+        env:
+          NODE_OPTIONS: '--max-old-space-size=4096'
 
   build:
     name: Build
