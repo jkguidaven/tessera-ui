@@ -28,8 +28,8 @@ export class TsTabPanel {
   // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   render() {
     return (
-      <Host>
-        <div class="tab-panel" part="panel" role="tabpanel">
+      <Host id={`panel-${this.value}`}>
+        <div class="tab-panel" part="panel" role="tabpanel" aria-labelledby={`tab-${this.value}`}>
           <slot />
         </div>
       </Host>

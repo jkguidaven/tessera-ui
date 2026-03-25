@@ -93,6 +93,46 @@ describe('ts-tabs', () => {
     expect(tabs?.[0]?.hasAttribute('disabled')).toBe(true);
   });
 
+  it('adds id and aria-controls to tab buttons', async () => {
+    const page = await newSpecPage({
+      components: [TsTabs, TsTabPanel],
+      html: `
+        <ts-tabs value="one">
+          <ts-tab-panel tab="Tab 1" value="one">Content 1</ts-tab-panel>
+          <ts-tab-panel tab="Tab 2" value="two">Content 2</ts-tab-panel>
+        </ts-tabs>
+      `,
+    });
+
+    const tabs = page.root?.shadowRoot?.querySelectorAll('[role="tab"]');
+    expect(tabs?.[0]?.getAttribute('id')).toBe('tab-one');
+    expect(tabs?.[0]?.getAttribute('aria-controls')).toBe('panel-one');
+    expect(tabs?.[1]?.getAttribute('id')).toBe('tab-two');
+    expect(tabs?.[1]?.getAttribute('aria-controls')).toBe('panel-two');
+  });
+
+  it('adds id and aria-labelledby to tab panels', async () => {
+    const page = await newSpecPage({
+      components: [TsTabs, TsTabPanel],
+      html: `
+        <ts-tabs value="one">
+          <ts-tab-panel tab="Tab 1" value="one">Content 1</ts-tab-panel>
+          <ts-tab-panel tab="Tab 2" value="two">Content 2</ts-tab-panel>
+        </ts-tabs>
+      `,
+    });
+
+    const panels = page.root?.querySelectorAll('ts-tab-panel');
+    expect(panels?.[0]?.getAttribute('id')).toBe('panel-one');
+    expect(panels?.[1]?.getAttribute('id')).toBe('panel-two');
+
+    const panelDiv0 = panels?.[0]?.shadowRoot?.querySelector('[role="tabpanel"]');
+    expect(panelDiv0?.getAttribute('aria-labelledby')).toBe('tab-one');
+
+    const panelDiv1 = panels?.[1]?.shadowRoot?.querySelector('[role="tabpanel"]');
+    expect(panelDiv1?.getAttribute('aria-labelledby')).toBe('tab-two');
+  });
+
   it('emits tsChange when a tab is clicked', async () => {
     const page = await newSpecPage({
       components: [TsTabs, TsTabPanel],

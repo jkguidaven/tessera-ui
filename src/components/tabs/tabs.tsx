@@ -141,8 +141,10 @@ export class TsTabs {
                 part={isActive ? 'tab tab-active' : 'tab'}
                 role="tab"
                 type="button"
+                id={`tab-${t.value}`}
                 aria-selected={isActive ? 'true' : 'false'}
                 aria-disabled={t.disabled ? 'true' : undefined}
+                aria-controls={`panel-${t.value}`}
                 tabindex={isActive ? 0 : -1}
                 disabled={t.disabled}
                 onClick={() => this.handleTabClick(t.value, t.disabled)}
