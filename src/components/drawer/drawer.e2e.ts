@@ -29,6 +29,7 @@ describe('ts-drawer e2e', () => {
     const overlay = await page.find('ts-drawer >>> .drawer__overlay');
     await overlay.click();
     await page.waitForChanges();
+    await page.waitForChanges();
 
     expect(tsClose).toHaveReceivedEvent();
   });

@@ -71,9 +71,12 @@ export const config: Config = {
       '--disable-setuid-sandbox',
       '--disable-gpu',
       '--disable-dev-shm-usage',
+      '--disable-extensions',
+      '--disable-background-networking',
     ],
     browserWaitUntil: 'load',
     testTimeout: 60000,
     setupFilesAfterFramework: ['./tests/setup.ts'],
+    testPathIgnorePatterns: ['/node_modules/', '/dist/', '/.claude/'],
   },
 };
