@@ -12,7 +12,7 @@
       "types": "./dist/index.d.ts"
     }
   },
-  "sideEffects": ["*.css", "./dist/index.js", "./dist/cjs/index.js"],
+  "sideEffects": ["**/*.css", "./dist/index.js", "./dist/cjs/index.js"],
   "files": ["dist/", "README.md"],
   "scripts": {
     "build": "tsc -p tsconfig.json && tsc -p tsconfig.cjs.json"

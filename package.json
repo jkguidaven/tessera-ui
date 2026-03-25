@@ -17,7 +17,7 @@
     "!dist/components.json"
   ],
   "sideEffects": [
-    "*.css",
+    "**/*.css",
     "dist/tessera-ui/tessera-ui.esm.js"
   ],
   "exports": {
