@@ -18,6 +18,7 @@ jobs:
   lint-and-test:
     name: Lint & Unit Tests
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
 
@@ -28,19 +29,11 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
-
-      - name: Cache node_modules
-        id: cache-modules
-        uses: actions/cache@v4
-        with:
-          path: |
-            node_modules
-            packages/*/node_modules
-          key: modules-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}
+          cache: 'pnpm'
 
       - name: Install dependencies
-        if: steps.cache-modules.outputs.cache-hit != 'true'
         run: pnpm install --frozen-lockfile
+        timeout-minutes: 5
 
       - run: pnpm lint
       - run: pnpm test
@@ -48,6 +41,7 @@ jobs:
   test-e2e:
     name: E2E Tests
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
 
@@ -58,19 +52,11 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
-
-      - name: Cache node_modules
-        id: cache-modules
-        uses: actions/cache@v4
-        with:
-          path: |
-            node_modules
-            packages/*/node_modules
-          key: modules-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}
+          cache: 'pnpm'
 
       - name: Install dependencies
-        if: steps.cache-modules.outputs.cache-hit != 'true'
         run: pnpm install --frozen-lockfile
+        timeout-minutes: 5
 
       - name: Cache Playwright browsers
         id: cache-playwright
@@ -92,6 +78,7 @@ jobs:
   build:
     name: Build
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
 
@@ -102,19 +89,11 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
-
-      - name: Cache node_modules
-        id: cache-modules
-        uses: actions/cache@v4
-        with:
-          path: |
-            node_modules
-            packages/*/node_modules
-          key: modules-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}
+          cache: 'pnpm'
 
       - name: Install dependencies
-        if: steps.cache-modules.outputs.cache-hit != 'true'
         run: pnpm install --frozen-lockfile
+        timeout-minutes: 5
 
       - run: pnpm build
 
