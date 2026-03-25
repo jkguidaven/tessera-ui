@@ -127,6 +127,25 @@
   }
 }
 
+/* ---- Exit Animations ---- */
+.dialog--closing.dialog__overlay {
+  animation: ts-dialog-overlay-exit var(--ts-transition-normal) ease-in forwards;
+}
+
+.dialog--closing.dialog__panel {
+  animation: ts-dialog-exit var(--ts-transition-normal) ease-in forwards;
+}
+
+@keyframes ts-dialog-exit {
+  from { opacity: 1; transform: scale(1); }
+  to { opacity: 0; transform: scale(0.95); }
+}
+
+@keyframes ts-dialog-overlay-exit {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
 /* ---- Reduced motion ---- */
 @media (prefers-reduced-motion: reduce) {
   .dialog__overlay {

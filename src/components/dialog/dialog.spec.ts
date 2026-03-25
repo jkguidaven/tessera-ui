@@ -2,6 +2,7 @@ import { newSpecPage } from '@stencil/core/testing';
 import { TsDialog } from './dialog';
 
 describe('ts-dialog', () => {
+
   it('does not render content when closed', async () => {
     const page = await newSpecPage({
       components: [TsDialog],
@@ -73,6 +74,10 @@ describe('ts-dialog', () => {
     closeBtn?.click();
     await page.waitForChanges();
 
+    // Wait for the exit animation fallback timer (250ms)
+    await new Promise(resolve => setTimeout(resolve, 300));
+    await page.waitForChanges();
+
     expect(spy).toHaveBeenCalledTimes(1);
   });
 
@@ -84,5 +89,54 @@ describe('ts-dialog', () => {
 
     const panel = page.root?.shadowRoot?.querySelector('.dialog__panel');
     expect(panel?.classList.contains('dialog__panel--lg')).toBe(true);
+  });
+
+  it('emits tsOpen when opened', async () => {
+    const page = await newSpecPage({
+      components: [TsDialog],
+      html: '<ts-dialog heading="Test">Content</ts-dialog>',
+    });
+
+    const spy = jest.fn();
+    page.root?.addEventListener('tsOpen', spy);
+
+    page.root?.setAttribute('open', '');
+    await page.waitForChanges();
+
+    expect(spy).toHaveBeenCalledTimes(1);
+  });
+
+  it('does not close immediately when preventClose is true', async () => {
+    const page = await newSpecPage({
+      components: [TsDialog],
+      html: '<ts-dialog open heading="Test" prevent-close>Content</ts-dialog>',
+    });
+
+    const closeSpy = jest.fn();
+    page.root?.addEventListener('tsClose', closeSpy);
+
+    const closeBtn = page.root?.shadowRoot?.querySelector<HTMLButtonElement>('.dialog__close');
+    closeBtn?.click();
+    await page.waitForChanges();
+
+    expect(closeSpy).not.toHaveBeenCalled();
+    expect(page.root?.open).toBe(true);
+  });
+
+  it('emits tsRequestClose with correct source when preventClose is true', async () => {
+    const page = await newSpecPage({
+      components: [TsDialog],
+      html: '<ts-dialog open heading="Test" prevent-close>Content</ts-dialog>',
+    });
+
+    const requestSpy = jest.fn();
+    page.root?.addEventListener('tsRequestClose', requestSpy);
+
+    const closeBtn = page.root?.shadowRoot?.querySelector<HTMLButtonElement>('.dialog__close');
+    closeBtn?.click();
+    await page.waitForChanges();
+
+    expect(requestSpy).toHaveBeenCalledTimes(1);
+    expect(requestSpy.mock.calls[0][0].detail).toEqual({ source: 'close-button' });
   });
 });

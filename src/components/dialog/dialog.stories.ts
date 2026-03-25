@@ -148,3 +148,27 @@ export const FormDialog = (): string => `
     </div>
   </ts-dialog>
 `;
+
+export const PreventClose = (): string => `
+  <ts-button onclick="this.nextElementSibling.show()">Open Protected Dialog</ts-button>
+  <ts-dialog heading="Unsaved Changes" size="sm" prevent-close>
+    <p style="margin: 0; font-family: sans-serif; color: #555;">
+      You have unsaved changes. Are you sure you want to close this dialog?
+    </p>
+    <div slot="footer">
+      <ts-row gap="2" justify="end">
+        <ts-button appearance="outline" onclick="this.closest('ts-dialog').close()">Discard Changes</ts-button>
+        <ts-button variant="primary" onclick="this.closest('ts-dialog').close()">Save and Close</ts-button>
+      </ts-row>
+    </div>
+  </ts-dialog>
+  <script>
+    {
+      const dialog = document.currentScript.previousElementSibling;
+      dialog.addEventListener('tsRequestClose', (e) => {
+        const confirmed = window.confirm('You have unsaved changes. Discard them?');
+        if (confirmed) dialog.close();
+      });
+    }
+  </script>
+`;
