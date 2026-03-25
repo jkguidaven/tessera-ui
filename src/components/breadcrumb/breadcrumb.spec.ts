@@ -51,6 +51,28 @@ describe('ts-breadcrumb', () => {
 
     expect(page.rootInstance.separator).toBe('>');
   });
+
+  it('hides middle items when maxItems is set', async () => {
+    const page = await newSpecPage({
+      components: [TsBreadcrumb],
+      html: `
+        <ts-breadcrumb max-items="3">
+          <ts-breadcrumb-item>A</ts-breadcrumb-item>
+          <ts-breadcrumb-item>B</ts-breadcrumb-item>
+          <ts-breadcrumb-item>C</ts-breadcrumb-item>
+          <ts-breadcrumb-item>D</ts-breadcrumb-item>
+          <ts-breadcrumb-item>E</ts-breadcrumb-item>
+        </ts-breadcrumb>
+      `,
+    });
+
+    const items = page.root?.querySelectorAll('ts-breadcrumb-item');
+    // First item visible, last 2 visible, middle 2 hidden
+    expect(items?.[1]?.style.display).toBe('none');
+    expect(items?.[2]?.style.display).toBe('none');
+    expect(items?.[0]?.style.display).not.toBe('none');
+    expect(items?.[4]?.style.display).not.toBe('none');
+  });
 });
 
 describe('ts-breadcrumb-item', () => {

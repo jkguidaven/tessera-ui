@@ -17,6 +17,9 @@ export class TsBreadcrumb {
   /** The separator character between breadcrumb items. */
   @Prop() separator = '/';
 
+  /** Maximum number of visible items. Middle items are hidden when exceeded. */
+  @Prop() maxItems?: number;
+
   componentDidRender(): void {
     const items = this.hostEl.querySelectorAll('ts-breadcrumb-item');
     items.forEach((item, index) => {
@@ -26,6 +29,24 @@ export class TsBreadcrumb {
         item.removeAttribute('separator');
       }
     });
+
+    // Collapse middle items when maxItems is set
+    if (this.maxItems !== undefined && items.length > this.maxItems) {
+      const lastVisibleCount = this.maxItems - 1;
+      const hideStart = 1;
+      const hideEnd = items.length - lastVisibleCount;
+      items.forEach((item, index) => {
+        if (index >= hideStart && index < hideEnd) {
+          (item as HTMLElement).style.display = 'none';
+        } else {
+          (item as HTMLElement).style.display = '';
+        }
+      });
+    } else {
+      items.forEach((item) => {
+        (item as HTMLElement).style.display = '';
+      });
+    }
   }
 
   // eslint-disable-next-line @typescript-eslint/explicit-function-return-type

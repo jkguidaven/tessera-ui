@@ -2,6 +2,7 @@ import { Component, Prop, h, Host } from '@stencil/core';
 
 /**
  * @slot - Default slot for label text.
+ * @slot icon - Optional icon slot rendered before the label.
  *
  * @part link - The anchor or span element.
  * @part separator - The separator element.
@@ -30,6 +31,7 @@ export class TsBreadcrumbItem {
         <li class="breadcrumb-item__li">
           {isLink ? (
             <a href={this.href} part="link" class="breadcrumb-item__link">
+              <slot name="icon" />
               <slot />
             </a>
           ) : (
@@ -38,6 +40,7 @@ export class TsBreadcrumbItem {
               class="breadcrumb-item__text"
               aria-current={this.current ? 'page' : undefined}
             >
+              <slot name="icon" />
               <slot />
             </span>
           )}
