@@ -1,6 +1,7 @@
 :host {
   display: block;
   font-family: var(--ts-font-family-base);
+  color: var(--ts-color-text-primary);
 }
 
 .page-header__main {
