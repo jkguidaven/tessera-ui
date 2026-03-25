@@ -113,6 +113,52 @@ describe('ts-input', () => {
     expect(spy).toHaveBeenCalledTimes(1);
   });
 
+  it('emits tsInput with correct previousValue', async () => {
+    const page = await newSpecPage({
+      components: [TsInput],
+      html: '<ts-input value="old"></ts-input>',
+    });
+
+    const spy = jest.fn();
+    page.root?.addEventListener('tsInput', spy);
+
+    const input = page.root?.shadowRoot?.querySelector('input');
+    if (input) {
+      input.value = 'new';
+      input.dispatchEvent(new Event('input'));
+    }
+
+    expect(spy).toHaveBeenCalledTimes(1);
+    const detail = spy.mock.calls[0][0].detail;
+    expect(detail.value).toBe('new');
+    expect(detail.previousValue).toBe('old');
+  });
+
+  it('emits tsChange with correct previousValue after input', async () => {
+    const page = await newSpecPage({
+      components: [TsInput],
+      html: '<ts-input value="initial"></ts-input>',
+    });
+
+    const changeSpy = jest.fn();
+    page.root?.addEventListener('tsChange', changeSpy);
+
+    const input = page.root?.shadowRoot?.querySelector('input');
+    if (input) {
+      // Simulate typing (input event updates value)
+      input.value = 'updated';
+      input.dispatchEvent(new Event('input'));
+
+      // Simulate blur/commit (change event)
+      input.dispatchEvent(new Event('change'));
+    }
+
+    expect(changeSpy).toHaveBeenCalledTimes(1);
+    const detail = changeSpy.mock.calls[0][0].detail;
+    expect(detail.value).toBe('updated');
+    expect(detail.previousValue).toBe('initial');
+  });
+
   it('reflects the correct input type', async () => {
     const page = await newSpecPage({
       components: [TsInput],

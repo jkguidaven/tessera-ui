@@ -36,6 +36,7 @@ export class TsInput {
 
   private inputEl?: HTMLInputElement;
   private inputId = generateId('ts-input');
+  private previousValue = '';
 
   /** The input's value. */
   @Prop({ mutable: true, reflect: true }) value = '';
@@ -128,13 +129,13 @@ export class TsInput {
 
   private handleInput = (event: Event): void => {
     const target = event.target as HTMLInputElement;
-    const previousValue = this.value;
+    this.previousValue = this.value;
     this.value = target.value;
-    this.tsInput.emit({ value: this.value, previousValue });
+    this.tsInput.emit({ value: this.value, previousValue: this.previousValue });
   };
 
   private handleChange = (): void => {
-    this.tsChange.emit({ value: this.value, previousValue: this.value });
+    this.tsChange.emit({ value: this.value, previousValue: this.previousValue });
 
     // Run native validation
     if (this.inputEl) {
