@@ -39,7 +39,7 @@ npm install @tessera-ui/vue
 npm install @tessera-ui/angular
 ```
 
-### Usage: Vanilla HTML
+### Usage: Vanilla HTML (CDN)
 
 ```html
 <script type="module" src="https://unpkg.com/@tessera-ui/core/dist/tessera-ui/tessera-ui.esm.js"></script>
@@ -47,6 +47,18 @@ npm install @tessera-ui/angular
 <ts-button variant="primary" size="lg">Get Started</ts-button>
 <ts-input label="Email" type="email" placeholder="you@example.com"></ts-input>
 <ts-badge variant="success" pill>Active</ts-badge>
+```
+
+### Usage: Vanilla (Bundler — Vite, Webpack, etc.)
+
+```ts
+import '@tessera-ui/core';
+
+// All components are now registered. Use them in your HTML.
+```
+
+```html
+<ts-button variant="primary">Get Started</ts-button>
 ```
 
 ### Usage: React

@@ -33,3 +33,21 @@ function minifyCssInDir(dir) {
 }
 
 minifyCssInDir('dist/collection');
+
+// 3. Auto-register web components on import
+// Patch dist entry points so `import '@tessera-ui/core'` auto-calls defineCustomElements().
+// This makes it a zero-config, single-line import for consumers.
+const esmEntry = 'dist/index.js';
+const cjsEntry = 'dist/index.cjs.js';
+
+const esmContent = fs.readFileSync(esmEntry, 'utf8');
+fs.writeFileSync(esmEntry,
+  `import { defineCustomElements } from './esm/loader.js';\ndefineCustomElements();\n${esmContent}`,
+  'utf8'
+);
+
+const cjsContent = fs.readFileSync(cjsEntry, 'utf8');
+fs.writeFileSync(cjsEntry,
+  `const { defineCustomElements } = require('./cjs/loader.cjs.js');\ndefineCustomElements();\n${cjsContent}`,
+  'utf8'
+);
