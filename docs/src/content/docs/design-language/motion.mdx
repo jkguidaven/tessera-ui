@@ -498,20 +498,33 @@ Lists and groups use a stagger interval to choreograph sequential entrance anima
 
 ## Reduced Motion
 
-All animations in Tessera UI respect the `prefers-reduced-motion` media query. When enabled, transitions are either removed or replaced with instant opacity changes.
+All animated Tessera UI components include targeted `@media (prefers-reduced-motion: reduce)` rules that reduce or eliminate motion for users with vestibular disorders. This is built into each component's CSS — no consumer action required.
 
 <div class="reduced-motion-card">
   <div class="reduced-motion-icon">A</div>
   <div class="reduced-motion-text">
-    <strong>Accessibility first</strong>
-    Some users experience vestibular disorders that make motion uncomfortable or disorienting. Always ensure animations degrade gracefully.
+    <strong>Accessibility first (WCAG SC 2.3.3)</strong>
+    Rather than a blanket override, each component reduces only its own animations. This ensures motion-sensitive users get instant feedback while preserving essential visual cues like focus rings.
     <code class="reduced-motion-code">
       @media (prefers-reduced-motion: reduce) {"{"}<br/>
-      &nbsp;&nbsp;*, *::before, *::after {"{"}<br/>
-      &nbsp;&nbsp;&nbsp;&nbsp;animation-duration: 0.01ms !important;<br/>
-      &nbsp;&nbsp;&nbsp;&nbsp;transition-duration: 0.01ms !important;<br/>
+      &nbsp;&nbsp;.button__native {"{"}<br/>
+      &nbsp;&nbsp;&nbsp;&nbsp;transition-duration: 0.01ms;<br/>
       &nbsp;&nbsp;{"}"}<br/>
       {"}"}
     </code>
   </div>
 </div>
+
+### Components with reduced-motion support
+
+| Component | What is reduced |
+|---|---|
+| **Button** | Hover/active transitions, press scale effect, loading spinner |
+| **Dialog** | Overlay fade-in, panel scale animation |
+| **Modal** | Overlay fade-in, dialog scale animation |
+| **Drawer** | Overlay fade-in, slide animations (all 4 placements) |
+| **Spinner** | Rotation animation (near-instant) |
+| **Skeleton** | Pulse and wave animations removed entirely |
+| **Progress** | Fill transition, indeterminate slide animation |
+| **Toast** | Slide-in entrance animation |
+| **Accordion** | Header hover, chevron rotation, panel expand/collapse |

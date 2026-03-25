@@ -87,3 +87,15 @@
 :host([animation="none"][variant="rectangular"]) .skeleton__base {
   animation: none;
 }
+
+/* ---- Reduced motion ---- */
+@media (prefers-reduced-motion: reduce) {
+  :host([animation="pulse"]) .skeleton__line,
+  :host([animation="pulse"][variant="circular"]) .skeleton__base,
+  :host([animation="pulse"][variant="rectangular"]) .skeleton__base,
+  :host([animation="wave"]) .skeleton__line,
+  :host([animation="wave"][variant="circular"]) .skeleton__base,
+  :host([animation="wave"][variant="rectangular"]) .skeleton__base {
+    animation: none;
+  }
+}

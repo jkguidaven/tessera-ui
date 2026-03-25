@@ -110,6 +110,12 @@ Tessera UI provides a `data-theme="high-contrast"` theme that maximizes contrast
 </body>
 ```
 
+## Reduced Motion
+
+All animated components include `@media (prefers-reduced-motion: reduce)` rules that eliminate or minimize motion for users with vestibular disorders (WCAG SC 2.3.3). This is built into each component's Shadow DOM CSS — no consumer action required.
+
+Affected components: Button, Dialog, Modal, Drawer, Spinner, Skeleton, Progress, Toast, Accordion. See the [Motion](/tessera-ui/design-language/motion/#reduced-motion) page for the full breakdown.
+
 ## Forced Colors (Windows High Contrast)
 
 Tessera UI components respond to the `forced-colors` media query, which activates on Windows High Contrast Mode and similar OS-level settings:
@@ -174,6 +180,7 @@ Use this checklist to verify accessibility when building with Tessera UI:
 - [ ] **2.1.2 No Keyboard Trap:** Focus can be moved away from every component
 - [ ] **2.4.3 Focus Order:** Focus order is logical and meaningful
 - [ ] **2.4.7 Focus Visible:** Focus indicator is always visible on interactive elements
+- [ ] **2.3.3 Animation from Interactions:** Motion can be disabled — all Tessera UI components respect `prefers-reduced-motion`
 - [ ] **2.5.5 Target Size:** Touch targets are at least 44px (default) or 32px (compact)
 - [ ] **3.3.1 Error Identification:** Errors are identified in text, not just color
 - [ ] **3.3.2 Labels or Instructions:** Form inputs have visible labels

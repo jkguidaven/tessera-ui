@@ -258,3 +258,18 @@
   display: inline-flex;
   align-items: center;
 }
+
+/* ---- Reduced motion ---- */
+@media (prefers-reduced-motion: reduce) {
+  .button__native {
+    transition-duration: 0.01ms !important;
+  }
+
+  .button__native:active:not([disabled]):not([aria-disabled="true"]) {
+    transform: none;
+  }
+
+  .button__spinner svg {
+    animation-duration: 0.01ms !important;
+  }
+}

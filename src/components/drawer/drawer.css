@@ -200,3 +200,21 @@
   from { transform: translateY(100%); }
   to   { transform: translateY(0); }
 }
+
+/* ---- Reduced motion ---- */
+@media (prefers-reduced-motion: reduce) {
+  .drawer__overlay {
+    animation-duration: 0.01ms !important;
+  }
+
+  .drawer__panel--start,
+  .drawer__panel--end,
+  .drawer__panel--top,
+  .drawer__panel--bottom {
+    animation-duration: 0.01ms !important;
+  }
+
+  .drawer__close {
+    transition-duration: 0.01ms !important;
+  }
+}

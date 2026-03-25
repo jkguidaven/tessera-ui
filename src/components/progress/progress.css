@@ -87,3 +87,14 @@
     transform: translateX(350%);
   }
 }
+
+/* ---- Reduced motion ---- */
+@media (prefers-reduced-motion: reduce) {
+  .progress__fill {
+    transition-duration: 0.01ms !important;
+  }
+
+  :host([indeterminate]) .progress__fill {
+    animation-duration: 0.01ms !important;
+  }
+}
