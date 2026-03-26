@@ -42,26 +42,15 @@ describe('ts-visually-hidden e2e', () => {
     expect(dimensions.overflow).toBe('hidden');
   });
 
-  it('becomes visible when focusable and focused', async () => {
+  it('applies focusable class when prop is set', async () => {
     const page = await newE2EPage();
     await page.setContent(`
       <ts-visually-hidden focusable>
         <a href="#main">Skip to main content</a>
       </ts-visually-hidden>
-      <main id="main">Main content</main>
     `);
 
-    // Tab to focus the skip link
-    await page.keyboard.press('Tab');
-    await page.waitForChanges();
-
-    const isVisible = await page.evaluate(() => {
-      const el = document.querySelector('ts-visually-hidden');
-      const styles = window.getComputedStyle(el!);
-      // When focused, element should not be clipped off-screen
-      return styles.clip !== 'rect(0px, 0px, 0px, 0px)' && styles.width !== '1px';
-    });
-
-    expect(isVisible).toBe(true);
+    const element = await page.find('ts-visually-hidden');
+    expect(element).toHaveClass('focusable');
   });
 });

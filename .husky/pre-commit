@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+# Lint staged .ts/.tsx files
+STAGED_TS=$(git diff --cached --name-only --diff-filter=ACM | grep -E '\.(ts|tsx)$' || true)
+
+if [ -n "$STAGED_TS" ]; then
+  echo "Running lint on staged files..."
+  npx eslint $STAGED_TS --ext .ts,.tsx
+fi

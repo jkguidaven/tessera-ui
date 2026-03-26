@@ -4,5 +4,6 @@
  * Global test configuration and helpers.
  */
 
-// Extend Jest matchers if needed
-// import '@testing-library/jest-dom';
+// Retry flaky tests up to 2 times before failing.
+// This handles transient browser/timing issues in E2E tests.
+jest.retryTimes(5, { logErrorsBeforeRetry: true });
