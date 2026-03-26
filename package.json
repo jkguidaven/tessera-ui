@@ -18,6 +18,9 @@
   ],
   "sideEffects": [
     "**/*.css",
+    "dist/index.js",
+    "dist/index.cjs.js",
+    "dist/esm/loader.js",
     "dist/tessera-ui/tessera-ui.esm.js"
   ],
   "_exportsComment": "The ./dist/* glob passthrough is required by framework wrapper packages (react/vue/angular) which deep-import from @tessera-ui/core/dist/. Do not remove it.",
