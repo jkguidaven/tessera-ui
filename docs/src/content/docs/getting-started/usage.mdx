@@ -1,29 +1,459 @@
 ---
 title: Usage
-description: How to use Tessera UI components
+description: How to set up and use Tessera UI in your project
 sidebar:
   order: 4
 ---
 
-## Basic Usage
+## Vanilla HTML (CDN)
 
-All Tessera UI components use the `ts-` prefix to avoid naming collisions:
+No build step needed. Add a script tag and start using components:
 
 ```html
-<ts-button variant="primary" size="md">Click me</ts-button>
-<ts-input label="Email" type="email" placeholder="you@example.com"></ts-input>
-<ts-badge variant="success">Active</ts-badge>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script type="module" src="https://unpkg.com/@tessera-ui/core/dist/tessera-ui/tessera-ui.esm.js"></script>
+</head>
+<body>
+  <ts-button variant="primary" size="lg">Get Started</ts-button>
+  <ts-input label="Email" type="email" placeholder="you@example.com"></ts-input>
+  <ts-badge variant="success">Active</ts-badge>
+
+  <script>
+    document.querySelector('ts-button').addEventListener('tsClick', () => {
+      console.log('Button clicked!');
+    });
+
+    document.querySelector('ts-input').addEventListener('tsInput', (e) => {
+      console.log('Value:', e.detail.value);
+    });
+  </script>
+</body>
+</html>
 ```
 
-## Theming
+---
 
-Tessera UI uses a **three-tier token architecture**:
+## Vanilla (Bundler — Vite, Webpack, etc.)
 
-| Tier | Prefix | Purpose |
-|---|---|---|
-| Reference | `--ts-ref-*` | Raw palette values (never use directly) |
-| Semantic | `--ts-*` | Role-based tokens (what components consume) |
-| Component | `--ts-{component}-*` | Per-component overrides (customization API) |
+**Install:**
+
+```bash
+npm install @tessera-ui/core
+```
+
+**Setup — one line in your entry file:**
+
+```js
+import '@tessera-ui/core';
+```
+
+**Use in your HTML:**
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <style>
+    /* Override design tokens to customize the theme */
+    :root {
+      --ts-color-interactive-primary: #7c3aed;
+      --ts-button-radius: 9999px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Buttons -->
+  <ts-button variant="primary">Submit</ts-button>
+  <ts-button variant="danger">Delete</ts-button>
+  <ts-button variant="neutral" appearance="outline">Cancel</ts-button>
+  <ts-button variant="primary" disabled>Disabled</ts-button>
+
+  <!-- Form controls -->
+  <ts-input label="Email" type="email" placeholder="you@example.com" clearable></ts-input>
+  <ts-textarea label="Message" placeholder="Type here..." auto-grow show-count maxlength="500"></ts-textarea>
+  <ts-select label="Role" placeholder="Select a role">
+    <option value="admin">Admin</option>
+    <option value="editor">Editor</option>
+  </ts-select>
+
+  <!-- Cards with slots -->
+  <ts-card bordered padding="md">
+    <span slot="header"><h3>Card Title</h3></span>
+    <p>Card body content goes here.</p>
+    <span slot="footer">
+      <ts-button size="sm" variant="primary">Action</ts-button>
+    </span>
+  </ts-card>
+
+  <!-- Dark mode -->
+  <div data-theme="dark">
+    <ts-button variant="primary">Dark mode button</ts-button>
+  </div>
+
+  <!-- Events -->
+  <script type="module">
+    import '@tessera-ui/core';
+
+    // Toggle dark mode
+    document.querySelector('ts-toggle').addEventListener('tsChange', (e) => {
+      document.documentElement.setAttribute('data-theme', e.detail.checked ? 'dark' : '');
+    });
+
+    // Listen for input changes
+    document.querySelector('ts-input').addEventListener('tsInput', (e) => {
+      console.log('Value:', e.detail.value);
+    });
+  </script>
+</body>
+</html>
+```
+
+---
+
+## React
+
+**Install:**
+
+```bash
+npm install @tessera-ui/react
+```
+
+**Setup — import components directly, no extra configuration:**
+
+```tsx
+import { useState } from 'react';
+import {
+  TsButton, TsInput, TsTextarea, TsSelect, TsNumberInput,
+  TsCard, TsBadge, TsAvatar, TsToggle, TsSlider,
+  TsRadioGroup, TsRadio, TsCheckboxGroup, TsCheckbox,
+  TsDialog, TsToast, TsTooltip,
+  TsStack, TsRow,
+} from '@tessera-ui/react';
+
+function App() {
+  const [name, setName] = useState('');
+  const [dialogOpen, setDialogOpen] = useState(false);
+  const [toastOpen, setToastOpen] = useState(false);
+
+  const toggleDarkMode = () => {
+    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    document.documentElement.setAttribute('data-theme', isDark ? '' : 'dark');
+  };
+
+  return (
+    <div style={{ padding: 40, maxWidth: 800, margin: '0 auto' }}>
+      {/* Dark mode toggle */}
+      <TsToggle onTsChange={toggleDarkMode} />
+
+      {/* Buttons — variants, sizes, states */}
+      <TsRow gap="2">
+        <TsButton variant="primary">Primary</TsButton>
+        <TsButton variant="danger">Delete</TsButton>
+        <TsButton variant="neutral" appearance="outline">Cancel</TsButton>
+        <TsButton variant="primary" disabled>Disabled</TsButton>
+        <TsButton variant="primary" loading>Saving...</TsButton>
+      </TsRow>
+
+      {/* Form with events */}
+      <TsStack gap="3">
+        <TsInput
+          label="Full Name"
+          placeholder="Enter your name"
+          value={name}
+          onTsInput={(e) => setName(e.detail.value)}
+          clearable
+          required
+        />
+        {name && <p>Hello, <strong>{name}</strong></p>}
+
+        <TsTextarea label="Bio" autoGrow showCount maxlength={200} />
+
+        <TsSelect label="Role" placeholder="Select...">
+          <option value="admin">Admin</option>
+          <option value="editor">Editor</option>
+        </TsSelect>
+
+        <TsNumberInput label="Quantity" value={1} min={1} max={99} />
+
+        <TsRadioGroup label="Plan" name="plan" value="pro">
+          <TsRadio value="free">Free</TsRadio>
+          <TsRadio value="pro">Pro — $19/mo</TsRadio>
+        </TsRadioGroup>
+
+        <TsCheckboxGroup label="Features">
+          <TsCheckbox value="dark" checked>Dark mode</TsCheckbox>
+          <TsCheckbox value="api">API access</TsCheckbox>
+        </TsCheckboxGroup>
+
+        <TsSlider label="Budget" showValue min={0} max={1000} step={50} value={500} />
+      </TsStack>
+
+      {/* Card with slots */}
+      <TsCard bordered padding="md">
+        <span slot="header"><strong>Revenue</strong></span>
+        <p style={{ fontSize: '2rem', fontWeight: 700 }}>$48,290</p>
+        <p><TsBadge variant="success" size="sm">+12%</TsBadge> vs last month</p>
+      </TsCard>
+
+      {/* Dialog — controlled with state */}
+      <TsButton onTsClick={() => setDialogOpen(true)}>Open Dialog</TsButton>
+      <TsDialog open={dialogOpen} heading="Confirm" onTsClose={() => setDialogOpen(false)}>
+        <p>Are you sure?</p>
+        <span slot="footer">
+          <TsRow gap="2" justify="end">
+            <TsButton variant="neutral" appearance="outline" onTsClick={() => setDialogOpen(false)}>Cancel</TsButton>
+            <TsButton variant="danger" onTsClick={() => setDialogOpen(false)}>Confirm</TsButton>
+          </TsRow>
+        </span>
+      </TsDialog>
+
+      {/* Toast — controlled with state */}
+      <TsButton onTsClick={() => setToastOpen(true)}>Show Toast</TsButton>
+      <TsToast open={toastOpen} variant="success" showProgress onTsClose={() => setToastOpen(false)}>
+        Saved!
+      </TsToast>
+
+      {/* Tooltip */}
+      <TsTooltip content="I'm a tooltip!">
+        <TsButton variant="neutral" appearance="ghost">Hover me</TsButton>
+      </TsTooltip>
+
+      {/* CSS override zone */}
+      <div style={{ '--ts-color-interactive-primary': '#7c3aed', '--ts-button-radius': '9999px' }}>
+        <TsButton variant="primary">Custom Purple</TsButton>
+      </div>
+
+      {/* Avatars */}
+      <TsRow gap="2">
+        <TsAvatar name="Alice" color="#6366f1" status="online" />
+        <TsAvatar name="Bob" color="#ec4899" status="busy" />
+      </TsRow>
+    </div>
+  );
+}
+```
+
+---
+
+## Vue
+
+**Install:**
+
+```bash
+npm install @tessera-ui/vue
+```
+
+**Vite config — add `isCustomElement` so Vue doesn't warn about `ts-*` tags:**
+
+```js
+// vite.config.js
+import { defineConfig } from 'vite';
+import vue from '@vitejs/plugin-vue';
+
+export default defineConfig({
+  plugins: [
+    vue({
+      template: {
+        compilerOptions: {
+          isCustomElement: (tag) => tag.startsWith('ts-'),
+        },
+      },
+    }),
+  ],
+});
+```
+
+**Use in your components:**
+
+```vue
+<template>
+  <div>
+    <!-- Dark mode toggle -->
+    <TsToggle @tsChange="toggleTheme" />
+
+    <!-- Buttons -->
+    <TsRow gap="2">
+      <TsButton variant="primary">Primary</TsButton>
+      <TsButton variant="danger">Delete</TsButton>
+      <TsButton variant="neutral" appearance="outline">Cancel</TsButton>
+      <TsButton variant="primary" disabled>Disabled</TsButton>
+    </TsRow>
+
+    <!-- Form with reactive binding -->
+    <TsStack gap="3">
+      <TsInput
+        label="Full Name"
+        placeholder="Enter your name"
+        :value="name"
+        @tsInput="name = $event.detail.value"
+        clearable
+        required
+      />
+      <p v-if="name">Hello, <strong>{{ name }}</strong></p>
+
+      <TsTextarea label="Bio" auto-grow show-count :maxlength="200" />
+
+      <TsSelect label="Role" placeholder="Select...">
+        <option value="admin">Admin</option>
+        <option value="editor">Editor</option>
+      </TsSelect>
+
+      <TsRadioGroup label="Plan" name="plan" value="pro">
+        <TsRadio value="free">Free</TsRadio>
+        <TsRadio value="pro">Pro — $19/mo</TsRadio>
+      </TsRadioGroup>
+    </TsStack>
+
+    <!-- Card with slots -->
+    <TsCard bordered padding="md">
+      <span slot="header"><strong>Revenue</strong></span>
+      <p :style="{ fontSize: '2rem', fontWeight: 700 }">$48,290</p>
+      <p><TsBadge variant="success" size="sm">+12%</TsBadge> vs last month</p>
+    </TsCard>
+
+    <!-- Dialog -->
+    <TsButton @tsClick="dialogOpen = true">Open Dialog</TsButton>
+    <TsDialog :open="dialogOpen" heading="Confirm" @tsClose="dialogOpen = false">
+      <p>Are you sure?</p>
+      <span slot="footer">
+        <TsRow gap="2" justify="end">
+          <TsButton variant="neutral" appearance="outline" @tsClick="dialogOpen = false">Cancel</TsButton>
+          <TsButton variant="danger" @tsClick="dialogOpen = false">Confirm</TsButton>
+        </TsRow>
+      </span>
+    </TsDialog>
+
+    <!-- CSS override zone -->
+    <div :style="{ '--ts-color-interactive-primary': '#7c3aed', '--ts-button-radius': '9999px' }">
+      <TsButton variant="primary">Custom Purple</TsButton>
+    </div>
+  </div>
+</template>
+
+<script setup>
+import { ref } from 'vue';
+import {
+  TsButton, TsInput, TsTextarea, TsSelect, TsToggle,
+  TsCard, TsBadge, TsDialog, TsRadioGroup, TsRadio,
+  TsStack, TsRow,
+} from '@tessera-ui/vue';
+
+const name = ref('');
+const dialogOpen = ref(false);
+
+const toggleTheme = () => {
+  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  document.documentElement.setAttribute('data-theme', isDark ? '' : 'dark');
+};
+</script>
+```
+
+---
+
+## Angular
+
+**Install:**
+
+```bash
+npm install @tessera-ui/angular
+```
+
+**Use in your standalone component — import `DIRECTIVES` and add `CUSTOM_ELEMENTS_SCHEMA`:**
+
+```typescript
+import { Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { DIRECTIVES } from '@tessera-ui/angular';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [DIRECTIVES],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  template: `
+    <!-- Dark mode toggle -->
+    <ts-toggle (tsChange)="toggleTheme($event)"></ts-toggle>
+
+    <!-- Buttons -->
+    <ts-row gap="2">
+      <ts-button variant="primary">Primary</ts-button>
+      <ts-button variant="danger">Delete</ts-button>
+      <ts-button variant="neutral" appearance="outline">Cancel</ts-button>
+      <ts-button variant="primary" [attr.disabled]="true">Disabled</ts-button>
+    </ts-row>
+
+    <!-- Form with event binding -->
+    <ts-stack gap="3">
+      <ts-input
+        label="Full Name"
+        placeholder="Enter your name"
+        (tsInput)="onNameInput($event)"
+        clearable
+        required
+      ></ts-input>
+      <p *ngIf="name">Hello, <strong>{{ name }}</strong></p>
+
+      <ts-textarea label="Bio" auto-grow show-count maxlength="200"></ts-textarea>
+
+      <ts-select label="Role" placeholder="Select...">
+        <option value="admin">Admin</option>
+        <option value="editor">Editor</option>
+      </ts-select>
+
+      <ts-radio-group label="Plan" name="plan" value="pro">
+        <ts-radio value="free">Free</ts-radio>
+        <ts-radio value="pro">Pro — $19/mo</ts-radio>
+      </ts-radio-group>
+    </ts-stack>
+
+    <!-- Card with slots -->
+    <ts-card bordered padding="md">
+      <span slot="header"><strong>Revenue</strong></span>
+      <p style="font-size: 2rem; font-weight: 700;">$48,290</p>
+      <p><ts-badge variant="success" size="sm">+12%</ts-badge> vs last month</p>
+    </ts-card>
+
+    <!-- Dialog -->
+    <ts-button (tsClick)="dialogOpen = true">Open Dialog</ts-button>
+    <ts-dialog [attr.open]="dialogOpen || null" heading="Confirm" (tsClose)="dialogOpen = false">
+      <p>Are you sure?</p>
+      <span slot="footer">
+        <ts-row gap="2" justify="end">
+          <ts-button variant="neutral" appearance="outline" (tsClick)="dialogOpen = false">Cancel</ts-button>
+          <ts-button variant="danger" (tsClick)="dialogOpen = false">Confirm</ts-button>
+        </ts-row>
+      </span>
+    </ts-dialog>
+
+    <!-- CSS override zone -->
+    <div style="--ts-color-interactive-primary: #7c3aed; --ts-button-radius: 9999px;">
+      <ts-button variant="primary">Custom Purple</ts-button>
+    </div>
+  `,
+})
+export class AppComponent {
+  name = '';
+  dialogOpen = false;
+
+  onNameInput(e: Event) {
+    this.name = (e as CustomEvent).detail.value;
+  }
+
+  toggleTheme(e: Event) {
+    const isDark = (e as CustomEvent).detail.checked;
+    document.documentElement.setAttribute('data-theme', isDark ? 'dark' : '');
+  }
+}
+```
+
+---
+
+## Common Patterns
+
+These patterns work the same way in every framework.
+
+### Theming with CSS Custom Properties
 
 Override semantic tokens to change the entire system:
 
@@ -39,28 +469,16 @@ Override semantic tokens to change the entire system:
 Or override component tokens to customize individual components:
 
 ```css
-ts-button {
-  --ts-button-radius: 9999px;
-}
-
-ts-card {
-  --ts-card-bg: #f0f0f0;
-  --ts-card-radius: 0;
-}
+ts-button { --ts-button-radius: 9999px; }
+ts-card { --ts-card-bg: #f0f0f0; }
 ```
 
-See the [Design Tokens](/tessera-ui/design-language/tokens/) page for the full reference.
+### Dark Mode
 
-## Dark Mode
-
-Activate dark mode by adding `data-theme="dark"` to any ancestor element:
+Add `data-theme="dark"` to any ancestor element:
 
 ```html
 <html data-theme="dark">
-  <body>
-    <ts-button variant="primary">Dark mode button</ts-button>
-  </body>
-</html>
 ```
 
 Toggle dynamically:
@@ -69,18 +487,16 @@ Toggle dynamically:
 document.documentElement.setAttribute('data-theme', 'dark');
 ```
 
-## Density
+### Density
 
-Switch between compact, default, and spacious density:
+Switch between compact, default, and spacious:
 
 ```html
 <html data-density="compact">   <!-- tighter spacing -->
 <html data-density="spacious">  <!-- more breathing room -->
 ```
 
-## RTL
-
-Enable right-to-left layout:
+### RTL
 
 ```html
 <html dir="rtl">
@@ -88,61 +504,23 @@ Enable right-to-left layout:
 
 All components use CSS logical properties and adapt automatically.
 
-## Slots
+### Slots
 
-Components use slots for flexible content composition:
+Components use named slots for content composition:
 
 ```html
-<ts-button>
-  <ts-icon slot="prefix" name="search" size="sm"></ts-icon>
-  Search
-</ts-button>
-
 <ts-card>
-  <h3 slot="header">Card Title</h3>
-  <p>Card body content goes here.</p>
+  <h3 slot="header">Title</h3>
+  <p>Body content</p>
   <div slot="footer">
     <ts-button size="sm">Action</ts-button>
   </div>
 </ts-card>
 ```
 
-## Events
+### CSS Parts
 
-Components emit custom events with the `ts` prefix:
-
-```js
-// Vanilla
-document.querySelector('ts-button').addEventListener('tsClick', (e) => {
-  console.log('Button clicked!');
-});
-
-document.querySelector('ts-input').addEventListener('tsChange', (e) => {
-  console.log('Value:', e.detail.value);
-});
-```
-
-```tsx
-// React — events are props with on* prefix
-<TsButton onTsClick={() => console.log('clicked!')}>Submit</TsButton>
-<TsInput onTsInput={(e) => console.log(e.detail.value)} />
-```
-
-```vue
-<!-- Vue — use @eventName syntax -->
-<TsButton @tsClick="handleClick">Submit</TsButton>
-<TsInput @tsInput="handleInput" />
-```
-
-```html
-<!-- Angular — use (eventName) syntax -->
-<ts-button (tsClick)="onClick()">Submit</ts-button>
-<ts-input (tsInput)="onInput($event)"></ts-input>
-```
-
-## CSS Parts
-
-Style internal elements using `::part()`:
+Style shadow DOM internals using `::part()`:
 
 ```css
 ts-button::part(base) {
