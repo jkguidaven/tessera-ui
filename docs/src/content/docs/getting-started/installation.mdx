@@ -1,6 +1,6 @@
 ---
 title: Installation
-description: How to install and set up Tessera UI in your project
+description: How to install Tessera UI
 sidebar:
   order: 3
 ---
@@ -29,107 +29,6 @@ For quick prototyping with no build step:
 
 ```html
 <script type="module" src="https://unpkg.com/@tessera-ui/core/dist/tessera-ui/tessera-ui.esm.js"></script>
-
-<ts-button variant="primary">Click me</ts-button>
-```
-
----
-
-## Setup by Framework
-
-### Vanilla (Bundler — Vite, Webpack, etc.)
-
-```js
-import '@tessera-ui/core';
-```
-
-That's it. All components are registered and design tokens are injected automatically. Use them in your HTML:
-
-```html
-<ts-button variant="primary">Click me</ts-button>
-<ts-input label="Email" type="email" placeholder="you@example.com"></ts-input>
-```
-
-### React
-
-```tsx
-import { TsButton, TsInput } from '@tessera-ui/react';
-
-function App() {
-  return (
-    <div>
-      <TsButton variant="primary" onTsClick={() => console.log('clicked!')}>
-        Submit
-      </TsButton>
-      <TsInput label="Name" onTsInput={(e) => console.log(e.detail.value)} />
-    </div>
-  );
-}
-```
-
-Components are typed — you get full autocomplete for props and events.
-
-### Vue
-
-```vue
-<template>
-  <TsButton variant="primary" @tsClick="handleClick">Submit</TsButton>
-  <TsInput label="Name" @tsInput="handleInput" />
-</template>
-
-<script setup>
-import { TsButton, TsInput } from '@tessera-ui/vue';
-
-const handleClick = () => console.log('clicked!');
-const handleInput = (e) => console.log(e.detail.value);
-</script>
-```
-
-Add `isCustomElement` to your Vite config so Vue doesn't warn about `ts-*` tags:
-
-```js
-// vite.config.js
-import vue from '@vitejs/plugin-vue';
-
-export default {
-  plugins: [
-    vue({
-      template: {
-        compilerOptions: {
-          isCustomElement: (tag) => tag.startsWith('ts-'),
-        },
-      },
-    }),
-  ],
-};
-```
-
-### Angular
-
-Import `DIRECTIVES` and add `CUSTOM_ELEMENTS_SCHEMA`:
-
-```typescript
-import { Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { DIRECTIVES } from '@tessera-ui/angular';
-
-@Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [DIRECTIVES],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  template: `
-    <ts-button variant="primary" (tsClick)="onClick()">Submit</ts-button>
-    <ts-input label="Name" (tsInput)="onInput($event)"></ts-input>
-  `,
-})
-export class AppComponent {
-  onClick() {
-    console.log('clicked!');
-  }
-  onInput(e: Event) {
-    console.log((e as CustomEvent).detail.value);
-  }
-}
 ```
 
 ---
@@ -142,4 +41,4 @@ When you import from any Tessera UI package:
 2. Design tokens (CSS custom properties) are loaded — colors, spacing, typography, shadows
 3. Dark mode, density, and high-contrast theme support is included
 
-No manual setup, no extra configuration files, no CSS imports.
+No manual setup, no extra configuration files, no CSS imports. See the [Usage](/tessera-ui/getting-started/usage/) page for framework-specific setup and examples.

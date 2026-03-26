@@ -1,156 +1,229 @@
 ---
 title: Usage
-description: How to use Tessera UI components
+description: How to set up and use Tessera UI in your project
 sidebar:
   order: 4
 ---
 
-## Basic Usage
+## Vanilla HTML (CDN)
 
-All Tessera UI components use the `ts-` prefix to avoid naming collisions:
+No build step needed. Add a script tag and start using components:
 
 ```html
-<ts-button variant="primary" size="md">Click me</ts-button>
+<script type="module" src="https://unpkg.com/@tessera-ui/core/dist/tessera-ui/tessera-ui.esm.js"></script>
+
+<ts-button variant="primary">Submit</ts-button>
 <ts-input label="Email" type="email" placeholder="you@example.com"></ts-input>
-<ts-badge variant="success">Active</ts-badge>
+
+<script>
+  document.querySelector('ts-button').addEventListener('tsClick', () => {
+    console.log('Button clicked!');
+  });
+
+  document.querySelector('ts-input').addEventListener('tsInput', (e) => {
+    console.log('Value:', e.detail.value);
+  });
+</script>
 ```
 
-## Theming
+---
 
-Tessera UI uses a **three-tier token architecture**:
+## Vanilla (Bundler — Vite, Webpack, etc.)
 
-| Tier | Prefix | Purpose |
-|---|---|---|
-| Reference | `--ts-ref-*` | Raw palette values (never use directly) |
-| Semantic | `--ts-*` | Role-based tokens (what components consume) |
-| Component | `--ts-{component}-*` | Per-component overrides (customization API) |
+```bash
+npm install @tessera-ui/core
+```
 
-Override semantic tokens to change the entire system:
+```js
+// main.js
+import '@tessera-ui/core';
+```
+
+```html
+<ts-button variant="primary">Submit</ts-button>
+<ts-input label="Email" type="email" placeholder="you@example.com"></ts-input>
+```
+
+---
+
+## React
+
+```bash
+npm install @tessera-ui/react
+```
+
+```tsx
+import { useState } from 'react';
+import { TsButton, TsInput } from '@tessera-ui/react';
+
+function App() {
+  const [name, setName] = useState('');
+
+  return (
+    <>
+      <TsInput
+        label="Name"
+        placeholder="Enter your name"
+        value={name}
+        onTsInput={(e) => setName(e.detail.value)}
+      />
+      <TsButton variant="primary" onTsClick={() => alert(`Hello, ${name}!`)}>
+        Submit
+      </TsButton>
+    </>
+  );
+}
+```
+
+---
+
+## Vue
+
+```bash
+npm install @tessera-ui/vue
+```
+
+Add `isCustomElement` to your Vite config:
+
+```js
+// vite.config.js
+import vue from '@vitejs/plugin-vue';
+
+export default {
+  plugins: [
+    vue({
+      template: {
+        compilerOptions: {
+          isCustomElement: (tag) => tag.startsWith('ts-'),
+        },
+      },
+    }),
+  ],
+};
+```
+
+```vue
+<template>
+  <TsInput
+    label="Name"
+    placeholder="Enter your name"
+    :value="name"
+    @tsInput="name = $event.detail.value"
+  />
+  <TsButton variant="primary" @tsClick="alert(`Hello, ${name}!`)">
+    Submit
+  </TsButton>
+</template>
+
+<script setup>
+import { ref } from 'vue';
+import { TsButton, TsInput } from '@tessera-ui/vue';
+
+const name = ref('');
+</script>
+```
+
+---
+
+## Angular
+
+```bash
+npm install @tessera-ui/angular
+```
+
+```typescript
+import { Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { DIRECTIVES } from '@tessera-ui/angular';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [DIRECTIVES],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  template: `
+    <ts-input
+      label="Name"
+      placeholder="Enter your name"
+      (tsInput)="onInput($event)"
+    ></ts-input>
+    <ts-button variant="primary" (tsClick)="onSubmit()">
+      Submit
+    </ts-button>
+  `,
+})
+export class AppComponent {
+  name = '';
+
+  onInput(e: Event) {
+    this.name = (e as CustomEvent).detail.value;
+  }
+
+  onSubmit() {
+    alert(`Hello, ${this.name}!`);
+  }
+}
+```
+
+---
+
+## Common Patterns
+
+These patterns work the same way across all frameworks.
+
+### Theming
+
+Override design tokens with CSS custom properties:
 
 ```css
 :root {
   --ts-color-interactive-primary: #7c3aed;
-  --ts-color-interactive-primary-hover: #6d28d9;
-  --ts-radius-md: 12px;
+  --ts-button-radius: 9999px;
   --ts-font-family-base: 'Nunito', sans-serif;
 }
 ```
 
-Or override component tokens to customize individual components:
-
-```css
-ts-button {
-  --ts-button-radius: 9999px;
-}
-
-ts-card {
-  --ts-card-bg: #f0f0f0;
-  --ts-card-radius: 0;
-}
-```
-
-See the [Design Tokens](/tessera-ui/design-language/tokens/) page for the full reference.
-
-## Dark Mode
-
-Activate dark mode by adding `data-theme="dark"` to any ancestor element:
+### Dark Mode
 
 ```html
 <html data-theme="dark">
-  <body>
-    <ts-button variant="primary">Dark mode button</ts-button>
-  </body>
-</html>
 ```
 
-Toggle dynamically:
-
 ```js
+// Toggle dynamically
 document.documentElement.setAttribute('data-theme', 'dark');
 ```
 
-## Density
-
-Switch between compact, default, and spacious density:
+### Density
 
 ```html
 <html data-density="compact">   <!-- tighter spacing -->
 <html data-density="spacious">  <!-- more breathing room -->
 ```
 
-## RTL
-
-Enable right-to-left layout:
+### Slots
 
 ```html
-<html dir="rtl">
-```
-
-All components use CSS logical properties and adapt automatically.
-
-## Slots
-
-Components use slots for flexible content composition:
-
-```html
-<ts-button>
-  <ts-icon slot="prefix" name="search" size="sm"></ts-icon>
-  Search
-</ts-button>
-
 <ts-card>
-  <h3 slot="header">Card Title</h3>
-  <p>Card body content goes here.</p>
+  <h3 slot="header">Title</h3>
+  <p>Body content</p>
   <div slot="footer">
     <ts-button size="sm">Action</ts-button>
   </div>
 </ts-card>
 ```
 
-## Events
-
-Components emit custom events with the `ts` prefix:
-
-```js
-// Vanilla
-document.querySelector('ts-button').addEventListener('tsClick', (e) => {
-  console.log('Button clicked!');
-});
-
-document.querySelector('ts-input').addEventListener('tsChange', (e) => {
-  console.log('Value:', e.detail.value);
-});
-```
-
-```tsx
-// React — events are props with on* prefix
-<TsButton onTsClick={() => console.log('clicked!')}>Submit</TsButton>
-<TsInput onTsInput={(e) => console.log(e.detail.value)} />
-```
-
-```vue
-<!-- Vue — use @eventName syntax -->
-<TsButton @tsClick="handleClick">Submit</TsButton>
-<TsInput @tsInput="handleInput" />
-```
-
-```html
-<!-- Angular — use (eventName) syntax -->
-<ts-button (tsClick)="onClick()">Submit</ts-button>
-<ts-input (tsInput)="onInput($event)"></ts-input>
-```
-
-## CSS Parts
-
-Style internal elements using `::part()`:
+### CSS Parts
 
 ```css
 ts-button::part(base) {
   text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-
-ts-input::part(input) {
-  font-size: 1.25rem;
 }
 ```
+
+### RTL
+
+```html
+<html dir="rtl">
+```
+
+All components use CSS logical properties and adapt automatically.
