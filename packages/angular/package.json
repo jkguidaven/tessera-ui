@@ -1,6 +1,6 @@
 {
   "name": "@tessera-ui/angular",
-  "version": "0.6.2",
+  "version": "0.6.3",
   "description": "Tessera UI components for Angular",
   "main": "dist/cjs/index.js",
   "module": "dist/index.js",
