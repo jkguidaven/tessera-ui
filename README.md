@@ -19,49 +19,52 @@ A framework-agnostic web component library built with **Stencil.js** and **TypeS
 
 - **Framework agnostic** — Web Components that work in any framework or none
 - **Auto-generated bindings** — First-class React, Vue, and Angular wrappers via Stencil output targets
+- **Zero-config setup** — One import, components just work. No `defineCustomElements()` or manual CSS imports
 - **Design tokens** — Full theming via CSS custom properties (works through Shadow DOM)
 - **Dark mode** — Built-in dark theme support via `data-theme="dark"`
 - **Accessible** — WCAG 2.1 AA compliant, keyboard navigable, ARIA patterns
 - **TypeScript** — Strict mode, fully typed props, events, and public methods
-- **Tree-shakeable** — Import only the components you use
+- **71 components** — From buttons and inputs to data tables, command palettes, and layout shells
 
 ## Quick Start
 
 ### Install
 
 ```bash
-# Core Web Components (vanilla HTML)
-npm install @tessera-ui/core
+# Pick your framework (each includes @tessera-ui/core as a dependency)
+npm install @tessera-ui/react     # React
+npm install @tessera-ui/vue       # Vue
+npm install @tessera-ui/angular   # Angular
 
-# Framework-specific wrappers (pick one — includes @tessera-ui/core automatically)
-npm install @tessera-ui/react
-npm install @tessera-ui/vue
-npm install @tessera-ui/angular
+# Or use the core package directly (vanilla / any framework)
+npm install @tessera-ui/core
 ```
 
-### Usage: Vanilla HTML (CDN)
+### Vanilla HTML (CDN)
+
+No build step needed — just add a script tag:
 
 ```html
 <script type="module" src="https://unpkg.com/@tessera-ui/core/dist/tessera-ui/tessera-ui.esm.js"></script>
 
-<ts-button variant="primary" size="lg">Get Started</ts-button>
+<ts-button variant="primary">Get Started</ts-button>
 <ts-input label="Email" type="email" placeholder="you@example.com"></ts-input>
-<ts-badge variant="success" pill>Active</ts-badge>
 ```
 
-### Usage: Vanilla (Bundler — Vite, Webpack, etc.)
+### Vanilla (Bundler — Vite, Webpack, etc.)
 
-```ts
+```js
 import '@tessera-ui/core';
-
-// All components are now registered. Use them in your HTML.
 ```
+
+That's it. All 71 components are registered and design tokens are injected. Use them in your HTML:
 
 ```html
 <ts-button variant="primary">Get Started</ts-button>
+<ts-input label="Email" type="email" placeholder="you@example.com"></ts-input>
 ```
 
-### Usage: React
+### React
 
 ```tsx
 import { TsButton, TsInput } from '@tessera-ui/react';
@@ -78,12 +81,12 @@ function App() {
 }
 ```
 
-### Usage: Vue
+### Vue
 
 ```vue
 <template>
-  <ts-button variant="primary" @tsClick="handleClick">Submit</ts-button>
-  <ts-input label="Name" @tsInput="handleInput" />
+  <TsButton variant="primary" @tsClick="handleClick">Submit</TsButton>
+  <TsInput label="Name" @tsInput="handleInput" />
 </template>
 
 <script setup>
@@ -94,151 +97,56 @@ const handleInput = (e) => console.log(e.detail.value);
 </script>
 ```
 
-### Usage: Angular
+> **Note:** Add `isCustomElement` to your Vite config so Vue doesn't warn about `ts-*` tags:
+> ```js
+> // vite.config.js
+> vue({
+>   template: {
+>     compilerOptions: {
+>       isCustomElement: (tag) => tag.startsWith('ts-'),
+>     },
+>   },
+> })
+> ```
+
+### Angular
+
+Import `DIRECTIVES` and add `CUSTOM_ELEMENTS_SCHEMA`:
 
 ```typescript
-import { TesseraUIModule } from '@tessera-ui/angular';
+import { Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { DIRECTIVES } from '@tessera-ui/angular';
 
-@NgModule({
-  imports: [TesseraUIModule],
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [DIRECTIVES],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  template: `
+    <ts-button variant="primary" (tsClick)="onClick()">Submit</ts-button>
+    <ts-input label="Name" (tsInput)="onInput($event)"></ts-input>
+  `,
 })
-export class AppModule {}
-```
-
-```html
-<ts-button variant="primary" (tsClick)="onClick()">Submit</ts-button>
-<ts-input label="Name" (tsInput)="onInput($event)"></ts-input>
-```
-
-## Components
-
-| Component      | Tag            | Description                              |
-| -------------- | -------------- | ---------------------------------------- |
-| Button         | `<ts-button>`   | Actions with variants, sizes, states     |
-| Input          | `<ts-input>`    | Text input with validation & labels      |
-| Card           | `<ts-card>`     | Content container with elevation/slots   |
-| Modal          | `<ts-modal>`    | Dialog with focus trapping & a11y        |
-| Badge          | `<ts-badge>`    | Status indicators & labels               |
-| Toggle         | `<ts-toggle>`   | Switch control for boolean values        |
-| Alert          | `<ts-alert>`    | Contextual feedback messages             |
-| Tooltip        | `<ts-tooltip>`  | Hover/focus information popups           |
-
-## Theming
-
-Tessera UI uses CSS custom properties for theming. Override tokens on `:root` or any container:
-
-```css
-:root {
-  --ts-color-primary-500: #e63946;
-  --ts-color-primary-600: #d62839;
-  --ts-radius-md: 12px;
-  --ts-font-family-base: 'Outfit', sans-serif;
-}
-```
-
-Enable dark mode by adding `data-theme="dark"` to any ancestor element.
-
-## Theming
-
-Tessera UI uses a **three-tier token architecture** for maximum flexibility:
-
-| Tier | Prefix | Purpose |
-|---|---|---|
-| Reference | `--ts-ref-*` | Raw palette values (never use directly) |
-| Semantic | `--ts-*` | Role-based tokens (what components consume) |
-| Component | `--ts-{component}-*` | Per-component overrides (customization API) |
-
-Override component tokens to customize individual components without touching the design system:
-
-```css
-/* Customize all buttons */
-ts-button {
-  --ts-button-radius: 9999px;
-}
-
-/* Customize all cards */
-ts-card {
-  --ts-card-bg: #f0f0f0;
-  --ts-card-radius: 0;
-}
-```
-
-Or override semantic tokens to change the entire system:
-
-```css
-:root {
-  --ts-color-interactive-primary: #e63946;
-  --ts-color-interactive-primary-hover: #c1121f;
+export class AppComponent {
+  onClick() { console.log('clicked!'); }
+  onInput(e: Event) { console.log((e as CustomEvent).detail.value); }
 }
 ```
 
 ## Documentation
 
-- **Docs site** — `https://jkguidaven.github.io/tessera-ui/` — component API reference, design tokens, getting started guides. Deployed on **release**.
-- **Storybook** — `https://jkguidaven.github.io/tessera-ui/storybook/` — interactive component playground. Deployed on **release** alongside docs.
+- **[Docs site](https://jkguidaven.github.io/tessera-ui/)** — Component API reference, design tokens, getting started guides
+- **[Storybook](https://jkguidaven.github.io/tessera-ui/storybook/)** — Interactive component playground with all variants and states
+- **[Component list](https://jkguidaven.github.io/tessera-ui/components/)** — Full list of 71 components with API docs
 
 ## Development
 
 ```bash
-# Install dependencies
-pnpm install
-
-# Start dev server with hot reload (Stencil watch + Storybook)
-pnpm start
-
-# Run unit tests
-pnpm test
-
-# Run E2E tests
-pnpm test.e2e
-
-# Build for production
-pnpm build
-
-# Build docs site locally
-pnpm build && pnpm -C docs build
-```
-
-## Releasing
-
-Tessera UI uses [Lerna](https://lerna.js.org/) with fixed versioning — all packages share the same version.
-
-`main` is a protected branch — all changes must go through PRs.
-
-```bash
-git checkout -b chore/release-X.Y.Z main
-pnpm exec lerna version X.Y.Z --no-push --yes   # Bumps all packages, creates commit + tag
-git push -u origin chore/release-X.Y.Z
-gh pr create --title "chore(release): publish vX.Y.Z"
-# After PR is merged, push the tag and create a GitHub Release
-```
-
-Creating a [GitHub Release](https://docs.github.com/en/repositories/releasing-projects-on-github/managing-releases-in-a-repository) from the tag triggers the release workflow which:
-
-1. **Publishes to npm** — all `@tessera-ui/*` packages (`core`, `react`, `vue`, `angular`)
-2. Builds the component library
-3. Builds Storybook
-4. Generates and builds the documentation site with the release version
-5. Deploys docs + Storybook to GitHub Pages
-
-### CI Setup (required once)
-
-The npm publish job requires an `NPM_TOKEN` secret in the GitHub repository settings:
-
-1. Create the `tessera-ui` org at [npmjs.com/org/create](https://www.npmjs.com/org/create)
-2. Generate an **Automation** token at [npmjs.com/settings/~/tokens](https://www.npmjs.com/settings/~/tokens)
-3. Add it as `NPM_TOKEN` under **Settings → Secrets and variables → Actions**
-
-## Architecture
-
-```
-Author (Stencil + TypeScript)
-     ↓ compile
-Web Components (Custom Elements + Shadow DOM)
-     ↓ output targets
-┌────────────┬────────────┬──────────────┬────────────┐
-│ dist (ESM) │ React pkg  │   Vue pkg    │ Angular pkg│
-└────────────┴────────────┴──────────────┴────────────┘
+pnpm install       # Install dependencies
+pnpm start         # Stencil watch + Storybook dev server
+pnpm test          # Unit tests
+pnpm test.e2e      # E2E tests
+pnpm build         # Production build
 ```
 
 ## License

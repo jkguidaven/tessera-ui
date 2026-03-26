@@ -17,33 +17,76 @@ All Tessera UI components use the `ts-` prefix to avoid naming collisions:
 
 ## Theming
 
-Tessera UI uses CSS custom properties (design tokens) for all styling. Override tokens to customize the theme:
+Tessera UI uses a **three-tier token architecture**:
+
+| Tier | Prefix | Purpose |
+|---|---|---|
+| Reference | `--ts-ref-*` | Raw palette values (never use directly) |
+| Semantic | `--ts-*` | Role-based tokens (what components consume) |
+| Component | `--ts-{component}-*` | Per-component overrides (customization API) |
+
+Override semantic tokens to change the entire system:
 
 ```css
 :root {
-  --ts-color-primary-600: #7c3aed; /* Change primary to purple */
-  --ts-radius-md: 12px;            /* Rounder corners */
+  --ts-color-interactive-primary: #7c3aed;
+  --ts-color-interactive-primary-hover: #6d28d9;
+  --ts-radius-md: 12px;
   --ts-font-family-base: 'Nunito', sans-serif;
 }
 ```
 
-All tokens use the `--ts-` prefix. See the [Design Tokens](/tessera-ui/tokens/overview/) page for the full reference.
+Or override component tokens to customize individual components:
+
+```css
+ts-button {
+  --ts-button-radius: 9999px;
+}
+
+ts-card {
+  --ts-card-bg: #f0f0f0;
+  --ts-card-radius: 0;
+}
+```
+
+See the [Design Tokens](/tessera-ui/design-language/tokens/) page for the full reference.
 
 ## Dark Mode
 
 Activate dark mode by adding `data-theme="dark"` to any ancestor element:
 
 ```html
-<body data-theme="dark">
-  <ts-button variant="primary">Dark mode button</ts-button>
-</body>
+<html data-theme="dark">
+  <body>
+    <ts-button variant="primary">Dark mode button</ts-button>
+  </body>
+</html>
 ```
 
-Or toggle it dynamically:
+Toggle dynamically:
 
-```javascript
+```js
 document.documentElement.setAttribute('data-theme', 'dark');
 ```
+
+## Density
+
+Switch between compact, default, and spacious density:
+
+```html
+<html data-density="compact">   <!-- tighter spacing -->
+<html data-density="spacious">  <!-- more breathing room -->
+```
+
+## RTL
+
+Enable right-to-left layout:
+
+```html
+<html dir="rtl">
+```
+
+All components use CSS logical properties and adapt automatically.
 
 ## Slots
 
@@ -51,9 +94,8 @@ Components use slots for flexible content composition:
 
 ```html
 <ts-button>
-  <span slot="prefix">🔍</span>
+  <ts-icon slot="prefix" name="search" size="sm"></ts-icon>
   Search
-  <span slot="suffix">→</span>
 </ts-button>
 
 <ts-card>
@@ -69,16 +111,33 @@ Components use slots for flexible content composition:
 
 Components emit custom events with the `ts` prefix:
 
-```javascript
-const button = document.querySelector('ts-button');
-button.addEventListener('tsClick', (event) => {
+```js
+// Vanilla
+document.querySelector('ts-button').addEventListener('tsClick', (e) => {
   console.log('Button clicked!');
 });
 
-const input = document.querySelector('ts-input');
-input.addEventListener('tsChange', (event) => {
-  console.log('Value:', event.detail.value);
+document.querySelector('ts-input').addEventListener('tsChange', (e) => {
+  console.log('Value:', e.detail.value);
 });
+```
+
+```tsx
+// React — events are props with on* prefix
+<TsButton onTsClick={() => console.log('clicked!')}>Submit</TsButton>
+<TsInput onTsInput={(e) => console.log(e.detail.value)} />
+```
+
+```vue
+<!-- Vue — use @eventName syntax -->
+<TsButton @tsClick="handleClick">Submit</TsButton>
+<TsInput @tsInput="handleInput" />
+```
+
+```html
+<!-- Angular — use (eventName) syntax -->
+<ts-button (tsClick)="onClick()">Submit</ts-button>
+<ts-input (tsInput)="onInput($event)"></ts-input>
 ```
 
 ## CSS Parts
