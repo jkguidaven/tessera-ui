@@ -78,6 +78,7 @@ export const config: Config = {
     browserWaitUntil: 'load',
     testTimeout: 60000,
     setupFilesAfterFramework: ['./tests/setup.ts'],
+    setupFilesAfterEnv: ['./tests/setup.ts'],
     testPathIgnorePatterns: ['/node_modules/', '/dist/', '/.claude/'],
   },
 };
