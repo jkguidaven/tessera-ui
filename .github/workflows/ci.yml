@@ -33,7 +33,6 @@ jobs:
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
-        timeout-minutes: 5
 
       - run: pnpm lint
       - run: pnpm test
@@ -56,7 +55,6 @@ jobs:
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
-        timeout-minutes: 5
 
       - name: Cache Playwright browsers
         id: cache-playwright
@@ -97,7 +95,6 @@ jobs:
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
-        timeout-minutes: 5
 
       - run: pnpm build
 
@@ -108,3 +105,34 @@ jobs:
           name: dist
           path: dist/
           retention-days: 7
+
+  integration:
+    name: Package Integration Tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    needs: build
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: ${{ env.PNPM_VERSION }}
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+        timeout-minutes: 5
+
+      - name: Build core + wrappers
+        run: |
+          pnpm build
+          cd packages/react && pnpm build && cd ../..
+          cd packages/vue && pnpm build && cd ../..
+          cd packages/angular && pnpm build && cd ../..
+
+      - name: Run integration tests
+        run: bash tests/integration/test-packaging.sh

@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+# Lint staged .ts/.tsx files
+STAGED_TS=$(git diff --cached --name-only --diff-filter=ACM | grep -E '\.(ts|tsx)$' || true)
+
+if [ -n "$STAGED_TS" ]; then
+  echo "Running lint on staged files..."
+  npx eslint $STAGED_TS --ext .ts,.tsx
+fi
+
+# Run integration tests when packaging-related files change
+CHANGED=$(git diff --cached --name-only)
+
+if echo "$CHANGED" | grep -qE "^(package\.json|packages/|scripts/post-build|stencil\.config|src/index\.ts)"; then
+  echo "Packaging files changed — running integration tests..."
+  bash tests/integration/test-packaging.sh
+fi

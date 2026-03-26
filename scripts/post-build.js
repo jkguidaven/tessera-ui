@@ -42,12 +42,12 @@ const cjsEntry = 'dist/index.cjs.js';
 
 const esmContent = fs.readFileSync(esmEntry, 'utf8');
 fs.writeFileSync(esmEntry,
-  `import { defineCustomElements } from './esm/loader.js';\ndefineCustomElements();\n${esmContent}`,
+  `import './tessera-ui/tessera-ui.css';\nimport { defineCustomElements } from './esm/loader.js';\ndefineCustomElements();\n${esmContent}`,
   'utf8'
 );
 
 const cjsContent = fs.readFileSync(cjsEntry, 'utf8');
 fs.writeFileSync(cjsEntry,
-  `const { defineCustomElements } = require('./cjs/loader.cjs.js');\ndefineCustomElements();\n${cjsContent}`,
+  `require('./tessera-ui/tessera-ui.css');\nconst { defineCustomElements } = require('./cjs/loader.cjs.js');\ndefineCustomElements();\n${cjsContent}`,
   'utf8'
 );
