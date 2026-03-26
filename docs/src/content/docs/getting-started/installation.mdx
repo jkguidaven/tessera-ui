@@ -1,96 +1,145 @@
 ---
 title: Installation
-description: How to install Tessera UI in your project
+description: How to install and set up Tessera UI in your project
 sidebar:
   order: 3
 ---
 
 ## Package Manager
 
-### Core (Vanilla HTML / Web Components)
-
-```bash
-# npm
-npm install @tessera-ui/core
-
-# pnpm
-pnpm add @tessera-ui/core
-
-# yarn
-yarn add @tessera-ui/core
-```
-
-## Framework Wrappers
-
-For first-class framework integration, install the appropriate wrapper package. `@tessera-ui/core` is included automatically as a dependency.
+Pick your framework — each wrapper includes `@tessera-ui/core` as a dependency:
 
 ```bash
 # React
-pnpm add @tessera-ui/react
+npm install @tessera-ui/react
 
 # Vue
-pnpm add @tessera-ui/vue
+npm install @tessera-ui/vue
 
 # Angular
-pnpm add @tessera-ui/angular
+npm install @tessera-ui/angular
+
+# Or use the core package directly (vanilla / any framework)
+npm install @tessera-ui/core
 ```
 
 ## CDN
 
-For quick prototyping, use the CDN:
+For quick prototyping with no build step:
 
 ```html
 <script type="module" src="https://unpkg.com/@tessera-ui/core/dist/tessera-ui/tessera-ui.esm.js"></script>
-```
-
-## Setup
-
-### Vanilla HTML / Web Components
-
-```html
-<script type="module">
-  import { defineCustomElements } from '@tessera-ui/core/loader';
-  defineCustomElements();
-</script>
 
 <ts-button variant="primary">Click me</ts-button>
+```
+
+---
+
+## Setup by Framework
+
+### Vanilla (Bundler — Vite, Webpack, etc.)
+
+```js
+import '@tessera-ui/core';
+```
+
+That's it. All components are registered and design tokens are injected automatically. Use them in your HTML:
+
+```html
+<ts-button variant="primary">Click me</ts-button>
+<ts-input label="Email" type="email" placeholder="you@example.com"></ts-input>
 ```
 
 ### React
 
-```jsx
-import { TsButton } from '@tessera-ui/react';
+```tsx
+import { TsButton, TsInput } from '@tessera-ui/react';
 
 function App() {
-  return <TsButton variant="primary">Click me</TsButton>;
+  return (
+    <div>
+      <TsButton variant="primary" onTsClick={() => console.log('clicked!')}>
+        Submit
+      </TsButton>
+      <TsInput label="Name" onTsInput={(e) => console.log(e.detail.value)} />
+    </div>
+  );
 }
 ```
+
+Components are typed — you get full autocomplete for props and events.
 
 ### Vue
 
 ```vue
-<script setup>
-import { TsButton } from '@tessera-ui/vue';
-</script>
-
 <template>
-  <TsButton variant="primary">Click me</TsButton>
+  <TsButton variant="primary" @tsClick="handleClick">Submit</TsButton>
+  <TsInput label="Name" @tsInput="handleInput" />
 </template>
+
+<script setup>
+import { TsButton, TsInput } from '@tessera-ui/vue';
+
+const handleClick = () => console.log('clicked!');
+const handleInput = (e) => console.log(e.detail.value);
+</script>
+```
+
+Add `isCustomElement` to your Vite config so Vue doesn't warn about `ts-*` tags:
+
+```js
+// vite.config.js
+import vue from '@vitejs/plugin-vue';
+
+export default {
+  plugins: [
+    vue({
+      template: {
+        compilerOptions: {
+          isCustomElement: (tag) => tag.startsWith('ts-'),
+        },
+      },
+    }),
+  ],
+};
 ```
 
 ### Angular
 
+Import `DIRECTIVES` and add `CUSTOM_ELEMENTS_SCHEMA`:
+
 ```typescript
-// app.module.ts
-import { TsButtonModule } from '@tessera-ui/angular';
+import { Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { DIRECTIVES } from '@tessera-ui/angular';
 
-@NgModule({
-  imports: [TsButtonModule],
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [DIRECTIVES],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  template: `
+    <ts-button variant="primary" (tsClick)="onClick()">Submit</ts-button>
+    <ts-input label="Name" (tsInput)="onInput($event)"></ts-input>
+  `,
 })
-export class AppModule {}
+export class AppComponent {
+  onClick() {
+    console.log('clicked!');
+  }
+  onInput(e: Event) {
+    console.log((e as CustomEvent).detail.value);
+  }
+}
 ```
 
-```html
-<!-- component.html -->
-<ts-button variant="primary">Click me</ts-button>
-```
+---
+
+## What happens on import
+
+When you `import '@tessera-ui/core'` (or any wrapper package that depends on it):
+
+1. All 71 web components are registered via `customElements.define()`
+2. Design tokens (CSS custom properties) are injected as a `<style>` tag
+3. Dark mode, density, and high-contrast theme overrides are included
+
+No manual `defineCustomElements()` call or CSS import is needed.
