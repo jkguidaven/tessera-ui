@@ -7,93 +7,108 @@ sidebar:
 
 # Tessera UI
 
-**Tessera UI** is a framework-agnostic web component library built with [Stencil.js](https://stenciljs.com/) and TypeScript. Components are authored once and compiled to standards-compliant Web Components with automatic wrapper generation for React, Vue, and Angular.
+**Tessera UI** is a production-ready UI component library with native support for React, Vue, Angular, and vanilla HTML. Install a single package for your framework, import the components you need, and start building.
 
 ## Why Tessera UI?
 
-- **Write once, use everywhere** — components work in React, Vue, Angular, or vanilla HTML
-- **True encapsulation** — Shadow DOM prevents style leaks in both directions
-- **Design tokens** — CSS custom properties cross the Shadow DOM boundary, making theming trivial
+- **One library, every framework** — the same components work in React, Vue, Angular, or plain HTML
+- **71 components** — forms, data display, navigation, overlays, layout, and more
+- **Design tokens** — three-tier token architecture for theming at every level
+- **Dark mode + density** — light, dark, high-contrast themes with compact, comfortable, and spacious density modes
 - **Accessible by default** — WCAG 2.1 AA compliant with keyboard navigation and ARIA patterns
-- **Tree-shakeable** — only bundle the components you use
-- **Type-safe** — strict TypeScript with fully typed props, events, and methods
+- **Type-safe** — fully typed props, events, and methods across all framework packages
+- **Zero-config** — one import, components just work. No manual setup required
 
-## Available Components (44)
+## Components
 
 ### Form Controls
 
 | Component | Tag | Description |
 |---|---|---|
 | Button | `<ts-button>` | Versatile button with variants, sizes, and appearances |
-| Input | `<ts-input>` | Text input with validation, labels, and help text |
-| Textarea | `<ts-textarea>` | Multi-line text input with resize control |
-| Checkbox | `<ts-checkbox>` | Checkbox with indeterminate state support |
-| Radio | `<ts-radio>` | Radio button for mutually exclusive selections |
-| Select | `<ts-select>` | Dropdown selection with custom styling |
+| Input | `<ts-input>` | Text input with clearable, character counter |
+| Textarea | `<ts-textarea>` | Multi-line input with auto-grow and character counter |
+| Number Input | `<ts-number-input>` | Stepper input with +/- buttons and min/max |
+| Checkbox | `<ts-checkbox>` | Checkbox with indeterminate state |
+| Checkbox Group | `<ts-checkbox-group>` | Multi-select checkbox container |
+| Radio | `<ts-radio>` | Radio button for single selection |
+| Radio Group | `<ts-radio-group>` | Single-select radio container |
+| Select | `<ts-select>` | Dropdown with search, filter, and multi-select |
+| Combobox | `<ts-combobox>` | Autocomplete text input with filterable dropdown |
 | Toggle | `<ts-toggle>` | Switch control for boolean values |
-| Slider | `<ts-slider>` | Range input with drag and keyboard control |
-| Date Picker | `<ts-date-picker>` | Calendar-based date selection |
-| File Upload | `<ts-file-upload>` | Drag-and-drop file upload area |
+| Slider | `<ts-slider>` | Range input with dual thumbs, marks, and vertical mode |
+| Date Picker | `<ts-date-picker>` | Calendar with range selection, year nav, and i18n |
+| Time Picker | `<ts-time-picker>` | Hour/minute/second picker with 12/24h format |
+| Tag Input | `<ts-tag-input>` | Multi-value input with chip tags |
+| File Upload | `<ts-file-upload>` | Drag-and-drop with file list and max count |
 | Switch Group | `<ts-switch-group>` | Segmented control / toggle button group |
+| Form | `<ts-form>` | Form wrapper with value collection |
 
 ### Data Display
 
 | Component | Tag | Description |
 |---|---|---|
 | Card | `<ts-card>` | Container with header, body, footer, and media slots |
-| Badge | `<ts-badge>` | Small status indicator with variants |
-| Avatar | `<ts-avatar>` | User image with initials fallback |
-| Table | `<ts-table>` | Styled table wrapper with striping, borders, hover |
+| Table | `<ts-table>` | Data table with sorting and row selection |
+| Badge | `<ts-badge>` | Status indicator with variants |
+| Avatar | `<ts-avatar>` | User image with initials fallback and status indicator |
+| Avatar Group | `<ts-avatar-group>` | Overlapping avatar stack with overflow |
 | Chip | `<ts-chip>` | Removable pill-shaped label |
-| Divider | `<ts-divider>` | Horizontal or vertical separator |
-| Skeleton | `<ts-skeleton>` | Loading placeholder with pulse animation |
-| Progress | `<ts-progress>` | Determinate and indeterminate progress bar |
+| Timeline | `<ts-timeline>` | Vertical activity feed with icons and timestamps |
+| Progress | `<ts-progress>` | Linear, circular, striped, and buffer progress |
 | Spinner | `<ts-spinner>` | Circular loading indicator |
+| Skeleton | `<ts-skeleton>` | Loading placeholder with animation |
+| Divider | `<ts-divider>` | Horizontal or vertical separator |
 | Empty State | `<ts-empty-state>` | Zero-data placeholder with icon and CTA |
-| Icon | `<ts-icon>` | Icon component with 1,400+ built-in Lucide icons |
+| Icon | `<ts-icon>` | 1,400+ built-in Lucide icons |
 
 ### Navigation
 
 | Component | Tag | Description |
 |---|---|---|
-| Tabs | `<ts-tabs>` | Tabbed content with line, enclosed, and pill variants |
-| Breadcrumb | `<ts-breadcrumb>` | Hierarchical page navigation trail |
-| Pagination | `<ts-pagination>` | Page navigation for lists and tables |
-| Nav | `<ts-nav>` | Sidebar or horizontal navigation |
+| Tabs | `<ts-tabs>` | Tabbed content with vertical, closable, and scrollable modes |
+| Breadcrumb | `<ts-breadcrumb>` | Page trail with icons and collapsible items |
+| Pagination | `<ts-pagination>` | Page navigation with first/last and info text |
+| Nav | `<ts-nav>` | Sidebar/horizontal nav with nested items and badges |
 | Stepper | `<ts-stepper>` | Multi-step wizard indicator |
+| Command Palette | `<ts-command-palette>` | Cmd+K searchable command menu |
 
 ### Overlays & Feedback
 
 | Component | Tag | Description |
 |---|---|---|
+| Dialog | `<ts-dialog>` | Confirmation dialog with exit animations |
 | Modal | `<ts-modal>` | Full dialog overlay with focus trapping |
-| Dialog | `<ts-dialog>` | Lightweight confirmation dialog |
 | Drawer | `<ts-drawer>` | Slide-in side panel |
-| Tooltip | `<ts-tooltip>` | Informational popup on hover/focus |
+| Tooltip | `<ts-tooltip>` | Hover/focus information popup |
 | Popover | `<ts-popover>` | Rich interactive floating panel |
 | Alert | `<ts-alert>` | Inline contextual feedback message |
-| Toast | `<ts-toast>` | Transient floating notification |
+| Toast | `<ts-toast>` | Floating notification with pause-on-hover |
 | Banner | `<ts-banner>` | Full-width page-level notification |
-| Menu | `<ts-menu>` | Dropdown context menu |
+| Menu | `<ts-menu>` | Dropdown menu with dividers and checkbox items |
 
 ### Layout
 
 | Component | Tag | Description |
 |---|---|---|
+| App Layout | `<ts-app-layout>` | CSS Grid app shell with sidebar/header/content |
+| Sidebar | `<ts-sidebar>` | Collapsible sidebar with header/nav/footer |
+| Page Header | `<ts-page-header>` | Structured header with breadcrumb and actions |
+| Container | `<ts-container>` | Centered max-width page container |
+| Grid | `<ts-grid>` | CSS Grid with auto-fill responsive columns |
 | Stack | `<ts-stack>` | Vertical flex layout with consistent gap |
 | Row | `<ts-row>` | Horizontal flex row with responsive stacking |
-| Grid | `<ts-grid>` | CSS Grid with auto-fill responsive columns |
-| Container | `<ts-container>` | Centered max-width page container |
 | Spacer | `<ts-spacer>` | Explicit spacing between elements |
+| Scroll Area | `<ts-scroll-area>` | Custom styled scrollbar container |
 | Toolbar | `<ts-toolbar>` | Horizontal action bar |
 | Accordion | `<ts-accordion>` | Collapsible content sections |
-| Tree | `<ts-tree>` | Hierarchical expandable list |
+| Tree | `<ts-tree>` | Hierarchical expandable list with checkboxes |
 
 ## Packages
 
 | Package | Description |
 |---|---|
-| `@tessera-ui/core` | Web Components (framework-agnostic) |
-| `@tessera-ui/react` | First-class React wrappers |
-| `@tessera-ui/vue` | First-class Vue wrappers |
-| `@tessera-ui/angular` | First-class Angular wrappers |
+| `@tessera-ui/core` | Core components for vanilla HTML and any framework |
+| `@tessera-ui/react` | Tessera UI components for React |
+| `@tessera-ui/vue` | Tessera UI components for Vue |
+| `@tessera-ui/angular` | Tessera UI components for Angular |

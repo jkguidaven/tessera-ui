@@ -7,7 +7,7 @@ sidebar:
 
 ## Package Manager
 
-Pick your framework — each wrapper includes `@tessera-ui/core` as a dependency:
+Pick your framework — each package includes `@tessera-ui/core` as a dependency:
 
 ```bash
 # React
@@ -136,10 +136,10 @@ export class AppComponent {
 
 ## What happens on import
 
-When you `import '@tessera-ui/core'` (or any wrapper package that depends on it):
+When you import from any Tessera UI package:
 
-1. All 71 web components are registered via `customElements.define()`
-2. Design tokens (CSS custom properties) are injected as a `<style>` tag
-3. Dark mode, density, and high-contrast theme overrides are included
+1. All 71 components are registered and ready to use
+2. Design tokens (CSS custom properties) are loaded — colors, spacing, typography, shadows
+3. Dark mode, density, and high-contrast theme support is included
 
-No manual `defineCustomElements()` call or CSS import is needed.
+No manual setup, no extra configuration files, no CSS imports.

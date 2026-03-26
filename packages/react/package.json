@@ -1,7 +1,7 @@
 {
   "name": "@tessera-ui/react",
   "version": "0.6.2",
-  "description": "React wrappers for Tessera UI web components",
+  "description": "Tessera UI components for React",
   "main": "dist/cjs/index.js",
   "module": "dist/index.js",
   "types": "dist/index.d.ts",

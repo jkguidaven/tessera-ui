@@ -11,20 +11,19 @@
 [![CI](https://github.com/jkguidaven/tessera-ui/actions/workflows/ci.yml/badge.svg)](https://github.com/jkguidaven/tessera-ui/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 
-A framework-agnostic web component library built with **Stencil.js** and **TypeScript**. Beautiful, accessible components that work in React, Vue, Angular, or vanilla HTML — no lock-in.
+A production-ready UI component library with native support for **React**, **Vue**, **Angular**, and **vanilla HTML**. 71 accessible, themeable components — one library for every framework.
 
 **[Documentation](https://jkguidaven.github.io/tessera-ui/)** | **[Storybook](https://jkguidaven.github.io/tessera-ui/storybook/)** | **[npm](https://www.npmjs.com/package/@tessera-ui/core)**
 
 ## Features
 
-- **Framework agnostic** — Web Components that work in any framework or none
-- **Auto-generated bindings** — First-class React, Vue, and Angular wrappers via Stencil output targets
-- **Zero-config setup** — One import, components just work. No `defineCustomElements()` or manual CSS imports
-- **Design tokens** — Full theming via CSS custom properties (works through Shadow DOM)
-- **Dark mode** — Built-in dark theme support via `data-theme="dark"`
-- **Accessible** — WCAG 2.1 AA compliant, keyboard navigable, ARIA patterns
-- **TypeScript** — Strict mode, fully typed props, events, and public methods
+- **One library, every framework** — Native packages for React, Vue, Angular, and vanilla HTML
 - **71 components** — From buttons and inputs to data tables, command palettes, and layout shells
+- **Zero-config setup** — One import, components just work. No manual registration or CSS imports
+- **Design tokens** — Full theming via CSS custom properties with three-tier token architecture
+- **Dark mode + density** — Light, dark, and high-contrast themes. Compact, comfortable, and spacious density
+- **Accessible** — WCAG 2.1 AA compliant, keyboard navigable, ARIA patterns, forced-colors support
+- **TypeScript** — Fully typed props, events, and public methods across all framework packages
 
 ## Quick Start
 
@@ -143,7 +142,7 @@ export class AppComponent {
 
 ```bash
 pnpm install       # Install dependencies
-pnpm start         # Stencil watch + Storybook dev server
+pnpm start         # Dev server with hot reload + Storybook
 pnpm test          # Unit tests
 pnpm test.e2e      # E2E tests
 pnpm build         # Production build
