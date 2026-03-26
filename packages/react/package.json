@@ -1,6 +1,6 @@
 {
   "name": "@tessera-ui/react",
-  "version": "0.6.1",
+  "version": "0.6.2",
   "description": "React wrappers for Tessera UI web components",
   "main": "dist/cjs/index.js",
   "module": "dist/index.js",
@@ -25,8 +25,8 @@
     "build": "tsc -p tsconfig.json && tsc -p tsconfig.cjs.json"
   },
   "dependencies": {
-    "@tessera-ui/core": "workspace:^",
-    "@stencil/react-output-target": "^1.4.2"
+    "@stencil/react-output-target": "^1.4.2",
+    "@tessera-ui/core": "workspace:^"
   },
   "peerDependencies": {
     "react": ">=17.0.0",
